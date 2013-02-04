@@ -13,7 +13,7 @@ solution "arg3"
 
     include "db"
 
-    include "dice-engine"
+    include "dice"
 
     include "format"
 
