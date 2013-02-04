@@ -1,4 +1,4 @@
-project "variant"
+project "arg3variant"
     files {
         "variant.h",
         "variant.test.cpp"

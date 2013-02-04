@@ -16,20 +16,29 @@ namespace arg3
 {
     //namespace collections
     //{
+
+        template<typename K, typename V>
+        vector<K> map_keys(map<K, V> collection)
+        {
+            vector<K> keys;
+
+            transform(collection.begin(), collection.end(), keys.begin(), [](const pair<K,V> &e) { e.first; });
+
+            return keys;
+        }
+
         template<typename K, typename V>
         string join(map<K, V> collection, const string &divider = ",", function<const pair<K,V> &()> op = [] (const pair<K,V> &e) { e.first; })
         {
-            list<K> keys;
+            vector<K> keys = map_keys(collection);
             ostringstream buf;
-
-            transform(collection.begin(), collection.end(), keys.begin(), op);
 
             if(keys.size() > 0) {
                 ostream_iterator<K> it(buf, divider);
 
                 copy(keys.begin(), keys.end()-1, it);
 
-                buf << keys.last();
+                buf << *(keys.end()-1);
             }
 
 
@@ -46,7 +55,7 @@ namespace arg3
 
                 copy(list.begin(), list.end()-1, it);
 
-                buf << list.end()-1;
+                buf << *(list.end()-1);
             }
 
             return buf.str();
@@ -58,11 +67,11 @@ namespace arg3
         	ostringstream buf;
 
             if(list.size() > 0) {
-                ostream_iterator<T> it(buf, divider);
+                ostream_iterator<T> it(buf, divider.c_str());
 
                 copy(list.begin(), list.end()-1, it);
 
-                buf << list[list.size()-1];
+                buf << *(list.end()-1);
             }
 
         	return buf.str();

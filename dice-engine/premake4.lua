@@ -1,4 +1,4 @@
-project "dice-engine"
+project "arg3dice"
     files {
         "**.h",
         "**.cpp"

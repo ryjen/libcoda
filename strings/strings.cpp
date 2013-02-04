@@ -2,6 +2,7 @@
 #include <sstream>
 #include <algorithm>
 #include "strings.h"
+#include "../format/format.h"
 
 namespace arg3
 {
@@ -127,7 +128,7 @@ namespace arg3
         ostringstream buf;
 
         if(value.length() > 0) {
-            ostream_iterator<string::value_type> it(buf, delimiter);
+            ostream_iterator<string::value_type> it(buf, delimiter.c_str());
             
             copy(value.begin(), value.end(), it);
         }    

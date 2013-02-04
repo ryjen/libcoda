@@ -9,11 +9,6 @@ using namespace igloo;
 
 using namespace arg3;
 
-int main()
-{
-    return TestRunner::RunAllTests();
-}
-
 Context(sqliteTest)
 {
 

@@ -1,4 +1,4 @@
-project "strings"
+project "arg3strings"
     files {
         "strings.h",
         "strings.cpp"

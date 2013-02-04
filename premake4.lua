@@ -7,9 +7,9 @@ solution "arg3"
     configuration "Debug"
         flags "Symbols"
     
-    buildoptions { "-std=c++11", "-stdlib=libc++"}
+    buildoptions { "-std=c++11", "-stdlib=libc++", "-Wall", "-Werror"}
 
-    include "collections"
+    linkoptions { "-stdlib=libc++" }
 
     include "db"
 
@@ -20,3 +20,19 @@ solution "arg3"
     include "strings"
 
     include "variant"
+
+    project "arg3test"
+        kind "ConsoleApp"
+        language "C++"
+        files {
+            "**.test.cpp",
+            "arg3.test.cpp"
+        }
+        links { 
+            "sqlite3",
+            "arg3db", 
+            "arg3dice", 
+            "arg3format", 
+            "arg3strings", 
+            "arg3variant" 
+        }
