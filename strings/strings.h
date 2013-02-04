@@ -19,6 +19,8 @@ namespace arg3 {
     string ordinal_string(int);
 
     string join(const string &str, size_t count, const string &delimiter = ",");
+
+    string join(const char c, size_t count, const string &delimiter = ",");
 }
 
 #endif

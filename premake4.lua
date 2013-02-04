@@ -36,3 +36,6 @@ solution "arg3"
             "arg3strings", 
             "arg3variant" 
         }
+        postbuildcommands {
+            "./arg3test"
+        }

@@ -123,14 +123,33 @@ namespace arg3
             return format("{0}th") << n;
     }
 
-    string join(const string& value, size_t count, const string &delimiter)
+    string join(const string& value, string::size_type count, const string &delimiter)
     {
         ostringstream buf;
 
         if(value.length() > 0) {
             ostream_iterator<string::value_type> it(buf, delimiter.c_str());
             
-            copy(value.begin(), value.end(), it);
+            for(string::size_type i = 0; i < count-1; i++)
+                copy(value.begin(), value.end(), it);
+
+            buf << value;
+        }    
+        return buf.str();
+    }
+
+    string join(string::value_type value, string::size_type count, const string &delimiter)
+    {
+        ostringstream buf;
+
+        if(count > 0) {
+            for(string::size_type i = 0; i < count-1; i++)
+            {
+                buf.put(value);
+                buf.put(',');
+            }
+
+            buf.put(value);
         }    
         return buf.str();
     }
