@@ -114,9 +114,9 @@ namespace arg3
             ScoreSheet::value_type calculateChance() const;
             ScoreSheet::value_type calculateYacht() const;
 
-            ScoreSheet mScore;  // the score sheet
-            unsigned short mRollCount; // number of die rolls
-            string mName;   // player name
+            ScoreSheet m_score;  // the score sheet
+            unsigned short m_rollCount; // number of die rolls
+            string m_name;   // player name
         };
 
     }

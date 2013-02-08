@@ -98,12 +98,12 @@ namespace arg3
          * sets a flag to indicate this die is frozen
          * @param value the value to set
          */
-        void frozen(bool value);
+        void keep(bool value);
 
         /*!
          * flag to indicate this die is frozen
          */
-        bool frozen() const;
+        bool keep() const;
 
         /*!
          * equality operator
@@ -134,12 +134,10 @@ namespace arg3
         value_type roll();
 
     private:
-        Engine *mEngine;     // engine to use for dice rolling
-        unsigned int mSides; // number of sides on die
-        value_type mValue;   // the current roll value
-        bool mFrozen;        // flag for not rolling a die
-
-
+        Engine *m_engine;     // engine to use for dice rolling
+        unsigned int m_sides; // number of sides on die
+        value_type m_value;   // the current roll value
+        bool m_keep;        // flag for not rolling a die
     };
 
 
@@ -151,9 +149,9 @@ namespace arg3
     {
 
     private:
-        short mBonus;
-        vector<Die> mDice;
-        vector<Die::value_type> mLastRoll;
+        short m_bonus;
+        vector<Die> m_dice;
+        vector<Die::value_type> m_lastRoll;
     public:
         /*! iterator type for each die */
         typedef typename vector<Die>::iterator iterator;

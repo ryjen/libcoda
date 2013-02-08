@@ -16,7 +16,7 @@ namespace arg3
     class DiceGame
     {
     protected:
-        Dice mDice;
+        Dice m_dice;
 
         DiceGame(unsigned int, unsigned int, Die::Engine * = Die::default_engine);
         DiceGame(const DiceGame &);

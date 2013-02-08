@@ -2,6 +2,7 @@
 #define _ARG3_COLLECTIONS_H_
 
 #include <map>
+#include <unordered_map>
 #include <string>
 #include <sstream>
 #include <list>
@@ -16,35 +17,47 @@ namespace arg3
 {
     //namespace collections
     //{
-
+        
         template<typename K, typename V>
-        vector<K> map_keys(map<K, V> collection)
+        string join(map<K, V> collection, const string &divider = ",", bool displayValues = false)
         {
-            vector<K> keys;
-
-            transform(collection.begin(), collection.end(), keys.begin(), [](const pair<K,V> &e) { e.first; });
-
-            return keys;
-        }
-
-        template<typename K, typename V>
-        string join(map<K, V> collection, const string &divider = ",", function<const pair<K,V> &()> op = [] (const pair<K,V> &e) { e.first; })
-        {
-            vector<K> keys = map_keys(collection);
             ostringstream buf;
 
-            if(keys.size() > 0) {
-                ostream_iterator<K> it(buf, divider);
+            size_t size = collection.size();
+            size_t count = 0;
 
-                copy(keys.begin(), keys.end()-1, it);
-
-                buf << *(keys.end()-1);
+            for(auto &e : collection) {
+                if(displayValues)
+                    buf << e.second;
+                else
+                    buf << e.first;
+                if(count++ < size-1) {
+                    buf << ",";
+                }
             }
-
 
             return buf.str();
         }
+        template<typename K, typename V>
+        string join(unordered_map<K, V> collection, const string &divider = ",", bool displayValues = false)
+        {
+            ostringstream buf;
 
+            size_t size = collection.size();
+            size_t count = 0;
+
+            for(auto &e : collection) {
+                if(displayValues)
+                    buf << e.second;
+                else
+                    buf << e.first;
+                if(count++ < size-1) {
+                    buf << ",";
+                }
+            }
+
+            return buf.str();
+        }
         template<typename T>
         string join(initializer_list<T> list, const string &delimiter = ",")
         {

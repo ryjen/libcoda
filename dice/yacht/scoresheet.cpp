@@ -9,11 +9,11 @@ namespace arg3
 
         ScoreSheet::ScoreSheet()
         {
-            mLowerValues.fill(0);
-            mUpperValues.fill(0);
+            m_lowerValues.fill(0);
+            m_upperValues.fill(0);
         }
 
-        ScoreSheet::ScoreSheet(const ScoreSheet &other) : mUpperValues(other.mUpperValues), mLowerValues(other.mLowerValues)
+        ScoreSheet::ScoreSheet(const ScoreSheet &other) : m_upperValues(other.m_upperValues), m_lowerValues(other.m_lowerValues)
         {
 
         }
@@ -28,36 +28,36 @@ namespace arg3
 
             if (this != &other)
             {
-                mUpperValues = other.mUpperValues;
-                mLowerValues = other.mLowerValues;
+                m_upperValues = other.m_upperValues;
+                m_lowerValues = other.m_lowerValues;
             }
             return *this;
         }
 
         void ScoreSheet::reset()
         {
-            mLowerValues.fill(0);
-            mUpperValues.fill(0);
+            m_lowerValues.fill(0);
+            m_upperValues.fill(0);
         }
 
         void ScoreSheet::lowerScore(Type index, ScoreSheet::value_type value)
         {
-            mLowerValues[index] = value;
+            m_lowerValues[index] = value;
         }
 
         void ScoreSheet::upperScore(Die::value_type index, ScoreSheet::value_type value)
         {
-            mUpperValues[index] = value;
+            m_upperValues[index] = value;
         }
 
         ScoreSheet::value_type ScoreSheet::lowerScore(Type index) const
         {
-            return mLowerValues[index];
+            return m_lowerValues[index];
         }
 
         ScoreSheet::value_type ScoreSheet::upperScore(Die::value_type index) const
         {
-            return mUpperValues[index];
+            return m_upperValues[index];
         }
 
     }

@@ -102,8 +102,8 @@ namespace arg3
             ScoreSheet::value_type upperScore(Die::value_type type) const;
 
         private:
-            array<value_type, MAX_TYPE> mUpperValues;
-            array<value_type, Constants::NUM_DICE> mLowerValues;
+            array<value_type, MAX_TYPE> m_upperValues;
+            array<value_type, Constants::NUM_DICE> m_lowerValues;
         };
 
     }

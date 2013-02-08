@@ -8,11 +8,11 @@ namespace arg3
     namespace yacht
     {
 
-        Engine::Engine(Die::Engine *engine) : mPlayers(), mEngine(engine), mCurrentPlayer(0)
+        Engine::Engine(Die::Engine *engine) : m_players(), m_engine(engine), m_currentPlayer(0)
         {
         }
 
-        Engine::Engine(const Engine &other) : mPlayers(other.mPlayers), mCurrentPlayer(other.mCurrentPlayer)
+        Engine::Engine(const Engine &other) : m_players(other.m_players), m_currentPlayer(other.m_currentPlayer)
         {
 
         }
@@ -22,31 +22,31 @@ namespace arg3
 
             if (this != &other)
             {
-                mPlayers = other.mPlayers;
-                mCurrentPlayer = other.mCurrentPlayer;
+                m_players = other.m_players;
+                m_currentPlayer = other.m_currentPlayer;
             }
             return *this;
         }
 
         void Engine::addPlayer(const string &name)
         {
-            mPlayers.push_back(Player(name, mEngine));
+            m_players.push_back(Player(name, m_engine));
         }
 
         void Engine::removePlayer(size_t index)
         {
 
-            iterator pos = mPlayers.begin() + index;
+            iterator pos = m_players.begin() + index;
 
-            if (pos >= mPlayers.end())
+            if (pos >= m_players.end())
             {
                 return;
             }
 
-            mPlayers.erase(pos);
+            m_players.erase(pos);
 
-            if (index >= mCurrentPlayer)
-                mCurrentPlayer--;
+            if (index >= m_currentPlayer)
+                m_currentPlayer--;
         }
 
         Engine *Engine::instance()
@@ -58,77 +58,77 @@ namespace arg3
 
         Player *Engine::currentPlayer()
         {
-            if (mCurrentPlayer >= mPlayers.size())
+            if (m_currentPlayer >= m_players.size())
                 return 0;
 
-            return &(mPlayers.at(mCurrentPlayer));
+            return &(m_players.at(m_currentPlayer));
         }
 
         size_t Engine::numberOfPlayers() const
         {
-            return mPlayers.size();
+            return m_players.size();
         }
 
         Player *Engine::nextPlayer()
         {
-            if (mPlayers.size() == 0)
+            if (m_players.size() == 0)
                 return 0;
 
-            mCurrentPlayer++;
+            m_currentPlayer++;
 
-            if (mCurrentPlayer >= mPlayers.size())
+            if (m_currentPlayer >= m_players.size())
             {
-                mCurrentPlayer = 0;
+                m_currentPlayer = 0;
             }
 
-            return &(mPlayers.at(mCurrentPlayer));
+            return &(m_players.at(m_currentPlayer));
         }
 
         // iterator methods
         Engine::iterator Engine::begin()
         {
-            return mPlayers.begin();
+            return m_players.begin();
         }
 
         Engine::const_iterator Engine::begin() const
         {
-            return mPlayers.begin();
+            return m_players.begin();
         }
 
         // const iterator methods
         const Engine::const_iterator Engine::cbegin() const
         {
-            return mPlayers.cbegin();
+            return m_players.cbegin();
         }
 
         Engine::iterator Engine::end()
         {
-            return mPlayers.end();
+            return m_players.end();
         }
 
         Engine::const_iterator Engine::end() const
         {
-            return mPlayers.end();
+            return m_players.end();
         }
 
         const Engine::const_iterator Engine::cend() const
         {
-            return mPlayers.cend();
+            return m_players.cend();
         }
 
         Player *Engine::operator[] ( size_t index )
         {
-            return &(mPlayers.at(index));
+            return &(m_players.at(index));
         }
 
         const Player *Engine::operator[] ( size_t index ) const
         {
-            return &(mPlayers[index]);
+            return &(m_players[index]);
         }
 
         void Engine::setRandomEngine(Die::Engine *value)
         {
-            mEngine = value;
+            m_engine = value;
         }
 
     }

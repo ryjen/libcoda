@@ -167,21 +167,21 @@ Context(sqliteTest)
 		container["test3"] = true;
 
 		Assert::That(container["test1"], Equals("1234"));
-		Assert::That(container["test2"], Equals(123.43));
+		Assert::That(container["test2"], Equals(123.43f));
 		Assert::That(container["test3"], Equals(1));
 		
 	}
 
-	Spec(testAppendOperator)
+	/*Spec(testAppendOperator)
 	{
 		variant v = "test";
 
 		v << 1 << 2 << 3;
 
 		Assert::That(v, Equals("test123"));
-	}
+	}*/
 
-	Spec(testBaseEquality) {
+	/*Spec(testBaseEquality) {
 		variant v(10);
 
 		Assert::That(v.base_int(16), Equals(16));
@@ -191,7 +191,7 @@ Context(sqliteTest)
 		Assert::That(v.base_ulong(16), Equals(16UL));
 
 		Assert::That(v.base_ullong(16), Equals(16ULL));
-	}
+	}*/
 
 	Spec(testBaseAutoDetect)
 	{
@@ -202,5 +202,28 @@ Context(sqliteTest)
 		v = "0173";
 
 		Assert::That(v.to_long(), Equals(123));
+	}
+
+	Spec(testUVariant)
+	{
+		variant v = 1234;
+
+		Assert::That(v.to_string(), Equals("1234"));
+
+		Assert::That(v.to_int(), Equals(1234));
+
+		Assert::That(v.to_long(), Equals(1234));
+
+		Assert::That(v.to_bool(), Equals(true));
+
+		Assert::That(v.to_float(), Equals(1234.0));
+
+		v = "test";
+
+		Assert::That(v.to_int(0), Equals(0));
+
+		v = UINT_MAX;
+
+		Assert::That(v.to_int(0), Equals(0));
 	}
 };

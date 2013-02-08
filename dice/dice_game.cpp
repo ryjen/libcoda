@@ -2,12 +2,12 @@
 
 namespace arg3
 {
-    DiceGame::DiceGame(unsigned int count, unsigned int sides, Die::Engine *const engine) : mDice(count, sides, engine)
+    DiceGame::DiceGame(unsigned int count, unsigned int sides, Die::Engine *const engine) : m_dice(count, sides, engine)
     {
 
     }
 
-    DiceGame::DiceGame(const DiceGame &other) : mDice(other.mDice)
+    DiceGame::DiceGame(const DiceGame &other) : m_dice(other.m_dice)
     {
 
     }
@@ -22,24 +22,24 @@ namespace arg3
 
         if (this != &other)
         {
-            mDice = other.mDice;
+            m_dice = other.m_dice;
         }
         return *this;
     }
 
     void DiceGame::roll()
     {
-        mDice.roll();
+        m_dice.roll();
     }
 
     const vector<Die::value_type> &DiceGame::values() const
     {
-        return mDice.values();
+        return m_dice.values();
     }
 
     bool DiceGame::operator==(const DiceGame &other) const
     {
-        return mDice == other.mDice;
+        return m_dice == other.m_dice;
     }
 
     bool DiceGame::operator!=(const DiceGame &other) const

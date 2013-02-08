@@ -19,8 +19,6 @@ solution "arg3"
 
     include "strings"
 
-    include "variant"
-
     project "arg3test"
         kind "ConsoleApp"
         language "C++"
@@ -33,8 +31,7 @@ solution "arg3"
             "arg3db", 
             "arg3dice", 
             "arg3format", 
-            "arg3strings", 
-            "arg3variant" 
+            "arg3strings"
         }
         postbuildcommands {
             "./arg3test"
