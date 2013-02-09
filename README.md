@@ -1,12 +1,12 @@
-[dice-engine](http://c0der78.github.com/libarg3/dice)
-===========
+libarg3
+=======
 
-A c++11 library for working with dice.  Engines for different dice games (Yahtzee, etc.)
+a c++11 utility library
 
 requirements
 ============
 
-- c++11 for compiling (I use clang++ on OSX)
+- a c++11 compiler (I use clang++ on OSX)
 
 optional
 ========
@@ -19,10 +19,10 @@ optional
 compilation
 ===========
 
-
 Just run 'premake4 --help' to get a list of build types
 
 Typically I run 'premake4 gmake; make'
+
 
 licensing
 =========

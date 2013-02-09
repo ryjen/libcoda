@@ -1,0 +1,6 @@
+obj
+*.a
+arg3test
+arg3test.make
+Makefile
+*.db

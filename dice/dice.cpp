@@ -6,11 +6,11 @@
 
 namespace arg3
 {
-    // #######################################################################################################
-    // Die
-    // #######################################################################################################
+// #######################################################################################################
+// Die
+// #######################################################################################################
 
-    // randomness for dice rolls
+// randomness for dice rolls
     static Die::DefaultEngine default_die_engine = Die::DefaultEngine();
 
     const Die::value_type Die::DEFAULT_SIDES;
@@ -94,7 +94,7 @@ namespace arg3
         return m_value;
     }
 
-    // returns one of the sides on the die (random)
+// returns one of the sides on the die (random)
     Die::value_type Die::roll()
     {
         assert(m_engine != 0);
@@ -114,18 +114,18 @@ namespace arg3
         return m_keep;
     }
 
-    // #######################################################################################################
-    // Dice
-    // #######################################################################################################
+// #######################################################################################################
+// Dice
+// #######################################################################################################
 
-    // creates x dice with y sides
+// creates x dice with y sides
     Dice::Dice(const unsigned int count, const unsigned int sides, Die::Engine *const engine) : m_bonus(0), m_dice(), m_lastRoll()
     {
         for (int i = 0; i < count; i++)
             m_dice.push_back(Die(sides, engine));
     }
 
-    // copy constructor
+// copy constructor
     Dice::Dice(const Dice &other) : m_bonus(other.m_bonus), m_dice(other.m_dice), m_lastRoll(other.m_lastRoll)
     {
     }
@@ -151,13 +151,13 @@ namespace arg3
         return !operator==(other);
     }
 
-    // deconstructor
+// deconstructor
     Dice::~Dice()
     {
 
     }
 
-    // iterator methods
+// iterator methods
     Dice::iterator Dice::begin()
     {
         return m_dice.begin();
@@ -168,7 +168,7 @@ namespace arg3
         return m_dice.begin();
     }
 
-    // const iterator methods
+// const iterator methods
     const Dice::const_iterator Dice::cbegin() const
     {
         return m_dice.cbegin();
@@ -210,7 +210,7 @@ namespace arg3
         m_bonus = value;
     }
 
-    // a string representation of the dice ex. 5d20
+// a string representation of the dice ex. 5d20
     const string Dice::to_string() const
     {
         stringstream buf;
@@ -231,20 +231,20 @@ namespace arg3
         return buf.str();
     }
 
-    // returns the values for each die in the last roll
+// returns the values for each die in the last roll
     const vector<Die::value_type> &Dice::values() const
     {
         return m_lastRoll;
     }
 
-    // return the total of rolling all dice
+// return the total of rolling all dice
     const unsigned int Dice::roll()
     {
         Die::value_type value = 0;
 
         m_lastRoll.clear(); // reset the last roll values
 
-        for (Die & d : m_dice)
+for (Die & d : m_dice)
         {
             auto roll = d.keep() ? d.value() : d.roll(); // roll the die
             value += roll; // sum the total

@@ -13,7 +13,7 @@ DiceTestEngine::DiceTestEngine(initializer_list<Die::value_type> value) : mValue
 
 DiceTestEngine::DiceTestEngine(const DiceTestEngine &copy) : mValues(copy.mValues.size()), mCurrentValue(copy.mCurrentValue)
 {
-    for (auto & d : copy.mValues)
+for (auto & d : copy.mValues)
         mValues.push_back(d);
 }
 
@@ -117,7 +117,7 @@ Context(DiceTest)
 
         Assert::That(dice.size(), Equals(10));
 
-        for (Die & d : dice)
+for (Die & d : dice)
         {
             Assert::That(d.sides(), Equals(10));
         }

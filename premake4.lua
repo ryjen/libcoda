@@ -1,4 +1,23 @@
 --_ACTION = _ACTION or "arg3"
+newaction {
+   trigger     = "indent",
+   description = "Format source files",
+   execute = function ()
+      os.execute("astyle -N -A1 -R *.cpp *.h");
+   end
+}
+
+newoption {
+   trigger     = "monolithic",
+   description = "Build one giant library instead of smaller component libraries"
+}
+
+if _ACTION == "clean" then
+    matches = os.matchfiles("**.orig")
+    for i=1, #matches do
+        os.remove(matches[i])
+    end
+end
 
 solution "arg3"
     configurations { "Debug", "Release" }
@@ -11,28 +30,45 @@ solution "arg3"
 
     linkoptions { "-stdlib=libc++" }
 
-    include "db"
+    if not _OPTIONS["monolithic"] then
+        include "db"
 
-    include "dice"
+        include "dice"
 
-    include "format"
+        include "format"
 
-    include "strings"
-
+        include "strings"
+    else
+        project "arg3"
+            kind "StaticLib"
+            files {
+                "**.cpp",
+                "**.h"
+            }
+            excludes {
+                "**.test.cpp"
+            }
+    end
+    
     project "arg3test"
         kind "ConsoleApp"
-        language "C++"
         files {
             "**.test.cpp",
             "arg3.test.cpp"
         }
-        links { 
-            "sqlite3",
-            "arg3db", 
-            "arg3dice", 
-            "arg3format", 
-            "arg3strings"
-        }
+        if _OPTIONS["monolithic"] then
+            links { "sqlite3", "arg3" }
+        else
+            links { 
+                "sqlite3",
+                "arg3db", 
+                "arg3dice", 
+                "arg3format", 
+                "arg3strings"
+            }
+        end
         postbuildcommands {
             "./arg3test"
         }
+
+
