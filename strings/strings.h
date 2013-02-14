@@ -29,7 +29,7 @@ namespace arg3
     string join(const char c, size_t count, const string &delimiter = ",");
 
     vector<string> split(const string& s, const string& delim = ",", const bool keep_empty = true);
- 
+
 }
 
 #endif

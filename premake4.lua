@@ -3,7 +3,7 @@ newaction {
    trigger     = "indent",
    description = "Format source files",
    execute = function ()
-      os.execute("astyle -N -A1 -R *.cpp *.h");
+      os.execute("astyle -N -A1 -R '*.cpp' '*.h'");
    end
 }
 
