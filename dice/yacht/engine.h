@@ -2,7 +2,7 @@
      @header Yacht Engine
      The Yacht Engine provides a functional interface to a game of Yacht.
      Use the functions declared here to handle gameplay.
-     @copyright arg3 software
+     @copyright ryan jennings (arg3.com) 2012 LGPL
      @updated 2012-09-09
  */
 #ifndef ARG3_YACHT_H

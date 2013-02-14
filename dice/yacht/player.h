@@ -2,7 +2,7 @@
      @header Yacht Player
      The Yacht Player provides a functional interface to a player in a game of Yacht.
      Use the functions declared here to handle gameplay.
-     @copyright c0der78 (arg3.com)
+     @copyright ryan jennings (arg3.com) 2012 LGPL
      @updated 2012-09-09
  */
 #ifndef ARG3_YACHT_PLAYER_H
