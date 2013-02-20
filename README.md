@@ -23,6 +23,11 @@ Just run 'premake4 --help' to get a list of build types
 
 Typically I run 'premake4 gmake; make'
 
+TODO
+====
+
+- arg3::db::base_record should be able to determine its own schema given a table name
+- more testing
 
 licensing
 =========
