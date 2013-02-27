@@ -80,6 +80,8 @@ solution "arg3"
         include "format"
 
         include "strings"
+
+        include "variant"
     else
         project "arg3"
             kind "StaticLib"
@@ -95,8 +97,10 @@ solution "arg3"
     configuration "Debug"
         flags "Symbols"
         targetdir "bin/Debug"
+        buildoptions { "-g" }
     configuration "Release"
         targetdir "bin/Release"
+        buildoptions { "-O" }
     
     project "arg3test"
         kind "ConsoleApp"
@@ -112,11 +116,12 @@ solution "arg3"
                 "arg3db", 
                 "arg3dice", 
                 "arg3format", 
-                "arg3strings"
+                "arg3strings",
+                "arg3variant"
             }
         end
         postbuildcommands {
-            "./arg3test"
+          "./arg3test"
         }
 
 
