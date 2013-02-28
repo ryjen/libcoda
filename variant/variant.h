@@ -97,12 +97,13 @@ namespace arg3
                 if (m_value.ld <= numeric_limits<T>::max() && m_value.ld >= numeric_limits<T>::min())
                     return static_cast<int>(m_value.ld);
             }
-            return def;
+            return D(def);
         };
 
     public:
-        variant();
 
+        // constructors
+        variant();
         variant(char c);
         variant(unsigned char uc);
         variant(wchar_t wc);
@@ -132,7 +133,7 @@ namespace arg3
 
         int type() const;
 
-        //operators
+        // implicit cast operators
         operator string() const;
 
         operator int() const;
@@ -142,6 +143,7 @@ namespace arg3
         operator long long() const;
 
         operator unsigned long() const;
+
         operator unsigned long long() const;
 
         operator double() const;
@@ -153,6 +155,8 @@ namespace arg3
         operator wstring() const;
 
         operator unsigned() const;
+
+        // equality operators
 
         bool operator==(bool other) const;
 
@@ -174,10 +178,11 @@ namespace arg3
 
         bool operator==(unsigned long ul) const;
 
-        bool equals(const variant &value) const;
-
         bool operator==(const variant &value) const;
 
+        bool equals(const variant &value) const;
+
+        // conversion methods
         string to_string(const string &def = "") const;
 
         const char *to_cstring(const char *def = NULL) const;
@@ -217,7 +222,7 @@ namespace arg3
 
     ostream &operator<<(ostream &stream, const variant &v);
 
-    // utility operators
+    // equality operators
 
     bool operator==(float f, const variant &v);
     bool operator==(const wstring &str, const variant &v);

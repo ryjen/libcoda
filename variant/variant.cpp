@@ -92,7 +92,6 @@ namespace arg3
     variant::variant(const variant &other) :
         m_type(other.m_type), m_refcount(other.m_refcount), m_value(other.m_value)
     {
-
         // update refcount
         if (m_refcount)
             (*m_refcount)++;
@@ -469,7 +468,7 @@ namespace arg3
         {
             try
             {
-                return std::stoi(static_cast<const char *>(m_value.p), NULL, BASE);
+                return stoi(static_cast<const char *>(m_value.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -502,7 +501,7 @@ namespace arg3
         {
             try
             {
-                return std::stol(static_cast<const char *>(m_value.p), NULL, BASE);
+                return stol(static_cast<const char *>(m_value.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -536,7 +535,7 @@ namespace arg3
         {
             try
             {
-                return std::stol(static_cast<const char *>(m_value.p), 0, BASE);
+                return stol(static_cast<const char *>(m_value.p), 0, BASE);
             }
             catch (const exception &e)
             {
@@ -570,7 +569,7 @@ namespace arg3
         {
             try
             {
-                return std::stoul(static_cast<const char *>(m_value.p), 0, BASE);
+                return stoul(static_cast<const char *>(m_value.p), 0, BASE);
             }
             catch (const exception &e)
             {
@@ -604,7 +603,7 @@ namespace arg3
         {
             try
             {
-                return std::stoll(static_cast<const char *>(m_value.p), 0, BASE);
+                return stoll(static_cast<const char *>(m_value.p), 0, BASE);
             }
             catch (const exception &e)
             {
@@ -638,7 +637,7 @@ namespace arg3
         {
             try
             {
-                return std::stoull(static_cast<const char *>(m_value.p), 0, BASE);
+                return stoull(static_cast<const char *>(m_value.p), 0, BASE);
             }
             catch (const exception &e)
             {
@@ -672,7 +671,7 @@ namespace arg3
         {
             try
             {
-                return std::stod(static_cast<const char *>(m_value.p), 0);
+                return stod(static_cast<const char *>(m_value.p), 0);
             }
             catch (const exception &e)
             {
@@ -754,7 +753,7 @@ namespace arg3
         {
             try
             {
-                return std::stof(static_cast<const char *>(m_value.p), NULL);
+                return stof(static_cast<const char *>(m_value.p), NULL);
             }
             catch (const exception &e)
             {
