@@ -19,6 +19,8 @@ optional
 compilation
 ===========
 
+To install premake4 you can use [homebrew](http://mxcl.github.com/homebrew/) (brew install premake)
+
 Just run 'premake4 --help' to get a list of build types
 
 Typically I run 'premake4 gmake; make'
@@ -26,7 +28,7 @@ Typically I run 'premake4 gmake; make'
 TODO
 ====
 
-- arg3::db::base_record should be able to determine its own schema given a table name
+- ~~arg3::db::base_record should be able to determine its own schema given a table name~~
 - more testing
 
 licensing
