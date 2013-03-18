@@ -79,6 +79,8 @@ solution "arg3"
 
         include "format"
 
+        include "json"
+
         include "strings"
 
         include "variant"
@@ -109,13 +111,15 @@ solution "arg3"
             "arg3.test.cpp"
         }
         if _OPTIONS["monolithic"] then
-            links { "sqlite3", "arg3" }
+            links { "sqlite3", "arg3", "json" }
         else
             links { 
                 "sqlite3",
+                "json",
                 "arg3db", 
                 "arg3dice", 
-                "arg3format", 
+                "arg3format",
+                "arg3json",
                 "arg3strings",
                 "arg3variant"
             }
