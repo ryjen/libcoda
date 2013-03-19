@@ -1,4 +1,5 @@
 project "arg3json"
+    kind "StaticLib"
     files {
         "*.h",
         "*.cpp",

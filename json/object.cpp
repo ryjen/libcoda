@@ -1,6 +1,7 @@
 #include "object.h"
 #include "array.h"
 #include "object_iterator.h"
+#include "../math/util.h"
 
 using namespace std;
 
@@ -94,8 +95,15 @@ namespace arg3
 
 				value_ = obj;
 			}
-			
+
 			return obj != NULL;
+		}
+
+		bool object::contains(const string &key) const
+		{
+			json_object *obj;
+
+			return json_object_object_get_ex(value_, key.c_str(), &obj);
 		}
 
 
@@ -272,5 +280,64 @@ namespace arg3
 			else
 				return array();
 		}
+
+		json_type object::type() const {
+			return json_object_get_type(value_);
+		}
+
+		bool object::operator==(const object &other) const
+		{	
+			switch(type())
+			{
+				case json_type_null:
+					return false;
+				case json_type_int:
+					return to_int64() == other.to_int64();
+				case json_type_string:
+					return to_str() == other.to_str();
+				case json_type_double:
+					return almost_equal(to_double(), other.to_double(), 8);
+				case json_type_boolean:
+					return to_bool() == other.to_bool();
+				case json_type_object:
+				case json_type_array:
+					return value_ == other.value_;
+			}
+		}
+
+		bool object::operator!=(const object &other) const {
+			return !operator==(other);
+		}
+
+
+
+		bool operator==(const std::string &val, const object &other)
+		{
+			return other.to_str() == val;
+		}
+
+		bool operator==(int32_t val, const object &other) 
+		{
+			return other.to_int() == val;
+		}
+		bool operator==(int64_t val, const object &other)
+		{
+			return other.to_int64() == val;
+		}
+
+		bool operator==(double val, const object &other)
+		{
+			return almost_equal(other.to_double(), val, 8);
+		}
+
+		bool operator==(bool val, const object &other)
+		{
+			return other.to_bool() == val;
+		}
+		bool operator==(const array &val, const object &other)
+		{
+			return other.value_ == val.value_;
+		}
+
 	}
 }

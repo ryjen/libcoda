@@ -96,19 +96,6 @@ namespace arg3
         {
         	return entry_ != other.entry_;
         }
-
-
-        
-        bool operator==(const object_iterator& r1, const object_iterator& r2)
-        {
-        	return r1.operator==(r2);
-        }
-
-        
-        bool operator!=(const object_iterator& r1, const object_iterator& r2)
-        {
-        	return r1.operator!=(r2);
-        }
         
 	}
 }

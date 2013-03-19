@@ -1,4 +1,5 @@
 project "arg3variant"
+    kind "StaticLib"
     files {
         "variant.h",
         "variant.cpp",

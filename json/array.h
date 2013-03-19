@@ -62,6 +62,8 @@ namespace arg3
 				
 			reverse_iterator rend();
 
+			friend bool operator==(const array &val, const object &other);
+			
 		protected:
 			array(json_object *obj);
 		private:

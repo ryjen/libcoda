@@ -39,6 +39,10 @@ namespace arg3
 			object get(size_t idx) const;
 			size_t size() const;
 
+			json_type type() const;
+
+			bool contains(const std::string &key) const;
+
 			bool parse(const std::string &value);
 
 			void set_int(const std::string &key, int32_t value);
@@ -69,10 +73,22 @@ namespace arg3
 			iterator begin() const;
 			iterator end() const;
 
+			bool operator==(const object &other) const;
+			bool operator!=(const object &other) const;
+
+			friend bool operator==(const array &val, const object &other);
+
 		private:
 			json_object *value_;
 			unsigned *references_;
 		};
+
+		bool operator==(const std::string &val, const object &other);
+		bool operator==(int32_t val, const object &other);
+		bool operator==(int64_t val, const object &other);
+		bool operator==(double val, const object &other);
+		bool operator==(bool val, const object &other);
+		bool operator==(const array &val, const object &other);
 	}
 }
 

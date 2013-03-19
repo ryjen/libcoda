@@ -15,7 +15,7 @@ newaction {
         error("You must specify an install location")
       end
 
-      if not os.isdir("bin/Release") then
+      if not os.isdir("bin/release") then
         error("You must make a release build first")
       end
 
@@ -30,14 +30,14 @@ newaction {
         os.mkdir(headerdir)
       end
 
-      libraries = { "libarg3.a", "libarg3db.a", "libarg3dice.a", "libarg3format.a", "libarg3strings.a"}
+      libraries = { "libarg3.a", "libarg3db.a", "libarg3dice.a", "libarg3format.a", "libarg3json.a", "libarg3strings.a"}
       for l=1, #libraries do
-        if os.isfile("bin/Release/"..libraries[l]) then
-            os.copyfile("bin/Release/"..libraries[l], bindir)
+        if os.isfile("bin/release/"..libraries[l]) then
+            os.copyfile("bin/release/"..libraries[l], bindir)
         end
       end
 
-      folders = {"collections", "db", "dice", "format", "strings", "variant"}
+      folders = {"collections", "db", "dice", "format", "json", "math", "strings", "variant"}
       for f=1, #folders do 
           headers = os.matchfiles(folders[f].."/**.h")
           tempdir = headerdir.."/"..folders[f]
@@ -64,14 +64,21 @@ if _ACTION == "clean" then
 end
 
 solution "arg3"
-    configurations { "Debug", "Release" }
-    kind "StaticLib"
+    configurations { "debug", "release" }
     language "C++"
 
     buildoptions { "-std=c++11", "-stdlib=libc++", "-Wall", "-Werror"}
 
     linkoptions { "-stdlib=libc++" }
-
+    
+    configuration "Debug"
+        flags "Symbols"
+        targetdir "bin/debug"
+        buildoptions { "-g" }
+    configuration "release"
+        targetdir "bin/release"
+        buildoptions { "-O" }
+    
     if not _OPTIONS["monolithic"] then
         include "db"
 
@@ -86,7 +93,6 @@ solution "arg3"
         include "variant"
     else
         project "arg3"
-            kind "StaticLib"
             files {
                 "**.cpp",
                 "**.h"
@@ -95,15 +101,7 @@ solution "arg3"
                 "**.test.cpp"
             }
     end
-    
-    configuration "Debug"
-        flags "Symbols"
-        targetdir "bin/Debug"
-        buildoptions { "-g" }
-    configuration "Release"
-        targetdir "bin/Release"
-        buildoptions { "-O" }
-    
+
     project "arg3test"
         kind "ConsoleApp"
         files {

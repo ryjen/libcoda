@@ -1,4 +1,5 @@
 project "arg3dice"
+    kind "StaticLib"
     files {
         "**.h",
         "**.cpp"

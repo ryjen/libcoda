@@ -42,10 +42,7 @@ namespace arg3
             bool operator==(const object_iterator& other) const;
 
             bool operator!=(const object_iterator& other) const;
-
-            friend bool operator==(const object_iterator& r1, const object_iterator &r2);
-
-            friend bool operator!=(const object_iterator& r1, const object_iterator &r2);
+            
 		private:
 			struct lh_entry *entry_;
 
@@ -55,11 +52,6 @@ namespace arg3
 
 			reference get_ref();
 		};
-
-		bool operator==(const object_iterator& r1, const object_iterator& r2);
-
-		bool operator!=(const object_iterator& r1, const object_iterator& r2);
-
 	}
 }
 
