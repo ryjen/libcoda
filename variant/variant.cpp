@@ -7,7 +7,7 @@ namespace arg3
 {
 
     variant::variant() :
-        m_type(INT), m_value(0)
+        m_type(INT), m_refcount(NULL), m_value(0)
     {}
 
     variant::variant(char c) :

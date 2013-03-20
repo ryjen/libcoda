@@ -122,8 +122,13 @@ solution "arg3"
                 "arg3variant"
             }
         end
-        postbuildcommands {
-          "./arg3test"
-        }
+        --configuration "Debug"
+        --postbuildcommands {
+        --  "bin/debug/arg3test"
+        --}
+        --configuration "Release"
+        --postbuildcommands {
+        --  "bin/release/arg3test"
+        --}
 
 
