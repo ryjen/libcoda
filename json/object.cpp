@@ -101,11 +101,13 @@ namespace arg3
 
 		bool object::contains(const string &key) const
 		{
-			json_object *obj;
-
-			return json_object_object_get_ex(value_, key.c_str(), &obj);
+			return json_object_object_get_ex(value_, key.c_str(), NULL);
 		}
 
+		void object::remove(const string &key)
+		{
+			json_object_object_del(value_, key.c_str());
+		}
 
 		int32_t object::get_int(const std::string &key) const
 		{
@@ -177,37 +179,85 @@ namespace arg3
 			return 0;
 		}
 
+		void object::set_value(const string &key, json_object *obj)
+		{
+			if(contains(key))
+				remove(key);
+
+			json_object_object_add(value_, key.c_str(), obj);
+		}
+
 		void object::set_int(const std::string &key, int32_t value)
 		{
-			json_object_object_add(value_, key.c_str(), json_object_new_int(value));
+			set_value(key, json_object_new_int(value));
 		}
 
 		void object::set_int64(const std::string &key, int64_t value)
 		{
-			json_object_object_add(value_, key.c_str(), json_object_new_int64(value));
+			set_value(key, json_object_new_int64(value));
 		}
 		void object::set_bool(const std::string &key, bool value)
 		{
-			json_object_object_add(value_, key.c_str(), json_object_new_boolean(value));
+			set_value(key, json_object_new_boolean(value));
 		}
 		void object::set_double(const std::string &key, double value)
 		{
-			json_object_object_add(value_, key.c_str(), json_object_new_double(value));
+			set_value(key, json_object_new_double(value));
 		}
 		void object::set_str(const std::string &key, const std::string &value)
 		{
-			json_object_object_add(value_, key.c_str(), json_object_new_string(value.c_str()));
+			set_value(key, json_object_new_string(value.c_str()));
 		}
 
 		void object::set_array(const std::string &key, const array &value)
 		{
-			json_object_object_add(value_, key.c_str(), json_object_get(value.value_));
+			set_value(key, json_object_get(value.value_));
 		}
 
 		void object::set(const std::string &key, const object &value)
 		{
-			json_object_object_add(value_, key.c_str(), json_object_get(value.value_));
+			set_value(key, json_object_get(value.value_));
 		}
+
+
+
+		void object::add_value(const string &key, json_object *obj)
+		{
+			json_object_object_add(value_, key.c_str(), obj);
+		}
+
+		void object::add_int(const std::string &key, int32_t value)
+		{
+			add_value(key, json_object_new_int(value));
+		}
+
+		void object::add_int64(const std::string &key, int64_t value)
+		{
+			add_value(key, json_object_new_int64(value));
+		}
+		void object::add_bool(const std::string &key, bool value)
+		{
+			add_value(key, json_object_new_boolean(value));
+		}
+		void object::add_double(const std::string &key, double value)
+		{
+			add_value(key, json_object_new_double(value));
+		}
+		void object::add_str(const std::string &key, const std::string &value)
+		{
+			add_value(key, json_object_new_string(value.c_str()));
+		}
+
+		void object::add_array(const std::string &key, const array &value)
+		{
+			add_value(key, json_object_get(value.value_));
+		}
+
+		void object::add(const std::string &key, const object &value)
+		{
+			add_value(key, json_object_get(value.value_));
+		}
+
 
 		bool object::is_int() const {
 			return json_object_is_type(value_, json_type_int);

@@ -43,6 +43,8 @@ namespace arg3
 
 			bool contains(const std::string &key) const;
 
+			void remove(const std::string &key);
+
 			bool parse(const std::string &value);
 
 			void set_int(const std::string &key, int32_t value);
@@ -52,6 +54,14 @@ namespace arg3
 			void set_str(const std::string &key, const std::string &value);
 			void set_array(const std::string &key, const array &value);
 			void set(const std::string &key, const object &value);
+
+			void add_int(const std::string &key, int32_t value);
+			void add_int64(const std::string &key, int64_t value);
+			void add_bool(const std::string &key, bool value);
+			void add_double(const std::string &key, double value);
+			void add_str(const std::string &key, const std::string &value);
+			void add_array(const std::string &key, const array &value);
+			void add(const std::string &key, const object &value);
 
 			int32_t to_int() const;
 			int64_t to_int64() const;
@@ -77,7 +87,9 @@ namespace arg3
 			bool operator!=(const object &other) const;
 
 			friend bool operator==(const array &val, const object &other);
-
+		protected:
+			void set_value(const std::string &key, json_object *obj);
+			void add_value(const std::string &key, json_object *obj);
 		private:
 			json_object *value_;
 			unsigned *references_;
