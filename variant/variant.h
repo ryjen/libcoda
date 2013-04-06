@@ -19,8 +19,8 @@ namespace arg3
         };
     private:
         static const int BASE = 0; // autodetect
-        int m_type;
-        unsigned *m_refcount;
+        int type_;
+        unsigned *refcount_;
         union var
         {
             //members
@@ -47,7 +47,7 @@ namespace arg3
             var(void *p) : p(p) {}
             var(const char *str) : p(str) {}
             var(const wchar_t *str) : p(str) {}
-        } m_value;
+        } value_;
 
         template<typename T>
         T D(T def) const
@@ -62,7 +62,7 @@ namespace arg3
         template<typename T>
         T convert_numeric(T def) const
         {
-            switch (m_type)
+            switch (type_)
             {
             case CHAR:
             case UCHAR:
@@ -70,32 +70,32 @@ namespace arg3
             case SHORT:
             case USHORT:
             case INT:
-                if (m_value.i <= numeric_limits<T>::max() && m_value.i >= numeric_limits<T>::min())
-                    return m_value.i;
+                if (value_.i <= numeric_limits<T>::max() && value_.i >= numeric_limits<T>::min())
+                    return value_.i;
             case UINT:
-                if (m_value.ui < numeric_limits<T>::max())
-                    return static_cast<int>(m_value.ui);
+                if (value_.ui < numeric_limits<T>::max())
+                    return static_cast<int>(value_.ui);
             case LONG:
-                if (m_value.l <= numeric_limits<T>::max() && m_value.l >= numeric_limits<T>::min())
-                    return static_cast<int>(m_value.l);
+                if (value_.l <= numeric_limits<T>::max() && value_.l >= numeric_limits<T>::min())
+                    return static_cast<int>(value_.l);
             case ULONG:
-                if (m_value.ul <= numeric_limits<T>::max())
-                    return static_cast<int>(m_value.ul);
+                if (value_.ul <= numeric_limits<T>::max())
+                    return static_cast<int>(value_.ul);
             case LLONG:
-                if (m_value.ll <= numeric_limits<T>::max() && m_value.ll >= numeric_limits<T>::min())
-                    return static_cast<int>(m_value.ll);
+                if (value_.ll <= numeric_limits<T>::max() && value_.ll >= numeric_limits<T>::min())
+                    return static_cast<int>(value_.ll);
             case ULLONG:
-                if (m_value.ull <= numeric_limits<T>::max())
-                    return static_cast<int>(m_value.ull);
+                if (value_.ull <= numeric_limits<T>::max())
+                    return static_cast<int>(value_.ull);
             case DOUBLE:
-                if (m_value.d <= numeric_limits<T>::max() && m_value.d >= numeric_limits<T>::min())
-                    return static_cast<int>(m_value.d);
+                if (value_.d <= numeric_limits<T>::max() && value_.d >= numeric_limits<T>::min())
+                    return static_cast<int>(value_.d);
             case FLOAT:
-                if (m_value.f <= numeric_limits<T>::max() && m_value.f >= numeric_limits<T>::min())
-                    return static_cast<int>(m_value.f);
+                if (value_.f <= numeric_limits<T>::max() && value_.f >= numeric_limits<T>::min())
+                    return static_cast<int>(value_.f);
             case LDOUBLE:
-                if (m_value.ld <= numeric_limits<T>::max() && m_value.ld >= numeric_limits<T>::min())
-                    return static_cast<int>(m_value.ld);
+                if (value_.ld <= numeric_limits<T>::max() && value_.ld >= numeric_limits<T>::min())
+                    return static_cast<int>(value_.ld);
             }
             return D(def);
         };

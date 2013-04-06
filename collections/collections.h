@@ -15,8 +15,6 @@ using namespace std;
 
 namespace arg3
 {
-//namespace collections
-//{
 
     template<typename K, typename V>
     string join(map<K, V> collection, const string &divider = ",", bool displayValues = false)
@@ -26,13 +24,13 @@ namespace arg3
         size_t size = collection.size();
         size_t count = 0;
 
-for(auto &e : collection)
+for (auto & e : collection)
         {
-            if(displayValues)
+            if (displayValues)
                 buf << e.second;
             else
                 buf << e.first;
-            if(count++ < size-1)
+            if (count++ < size - 1)
             {
                 buf << ",";
             }
@@ -48,13 +46,13 @@ for(auto &e : collection)
         size_t size = collection.size();
         size_t count = 0;
 
-for(auto &e : collection)
+for (auto & e : collection)
         {
-            if(displayValues)
+            if (displayValues)
                 buf << e.second;
             else
                 buf << e.first;
-            if(count++ < size-1)
+            if (count++ < size - 1)
             {
                 buf << ",";
             }
@@ -67,13 +65,13 @@ for(auto &e : collection)
     {
         ostringstream buf;
 
-        if(list.size() > 0)
+        if (list.size() > 0)
         {
             ostream_iterator<T> it(buf, delimiter);
 
-            copy(list.begin(), list.end()-1, it);
+            copy(list.begin(), list.end() - 1, it);
 
-            buf << *(list.end()-1);
+            buf << *(list.end() - 1);
         }
 
         return buf.str();
@@ -84,18 +82,17 @@ for(auto &e : collection)
     {
         ostringstream buf;
 
-        if(list.size() > 0)
+        if (list.size() > 0)
         {
             ostream_iterator<T> it(buf, divider.c_str());
 
-            copy(list.begin(), list.end()-1, it);
+            copy(list.begin(), list.end() - 1, it);
 
-            buf << *(list.end()-1);
+            buf << *(list.end() - 1);
         }
 
         return buf.str();
     }
-//}
 }
 
 #endif

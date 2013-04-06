@@ -10,44 +10,44 @@ using namespace std;
 
 Context(JsonObject)
 {
-	Spec(testIterator)
-	{
-		json::object obj;
+    Spec(testIterator)
+    {
+        json::object obj;
 
-		obj.set_str("testa", "test string");
+        obj.set_str("testa", "test string");
 
-		obj.set_int("testb", 1234);
+        obj.set_int("testb", 1234);
 
-		obj.set_bool("testc", true);
+        obj.set_bool("testc", true);
 
-		obj.set_double("testd", 1234.4321);
+        obj.set_double("testd", 1234.4321);
 
-		auto i = obj.begin();
+        auto i = obj.begin();
 
-		Assert::That(i->first, Equals("testa"));
+        Assert::That(i->first, Equals("testa"));
 
-		Assert::That(i->second.is_str(), Equals(true));
+        Assert::That(i->second.is_str(), Equals(true));
 
-		Assert::That(i->second.to_str(), Equals("test string"));
+        Assert::That(i->second.to_str(), Equals("test string"));
 
-		i++;
+        i++;
 
-		Assert::That(i->second.is_int(), Equals(true));
+        Assert::That(i->second.is_int(), Equals(true));
 
-		Assert::That(i->second.to_int(), Equals(1234));
+        Assert::That(i->second.to_int(), Equals(1234));
 
-		i++;
+        i++;
 
-		Assert::That(i->second.is_bool(), Equals(true));
+        Assert::That(i->second.is_bool(), Equals(true));
 
-		Assert::That(i->second.to_bool(), Equals(true));
+        Assert::That(i->second.to_bool(), Equals(true));
 
-		i++;
+        i++;
 
-		Assert::That(i->second.is_double(), Equals(true));
+        Assert::That(i->second.is_double(), Equals(true));
 
-		Assert::That(i->second.to_double(), Equals(1234.4321));
-	}
+        Assert::That(i->second.to_double(), Equals(1234.4321));
+    }
 
 
     Spec(testParse)

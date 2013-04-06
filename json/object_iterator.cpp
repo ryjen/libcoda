@@ -3,12 +3,12 @@
 
 namespace arg3
 {
-	namespace json
-	{
-		object_iterator::object_iterator(struct lh_entry *entry) : entry_(entry)
-		{
+    namespace json
+    {
+        object_iterator::object_iterator(struct lh_entry *entry) : entry_(entry)
+        {
 
-		}
+        }
 
         object_iterator::object_iterator(const object_iterator &other) : entry_(other.entry_)
         {
@@ -30,45 +30,45 @@ namespace arg3
             return *this;
         }
 
-		object_iterator::reference object_iterator::get_ref()
-		{
-			if(entry_ == NULL)
-				return ref_;
+        object_iterator::reference object_iterator::get_ref()
+        {
+            if(entry_ == NULL)
+                return ref_;
 
-			ref_ = make_pair(string(static_cast<char*>(entry_->k)), object(static_cast<json_object*>(const_cast<void*>(entry_->v))));
+            ref_ = make_pair(string(static_cast<char*>(entry_->k)), object(static_cast<json_object*>(const_cast<void*>(entry_->v))));
 
             return ref_;
-		}
+        }
 
-		object_iterator::reference object_iterator::operator*()
-		{
-			return get_ref();
-		}
+        object_iterator::reference object_iterator::operator*()
+        {
+            return get_ref();
+        }
 
         object_iterator::pointer object_iterator::operator->()
         {
-        	return &get_ref();
+            return &get_ref();
         }
 
-        
+
         object_iterator& object_iterator::operator++()
         {
-        	if(entry_ != NULL)
-	        	entry_ = entry_->next;
-        	return *this;
+            if(entry_ != NULL)
+                entry_ = entry_->next;
+            return *this;
         }
 
-        
+
         object_iterator object_iterator::operator++(int)
         {
-        	object_iterator temp(*this);
+            object_iterator temp(*this);
 
-        	++(*this);
+            ++(*this);
 
-        	return temp;
+            return temp;
         }
 
-        
+
         object_iterator object_iterator::operator+(difference_type n)
         {
             object_iterator tmp(*this);
@@ -77,7 +77,7 @@ namespace arg3
             return tmp;
         }
 
-        
+
         object_iterator &object_iterator::operator+=(difference_type n)
         {
             for (difference_type i = 0; i < n; i++)
@@ -85,17 +85,17 @@ namespace arg3
             return *this;
         }
 
-        
+
         bool object_iterator::operator==(const object_iterator& other) const
         {
-        	return entry_ == other.entry_;
+            return entry_ == other.entry_;
         }
 
-        
+
         bool object_iterator::operator!=(const object_iterator& other) const
         {
-        	return entry_ != other.entry_;
+            return entry_ != other.entry_;
         }
-        
-	}
+
+    }
 }

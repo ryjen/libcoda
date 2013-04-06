@@ -7,94 +7,94 @@ namespace arg3
 {
 
     variant::variant() :
-        m_type(INT), m_refcount(NULL), m_value(0)
+        type_(INT), refcount_(NULL), value_(0)
     {}
 
     variant::variant(char c) :
-        m_type(CHAR), m_refcount(NULL), m_value(c)
+        type_(CHAR), refcount_(NULL), value_(c)
     {}
 
     variant::variant(unsigned char uc) :
-        m_type(UCHAR), m_refcount(NULL), m_value(uc)
+        type_(UCHAR), refcount_(NULL), value_(uc)
     {}
 
     variant::variant(wchar_t wc) :
-        m_type(WCHAR), m_refcount(NULL), m_value(wc)
+        type_(WCHAR), refcount_(NULL), value_(wc)
     {}
 
     variant::variant(short s) :
-        m_type(SHORT), m_refcount(NULL), m_value(s)
+        type_(SHORT), refcount_(NULL), value_(s)
     {}
 
     variant::variant(unsigned short us) :
-        m_type(USHORT), m_refcount(NULL), m_value(us)
+        type_(USHORT), refcount_(NULL), value_(us)
     {}
 
     variant::variant(int i) :
-        m_type(INT), m_refcount(NULL), m_value(i)
+        type_(INT), refcount_(NULL), value_(i)
     {}
 
     variant::variant(unsigned ui) :
-        m_type(UINT), m_refcount(NULL), m_value(ui)
+        type_(UINT), refcount_(NULL), value_(ui)
     {}
 
     variant::variant(long l) :
-        m_type(LONG), m_refcount(NULL), m_value(l)
+        type_(LONG), refcount_(NULL), value_(l)
     {}
 
     variant::variant(unsigned long ul) :
-        m_type(ULONG), m_refcount(NULL), m_value(ul)
+        type_(ULONG), refcount_(NULL), value_(ul)
     {}
 
     variant::variant(float f) :
-        m_type(FLOAT), m_refcount(NULL), m_value(f)
+        type_(FLOAT), refcount_(NULL), value_(f)
     {}
 
     variant::variant(double d) :
-        m_type(DOUBLE), m_refcount(NULL), m_value(d)
+        type_(DOUBLE), refcount_(NULL), value_(d)
     {}
 
     variant::variant(long double ld) :
-        m_type(LDOUBLE), m_refcount(NULL), m_value(ld)
+        type_(LDOUBLE), refcount_(NULL), value_(ld)
     {}
 
     variant::variant(long long ll) :
-        m_type(LLONG), m_refcount(NULL), m_value(ll)
+        type_(LLONG), refcount_(NULL), value_(ll)
     {}
 
     variant::variant(unsigned long long ull) :
-        m_type(ULLONG), m_refcount(NULL), m_value(ull)
+        type_(ULLONG), refcount_(NULL), value_(ull)
     {}
 
     variant::variant(void *p) :
-        m_type(POINTER), m_refcount(NULL), m_value(p)
+        type_(POINTER), refcount_(NULL), value_(p)
     { }
 
     // for strings we initialize refcount and make a copy of the cstring
 
     variant::variant(const char *str) :
-        m_type(CSTRING), m_refcount(new unsigned(0)), m_value(strdup(str))
+        type_(CSTRING), refcount_(new unsigned(0)), value_(strdup(str))
     {}
 
     variant::variant(const wchar_t *str) :
-        m_type(WCSTRING), m_refcount(new unsigned(0)), m_value(wcsdup(str))
+        type_(WCSTRING), refcount_(new unsigned(0)), value_(wcsdup(str))
     {}
 
     variant::variant(const string &str) :
-        m_type(STRING), m_refcount(new unsigned(0)), m_value(strdup(str.c_str()))
+        type_(STRING), refcount_(new unsigned(0)), value_(strdup(str.c_str()))
     {}
 
     variant::variant(const wstring &str) :
-        m_type(WSTRING), m_refcount(new unsigned(0)), m_value(wcsdup(str.c_str()))
+        type_(WSTRING), refcount_(new unsigned(0)), value_(wcsdup(str.c_str()))
     {}
 
     // copy constructor
     variant::variant(const variant &other) :
-        m_type(other.m_type), m_refcount(other.m_refcount), m_value(other.m_value)
+        type_(other.type_), refcount_(other.refcount_), value_(other.value_)
     {
         // update refcount
-        if (m_refcount)
-            (*m_refcount)++;
+        if (refcount_)
+            (*refcount_)++;
     }
 
     variant &variant::operator=(const variant &other)
@@ -102,15 +102,15 @@ namespace arg3
         if (this != &other)
         {
 
-            m_type = other.m_type;
+            type_ = other.type_;
 
-            m_value = other.m_value;
+            value_ = other.value_;
 
-            m_refcount = other.m_refcount;
+            refcount_ = other.refcount_;
 
             // update refcount
-            if (m_refcount)
-                (*m_refcount)++;
+            if (refcount_)
+                (*refcount_)++;
 
         }
         return *this;
@@ -120,17 +120,17 @@ namespace arg3
     {
 
         // check refcounts to free a pointer
-        if (m_refcount)
+        if (refcount_)
         {
             // no references except this one
-            if (*m_refcount == 0)
+            if (*refcount_ == 0)
             {
-                free(const_cast<void *>(m_value.p));
+                free(const_cast<void *>(value_.p));
             }
             // decrement reference count
             else
             {
-                (*m_refcount)--;
+                (*refcount_)--;
             }
         }
 
@@ -138,7 +138,7 @@ namespace arg3
 
     int variant::type() const
     {
-        return m_type;
+        return type_;
     }
 
     //operators
@@ -248,7 +248,7 @@ namespace arg3
 
     bool variant::equals(const variant &value) const
     {
-        switch (m_type)
+        switch (type_)
         {
         case CHAR:
         case UCHAR:
@@ -256,25 +256,25 @@ namespace arg3
         case SHORT:
         case USHORT:
         case INT:
-            return m_value.i == value.m_value.i;
+            return value_.i == value.value_.i;
         case UINT:
-            return m_value.ui == value.m_value.ui;
+            return value_.ui == value.value_.ui;
         case LONG:
-            return m_value.l == value.m_value.l;
+            return value_.l == value.value_.l;
         case ULONG:
-            return m_value.ul == value.m_value.ul;
+            return value_.ul == value.value_.ul;
         case LLONG:
-            return m_value.ll == value.m_value.ll;
+            return value_.ll == value.value_.ll;
         case ULLONG:
-            return m_value.ull == value.m_value.ull;
+            return value_.ull == value.value_.ull;
         case FLOAT:
-            return m_value.f == value.m_value.f;
+            return value_.f == value.value_.f;
         case DOUBLE:
-            return m_value.d == value.m_value.d;
+            return value_.d == value.value_.d;
         case LDOUBLE:
-            return m_value.ld == value.m_value.ld;
+            return value_.ld == value.value_.ld;
         case POINTER:
-            return m_value.p == value.m_value.p;
+            return value_.p == value.value_.p;
         case CSTRING:
         case STRING:
             return strcmp(to_cstring(), value.to_cstring());
@@ -294,37 +294,37 @@ namespace arg3
 
     string variant::to_string(const string &def) const
     {
-        switch (m_type)
+        switch (type_)
         {
         case STRING:
         case CSTRING:
-            return static_cast<const char *>(m_value.p);
+            return static_cast<const char *>(value_.p);
         case CHAR:
-            return (const char *) &m_value.i;
+            return (const char *) &value_.i;
         case BOOL:
-            return m_value.i == 0 ? "false" : "true";
+            return value_.i == 0 ? "false" : "true";
         case WCHAR:
         case UCHAR:
         case SHORT:
         case USHORT:
         case INT:
-            return std::to_string(m_value.i);
+            return std::to_string(value_.i);
         case UINT:
-            return std::to_string(m_value.ui);
+            return std::to_string(value_.ui);
         case LONG:
-            return std::to_string(m_value.l);
+            return std::to_string(value_.l);
         case ULONG:
-            return std::to_string(m_value.ul);
+            return std::to_string(value_.ul);
         case LLONG:
-            return std::to_string(m_value.ll);
+            return std::to_string(value_.ll);
         case ULLONG:
-            return std::to_string(m_value.ull);
+            return std::to_string(value_.ull);
         case FLOAT:
-            return std::to_string(m_value.f);
+            return std::to_string(value_.f);
         case DOUBLE:
-            return std::to_string(m_value.d);
+            return std::to_string(value_.d);
         case LDOUBLE:
-            return std::to_string(m_value.ld);
+            return std::to_string(value_.ld);
         default:
         case WSTRING:
         case WCSTRING:
@@ -334,13 +334,13 @@ namespace arg3
 
     const char *variant::to_cstring(const char *def) const
     {
-        switch (m_type)
+        switch (type_)
         {
         case STRING:
         case CSTRING:
-            return static_cast<const char *>(m_value.p);
+            return static_cast<const char *>(value_.p);
         case CHAR:
-            return (const char *) &m_value.i;
+            return (const char *) &value_.i;
         default:
             return D(def);
         }
@@ -348,13 +348,13 @@ namespace arg3
 
     const wchar_t *variant::to_wcstring(const wchar_t *def) const
     {
-        switch (m_type)
+        switch (type_)
         {
         case WSTRING:
         case WCSTRING:
-            return static_cast<const wchar_t *>(m_value.p);
+            return static_cast<const wchar_t *>(value_.p);
         case WCHAR:
-            return (const wchar_t *) &m_value.i;
+            return (const wchar_t *) &value_.i;
         default:
             return D(def);
         }
@@ -362,40 +362,40 @@ namespace arg3
 
     wstring variant::to_wstring(const wstring &def) const
     {
-        switch (m_type)
+        switch (type_)
         {
         case STRING:
         case CSTRING:
             return D(def);
         case WSTRING:
         case WCSTRING:
-            return static_cast<const wchar_t *>(m_value.p);
+            return static_cast<const wchar_t *>(value_.p);
         case CHAR:
         case BOOL:
-            return m_value.i == 0 ? L"false" : L"true";
+            return value_.i == 0 ? L"false" : L"true";
         case WCHAR:
-            return (const wchar_t *) &m_value.i;
+            return (const wchar_t *) &value_.i;
         case UCHAR:
         case SHORT:
         case USHORT:
         case INT:
-            return std::to_wstring(m_value.i);
+            return std::to_wstring(value_.i);
         case UINT:
-            return std::to_wstring(m_value.ui);
+            return std::to_wstring(value_.ui);
         case LONG:
-            return std::to_wstring(m_value.l);
+            return std::to_wstring(value_.l);
         case ULONG:
-            return std::to_wstring(m_value.ul);
+            return std::to_wstring(value_.ul);
         case LLONG:
-            return std::to_wstring(m_value.ll);
+            return std::to_wstring(value_.ll);
         case ULLONG:
-            return std::to_wstring(m_value.ull);
+            return std::to_wstring(value_.ull);
         case FLOAT:
-            return std::to_wstring(m_value.f);
+            return std::to_wstring(value_.f);
         case DOUBLE:
-            return std::to_wstring(m_value.d);
+            return std::to_wstring(value_.d);
         case LDOUBLE:
-            return std::to_wstring(m_value.ld);
+            return std::to_wstring(value_.ld);
         default:
             return D(def);
         }
@@ -403,7 +403,7 @@ namespace arg3
 
     bool variant::is_string() const
     {
-        switch (m_type)
+        switch (type_)
         {
         case STRING:
         case CSTRING:
@@ -415,7 +415,7 @@ namespace arg3
 
     bool variant::is_wstring() const
     {
-        switch (m_type)
+        switch (type_)
         {
         case WSTRING:
         case WCSTRING:
@@ -427,7 +427,7 @@ namespace arg3
 
     bool variant::is_numeric() const
     {
-        switch (m_type)
+        switch (type_)
         {
         case CHAR:
         case UCHAR:
@@ -448,7 +448,7 @@ namespace arg3
 
     bool variant::is_real() const
     {
-        switch (m_type)
+        switch (type_)
         {
         case FLOAT:
         case DOUBLE:
@@ -468,7 +468,7 @@ namespace arg3
         {
             try
             {
-                return stoi(static_cast<const char *>(m_value.p), NULL, BASE);
+                return stoi(static_cast<const char *>(value_.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -479,7 +479,7 @@ namespace arg3
         {
             try
             {
-                return wcstol(static_cast<const wchar_t *>(m_value.p), NULL, BASE);
+                return wcstol(static_cast<const wchar_t *>(value_.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -501,7 +501,7 @@ namespace arg3
         {
             try
             {
-                return stol(static_cast<const char *>(m_value.p), NULL, BASE);
+                return stol(static_cast<const char *>(value_.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -512,7 +512,7 @@ namespace arg3
         {
             try
             {
-                return wcstoul(static_cast<const wchar_t *>(m_value.p), NULL, BASE);
+                return wcstoul(static_cast<const wchar_t *>(value_.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -535,7 +535,7 @@ namespace arg3
         {
             try
             {
-                return stol(static_cast<const char *>(m_value.p), 0, BASE);
+                return stol(static_cast<const char *>(value_.p), 0, BASE);
             }
             catch (const exception &e)
             {
@@ -546,7 +546,7 @@ namespace arg3
         {
             try
             {
-                return wcstol(static_cast<const wchar_t *>(m_value.p), NULL, BASE);
+                return wcstol(static_cast<const wchar_t *>(value_.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -569,7 +569,7 @@ namespace arg3
         {
             try
             {
-                return stoul(static_cast<const char *>(m_value.p), 0, BASE);
+                return stoul(static_cast<const char *>(value_.p), 0, BASE);
             }
             catch (const exception &e)
             {
@@ -580,7 +580,7 @@ namespace arg3
         {
             try
             {
-                return wcstoul(static_cast<const wchar_t *>(m_value.p), NULL, BASE);
+                return wcstoul(static_cast<const wchar_t *>(value_.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -603,7 +603,7 @@ namespace arg3
         {
             try
             {
-                return stoll(static_cast<const char *>(m_value.p), 0, BASE);
+                return stoll(static_cast<const char *>(value_.p), 0, BASE);
             }
             catch (const exception &e)
             {
@@ -614,7 +614,7 @@ namespace arg3
         {
             try
             {
-                return wcstoll(static_cast<const wchar_t *>(m_value.p), NULL, BASE);
+                return wcstoll(static_cast<const wchar_t *>(value_.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -637,7 +637,7 @@ namespace arg3
         {
             try
             {
-                return stoull(static_cast<const char *>(m_value.p), 0, BASE);
+                return stoull(static_cast<const char *>(value_.p), 0, BASE);
             }
             catch (const exception &e)
             {
@@ -648,7 +648,7 @@ namespace arg3
         {
             try
             {
-                return wcstoull(static_cast<const wchar_t *>(m_value.p), NULL, BASE);
+                return wcstoull(static_cast<const wchar_t *>(value_.p), NULL, BASE);
             }
             catch (const exception &e)
             {
@@ -671,7 +671,7 @@ namespace arg3
         {
             try
             {
-                return stod(static_cast<const char *>(m_value.p), 0);
+                return stod(static_cast<const char *>(value_.p), 0);
             }
             catch (const exception &e)
             {
@@ -682,7 +682,7 @@ namespace arg3
         {
             try
             {
-                return wcstod(static_cast<const wchar_t *>(m_value.p), NULL);
+                return wcstod(static_cast<const wchar_t *>(value_.p), NULL);
             }
             catch (const exception &e)
             {
@@ -698,7 +698,7 @@ namespace arg3
 
     bool variant::to_bool() const
     {
-        switch (m_type)
+        switch (type_)
         {
         case BOOL:
         case CHAR:
@@ -707,37 +707,37 @@ namespace arg3
         case SHORT:
         case USHORT:
         case INT:
-            return m_value.i != 0;
+            return value_.i != 0;
         case UINT:
-            return m_value.ui != 0;
+            return value_.ui != 0;
         case LONG:
-            return m_value.l != 0;
+            return value_.l != 0;
         case ULONG:
-            return m_value.ul != 0;
+            return value_.ul != 0;
         case LLONG:
-            return m_value.ll != 0;
+            return value_.ll != 0;
         case ULLONG:
-            return m_value.ull != 0;
+            return value_.ull != 0;
         case FLOAT:
-            return !isnan(m_value.f);
+            return !isnan(value_.f);
         case DOUBLE:
-            return !isnan(m_value.d);
+            return !isnan(value_.d);
         case LDOUBLE:
-            return !isnan(m_value.ld);
+            return !isnan(value_.ld);
         case CSTRING:
         case STRING:
         {
-            const char *temp = static_cast<const char *>(m_value.p);
+            const char *temp = static_cast<const char *>(value_.p);
             return temp && *temp;
         }
         case WCSTRING:
         case WSTRING:
         {
-            const wchar_t *temp = static_cast<const wchar_t *>(m_value.p);
+            const wchar_t *temp = static_cast<const wchar_t *>(value_.p);
             return wcslen(temp) != 0;
         }
         case POINTER:
-            return m_value.p != 0;
+            return value_.p != 0;
         default:
             return false;
         }
@@ -753,7 +753,7 @@ namespace arg3
         {
             try
             {
-                return stof(static_cast<const char *>(m_value.p), NULL);
+                return stof(static_cast<const char *>(value_.p), NULL);
             }
             catch (const exception &e)
             {
@@ -764,7 +764,7 @@ namespace arg3
         {
             try
             {
-                return wcstof(static_cast<const wchar_t *>(m_value.p), NULL);
+                return wcstof(static_cast<const wchar_t *>(value_.p), NULL);
             }
             catch (const exception &e)
             {

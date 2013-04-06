@@ -88,7 +88,7 @@ Context(sqliteTest)
         Assert::That(v, Equals(1234));
 
         v = "asdf1234";
-#ifdef ARG3_VARIANT_THROW_EXCEPTIONS        
+#ifdef ARG3_VARIANT_THROW_EXCEPTIONS
         AssertThrows(std::invalid_argument, v.to_int());
 #else
         Assert::That(v.to_int(-1), Equals(-1));
@@ -97,9 +97,9 @@ Context(sqliteTest)
         v = "1234129837410928374109283741029837410293847";
 #ifdef ARG3_VARIANT_THROW_EXCEPTIONS
         AssertThrows(std::out_of_range, v.to_int());
-#else 
+#else
         Assert::That(v.to_int(-1), Equals(-1));
-#endif        
+#endif
     }
 
     Spec(testConvertLong)
@@ -115,9 +115,9 @@ Context(sqliteTest)
         v = "asasdlfknalskdnf";
 #ifdef ARG3_VARIANT_THROW_EXCEPTIONS
         AssertThrows(std::invalid_argument, v.to_long());
-#else 
+#else
         Assert::That(v.to_long(-1), Equals(-1));
-#endif        
+#endif
     }
 
     Spec(testCast)

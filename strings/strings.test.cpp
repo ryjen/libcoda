@@ -41,7 +41,7 @@ Context(arg3strings)
         Assert::That(ordinal_string(23), Equals("23rd"));
     }
 
-    
+
     Spec(testCapitalize)
     {
 

@@ -6,15 +6,15 @@
 
 namespace arg3
 {
-	namespace json
-	{
-		class exception : public std::logic_error
-		{
-		public:
-			exception(const std::string &what) : std::logic_error(what)
-			{}
-		};
-	}
+    namespace json
+    {
+        class exception : public std::logic_error
+        {
+        public:
+            exception(const std::string &what) : std::logic_error(what)
+            {}
+        };
+    }
 }
 
 #endif
