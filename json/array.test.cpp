@@ -11,36 +11,36 @@ Context(ArrayTest)
     {
         json::array value;
 
-        value.add_str("test");
+        value.addString("test");
 
-        value.add_int(1234);
+        value.addInt(1234);
 
-        value.add_double(123.321);
+        value.addDouble(123.321);
 
-        value.add_bool(true);
+        value.addBool(true);
 
         auto i = value.begin();
 
-        Assert::That(i->is_str(), Equals(true));
+        Assert::That(i->isString(), Equals(true));
 
-        Assert::That(i->to_str(), Equals("test"));
-
-        i++;
-
-        Assert::That(i->is_int(), Equals(true));
-
-        Assert::That(i->to_int(), Equals(1234));
+        Assert::That(i->toString(), Equals("test"));
 
         i++;
 
-        Assert::That(i->is_double(), Equals(true));
+        Assert::That(i->isInt(), Equals(true));
 
-        Assert::That(i->to_double(), Equals(123.321));
+        Assert::That(i->toInt(), Equals(1234));
 
         i++;
 
-        Assert::That(i->is_bool(), Equals(true));
+        Assert::That(i->isDouble(), Equals(true));
 
-        Assert::That(i->to_bool(), Equals(true));
+        Assert::That(i->toDouble(), Equals(123.321));
+
+        i++;
+
+        Assert::That(i->isBool(), Equals(true));
+
+        Assert::That(i->toBool(), Equals(true));
     }
 };

@@ -28,12 +28,12 @@ namespace arg3
             virtual ~object();
             object &operator=(const object &obj);
 
-            int32_t get_int(const std::string &key) const;
-            int64_t get_int64(const std::string &key) const;
-            bool get_bool(const std::string &key) const;
-            double get_double(const std::string &key) const;
-            std::string get_str(const std::string &key) const;
-            array get_array(const std::string &key) const;
+            int32_t getInt(const std::string &key) const;
+            int64_t getInt64(const std::string &key) const;
+            bool getBool(const std::string &key) const;
+            double getDouble(const std::string &key) const;
+            std::string getString(const std::string &key) const;
+            array getArray(const std::string &key) const;
             object get(const std::string &key) const;
 
             object get(size_t idx) const;
@@ -47,36 +47,36 @@ namespace arg3
 
             bool parse(const std::string &value);
 
-            void set_int(const std::string &key, int32_t value);
-            void set_int64(const std::string &key, int64_t value);
-            void set_bool(const std::string &key, bool value);
-            void set_double(const std::string &key, double value);
-            void set_str(const std::string &key, const std::string &value);
-            void set_array(const std::string &key, const array &value);
+            void setInt(const std::string &key, int32_t value);
+            void setInt64(const std::string &key, int64_t value);
+            void setBool(const std::string &key, bool value);
+            void setDouble(const std::string &key, double value);
+            void setString(const std::string &key, const std::string &value);
+            void setArray(const std::string &key, const array &value);
             void set(const std::string &key, const object &value);
 
-            void add_int(const std::string &key, int32_t value);
-            void add_int64(const std::string &key, int64_t value);
-            void add_bool(const std::string &key, bool value);
-            void add_double(const std::string &key, double value);
-            void add_str(const std::string &key, const std::string &value);
-            void add_array(const std::string &key, const array &value);
+            void addInt(const std::string &key, int32_t value);
+            void addInt64(const std::string &key, int64_t value);
+            void addBool(const std::string &key, bool value);
+            void addDouble(const std::string &key, double value);
+            void addString(const std::string &key, const std::string &value);
+            void addArray(const std::string &key, const array &value);
             void add(const std::string &key, const object &value);
 
-            int32_t to_int() const;
-            int64_t to_int64() const;
-            bool to_bool() const;
-            double to_double() const;
-            std::string to_str() const;
-            array to_array() const;
+            int32_t toInt() const;
+            int64_t toInt64() const;
+            bool toBool() const;
+            double toDouble() const;
+            std::string toString() const;
+            array toArray() const;
 
-            bool is_int() const;
-            bool is_bool() const;
-            bool is_double() const;
-            bool is_str() const;
-            bool is_array() const;
-            bool is_obj() const;
-            bool is_null() const;
+            bool isInt() const;
+            bool isBool() const;
+            bool isDouble() const;
+            bool isString() const;
+            bool isArray() const;
+            bool isObject() const;
+            bool isNull() const;
 
             iterator begin();
             iterator end();

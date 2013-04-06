@@ -109,36 +109,36 @@ namespace arg3
             json_object_object_del(value_, key.c_str());
         }
 
-        int32_t object::get_int(const std::string &key) const
+        int32_t object::getInt(const std::string &key) const
         {
             json_object *obj = json_object_object_get(value_, key.c_str());
             return json_object_get_int(obj);
         }
 
-        int64_t object::get_int64(const std::string &key) const
+        int64_t object::getInt64(const std::string &key) const
         {
             json_object *obj = json_object_object_get(value_, key.c_str());
             return json_object_get_int64(obj);
         }
-        bool object::get_bool(const std::string &key) const
+        bool object::getBool(const std::string &key) const
         {
             json_object *obj = json_object_object_get(value_, key.c_str());
             return json_object_get_boolean(obj);
         }
 
-        double object::get_double(const std::string &key) const
+        double object::getDouble(const std::string &key) const
         {
             json_object *obj = json_object_object_get(value_, key.c_str());
             return json_object_get_double(obj);
         }
 
-        std::string object::get_str(const std::string &key) const
+        std::string object::getString(const std::string &key) const
         {
             json_object *obj = json_object_object_get(value_, key.c_str());
             return json_object_get_string(obj);
         }
 
-        array object::get_array(const std::string &key) const
+        array object::getArray(const std::string &key) const
         {
             json_object *obj = json_object_object_get(value_, key.c_str());
             return array(obj);
@@ -152,7 +152,7 @@ namespace arg3
 
         object object::get(size_t idx) const
         {
-            if(!is_array()) return object();
+            if(!isArray()) return object();
 
             json_object *obj = json_object_array_get_idx(value_, idx);
 
@@ -161,10 +161,10 @@ namespace arg3
 
         size_t object::size() const
         {
-            if(is_array())
+            if(isArray())
                 return json_object_array_length(value_);
 
-            if(is_obj())
+            if(isObject())
             {
                 size_t iCount = 0;
 
@@ -187,29 +187,29 @@ namespace arg3
             json_object_object_add(value_, key.c_str(), obj);
         }
 
-        void object::set_int(const std::string &key, int32_t value)
+        void object::setInt(const std::string &key, int32_t value)
         {
             set_value(key, json_object_new_int(value));
         }
 
-        void object::set_int64(const std::string &key, int64_t value)
+        void object::setInt64(const std::string &key, int64_t value)
         {
             set_value(key, json_object_new_int64(value));
         }
-        void object::set_bool(const std::string &key, bool value)
+        void object::setBool(const std::string &key, bool value)
         {
             set_value(key, json_object_new_boolean(value));
         }
-        void object::set_double(const std::string &key, double value)
+        void object::setDouble(const std::string &key, double value)
         {
             set_value(key, json_object_new_double(value));
         }
-        void object::set_str(const std::string &key, const std::string &value)
+        void object::setString(const std::string &key, const std::string &value)
         {
             set_value(key, json_object_new_string(value.c_str()));
         }
 
-        void object::set_array(const std::string &key, const array &value)
+        void object::setArray(const std::string &key, const array &value)
         {
             set_value(key, json_object_get(value.value_));
         }
@@ -226,29 +226,29 @@ namespace arg3
             json_object_object_add(value_, key.c_str(), obj);
         }
 
-        void object::add_int(const std::string &key, int32_t value)
+        void object::addInt(const std::string &key, int32_t value)
         {
             add_value(key, json_object_new_int(value));
         }
 
-        void object::add_int64(const std::string &key, int64_t value)
+        void object::addInt64(const std::string &key, int64_t value)
         {
             add_value(key, json_object_new_int64(value));
         }
-        void object::add_bool(const std::string &key, bool value)
+        void object::addBool(const std::string &key, bool value)
         {
             add_value(key, json_object_new_boolean(value));
         }
-        void object::add_double(const std::string &key, double value)
+        void object::addDouble(const std::string &key, double value)
         {
             add_value(key, json_object_new_double(value));
         }
-        void object::add_str(const std::string &key, const std::string &value)
+        void object::addString(const std::string &key, const std::string &value)
         {
             add_value(key, json_object_new_string(value.c_str()));
         }
 
-        void object::add_array(const std::string &key, const array &value)
+        void object::addArray(const std::string &key, const array &value)
         {
             add_value(key, json_object_get(value.value_));
         }
@@ -259,37 +259,37 @@ namespace arg3
         }
 
 
-        bool object::is_int() const
+        bool object::isInt() const
         {
             return json_object_is_type(value_, json_type_int);
         }
 
-        bool object::is_bool() const
+        bool object::isBool() const
         {
             return json_object_is_type(value_, json_type_boolean);
         }
 
-        bool object::is_double() const
+        bool object::isDouble() const
         {
             return json_object_is_type(value_, json_type_double);
         }
 
-        bool object::is_str() const
+        bool object::isString() const
         {
             return json_object_is_type(value_, json_type_string);
         }
 
-        bool object::is_array() const
+        bool object::isArray() const
         {
             return json_object_is_type(value_, json_type_array);
         }
 
-        bool object::is_obj() const
+        bool object::isObject() const
         {
             return json_object_is_type(value_, json_type_object);
         }
 
-        bool object::is_null() const
+        bool object::isNull() const
         {
             return json_object_is_type(value_, json_type_null);
         }
@@ -314,34 +314,34 @@ namespace arg3
             return object_iterator(NULL);
         }
 
-        int32_t object::to_int() const
+        int32_t object::toInt() const
         {
             return json_object_get_int(value_);
         }
 
-        int64_t object::to_int64() const
+        int64_t object::toInt64() const
         {
             return json_object_get_int64(value_);
         }
 
-        bool object::to_bool() const
+        bool object::toBool() const
         {
             return json_object_get_boolean(value_);
         }
 
-        double object::to_double() const
+        double object::toDouble() const
         {
             return json_object_get_double(value_);
         }
 
-        string object::to_str() const
+        string object::toString() const
         {
             return json_object_get_string(value_);
         }
 
-        array object::to_array() const
+        array object::toArray() const
         {
-            if(is_array())
+            if(isArray())
                 return array(value_);
             else
                 return array();
@@ -359,13 +359,13 @@ namespace arg3
             case json_type_null:
                 return false;
             case json_type_int:
-                return to_int64() == other.to_int64();
+                return toInt64() == other.toInt64();
             case json_type_string:
-                return to_str() == other.to_str();
+                return toString() == other.toString();
             case json_type_double:
-                return almost_equal(to_double(), other.to_double(), 8);
+                return almost_equal(toDouble(), other.toDouble(), 8);
             case json_type_boolean:
-                return to_bool() == other.to_bool();
+                return toBool() == other.toBool();
             case json_type_object:
             case json_type_array:
                 return value_ == other.value_;
@@ -381,26 +381,26 @@ namespace arg3
 
         bool operator==(const std::string &val, const object &other)
         {
-            return other.to_str() == val;
+            return other.toString() == val;
         }
 
         bool operator==(int32_t val, const object &other)
         {
-            return other.to_int() == val;
+            return other.toInt() == val;
         }
         bool operator==(int64_t val, const object &other)
         {
-            return other.to_int64() == val;
+            return other.toInt64() == val;
         }
 
         bool operator==(double val, const object &other)
         {
-            return almost_equal(other.to_double(), val, 8);
+            return almost_equal(other.toDouble(), val, 8);
         }
 
         bool operator==(bool val, const object &other)
         {
-            return other.to_bool() == val;
+            return other.toBool() == val;
         }
         bool operator==(const array &val, const object &other)
         {

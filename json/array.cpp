@@ -65,57 +65,57 @@ namespace arg3
             json_object_array_add(value_, json_object_get(value.value_));
         }
 
-        void array::add_str(const string &value)
+        void array::addString(const string &value)
         {
             json_object_array_add(value_, json_object_new_string(value.c_str()));
         }
 
-        void array::add_int(int32_t value)
+        void array::addInt(int32_t value)
         {
             json_object_array_add(value_, json_object_new_int(value));
         }
 
-        void array::add_int64(int64_t value)
+        void array::addInt64(int64_t value)
         {
             json_object_array_add(value_, json_object_new_int64(value));
         }
 
-        void array::add_double(double value)
+        void array::addDouble(double value)
         {
             json_object_array_add(value_, json_object_new_double(value));
         }
 
-        void array::add_bool(bool value)
+        void array::addBool(bool value)
         {
             json_object_array_add(value_, json_object_new_boolean(value));
         }
 
-        void array::add_array(const array &value)
+        void array::addArray(const array &value)
         {
             json_object_array_add(value_, json_object_get(value.value_));
         }
 
-        int32_t array::get_int(size_t idx) const
+        int32_t array::getInt(size_t idx) const
         {
             return json_object_get_int(json_object_array_get_idx(value_, idx));
         }
 
-        int64_t array::get_int64(size_t idx) const
+        int64_t array::getInt64(size_t idx) const
         {
             return json_object_get_int64(json_object_array_get_idx(value_, idx));
         }
 
-        string array::get_str(size_t idx) const
+        string array::getString(size_t idx) const
         {
             return json_object_get_string(json_object_array_get_idx(value_, idx));
         }
 
-        double array::get_double(size_t idx) const
+        double array::getDouble(size_t idx) const
         {
             return json_object_get_double(json_object_array_get_idx(value_, idx));
         }
 
-        array array::get_array(size_t idx) const
+        array array::getArray(size_t idx) const
         {
             json_object *obj = json_object_array_get_idx(value_, idx);
 
