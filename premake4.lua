@@ -86,6 +86,8 @@ solution "arg3"
 
         include "format"
 
+        include "log"
+
         include "json"
 
         include "strings"
@@ -114,6 +116,7 @@ solution "arg3"
             links { 
                 "sqlite3",
                 "json",
+                "arg3log",
                 "arg3db", 
                 "arg3dice", 
                 "arg3format",
