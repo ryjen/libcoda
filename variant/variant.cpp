@@ -468,7 +468,7 @@ namespace arg3
         {
             try
             {
-                return stoi(static_cast<const char *>(value_.p), NULL, BASE);
+                return V(stoi(static_cast<const char *>(value_.p), NULL, BASE));
             }
             catch (const exception &e)
             {
@@ -479,7 +479,7 @@ namespace arg3
         {
             try
             {
-                return wcstol(static_cast<const wchar_t *>(value_.p), NULL, BASE);
+                return V(wcstol(static_cast<const wchar_t *>(value_.p), NULL, BASE));
             }
             catch (const exception &e)
             {
@@ -501,7 +501,7 @@ namespace arg3
         {
             try
             {
-                return stol(static_cast<const char *>(value_.p), NULL, BASE);
+                return V(stol(static_cast<const char *>(value_.p), NULL, BASE));
             }
             catch (const exception &e)
             {
@@ -512,7 +512,7 @@ namespace arg3
         {
             try
             {
-                return wcstoul(static_cast<const wchar_t *>(value_.p), NULL, BASE);
+                return V(wcstoul(static_cast<const wchar_t *>(value_.p), NULL, BASE));
             }
             catch (const exception &e)
             {
@@ -535,7 +535,7 @@ namespace arg3
         {
             try
             {
-                return stol(static_cast<const char *>(value_.p), 0, BASE);
+                return V(stol(static_cast<const char *>(value_.p), 0, BASE));
             }
             catch (const exception &e)
             {
@@ -546,7 +546,7 @@ namespace arg3
         {
             try
             {
-                return wcstol(static_cast<const wchar_t *>(value_.p), NULL, BASE);
+                return V(wcstol(static_cast<const wchar_t *>(value_.p), NULL, BASE));
             }
             catch (const exception &e)
             {
@@ -569,7 +569,7 @@ namespace arg3
         {
             try
             {
-                return stoul(static_cast<const char *>(value_.p), 0, BASE);
+                return V(stoul(static_cast<const char *>(value_.p), 0, BASE));
             }
             catch (const exception &e)
             {
@@ -580,7 +580,7 @@ namespace arg3
         {
             try
             {
-                return wcstoul(static_cast<const wchar_t *>(value_.p), NULL, BASE);
+                return V(wcstoul(static_cast<const wchar_t *>(value_.p), NULL, BASE));
             }
             catch (const exception &e)
             {
@@ -603,7 +603,7 @@ namespace arg3
         {
             try
             {
-                return stoll(static_cast<const char *>(value_.p), 0, BASE);
+                return V(stoll(static_cast<const char *>(value_.p), 0, BASE));
             }
             catch (const exception &e)
             {
@@ -614,7 +614,7 @@ namespace arg3
         {
             try
             {
-                return wcstoll(static_cast<const wchar_t *>(value_.p), NULL, BASE);
+                return V(wcstoll(static_cast<const wchar_t *>(value_.p), NULL, BASE));
             }
             catch (const exception &e)
             {
@@ -637,7 +637,7 @@ namespace arg3
         {
             try
             {
-                return stoull(static_cast<const char *>(value_.p), 0, BASE);
+                return V(stoull(static_cast<const char *>(value_.p), 0, BASE));
             }
             catch (const exception &e)
             {
@@ -648,7 +648,7 @@ namespace arg3
         {
             try
             {
-                return wcstoull(static_cast<const wchar_t *>(value_.p), NULL, BASE);
+                return V(wcstoull(static_cast<const wchar_t *>(value_.p), NULL, BASE));
             }
             catch (const exception &e)
             {
@@ -671,7 +671,7 @@ namespace arg3
         {
             try
             {
-                return stod(static_cast<const char *>(value_.p), 0);
+                return V(stod(static_cast<const char *>(value_.p), 0));
             }
             catch (const exception &e)
             {
@@ -682,7 +682,7 @@ namespace arg3
         {
             try
             {
-                return wcstod(static_cast<const wchar_t *>(value_.p), NULL);
+                return V(wcstod(static_cast<const wchar_t *>(value_.p), NULL));
             }
             catch (const exception &e)
             {
@@ -753,7 +753,7 @@ namespace arg3
         {
             try
             {
-                return stof(static_cast<const char *>(value_.p), NULL);
+                return V(stof(static_cast<const char *>(value_.p), NULL));
             }
             catch (const exception &e)
             {
@@ -764,7 +764,7 @@ namespace arg3
         {
             try
             {
-                return wcstof(static_cast<const wchar_t *>(value_.p), NULL);
+                return V(wcstof(static_cast<const wchar_t *>(value_.p), NULL));
             }
             catch (const exception &e)
             {

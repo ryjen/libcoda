@@ -48,7 +48,22 @@ newaction {
       end
     end
 }
+newaction {
+    trigger   = "release",
+    description = "builds a release",
+    execute = function()
+       if( os.isdir("bin")) then
+          error("You must run clean first")
+       end
 
+       if _ARGS[1] then
+         version = _ARGS[1]
+       else
+         version = "1.0"
+       end
+       os.execute("tar --exclude=libarg3_"..version..".tar.gz -czf libarg3_"..version..".tar.gz .");
+    end
+}
 newoption {
    trigger     = "shared",
    description = "Build a shared library"

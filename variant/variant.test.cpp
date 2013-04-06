@@ -9,7 +9,7 @@ using namespace igloo;
 
 using namespace arg3;
 
-Context(sqliteTest)
+Context(variantTest)
 {
 
     Spec(testInt)
@@ -89,14 +89,14 @@ Context(sqliteTest)
 
         v = "asdf1234";
 #ifdef ARG3_VARIANT_THROW_EXCEPTIONS
-        AssertThrows(std::invalid_argument, v.to_int());
+        AssertThrows(std::illegal_argument, v.to_int());
 #else
         Assert::That(v.to_int(-1), Equals(-1));
 #endif
 
-        v = "1234129837410928374109283741029837410293847";
+        v = "1234129837410928374109283741029837410293847123412341235436574567845765";
 #ifdef ARG3_VARIANT_THROW_EXCEPTIONS
-        AssertThrows(std::out_of_range, v.to_int());
+        AssertThrows(std::illegal_argument, v.to_int());
 #else
         Assert::That(v.to_int(-1), Equals(-1));
 #endif
@@ -114,7 +114,7 @@ Context(sqliteTest)
 
         v = "asasdlfknalskdnf";
 #ifdef ARG3_VARIANT_THROW_EXCEPTIONS
-        AssertThrows(std::invalid_argument, v.to_long());
+        AssertThrows(std::illegal_argument, v.to_long());
 #else
         Assert::That(v.to_long(-1), Equals(-1));
 #endif
@@ -233,7 +233,7 @@ Context(sqliteTest)
 
         Assert::That(v.to_int(0), Equals(0));
 
-        v = UINT_MAX;
+        v = ULLONG_MAX;
 
         Assert::That(v.to_int(0), Equals(0));
     }
