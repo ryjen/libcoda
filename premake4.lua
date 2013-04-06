@@ -30,7 +30,7 @@ newaction {
         os.mkdir(headerdir)
       end
 
-      libraries = { "libarg3.a", "libarg3db.a", "libarg3dice.a", "libarg3format.a", "libarg3json.a", "libarg3strings.a"}
+      libraries = { "libarg3.dylib", "libarg3db.a", "libarg3dice.a", "libarg3format.a", "libarg3json.a", "libarg3strings.a"}
       for l=1, #libraries do
         if os.isfile("bin/release/"..libraries[l]) then
             os.copyfile("bin/release/"..libraries[l], bindir)
@@ -50,8 +50,8 @@ newaction {
 }
 
 newoption {
-   trigger     = "monolithic",
-   description = "Build one giant library instead of smaller component libraries"
+   trigger     = "shared",
+   description = "Build a shared library"
 }
 
 if _ACTION == "clean" then
@@ -79,7 +79,7 @@ solution "arg3"
         targetdir "bin/release"
         buildoptions { "-O" }
     
-    if not _OPTIONS["monolithic"] then
+    if not _OPTIONS["shared"] then
         include "db"
 
         include "dice"
@@ -95,6 +95,7 @@ solution "arg3"
         include "variant"
     else
         project "arg3"
+            kind "SharedLib"
             files {
                 "**.cpp",
                 "**.h"
@@ -102,6 +103,7 @@ solution "arg3"
             excludes {
                 "**.test.cpp"
             }
+            links { "json", "sqlite3" }
     end
 
     project "arg3test"
@@ -110,8 +112,8 @@ solution "arg3"
             "**.test.cpp",
             "arg3.test.cpp"
         }
-        if _OPTIONS["monolithic"] then
-            links { "sqlite3", "arg3", "json" }
+        if _OPTIONS["shared"] then
+            links { "arg3" }
         else
             links { 
                 "sqlite3",
