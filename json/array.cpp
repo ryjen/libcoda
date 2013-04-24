@@ -193,6 +193,10 @@ namespace arg3
         bool array::operator==(const array &other) const {
             return value_ == other.value_;
         }
+
+        bool array::operator!=(const array &other) const {
+            return value_ != other.value_;
+        }
     }
 }
 
