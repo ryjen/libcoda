@@ -51,9 +51,9 @@ namespace arg3
 
         object::~object()
         {
-            if(references_)
+            if (references_)
             {
-                if(*references_ == 0)
+                if (*references_ == 0)
                 {
                     json_object_put(value_);
 
@@ -72,13 +72,13 @@ namespace arg3
 
         object &object::operator=(const object &obj)
         {
-            if(this != &obj)
+            if (this != &obj)
             {
                 value_ = obj.value_;
 
                 references_ = obj.references_;
 
-                if(references_)
+                if (references_)
                     (*references_)++;
             }
             return *this;
@@ -88,9 +88,9 @@ namespace arg3
         {
             json_object *obj = json_tokener_parse(value.c_str());
 
-            if(obj != NULL)
+            if (obj != NULL)
             {
-                if(value_ != NULL)
+                if (value_ != NULL)
                     json_object_put(value_);
 
                 value_ = obj;
@@ -152,7 +152,7 @@ namespace arg3
 
         object object::get(size_t idx) const
         {
-            if(!isArray()) return object();
+            if (!isArray()) return object();
 
             json_object *obj = json_object_array_get_idx(value_, idx);
 
@@ -161,10 +161,10 @@ namespace arg3
 
         size_t object::size() const
         {
-            if(isArray())
+            if (isArray())
                 return json_object_array_length(value_);
 
-            if(isObject())
+            if (isObject())
             {
                 size_t iCount = 0;
 
@@ -181,7 +181,7 @@ namespace arg3
 
         void object::set_value(const string &key, json_object *obj)
         {
-            if(contains(key))
+            if (contains(key))
                 remove(key);
 
             json_object_object_add(value_, key.c_str(), obj);
@@ -341,7 +341,7 @@ namespace arg3
 
         array object::toArray() const
         {
-            if(isArray())
+            if (isArray())
                 return array(value_);
             else
                 return array();
@@ -354,7 +354,7 @@ namespace arg3
 
         bool object::operator==(const object &other) const
         {
-            switch(type())
+            switch (type())
             {
             case json_type_null:
                 return false;

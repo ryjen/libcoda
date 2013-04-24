@@ -170,7 +170,7 @@ Context(variantTest)
 
     Spec(mapVariantTest)
     {
-        map<string,variant> container;
+        map<string, variant> container;
 
         container["test1"] = 1234;
         container["test2"] = "123.43";
@@ -184,23 +184,23 @@ Context(variantTest)
 
     /*Spec(testAppendOperator)
     {
-    	variant v = "test";
+        variant v = "test";
 
-    	v << 1 << 2 << 3;
+        v << 1 << 2 << 3;
 
-    	Assert::That(v, Equals("test123"));
+        Assert::That(v, Equals("test123"));
     }*/
 
     /*Spec(testBaseEquality) {
-    	variant v(10);
+        variant v(10);
 
-    	Assert::That(v.base_int(16), Equals(16));
+        Assert::That(v.base_int(16), Equals(16));
 
-    	Assert::That(v.base_long(16), Equals(16L));
+        Assert::That(v.base_long(16), Equals(16L));
 
-    	Assert::That(v.base_ulong(16), Equals(16UL));
+        Assert::That(v.base_ulong(16), Equals(16UL));
 
-    	Assert::That(v.base_ullong(16), Equals(16ULL));
+        Assert::That(v.base_ullong(16), Equals(16ULL));
     }*/
 
     Spec(testBaseAutoDetect)

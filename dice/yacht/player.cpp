@@ -80,7 +80,7 @@ namespace arg3
         ScoreSheet::value_type Player::calculateUpperScore(Die::value_type value) const
         {
             ScoreSheet::value_type score = 0;
-for (auto & d : m_dice)
+            for (auto & d : m_dice)
             {
                 if (d.value() == value)
                     score += value;
@@ -99,7 +99,7 @@ for (auto & d : m_dice)
             int count = 0;
             Die::value_type lastValue = 0;
 
-for (auto & d : values)
+            for (auto & d : values)
             {
                 if (lastValue != d)
                 {
@@ -157,7 +157,7 @@ for (auto & d : values)
 
             int count = 0;
 
-for (auto & d : values)
+            for (auto & d : values)
             {
                 if (test == 0)
                 {
@@ -181,7 +181,7 @@ for (auto & d : values)
         ScoreSheet::value_type Player::calculateChance() const
         {
             ScoreSheet::value_type value = 0;
-for (auto & d : m_dice.values())
+            for (auto & d : m_dice.values())
             {
                 value += d;
             }

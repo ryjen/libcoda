@@ -22,7 +22,7 @@ namespace arg3
 
         object_iterator &object_iterator::operator=(const object_iterator &other)
         {
-            if(this != &other)
+            if (this != &other)
             {
                 entry_ = other.entry_;
             }
@@ -32,10 +32,10 @@ namespace arg3
 
         object_iterator::reference object_iterator::get_ref()
         {
-            if(entry_ == NULL)
+            if (entry_ == NULL)
                 return ref_;
 
-            ref_ = make_pair(string(static_cast<char*>(entry_->k)), object(static_cast<json_object*>(const_cast<void*>(entry_->v))));
+            ref_ = make_pair(string(static_cast<char *>(entry_->k)), object(static_cast<json_object *>(const_cast<void *>(entry_->v))));
 
             return ref_;
         }
@@ -51,9 +51,9 @@ namespace arg3
         }
 
 
-        object_iterator& object_iterator::operator++()
+        object_iterator &object_iterator::operator++()
         {
-            if(entry_ != NULL)
+            if (entry_ != NULL)
                 entry_ = entry_->next;
             return *this;
         }
@@ -86,13 +86,13 @@ namespace arg3
         }
 
 
-        bool object_iterator::operator==(const object_iterator& other) const
+        bool object_iterator::operator==(const object_iterator &other) const
         {
             return entry_ == other.entry_;
         }
 
 
-        bool object_iterator::operator!=(const object_iterator& other) const
+        bool object_iterator::operator!=(const object_iterator &other) const
         {
             return entry_ != other.entry_;
         }

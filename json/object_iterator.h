@@ -9,7 +9,7 @@ namespace arg3
 {
     namespace json
     {
-        typedef pair<string,object> object_iterator_entry;
+        typedef pair<string, object> object_iterator_entry;
 
         class object_iterator : public iterator<input_iterator_tag, object_iterator_entry>
         {
@@ -25,13 +25,13 @@ namespace arg3
             object_iterator(const object_iterator &other);
             virtual ~object_iterator();
 
-            object_iterator& operator=(const object_iterator &other);
+            object_iterator &operator=(const object_iterator &other);
 
             reference operator*();
 
             pointer operator->();
 
-            object_iterator& operator++();
+            object_iterator &operator++();
 
             object_iterator operator++(int);
 
@@ -39,9 +39,9 @@ namespace arg3
 
             object_iterator &operator+=(difference_type n);
 
-            bool operator==(const object_iterator& other) const;
+            bool operator==(const object_iterator &other) const;
 
-            bool operator!=(const object_iterator& other) const;
+            bool operator!=(const object_iterator &other) const;
 
         private:
             struct lh_entry *entry_;

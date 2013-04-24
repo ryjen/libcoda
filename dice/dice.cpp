@@ -244,7 +244,7 @@ namespace arg3
 
         m_lastRoll.clear(); // reset the last roll values
 
-for (Die & d : m_dice)
+        for (Die & d : m_dice)
         {
             auto roll = d.keep() ? d.value() : d.roll(); // roll the die
             value += roll; // sum the total

@@ -62,7 +62,7 @@ namespace arg3
         template<typename T>
         T V(T val) const
         {
-            if(numeric_limits<T>::max() == val)
+            if (numeric_limits<T>::max() == val)
                 throw out_of_range("invalid conversion");
 
             return val;

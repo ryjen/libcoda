@@ -42,11 +42,11 @@ namespace arg3
         variant_value(float value) : variant_value(std::to_string(value)) {}
         variant_value(double value) : variant_value(std::to_string(value)) {}
         variant_value(long double value) : variant_value(std::to_string(value)) {}
-        variant_value(bool value) : variant_value(std::to_string(value?1:0)) {}
+        variant_value(bool value) : variant_value(std::to_string(value ? 1 : 0)) {}
 
         variant_value &operator=(const variant_value &other)
         {
-            if(this != &other)
+            if (this != &other)
             {
                 m_value = other.m_value;
             }
@@ -64,14 +64,14 @@ namespace arg3
             return m_value;
         }
 
-        const T* to_cstring() const
+        const T *to_cstring() const
         {
             return m_value.c_str();
         }
 
         T to_char() const
         {
-            if(m_value.size() == 0)
+            if (m_value.size() == 0)
                 return '\0';
             return m_value[0];
         }
@@ -93,7 +93,7 @@ namespace arg3
             {
                 return base_int(base);
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -119,7 +119,7 @@ namespace arg3
             {
                 return base_uint(base);
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -144,7 +144,7 @@ namespace arg3
             {
                 return base_long(base);
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -169,7 +169,7 @@ namespace arg3
             {
                 return base_ulong(base);
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -194,7 +194,7 @@ namespace arg3
             {
                 return base_llong(base);
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -219,7 +219,7 @@ namespace arg3
             {
                 return base_ullong(base);
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -244,7 +244,7 @@ namespace arg3
             {
                 return to_bool();
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -263,7 +263,7 @@ namespace arg3
             {
                 return to_double();
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -280,7 +280,7 @@ namespace arg3
             {
                 return to_ldouble();
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -298,7 +298,7 @@ namespace arg3
             {
                 return to_float();
             }
-            catch(const std::exception &e)
+            catch (const std::exception &e)
             {
                 return defaultValue;
             }
@@ -380,19 +380,19 @@ namespace arg3
         }
     };
 
-// type definitions
+    // type definitions
     typedef variant_value<char> variant;
     typedef variant_value<wchar_t> wvariant;
 
-// global stream operator
+    // global stream operator
     template<typename T>
-    ostream& operator<<(ostream& stream, const variant_value<T>& v)
+    ostream &operator<<(ostream &stream, const variant_value<T> &v)
     {
         stream << v.to_cstring();
         return stream;
     }
 
-// global equality operators
+    // global equality operators
     template<typename T>
     bool operator==(const typename variant_value<T>::value_type &lhs, const variant_value<T> &v)
     {
@@ -400,7 +400,7 @@ namespace arg3
     }
 
     template<typename T>
-    bool operator==(const T* lhs, const variant_value<T> &v)
+    bool operator==(const T *lhs, const variant_value<T> &v)
     {
         return variant_value<T>(lhs) == v;
     }

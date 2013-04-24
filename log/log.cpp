@@ -21,13 +21,13 @@ namespace arg3
         return out_;
     }
 
-    log& log::write(const string &value)
+    log &log::write(const string &value)
     {
         header() << value;
         return *this;
     }
 
-    log& log::writeln(const string &value)
+    log &log::writeln(const string &value)
     {
         header() << value << endl;
 

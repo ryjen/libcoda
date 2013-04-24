@@ -20,7 +20,7 @@ namespace arg3
 
         array::array(const array &other) : value_(other.value_), references_(other.references_)
         {
-            if(references_)
+            if (references_)
             {
                 (*references_)++;
             }
@@ -28,9 +28,9 @@ namespace arg3
 
         array::~array()
         {
-            if(references_)
+            if (references_)
             {
-                if(*references_ == 0)
+                if (*references_ == 0)
                 {
                     json_object_put(value_);
                 }
@@ -43,12 +43,12 @@ namespace arg3
 
         array &array::operator=(const array &other)
         {
-            if(this != &other)
+            if (this != &other)
             {
                 value_ = other.value_;
                 references_ = other.references_;
 
-                if(references_)
+                if (references_)
                     (*references_)++;
             }
 
@@ -119,7 +119,7 @@ namespace arg3
         {
             json_object *obj = json_object_array_get_idx(value_, idx);
 
-            if(json_object_is_type(obj, json_type_array))
+            if (json_object_is_type(obj, json_type_array))
                 return array(obj);
             else
                 return array();
@@ -147,7 +147,7 @@ namespace arg3
 
         object array::back() const
         {
-            return get(size()-1);
+            return get(size() - 1);
         }
 
         array::iterator array::begin() const
@@ -188,6 +188,10 @@ namespace arg3
         array::reverse_iterator array::rend()
         {
             return reverse_iterator(begin());
+        }
+
+        bool array::operator==(const array &other) const {
+            return value_ == other.value_;
         }
     }
 }

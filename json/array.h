@@ -64,6 +64,8 @@ namespace arg3
 
             friend bool operator==(const array &val, const object &other);
 
+            bool operator==(const array &other) const;
+            
         protected:
             array(json_object *obj);
         private:

@@ -24,7 +24,7 @@ namespace arg3
         size_t size = collection.size();
         size_t count = 0;
 
-for (auto & e : collection)
+        for (auto & e : collection)
         {
             if (displayValues)
                 buf << e.second;
@@ -46,7 +46,7 @@ for (auto & e : collection)
         size_t size = collection.size();
         size_t count = 0;
 
-for (auto & e : collection)
+        for (auto & e : collection)
         {
             if (displayValues)
                 buf << e.second;

@@ -35,11 +35,11 @@ namespace arg3
 
             pointer operator->();
 
-            reference operator[](const difference_type&);
+            reference operator[](const difference_type &);
 
-            array_iterator& operator++();
+            array_iterator &operator++();
 
-            array_iterator& operator--();
+            array_iterator &operator--();
 
             array_iterator operator++(int);
 
@@ -53,49 +53,49 @@ namespace arg3
 
             array_iterator &operator-=(difference_type n);
 
-            bool operator==(const array_iterator& other) const;
+            bool operator==(const array_iterator &other) const;
 
-            bool operator!=(const array_iterator& other) const;
+            bool operator!=(const array_iterator &other) const;
 
-            bool operator<(const array_iterator& other) const;
+            bool operator<(const array_iterator &other) const;
 
-            bool operator<=(const array_iterator& other) const;
+            bool operator<=(const array_iterator &other) const;
 
-            bool operator>(const array_iterator& other) const;
+            bool operator>(const array_iterator &other) const;
 
-            bool operator>=(const array_iterator& other) const;
+            bool operator>=(const array_iterator &other) const;
 
             friend bool operator==(
-                const array_iterator& r1,
-                const array_iterator& r2);
+                const array_iterator &r1,
+                const array_iterator &r2);
 
             friend bool operator!=(
-                const array_iterator& r1,
-                const array_iterator& r2);
+                const array_iterator &r1,
+                const array_iterator &r2);
 
             friend bool operator<(
-                const array_iterator& r1,
-                const array_iterator& r2);
+                const array_iterator &r1,
+                const array_iterator &r2);
 
             friend bool operator>(
-                const array_iterator& r1,
-                const array_iterator& r2);
+                const array_iterator &r1,
+                const array_iterator &r2);
 
             friend bool operator<=(
-                const array_iterator& r1,
-                const array_iterator& r2);
+                const array_iterator &r1,
+                const array_iterator &r2);
 
             friend bool operator>=(
-                const array_iterator& r1,
-                const array_iterator& r2);
+                const array_iterator &r1,
+                const array_iterator &r2);
 
             friend difference_type operator+(
-                const array_iterator& r1,
-                const array_iterator& r2);
+                const array_iterator &r1,
+                const array_iterator &r2);
 
             friend difference_type operator-(
-                const array_iterator& r1,
-                const array_iterator& r2);
+                const array_iterator &r1,
+                const array_iterator &r2);
 
         private:
             json_object *value_;
@@ -107,24 +107,24 @@ namespace arg3
             array_iterator(json_object *value, long pos);
         };
 
-        bool operator==(const array_iterator& r1, const array_iterator& r2);
+        bool operator==(const array_iterator &r1, const array_iterator &r2);
 
-        bool operator!=(const array_iterator& r1, const array_iterator& r2);
+        bool operator!=(const array_iterator &r1, const array_iterator &r2);
 
-        bool operator<(const array_iterator& r1, const array_iterator& r2);
+        bool operator<(const array_iterator &r1, const array_iterator &r2);
 
-        bool operator>(const array_iterator& r1, const array_iterator& r2);
+        bool operator>(const array_iterator &r1, const array_iterator &r2);
 
-        bool operator<=(const array_iterator& r1, const array_iterator& r2);
+        bool operator<=(const array_iterator &r1, const array_iterator &r2);
 
-        bool operator>=(const array_iterator& r1, const array_iterator& r2);
+        bool operator>=(const array_iterator &r1, const array_iterator &r2);
 
         array_iterator::difference_type operator+(
-            const array_iterator& r1,
-            const array_iterator& r2);
+            const array_iterator &r1,
+            const array_iterator &r2);
 
         array_iterator::difference_type operator-(
-            const array_iterator& r1, const array_iterator& r2);
+            const array_iterator &r1, const array_iterator &r2);
     }
 }
 

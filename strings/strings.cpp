@@ -123,15 +123,15 @@ namespace arg3
             return format("{0}th") << n;
     }
 
-    string join(const string& value, string::size_type count, const string &delimiter)
+    string join(const string &value, string::size_type count, const string &delimiter)
     {
         ostringstream buf;
 
-        if(value.length() > 0)
+        if (value.length() > 0)
         {
             ostream_iterator<string::value_type> it(buf, delimiter.c_str());
 
-            for(string::size_type i = 0; i < count-1; i++)
+            for (string::size_type i = 0; i < count - 1; i++)
                 copy(value.begin(), value.end(), it);
 
             buf << value;
@@ -143,9 +143,9 @@ namespace arg3
     {
         ostringstream buf;
 
-        if(count > 0)
+        if (count > 0)
         {
-            for(string::size_type i = 0; i < count-1; i++)
+            for (string::size_type i = 0; i < count - 1; i++)
             {
                 buf.put(value);
                 buf.put(',');
@@ -156,7 +156,7 @@ namespace arg3
         return buf.str();
     }
 
-    vector<string> split(const string& s, const string& delim, const bool keep_empty)
+    vector<string> split(const string &s, const string &delim, const bool keep_empty)
     {
         vector<string> result;
         if (delim.empty())
