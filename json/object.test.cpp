@@ -1,6 +1,8 @@
 #include "object.h"
 #include "array.h"
 #include <igloo/igloo.h>
+#include <fstream>
+#include <unistd.h>
 
 using namespace arg3;
 
@@ -49,6 +51,20 @@ Context(JsonObject)
         Assert::That(i->second.toDouble(), Equals(1234.4321));
     }
 
+    Spec(testInputStreamConstructor)
+    {
+        ifstream file;
+
+        file.open("json/object.test.json");
+
+        Assert::That(file.is_open(), Equals(true));
+
+        json::object obj(file);
+
+        Assert::That(obj.getInt("var1"), Equals(1234));
+
+        Assert::That(obj.getString("var2"), Equals("test"));
+    }
 
     Spec(testParse)
     {

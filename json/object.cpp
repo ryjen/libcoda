@@ -29,7 +29,7 @@ namespace arg3
             std::ostringstream os;
             in>>os.rdbuf();
             
-            value_ = json_object_new_string(os.str().c_str());
+            value_ = json_tokener_parse(os.str().c_str());
             references_ = new unsigned(0);
         }
 
