@@ -33,6 +33,8 @@ namespace arg3
                 if (*references_ == 0)
                 {
                     json_object_put(value_);
+                    delete references_;
+                    references_ = 0;
                 }
                 else
                 {

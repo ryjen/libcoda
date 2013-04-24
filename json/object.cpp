@@ -2,6 +2,7 @@
 #include "array.h"
 #include "object_iterator.h"
 #include "../math/util.h"
+#include <sstream>
 
 using namespace std;
 
@@ -21,6 +22,15 @@ namespace arg3
         object::object(const string &value) : value_(json_object_new_string(value.c_str())), references_(new unsigned(0))
         {
 
+        }
+
+        object::object(istream &in) : value_(NULL), references_(NULL) 
+        {
+            std::ostringstream os;
+            in>>os.rdbuf();
+            
+            value_ = json_object_new_string(os.str().c_str());
+            references_ = new unsigned(0);
         }
 
         object::object(int64_t value) : value_(json_object_new_int64(value)), references_(new unsigned(0))

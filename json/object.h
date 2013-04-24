@@ -20,6 +20,7 @@ namespace arg3
             object(json_object *value);
             object();
             object(const std::string &value);
+            object(std::istream &is);
             object(int32_t value);
             object(int64_t value);
             object(double value);
