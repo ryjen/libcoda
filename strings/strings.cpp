@@ -182,7 +182,7 @@ namespace arg3
         return result;
     }
 
-    bool strcasecmp(const string& a, const string& b)
+    bool iequals(const string& a, const string& b)
     {
         unsigned int sz = a.size();
         if (b.size() != sz)

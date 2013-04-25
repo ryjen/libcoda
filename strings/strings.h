@@ -30,7 +30,7 @@ namespace arg3
 
     vector<string> split(const string &s, const string &delim = ",", const bool keep_empty = true);
 
-    bool strcasecmp(const string &a, const string &b);
+    bool iequals(const string &a, const string &b);
 }
 
 #endif
