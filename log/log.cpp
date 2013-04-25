@@ -31,9 +31,9 @@ namespace arg3
 
     log::level log::lookupLogLevel(const std::string &value)
     {
-        for(unsigned i = 0; i < sizeof(logNames) / sizeof(logNames[0]); i++) {
-            if(!strcasecmp(value, logNames[i]))
-                return (level)i;
+        for(level l = TRACE; l <= ERROR; l++) {
+            if(!strcasecmp(value, logNames[l]))
+                return l;
         }
         return minLevel_;
     }
