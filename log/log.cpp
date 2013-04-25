@@ -2,12 +2,13 @@
 #include <iostream>
 #include <ctime>
 #include "log.h"
+#include "../strings/strings.h"
 
 using namespace std;
 
 namespace arg3
 {
-    const char *logNames[] = { "ERROR","WARN","INFO","DEBUG","TRACE"   };
+    const char *logNames[] = { "TRACE", "DEBUG","INFO","WARN","ERROR",   };
 
     log::level log::minLevel_ = log::TRACE;
 
@@ -31,8 +32,8 @@ namespace arg3
     log::level log::lookupLogLevel(const std::string &value)
     {
         for(unsigned i = 0; i < sizeof(logNames) / sizeof(logNames[0]); i++) {
-            if(value == logNames[i])
-                return (level) i;
+            if(!strcasecmp(value, logNames[i]))
+                return (level)i;
         }
         return minLevel_;
     }

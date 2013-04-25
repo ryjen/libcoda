@@ -9,7 +9,7 @@ namespace arg3
     class log
     {
     public:
-        typedef enum { ERROR, WARN, INFO, DEBUG, TRACE } level;
+        typedef enum { TRACE, DEBUG, INFO, WARN, ERROR } level;
 
         static void trace(const std::string &value, std::ostream &out = std::cout);
         static void debug(const std::string &value, std::ostream &out = std::cout);
