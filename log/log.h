@@ -17,7 +17,7 @@ namespace arg3
         static void error(const std::string &value, std::ostream &out = std::cout);
         static void warn(const std::string &value, std::ostream &out = std::cout);
 
-        log(level level, std::ostream &out = std::cout);
+        log(level level = TRACE, std::ostream &out = std::cout);
 
         template<typename T>
         log &write(const T &value)
