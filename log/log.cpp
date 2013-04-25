@@ -7,7 +7,7 @@ using namespace std;
 
 namespace arg3
 {
-    const char *logNames[] = { "TRACE", "DEBUG","INFO","WARN","ERROR",   };
+    const char *logNames[] = { "ERROR","WARN","INFO","DEBUG","TRACE"   };
 
     log::level log::minLevel_ = log::TRACE;
 
