@@ -31,6 +31,8 @@ namespace arg3
 
         static void setMinLogLevel(level lev);
 
+        static level lookupLogLevel(const std::string &value);
+
         template<typename T>
         log &operator<<(const T &val)
         {

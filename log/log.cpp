@@ -28,6 +28,15 @@ namespace arg3
         minLevel_ = lev;
     }
 
+    log::level log::lookupLogLevel(const std::string &value)
+    {
+        for(unsigned i = 0; i < sizeof(logNames) / sizeof(logNames[0]); i++) {
+            if(value == logNames[i])
+                return (level) i;
+        }
+        return minLevel_;
+    }
+
     void log::debug(const string &value, ostream &out)
     {
         log(DEBUG, out).write(value);
