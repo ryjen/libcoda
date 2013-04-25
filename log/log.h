@@ -9,7 +9,7 @@ namespace arg3
     class log
     {
     public:
-        typedef enum { ERROR, WARN, INFO, DEBUG, TRACE } level;
+        typedef enum { TRACE, DEBUG, INFO, WARN, ERROR } level;
 
         static void trace(const std::string &value, std::ostream &out = std::cout);
         static void debug(const std::string &value, std::ostream &out = std::cout);
@@ -19,17 +19,31 @@ namespace arg3
 
         log(level level, std::ostream &out = std::cout);
 
-        log &write(const std::string &value);
-        log &writeln(const std::string &value);
+        template<typename T>
+        log &write(const T &value)
+        {
+            if(level_ >= minLevel_)
+
+                header() << value << std::endl;
+
+            return *this;
+        }
+
+        static void setMinLogLevel(level lev);
 
         template<typename T>
-        log &operator<<(const T &value)
+        log &operator<<(const T &val)
         {
-            header() << value;
+            if(level_ >= minLevel_)
+                header() << val << std::endl;
+
+            return *this;
         }
     protected:
         std::ostream &header();
     private:
+        static level minLevel_;
+
         level level_;
         std::ostream &out_;
     };

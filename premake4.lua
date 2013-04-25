@@ -30,14 +30,14 @@ newaction {
         os.mkdir(headerdir)
       end
 
-      libraries = { "libarg3.dylib", "libarg3db.a", "libarg3dice.a", "libarg3format.a", "libarg3json.a", "libarg3strings.a"}
+      libraries = { "libarg3.dylib", "libarg3db.a", "libarg3dice.a", "libarg3.log.a", "libarg3format.a", "libarg3json.a", "libarg3strings.a"}
       for l=1, #libraries do
         if os.isfile("bin/release/"..libraries[l]) then
             os.copyfile("bin/release/"..libraries[l], bindir)
         end
       end
 
-      folders = {"collections", "db", "dice", "format", "json", "math", "strings", "variant"}
+      folders = {"collections", "db", "dice", "format", "log", "json", "math", "strings", "variant"}
       for f=1, #folders do 
           headers = os.matchfiles(folders[f].."/**.h")
           tempdir = headerdir.."/"..folders[f]

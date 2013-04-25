@@ -9,6 +9,8 @@ namespace arg3
 {
     const char *logNames[] = { "ERROR", "WARN", "INFO", "DEBUG", "TRACE"};
 
+    log::level log::minLevel_ = log::TRACE;
+
     log::log(log::level level, ostream &out) : level_(level), out_(out)
     {}
 
@@ -21,39 +23,31 @@ namespace arg3
         return out_;
     }
 
-    log &log::write(const string &value)
+    void log::setMinLogLevel(level lev)
     {
-        header() << value;
-        return *this;
-    }
-
-    log &log::writeln(const string &value)
-    {
-        header() << value << endl;
-
-        return *this;
+        minLevel_ = lev;
     }
 
     void log::debug(const string &value, ostream &out)
     {
-        log(DEBUG, out).writeln(value);
+        log(DEBUG, out).write(value);
     }
 
     void log::trace(const string &value, std::ostream &out)
     {
-        log(TRACE, out).writeln(value);
+        log(TRACE, out).write(value);
     }
     void log::info(const string &value, ostream &out)
     {
-        log(INFO, out).writeln(value);
+        log(INFO, out).write(value);
     }
     void log::error(const string &value, ostream &out)
     {
-        log(ERROR, out).writeln(value);
+        log(ERROR, out).write(value);
     }
     void log::warn(const string &value, ostream &out)
     {
-        log(WARN, out).writeln(value);
+        log(WARN, out).write(value);
     }
 
 }
