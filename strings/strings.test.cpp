@@ -56,4 +56,10 @@ Context(arg3strings)
         Assert::That(nullstr("test"), Equals(false));
     }
 
+    Spec(testInsensitiveEquals)
+    {
+        Assert::That(iequals("ABC", "abc"), Equals(true));
+
+        Assert::That(iequals("DEF", "ghi"), Equals(false));
+    }
 };
