@@ -44,7 +44,7 @@ namespace arg3
 
             bool contains(const std::string &key) const;
 
-            void remove(const std::string &key);
+            object remove(const std::string &key);
 
             bool parse(const std::string &value);
 

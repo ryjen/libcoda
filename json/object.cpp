@@ -24,11 +24,11 @@ namespace arg3
 
         }
 
-        object::object(istream &in) : value_(NULL), references_(NULL) 
+        object::object(istream &in) : value_(NULL), references_(NULL)
         {
             std::ostringstream os;
             in>>os.rdbuf();
-            
+
             value_ = json_tokener_parse(os.str().c_str());
             references_ = new unsigned(0);
         }
@@ -114,9 +114,11 @@ namespace arg3
             return json_object_object_get_ex(value_, key.c_str(), NULL);
         }
 
-        void object::remove(const string &key)
+        object object::remove(const string &key)
         {
+            json_object *obj = json_object_object_get(value_, key.c_str());
             json_object_object_del(value_, key.c_str());
+            return object(obj);
         }
 
         int32_t object::getInt(const std::string &key) const
