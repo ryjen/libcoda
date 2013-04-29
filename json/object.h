@@ -84,6 +84,8 @@ namespace arg3
             iterator begin() const;
             iterator end() const;
 
+            operator std::string() const;
+
             bool operator==(const object &other) const;
             bool operator!=(const object &other) const;
 

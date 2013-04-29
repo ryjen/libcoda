@@ -364,6 +364,11 @@ namespace arg3
             return json_object_get_type(value_);
         }
 
+        object::operator string() const
+        {
+            return toString();
+        }
+
         bool object::operator==(const object &other) const
         {
             switch (type())
