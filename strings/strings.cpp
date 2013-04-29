@@ -248,13 +248,13 @@ namespace arg3
 
         }
 
-        string decode(string const& encoded_string) {
+        ustring decode(const string &encoded_string) {
             size_t in_len = encoded_string.size();
             size_t i = 0;
             size_t j = 0;
             int in_ = 0;
             unsigned char char_array_4[4], char_array_3[3];
-            string ret;
+            ustring ret;
 
             while (in_len-- && ( encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
                 char_array_4[i++] = encoded_string[in_];
