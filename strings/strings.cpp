@@ -205,7 +205,7 @@ namespace arg3
             return (isalnum(c) || (c == '+') || (c == '/'));
         }
 
-        string encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
+        string encode(unsigned char const* bytes_to_encode, size_t in_len) {
             string ret;
             int i = 0;
             int j = 0;
