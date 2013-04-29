@@ -116,7 +116,7 @@ namespace arg3
 
         object object::remove(const string &key)
         {
-            json_object *obj = json_object_object_get(value_, key.c_str());
+            json_object *obj = json_object_get(json_object_object_get(value_, key.c_str()));
             json_object_object_del(value_, key.c_str());
             return object(obj);
         }

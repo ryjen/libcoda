@@ -92,5 +92,20 @@ Context(JsonObject)
 
         Assert::That(obj.get("col6").getBool("col7"), Equals(true));
     }
+
+    Spec(testRemove)
+    {
+        json::object obj;
+
+        obj.setString("col1", "value1");
+
+        Assert::That(obj.contains("col1"), Equals(true));
+
+        string value = obj.remove("col1");
+
+        Assert::That(value, Equals("value1"));
+
+        Assert::That(obj.contains("col1"), Equals(false));
+    }
 };
 
