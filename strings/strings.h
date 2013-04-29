@@ -31,6 +31,14 @@ namespace arg3
     vector<string> split(const string &s, const string &delim = ",", const bool keep_empty = true);
 
     bool iequals(const string &a, const string &b);
+
+    namespace base64
+    {
+        std::string encode(unsigned char const* , unsigned int len);
+        std::string decode(std::string const& s);
+    }
 }
+
+
 
 #endif
