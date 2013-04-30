@@ -3,12 +3,15 @@
 
 #include <string>
 #include <vector>
+#include <array>
 
 using namespace std;
 
 namespace arg3
 {
-    typedef basic_string<unsigned char> ustring;
+    //typedef basic_string<unsigned char> ustring;
+
+    typedef std::vector<uint8_t> binary;
 
     // checks if a cstring is null or empty
     bool nullstr(const char *);
@@ -36,7 +39,7 @@ namespace arg3
     {
         // reference: http://www.cplusplus.com/forum/beginner/51572/
         std::string encode(unsigned char const* , size_t len);
-        ustring decode(const string &s);
+        binary decode(const string &s);
     }
 }
 

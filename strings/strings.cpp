@@ -248,13 +248,13 @@ namespace arg3
 
         }
 
-        ustring decode(const string &encoded_string) {
+        binary decode(const string &encoded_string) {
             size_t in_len = encoded_string.size();
             size_t i = 0;
             size_t j = 0;
             int in_ = 0;
             unsigned char char_array_4[4], char_array_3[3];
-            ustring ret;
+            binary ret;
 
             while (in_len-- && ( encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
                 char_array_4[i++] = encoded_string[in_];
@@ -268,7 +268,7 @@ namespace arg3
                     char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
                     for (i = 0; (i < 3); i++)
-                        ret += char_array_3[i];
+                        ret.push_back(char_array_3[i]);
                     i = 0;
                 }
             }
@@ -284,7 +284,7 @@ namespace arg3
                 char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
                 char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
-                for (j = 0; (j < i - 1); j++) ret += char_array_3[j];
+                for (j = 0; (j < i - 1); j++) ret.push_back(char_array_3[j]);
             }
 
             return ret;
