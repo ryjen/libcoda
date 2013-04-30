@@ -205,6 +205,10 @@ namespace arg3
             return (isalnum(c) || (c == '+') || (c == '/'));
         }
 
+        string encode(const binary &value) {
+            return encode(value.data(), value.size());
+        }
+
         string encode(unsigned char const* bytes_to_encode, size_t in_len) {
             string ret;
             int i = 0;
