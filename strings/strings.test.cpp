@@ -1,5 +1,6 @@
 #include <igloo/igloo.h>
 #include "strings.h"
+#include <algorithm>
 
 using namespace igloo;
 
@@ -61,5 +62,18 @@ Context(arg3strings)
         Assert::That(iequals("ABC", "abc"), Equals(true));
 
         Assert::That(iequals("DEF", "ghi"), Equals(false));
+    }
+
+    Spec(testBase64)
+    {
+        string testStr = "hello, world";
+        binary binStr(testStr.begin(), testStr.end());
+        string encStr = "aGVsbG8sIHdvcmxk";
+
+        Assert::That(base64::encode(binStr), Equals(encStr));
+
+        binary decStr = base64::decode(encStr);
+
+        Assert::That(std::equal(decStr.begin(), decStr.end(), binStr.begin()), Equals(true));
     }
 };

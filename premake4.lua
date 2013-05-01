@@ -89,7 +89,7 @@ solution "arg3"
     configuration "Debug"
         flags "Symbols"
         targetdir "bin/debug"
-        buildoptions { "-g" }
+        buildoptions { "-g -D_DEBUG" }
     configuration "release"
         targetdir "bin/release"
         buildoptions { "-O" }
