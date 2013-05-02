@@ -1,7 +1,7 @@
 #include <iterator>
 #include <sstream>
 #include <algorithm>
-#include "strings.h"
+#include "string.h"
 #include "../format/format.h"
 
 namespace arg3
