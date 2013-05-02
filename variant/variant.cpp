@@ -118,7 +118,6 @@ namespace arg3
 
     variant::~variant()
     {
-
         // check refcounts to free a pointer
         if (refcount_)
         {
@@ -126,6 +125,7 @@ namespace arg3
             if (*refcount_ == 0)
             {
                 free(const_cast<void *>(value_.p));
+                delete refcount_;
             }
             // decrement reference count
             else

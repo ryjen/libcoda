@@ -74,6 +74,10 @@ if _ACTION == "clean" then
     for i=1, #matches do
         os.remove(matches[i])
     end
+    matches = os.matchfiles("**.a")
+    for i=1, #matches do
+        os.remove(matches[i])
+    end
     os.rmdir("bin")
     os.rmdir("obj")
 end

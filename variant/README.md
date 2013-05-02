@@ -29,28 +29,3 @@ v.to_int(); // will throw illegal_argument exception
 v.to_int(0); // will return 0 by default instead of throwing an exception
 
 ```
-
-
-#### base conversion
-
-```c++
-variant v = "123";
-
-assert(v.base_int(16) == 0x7B); // converts the int in hex
-
-assert(v.base_int(8) == 173); // converts the int in octal
-
-v.base_int(2, 0); // converts the int in binary with a default value of 0
-```
-
-#### more base conversion
-```c++
-variant v = "0x7B"; // hex format
-
-assert(v.to_int() == 123);
-
-v = "0173"; // octal format
-
-assert(v.to_int() == 123);
-
-```

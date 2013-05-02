@@ -1,37 +1,39 @@
 libarg3
 =======
 
-a c++11 utility library
+a c++11 utility library.  Its my toolkit for anything c++11.
 
 requirements
 ============
 
-- a c++11 compiler (I use clang++ on OSX)
+*compiler*
+You need a c++11 compiler.  I use [http://clang.llvm.org](clang++) on OSX. You need to pass '-std=c++11' and '-stdlib=libc++' options.
+
+*libraries*
+- [https://github.com/json-c/json-c](libjson)
+- [http://curl.haxx.se/libcurl/](libcurl)
+- [http://www.sqlite.org](sqlite3)
+
+all of the above libraries are available on OSX with the fabulous [http://mxcl.github.io/homebrew/](Homebrew)
 
 optional
 ========
 
-- [http://igloo-testing.org](Igloo) Unit Testing
-- [premake](http://industriousone.com/premake) for building
+- [http://igloo-testing.org](Igloo) Unit Testing (header only library)
+- [premake](http://industriousone.com/premake) for building (available on hombrew)
 - [HeaderDoc](http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/HeaderDoc/intro/intro.html) (Apple) for creating documentation
 - [astyle](http://astyle.sourceforge.net) for formatting source code
 
 compilation
 ===========
 
-To install premake4 you can use [homebrew](http://mxcl.github.com/homebrew/) (brew install premake)
+Just run 'premake4 --help' to get a list of build options
 
-Just run 'premake4 --help' to get a list of build types
+Typically I run 'premake4 --shared gmake; make'
 
-Typically I run 'premake4 gmake; make'
-
-TODO
-====
-
-- ~~arg3::db::base_record should be able to determine its own schema given a table name~~
-- more testing
+If you want to install the library use 'premake4 install /usr/local'.  I plan on making a homebrew formula when more mature.
 
 licensing
 =========
 
-copyrighted under the Lesser GNU Public License
+under the Lesser GNU Public License
