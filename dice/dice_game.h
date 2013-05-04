@@ -16,11 +16,13 @@ namespace arg3
     class DiceGame
     {
     protected:
-        Dice m_dice;
+        Dice dice_;
 
         DiceGame(unsigned int, unsigned int, Die::Engine * = Die::default_engine);
         DiceGame(const DiceGame &);
+        DiceGame(DiceGame &&);
         DiceGame &operator=(const DiceGame &);
+        DiceGame &operator=(DiceGame &&);
         virtual ~DiceGame();
     public:
         // rolls the dice for the game

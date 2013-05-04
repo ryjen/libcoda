@@ -43,12 +43,22 @@ namespace arg3
         variant_value(double value) : variant_value(std::to_string(value)) {}
         variant_value(long double value) : variant_value(std::to_string(value)) {}
         variant_value(bool value) : variant_value(std::to_string(value ? 1 : 0)) {}
+        variant_value(variant_value &&other) : m_value(std::move(other.m_value)) {}
 
         variant_value &operator=(const variant_value &other)
         {
             if (this != &other)
             {
                 m_value = other.m_value;
+            }
+            return *this;
+        }
+
+        variant_value &operator=(variant_value &&other)
+        {
+            if(this != &other)
+            {
+                m_value = std::move(other.m_value);
             }
             return *this;
         }

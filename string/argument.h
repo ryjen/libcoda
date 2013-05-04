@@ -13,11 +13,16 @@ namespace arg3
     class argument
     {
     private:
-        string mStr;
+        string str_;
     protected:
         size_t next(string &) const;
     public:
         argument(const string &);
+        argument();
+        argument(const argument &other);
+        argument(argument &&other);
+        argument &operator=(const argument &other);
+        argument &operator=(argument &&other);
         virtual ~argument();
         string peek() const;
         string next();

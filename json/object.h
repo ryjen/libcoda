@@ -26,8 +26,10 @@ namespace arg3
             object(double value);
             object(bool value);
             object(const object &object);
+            object(object &&other);
             virtual ~object();
             object &operator=(const object &obj);
+            object &operator=(object &&other);
 
             int32_t getInt(const std::string &key) const;
             int64_t getInt64(const std::string &key) const;

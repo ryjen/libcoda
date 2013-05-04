@@ -1,10 +1,10 @@
 libarg3strings
 ==============
 
-useful function for strings
+useful functions for strings
 
 
 licensing
 =========
 
-copyrighted under the Lesser GNU Public License
+under the Lesser GNU Public License

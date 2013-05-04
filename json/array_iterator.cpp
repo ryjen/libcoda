@@ -17,6 +17,13 @@ namespace arg3
 
         }
 
+        array_iterator::array_iterator(array_iterator &&other) : value_(other.value_), pos_(other.pos_), 
+                ref_(other.ref_)
+        {
+            other.value_ = NULL;
+            other.ref_ = 0;
+            other.pos_ = 0;
+        }
 
         array_iterator::~array_iterator()
         {
@@ -35,6 +42,19 @@ namespace arg3
             return *this;
         }
 
+        array_iterator &array_iterator::operator=(array_iterator &&other)
+        {
+            if (this != &other)
+            {
+                value_ = other.value_;
+                pos_ = other.pos_;
+                ref_ = other.ref_;
+
+                other.value_ = NULL;
+                other.ref_ = 0;
+            }
+            return *this;
+        }
 
         array_iterator::reference array_iterator::operator*()
         {

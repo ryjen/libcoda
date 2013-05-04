@@ -13,12 +13,18 @@ namespace arg3
         }
 
         Player::Player(const string &name, Die::Engine *const engine) : DiceGame(dieCount(), dieSides(), engine),
-            m_score(), m_rollCount(0), m_name(name)
+            score_(), rollCount_(0), name_(name)
         {
 
         }
-        Player::Player(const Player &other) : DiceGame(other), m_score(other.m_score), m_rollCount(other.m_rollCount),
-            m_name(other.m_name)
+        Player::Player(const Player &other) : DiceGame(other), score_(other.score_), rollCount_(other.rollCount_),
+            name_(other.name_)
+        {
+
+        }
+
+        Player::Player(Player &&other) : DiceGame(std::move(other)), score_(std::move(other.score_)), rollCount_(other.rollCount_),
+            name_(std::move(other.name_))
         {
 
         }
@@ -35,9 +41,22 @@ namespace arg3
 
             if (this != &other)
             {
-                m_score = other.m_score;
-                m_rollCount = other.m_rollCount;
-                m_name = other.m_name;
+                score_ = other.score_;
+                rollCount_ = other.rollCount_;
+                name_ = other.name_;
+            }
+            return *this;
+        }
+
+        Player &Player::operator=(Player &&other)
+        {
+            DiceGame::operator=(std::move(other));
+
+            if (this != &other)
+            {
+                score_ = std::move(other.score_);
+                rollCount_ = other.rollCount_;
+                name_ = std::move(other.name_);
             }
             return *this;
         }
@@ -54,22 +73,22 @@ namespace arg3
 
         void Player::keepDie(size_t index)
         {
-            m_dice[index].keep(true);
+            dice_[index].keep(true);
         }
 
         const string &Player::name() const
         {
-            return m_name;
+            return name_;
         }
 
         ScoreSheet &Player::score()
         {
-            return m_score;
+            return score_;
         }
 
         bool Player::operator==(const Player &other) const
         {
-            return m_name == other.m_name;
+            return name_ == other.name_;
         }
 
         bool Player::operator!=(const Player &other) const
@@ -80,7 +99,7 @@ namespace arg3
         ScoreSheet::value_type Player::calculateUpperScore(Die::value_type value) const
         {
             ScoreSheet::value_type score = 0;
-            for (auto & d : m_dice)
+            for (auto & d : dice_)
             {
                 if (d.value() == value)
                     score += value;
@@ -92,7 +111,7 @@ namespace arg3
 
         ScoreSheet::value_type Player::calculateNumberOfAKind(int length) const
         {
-            auto values = m_dice.values();
+            auto values = dice_.values();
 
             sort(values.begin(), values.end());
 
@@ -119,7 +138,7 @@ namespace arg3
 
         ScoreSheet::value_type Player::calculateFullHouse() const
         {
-            auto values = m_dice.values();
+            auto values = dice_.values();
 
             if (values.size() < 5)
                 return 0;
@@ -149,7 +168,7 @@ namespace arg3
 
         ScoreSheet::value_type Player::calculateStraight(int length) const
         {
-            auto values = m_dice.values();
+            auto values = dice_.values();
 
             sort(values.begin(), values.end());
 
@@ -181,7 +200,7 @@ namespace arg3
         ScoreSheet::value_type Player::calculateChance() const
         {
             ScoreSheet::value_type value = 0;
-            for (auto & d : m_dice.values())
+            for (auto & d : dice_.values())
             {
                 value += d;
             }
@@ -195,7 +214,7 @@ namespace arg3
 
             for (auto t = ScoreSheet::FIRST_TYPE; t < ScoreSheet::MAX_TYPE; t++)
             {
-                if (m_score.lowerScore(t) != 0) continue;
+                if (score_.lowerScore(t) != 0) continue;
 
                 auto score = calculateLowerScore(t);
                 if (score > value)
@@ -215,7 +234,7 @@ namespace arg3
             for (Die::value_type d = 1; d <= Die::DEFAULT_SIDES; d++)
             {
 
-                if (m_score.upperScore(d) != 0) continue;
+                if (score_.upperScore(d) != 0) continue;
 
                 auto score = calculateUpperScore(d);
 
@@ -240,7 +259,7 @@ namespace arg3
 
         ScoreSheet::value_type Player::calculateYacht() const
         {
-            auto values = m_dice.values();
+            auto values = dice_.values();
 
             sort(values.begin(), values.end());
 

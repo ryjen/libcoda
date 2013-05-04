@@ -27,28 +27,43 @@ namespace arg3
         return distribution(random_engine);
     }
 
-    Die::Die(const unsigned int sides, Die::Engine *const engine) : m_engine(engine), m_value(0), m_keep(false)
+    Die::Die(const unsigned int sides, Die::Engine *const engine) : engine_(engine), value_(0), keep_(false)
     {
         if (sides == 0)
         {
             throw new invalid_argument("Dice must have one or more sides.");
         }
 
-        m_sides = sides;
+        sides_ = sides;
     }
 
-    Die::Die(const Die &other) : m_engine(other.m_engine), m_sides(other.m_sides), m_value(other.m_value), m_keep(other.m_keep)
+    Die::Die(const Die &other) : engine_(other.engine_), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
     {
     }
+
+    Die::Die(Die &&other) : engine_(std::move(other.engine_)), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
+    {}
 
     Die &Die::operator= (const Die &other)
     {
         if (this != &other)
         {
-            m_engine = other.m_engine;
-            m_sides = other.m_sides;
-            m_value = other.m_value;
-            m_keep = other.m_keep;
+            engine_ = other.engine_;
+            sides_ = other.sides_;
+            value_ = other.value_;
+            keep_ = other.keep_;
+        }
+        return *this;
+    }
+
+    Die &Die::operator= (Die &&other)
+    {
+        if (this != &other)
+        {
+            engine_ = std::move(other.engine_);
+            sides_ = other.sides_;
+            value_ = other.value_;
+            keep_ = other.keep_;
         }
         return *this;
     }
@@ -60,7 +75,7 @@ namespace arg3
 
     bool Die::operator== (const Die &rhs) const
     {
-        return m_value == rhs.m_value;
+        return value_ == rhs.value_;
     }
 
     bool Die::operator!= (const Die &rhs) const
@@ -70,7 +85,7 @@ namespace arg3
 
     Die::operator value_type() const
     {
-        return m_value;
+        return value_;
     }
 
     /*
@@ -78,7 +93,7 @@ namespace arg3
      */
     unsigned int Die::sides() const
     {
-        return m_sides;
+        return sides_;
     }
 
     /*
@@ -86,32 +101,32 @@ namespace arg3
      */
     void Die::sides(const unsigned int value)
     {
-        m_sides = value;
+        sides_ = value;
     }
 
     Die::value_type Die::value() const
     {
-        return m_value;
+        return value_;
     }
 
     // returns one of the sides on the die (random)
     Die::value_type Die::roll()
     {
-        assert(m_engine != 0);
+        assert(engine_ != 0);
 
-        m_value = m_engine->generate(1, m_sides + 1);
+        value_ = engine_->generate(1, sides_ + 1);
 
-        return m_value;
+        return value_;
     }
 
     void Die::keep(bool value)
     {
-        m_keep = value;
+        keep_ = value;
     }
 
     bool Die::keep() const
     {
-        return m_keep;
+        return keep_;
     }
 
     // #######################################################################################################
@@ -119,14 +134,19 @@ namespace arg3
     // #######################################################################################################
 
     // creates x dice with y sides
-    Dice::Dice(const unsigned int count, const unsigned int sides, Die::Engine *const engine) : m_bonus(0), m_dice(), m_lastRoll()
+    Dice::Dice(const unsigned int count, const unsigned int sides, Die::Engine *const engine) : bonus_(0), dice_(), lastRoll_()
     {
         for (int i = 0; i < count; i++)
-            m_dice.push_back(Die(sides, engine));
+            dice_.push_back(Die(sides, engine));
     }
 
     // copy constructor
-    Dice::Dice(const Dice &other) : m_bonus(other.m_bonus), m_dice(other.m_dice), m_lastRoll(other.m_lastRoll)
+    Dice::Dice(const Dice &other) : bonus_(other.bonus_), dice_(other.dice_), lastRoll_(other.lastRoll_)
+    {
+    }
+
+    // move constructor
+    Dice::Dice(Dice &&other) : bonus_(other.bonus_), dice_(std::move(other.dice_)), lastRoll_(std::move(other.lastRoll_))
     {
     }
 
@@ -134,16 +154,27 @@ namespace arg3
     {
         if (this != &other)
         {
-            m_bonus = other.m_bonus;
-            m_dice = other.m_dice;
-            m_lastRoll = other.m_lastRoll;
+            bonus_ = other.bonus_;
+            dice_ = other.dice_;
+            lastRoll_ = other.lastRoll_;
+        }
+        return *this;
+    }
+
+    Dice &Dice::operator=(Dice &&other)
+    {
+        if (this != &other)
+        {
+            bonus_ = other.bonus_;
+            dice_ = std::move(other.dice_);
+            lastRoll_ = std::move(other.lastRoll_);
         }
         return *this;
     }
 
     bool Dice::operator==(const Dice &other) const
     {
-        return m_bonus == other.m_bonus && m_dice == other.m_dice && m_lastRoll == other.m_lastRoll;
+        return bonus_ == other.bonus_ && dice_ == other.dice_ && lastRoll_ == other.lastRoll_;
     }
 
     bool Dice::operator!=(const Dice &other) const
@@ -160,38 +191,38 @@ namespace arg3
     // iterator methods
     Dice::iterator Dice::begin()
     {
-        return m_dice.begin();
+        return dice_.begin();
     }
 
     Dice::const_iterator Dice::begin() const
     {
-        return m_dice.begin();
+        return dice_.begin();
     }
 
     // const iterator methods
     const Dice::const_iterator Dice::cbegin() const
     {
-        return m_dice.cbegin();
+        return dice_.cbegin();
     }
 
     Dice::iterator Dice::end()
     {
-        return m_dice.end();
+        return dice_.end();
     }
 
     Dice::const_iterator Dice::end() const
     {
-        return m_dice.end();
+        return dice_.end();
     }
 
     const Dice::const_iterator Dice::cend() const
     {
-        return m_dice.cend();
+        return dice_.cend();
     }
 
     unsigned int Dice::size() const
     {
-        return m_dice.size();
+        return dice_.size();
     }
 
     /*
@@ -199,7 +230,7 @@ namespace arg3
      */
     int Dice::bonus() const
     {
-        return m_bonus;
+        return bonus_;
     }
 
     /*
@@ -207,7 +238,7 @@ namespace arg3
      */
     void Dice::bonus(const int value)
     {
-        m_bonus = value;
+        bonus_ = value;
     }
 
     // a string representation of the dice ex. 5d20
@@ -215,18 +246,18 @@ namespace arg3
     {
         stringstream buf;
 
-        size_t size = m_dice.size();
+        size_t size = dice_.size();
 
         buf << size;
 
         if (size > 0)
         {
-            buf << "d" << m_dice.begin()->sides();
+            buf << "d" << dice_.begin()->sides();
         }
 
-        if (m_bonus > 0)
+        if (bonus_ > 0)
         {
-            buf << "+" << m_bonus;
+            buf << "+" << bonus_;
         }
         return buf.str();
     }
@@ -234,7 +265,7 @@ namespace arg3
     // returns the values for each die in the last roll
     const vector<Die::value_type> &Dice::values() const
     {
-        return m_lastRoll;
+        return lastRoll_;
     }
 
     // return the total of rolling all dice
@@ -242,26 +273,26 @@ namespace arg3
     {
         Die::value_type value = 0;
 
-        m_lastRoll.clear(); // reset the last roll values
+        lastRoll_.clear(); // reset the last roll values
 
-        for (Die & d : m_dice)
+        for (Die & d : dice_)
         {
             auto roll = d.keep() ? d.value() : d.roll(); // roll the die
             value += roll; // sum the total
             // save each value for use later
-            m_lastRoll.push_back(roll);
+            lastRoll_.push_back(roll);
         }
         return value + bonus(); // add the bonus
     }
 
     Die &Dice::operator[] ( size_t n )
     {
-        return m_dice[n];
+        return dice_[n];
     }
 
     const Die &Dice::operator[] ( size_t n ) const
     {
-        return m_dice[n];
+        return dice_[n];
     }
 
     ostream &operator<< (ostream &out, const Dice &dice)

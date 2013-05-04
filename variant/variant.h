@@ -135,10 +135,12 @@ namespace arg3
 
         // copy constructor
         variant(const variant &other);
+        variant(variant &&other);
 
         variant &operator=(const variant &other);
+        variant &operator=(variant &&other);
 
-        ~variant();
+        virtual ~variant();
 
         int type() const;
 

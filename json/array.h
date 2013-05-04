@@ -23,8 +23,10 @@ namespace arg3
 
             array();
             array(const array &other);
+            array(array &&other);
             virtual ~array();
             array &operator=(const array &other);
+            array &operator=(array &&other);
             size_t size() const;
             void add(const object &value);
             void addInt(int32_t value);

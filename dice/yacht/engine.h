@@ -86,17 +86,21 @@ namespace arg3
              */
             void setRandomEngine(Die::Engine *engine);
 
-        private:
-            vector<Player> m_players;
+            Engine(const Engine &);
+            Engine(Engine &&);
+            Engine &operator=(const Engine &);
+            Engine &operator=(Engine &&);
 
-            Die::Engine *m_engine;
+        private:
+            vector<Player> players_;
+
+            Die::Engine *engine_;
 
             // private singleton constructors
             Engine(Die::Engine * = Die::default_engine);
-            Engine(const Engine &);
-            Engine &operator=(const Engine &);
 
-            size_t m_currentPlayer;
+
+            size_t currentPlayer_;
         };
 
     }

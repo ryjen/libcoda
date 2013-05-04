@@ -43,4 +43,11 @@ Context(ArrayTest)
 
         Assert::That(i->toBool(), Equals(true));
     }
+
+    Spec(testMoveConstructor)
+    {
+        json::array value;
+
+        
+    }
 };

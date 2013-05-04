@@ -27,9 +27,13 @@ namespace arg3
 
             array_iterator(const array_iterator &other);
 
+            array_iterator(array_iterator &&other);
+
             virtual ~array_iterator();
 
             array_iterator &operator=(const array_iterator &other);
+
+            array_iterator &operator=(array_iterator &&other);
 
             reference operator*();
 

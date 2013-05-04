@@ -107,5 +107,6 @@ Context(JsonObject)
 
         Assert::That(obj.contains("col1"), Equals(false));
     }
+
 };
 

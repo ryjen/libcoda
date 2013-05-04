@@ -59,6 +59,8 @@ namespace arg3
              */
             ScoreSheet(const ScoreSheet &other);
 
+            ScoreSheet(ScoreSheet &&other);
+
             /*!
              * destructor
              */
@@ -69,6 +71,8 @@ namespace arg3
              * @param rhs the right hand side of the operator
              */
             ScoreSheet &operator=(const ScoreSheet &rhs);
+
+            ScoreSheet &operator=(ScoreSheet &&rhs);
 
             /*!
              * sets a score on the lower page
@@ -102,8 +106,8 @@ namespace arg3
             ScoreSheet::value_type upperScore(Die::value_type type) const;
 
         private:
-            array<value_type, MAX_TYPE> m_upperValues;
-            array<value_type, Constants::NUM_DICE> m_lowerValues;
+            array<value_type, MAX_TYPE> upperValues_;
+            array<value_type, Constants::NUM_DICE> lowerValues_;
         };
 
     }

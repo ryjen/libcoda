@@ -14,7 +14,10 @@ namespace arg3
         {
 
         }
-
+        object_iterator::object_iterator(object_iterator &&other) : entry_(other.entry_)
+        {
+            other.entry_ = NULL;
+        }
         object_iterator::~object_iterator()
         {
 
@@ -25,6 +28,17 @@ namespace arg3
             if (this != &other)
             {
                 entry_ = other.entry_;
+            }
+
+            return *this;
+        }
+        object_iterator &object_iterator::operator=(object_iterator &&other)
+        {
+            if (this != &other)
+            {
+                entry_ = other.entry_;
+
+                other.entry_ = NULL;
             }
 
             return *this;

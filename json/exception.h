@@ -13,6 +13,24 @@ namespace arg3
         public:
             exception(const std::string &what) : std::logic_error(what)
             {}
+
+            exception(exception &&other) : std::logic_error(other)
+            {}
+
+            exception(const exception &other) : std::logic_error(other)
+            {}
+
+            virtual ~exception() {}
+
+            exception &operator=(const exception &e) {
+                std::exception::operator=(e);
+                return *this;
+            }
+
+            exception &operator=(exception &&e) {
+                std::exception::operator=(std::move(e));
+                return *this;
+            }
         };
     }
 }

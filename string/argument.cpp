@@ -5,11 +5,35 @@ using namespace std;
 namespace arg3
 {
 
-    argument::argument(const string &str) : mStr(str)
+    argument::argument(const string &str) : str_(str)
     {}
 
     argument::~argument()
     {}
+
+    argument::argument(const argument &other) : str_(other.str_)
+    {}
+
+    argument::argument(argument &&other) : str_(std::move(other.str_))
+    {}
+
+    argument &argument::operator=(const argument &other)
+    {
+        if(this != &other)
+        {
+            str_ = other.str_;
+        }
+        return *this;
+    }
+
+    argument &argument::operator=(argument &&other)
+    {
+        if(this != &other)
+        {
+            str_ = std::move(other.str_);
+        }
+        return *this;
+    }
 
     /**
      * gets the next argument
@@ -18,36 +42,36 @@ namespace arg3
     {
         char cEnd;
 
-        size_t pos = mStr.find_first_not_of(' ');
+        size_t pos = str_.find_first_not_of(' ');
 
         cEnd = ' ';
 
-        if ( mStr[pos] == '\'' || mStr[pos] == '"'
-                || mStr[pos] == '(' )
+        if ( str_[pos] == '\'' || str_[pos] == '"'
+                || str_[pos] == '(' )
         {
-            if ( mStr[pos] == '(' )
+            if ( str_[pos] == '(' )
             {
                 cEnd = ')';
                 pos++;
             }
             else
             {
-                cEnd = mStr[pos++];
+                cEnd = str_[pos++];
             }
         }
 
-        while ( pos < mStr.length() )
+        while ( pos < str_.length() )
         {
-            if ( mStr[pos] == cEnd )
+            if ( str_[pos] == cEnd )
             {
                 pos++;
                 break;
             }
 
-            arg += mStr[pos++];
+            arg += str_[pos++];
         }
 
-        pos = mStr.find_first_not_of(' ', pos);
+        pos = str_.find_first_not_of(' ', pos);
 
         return pos;
     }
@@ -69,11 +93,11 @@ namespace arg3
 
         if (pos == string::npos)
         {
-            mStr = string();
+            str_ = string();
         }
         else
         {
-            mStr = mStr.substr(pos);
+            str_ = str_.substr(pos);
         }
 
         return arg;
@@ -99,27 +123,27 @@ namespace arg3
 
     argument::operator const string &()
     {
-        return mStr;
+        return str_;
     }
 
     bool argument::empty() const
     {
-        return mStr.length() == 0;
+        return str_.length() == 0;
     }
 
     size_t argument::length() const
     {
-        return mStr.length();
+        return str_.length();
     }
 
     string argument::to_string() const
     {
-        return mStr;
+        return str_;
     }
 
     char argument::operator [] (int index) const
     {
-        return mStr[index];
+        return str_[index];
     }
 
     bool argument::operator ! () const

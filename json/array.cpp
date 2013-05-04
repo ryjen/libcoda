@@ -26,6 +26,12 @@ namespace arg3
             }
         }
 
+        array::array(array &&other) : value_(other.value_), references_(other.references_)
+        {
+            other.value_ = NULL;
+            other.references_ = NULL;
+        }
+
         array::~array()
         {
             if (references_)
@@ -54,6 +60,19 @@ namespace arg3
                     (*references_)++;
             }
 
+            return *this;
+        }
+
+        array &array::operator=(array &&other)
+        {
+            if(this != &other)
+            {
+                value_ = other.value_;
+                references_ = other.references_;
+
+                other.value_ = NULL;
+                other.references_ = NULL;
+            }
             return *this;
         }
 

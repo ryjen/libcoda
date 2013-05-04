@@ -77,9 +77,16 @@ namespace arg3
         *this = x;
     }
 
+    bigint::bigint(bigint &&x)
+    {
+        init();
+        *this = std::move(x);
+    }
+
     bigint::~bigint()
     {
-        delete [] array;
+        if(array)
+            delete [] array;
     }
 
     bigint &bigint::operator= (const bigint &x)
@@ -93,7 +100,16 @@ namespace arg3
         flipped = x.flipped;
         return *this;
     }
-
+    bigint &bigint::operator= (bigint &&x)
+    {
+        if(this != &x) {
+            array = std::move(x.array);
+            size = x.size;
+            flipped = x.flipped;
+            capacity = x.capacity;
+        }
+        return *this;
+    }
     bool bigint::operator== (int32_t x) const
     {
         if (x < 0)

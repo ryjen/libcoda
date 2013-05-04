@@ -23,9 +23,12 @@ namespace arg3
             typedef typename iterator<input_iterator_tag, object_iterator_entry>::pointer pointer;
 
             object_iterator(const object_iterator &other);
+            object_iterator(object_iterator &&other);
             virtual ~object_iterator();
 
             object_iterator &operator=(const object_iterator &other);
+
+            object_iterator &operator=(object_iterator &&other);
 
             reference operator*();
 

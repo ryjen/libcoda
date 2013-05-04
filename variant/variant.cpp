@@ -97,6 +97,12 @@ namespace arg3
             (*refcount_)++;
     }
 
+    variant::variant(variant &&other) : type_(other.type_), refcount_(std::move(refcount_)), value_(std::move(other.value_))
+    {
+        other.refcount_ = NULL;
+        value_.p = NULL;
+    }
+
     variant &variant::operator=(const variant &other)
     {
         if (this != &other)
@@ -116,6 +122,20 @@ namespace arg3
         return *this;
     }
 
+    variant &variant::operator=(variant &&other)
+    {
+        if(this != &other)
+        {
+            type_ = std::move(other.type_);
+            value_ = std::move(other.value_);
+            refcount_ = std::move(other.refcount_);
+            other.refcount_ = NULL;
+            other.value_.p = NULL;
+        }
+
+        return *this;
+    }
+
     variant::~variant()
     {
         // check refcounts to free a pointer
@@ -124,8 +144,10 @@ namespace arg3
             // no references except this one
             if (*refcount_ == 0)
             {
-                free(const_cast<void *>(value_.p));
+                if(value_.p)
+                    free(const_cast<void *>(value_.p));
                 delete refcount_;
+                refcount_ = NULL;
             }
             // decrement reference count
             else

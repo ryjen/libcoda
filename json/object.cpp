@@ -59,12 +59,19 @@ namespace arg3
                 (*references_)++;
         }
 
+        object::object(object &&other) : value_(other.value_), references_(other.references_)
+        {
+            other.value_ = NULL;
+            other.references_ = NULL;
+        }
+
         object::~object()
         {
             if (references_)
             {
                 if (*references_ == 0)
                 {
+
                     json_object_put(value_);
 
                     delete references_;
@@ -90,6 +97,20 @@ namespace arg3
 
                 if (references_)
                     (*references_)++;
+            }
+            return *this;
+        }
+
+        object &object::operator=(object &&obj)
+        {
+            if (this != &obj)
+            {
+                value_ = obj.value_;
+
+                references_ = obj.references_;
+
+                obj.value_ = NULL;
+                obj.references_ = NULL;
             }
             return *this;
         }

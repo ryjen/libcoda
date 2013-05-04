@@ -24,7 +24,7 @@ namespace arg3
         /*!
          * type of the value of die sides
          */
-        typedef unsigned int value_type;
+        typedef unsigned value_type;
 
         /*!
          * Default number of sides on a die
@@ -78,11 +78,15 @@ namespace arg3
          */
         Die(const Die &other);
 
+        Die(Die &&other);
+
         /*!
          * assignment operator
          * @param rhs the right hand side of the operator
          */
         Die &operator=(const Die &rhs);
+
+        Die &operator=(Die &&rhs);
 
         /*!
          * deconstructor
@@ -134,10 +138,10 @@ namespace arg3
         value_type roll();
 
     private:
-        Engine *m_engine;     // engine to use for dice rolling
-        unsigned int m_sides; // number of sides on die
-        value_type m_value;   // the current roll value
-        bool m_keep;        // flag for not rolling a die
+        Engine *engine_;     // engine to use for dice rolling
+        unsigned sides_; // number of sides on die
+        value_type value_;   // the current roll value
+        bool keep_;        // flag for not rolling a die
     };
 
 
@@ -149,9 +153,9 @@ namespace arg3
     {
 
     private:
-        short m_bonus;
-        vector<Die> m_dice;
-        vector<Die::value_type> m_lastRoll;
+        short bonus_;
+        vector<Die> dice_;
+        vector<Die::value_type> lastRoll_;
     public:
         /*! iterator type for each die */
         typedef typename vector<Die>::iterator iterator;
@@ -173,11 +177,15 @@ namespace arg3
          */
         Dice(const Dice &other);
 
+        Dice(Dice &&other);
+
         /*!
          * assignment operator
          * @param rhs the right hand side of the assignment
          */
         Dice &operator= (const Dice &rhs);
+
+        Dice &operator= (Dice &&rhs);
 
         /*!
          * equality operator

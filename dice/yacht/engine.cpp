@@ -8,11 +8,16 @@ namespace arg3
     namespace yacht
     {
 
-        Engine::Engine(Die::Engine *engine) : m_players(), m_engine(engine), m_currentPlayer(0)
+        Engine::Engine(Die::Engine *engine) : players_(), engine_(engine), currentPlayer_(0)
         {
         }
 
-        Engine::Engine(const Engine &other) : m_players(other.m_players), m_currentPlayer(other.m_currentPlayer)
+        Engine::Engine(const Engine &other) : players_(other.players_), engine_(other.engine_), currentPlayer_(other.currentPlayer_)
+        {
+
+        }
+
+        Engine::Engine(Engine &&other) : players_(std::move(other.players_)), engine_(std::move(other.engine_)), currentPlayer_(other.currentPlayer_)
         {
 
         }
@@ -22,31 +27,45 @@ namespace arg3
 
             if (this != &other)
             {
-                m_players = other.m_players;
-                m_currentPlayer = other.m_currentPlayer;
+                players_ = other.players_;
+                engine_ = other.engine_;
+                currentPlayer_ = other.currentPlayer_;
+            }
+            return *this;
+        }
+
+
+        Engine &Engine::operator=(Engine &&other)
+        {
+
+            if (this != &other)
+            {
+                players_ = std::move(other.players_);
+                engine_ = std::move(other.engine_);
+                currentPlayer_ = other.currentPlayer_;
             }
             return *this;
         }
 
         void Engine::addPlayer(const string &name)
         {
-            m_players.push_back(Player(name, m_engine));
+            players_.push_back(Player(name, engine_));
         }
 
         void Engine::removePlayer(size_t index)
         {
 
-            iterator pos = m_players.begin() + index;
+            iterator pos = players_.begin() + index;
 
-            if (pos >= m_players.end())
+            if (pos >= players_.end())
             {
                 return;
             }
 
-            m_players.erase(pos);
+            players_.erase(pos);
 
-            if (index >= m_currentPlayer)
-                m_currentPlayer--;
+            if (index >= currentPlayer_)
+                currentPlayer_--;
         }
 
         Engine *Engine::instance()
@@ -58,77 +77,77 @@ namespace arg3
 
         Player *Engine::currentPlayer()
         {
-            if (m_currentPlayer >= m_players.size())
+            if (currentPlayer_ >= players_.size())
                 return 0;
 
-            return &(m_players.at(m_currentPlayer));
+            return &(players_.at(currentPlayer_));
         }
 
         size_t Engine::numberOfPlayers() const
         {
-            return m_players.size();
+            return players_.size();
         }
 
         Player *Engine::nextPlayer()
         {
-            if (m_players.size() == 0)
+            if (players_.size() == 0)
                 return 0;
 
-            m_currentPlayer++;
+            currentPlayer_++;
 
-            if (m_currentPlayer >= m_players.size())
+            if (currentPlayer_ >= players_.size())
             {
-                m_currentPlayer = 0;
+                currentPlayer_ = 0;
             }
 
-            return &(m_players.at(m_currentPlayer));
+            return &(players_.at(currentPlayer_));
         }
 
         // iterator methods
         Engine::iterator Engine::begin()
         {
-            return m_players.begin();
+            return players_.begin();
         }
 
         Engine::const_iterator Engine::begin() const
         {
-            return m_players.begin();
+            return players_.begin();
         }
 
         // const iterator methods
         const Engine::const_iterator Engine::cbegin() const
         {
-            return m_players.cbegin();
+            return players_.cbegin();
         }
 
         Engine::iterator Engine::end()
         {
-            return m_players.end();
+            return players_.end();
         }
 
         Engine::const_iterator Engine::end() const
         {
-            return m_players.end();
+            return players_.end();
         }
 
         const Engine::const_iterator Engine::cend() const
         {
-            return m_players.cend();
+            return players_.cend();
         }
 
         Player *Engine::operator[] ( size_t index )
         {
-            return &(m_players.at(index));
+            return &(players_.at(index));
         }
 
         const Player *Engine::operator[] ( size_t index ) const
         {
-            return &(m_players[index]);
+            return &(players_[index]);
         }
 
         void Engine::setRandomEngine(Die::Engine *value)
         {
-            m_engine = value;
+            engine_ = value;
         }
 
     }

@@ -50,10 +50,14 @@ namespace arg3
              */
             Player(const Player &);
 
+            Player(Player &&);
+
             /*!
              * assignment operator
              */
             Player &operator=(const Player &);
+
+            Player &operator=(Player &&);
 
             /*!
              * destructor
@@ -114,9 +118,9 @@ namespace arg3
             ScoreSheet::value_type calculateChance() const;
             ScoreSheet::value_type calculateYacht() const;
 
-            ScoreSheet m_score;  // the score sheet
-            unsigned short m_rollCount; // number of die rolls
-            string m_name;   // player name
+            ScoreSheet score_;  // the score sheet
+            unsigned short rollCount_; // number of die rolls
+            string name_;   // player name
         };
 
     }

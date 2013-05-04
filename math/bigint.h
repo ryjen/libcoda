@@ -35,11 +35,15 @@ namespace arg3
 
         bigint(const bigint &x);
 
+        bigint(bigint &&x);
+
         virtual ~bigint();
 
         std::string to_string() const;
 
         bigint &operator= (const bigint &x);
+
+        bigint &operator= (bigint &&x);
 
         bool operator== (int32_t x) const;
 
