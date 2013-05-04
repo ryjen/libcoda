@@ -294,4 +294,14 @@ namespace arg3
             return ret;
         }
     }
+
+    time_t datetime(const std::string &s, const std::string &format)
+    {
+        struct tm tp;
+
+        if (!strptime(s.c_str(), format.c_str(), &tp))
+            return 0;
+
+        return mktime(&tp);
+    }
 }

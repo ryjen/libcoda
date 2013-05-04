@@ -39,6 +39,8 @@ namespace arg3
         std::string encode(const binary &);
         binary decode(const string &s);
     }
+
+    time_t datetime(const std::string &s, const std::string &format = "%FT%T%z");
 }
 
 
