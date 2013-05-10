@@ -149,7 +149,7 @@ solution "arg3"
                 "arg3net",
                 "arg3json",
                 "arg3math",
-                "arg3strings",
+                "arg3string",
                 "arg3variant"
             }
         end

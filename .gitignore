@@ -1,8 +1,7 @@
 obj
-*.a
-arg3test
-arg3test.make
+bin
 Makefile
+*.a
 *.db
 *.make
-bin
+*.sublime-workspace

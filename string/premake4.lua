@@ -1,9 +1,9 @@
-project "arg3strings"
+project "arg3string"
     kind "StaticLib"
     files {
-        "strings.h",
-        "strings.cpp"
+        "*.h",
+        "*.cpp"
     }
     excludes {
-        "strings.test.cpp"
+        "*.test.cpp"
     }
