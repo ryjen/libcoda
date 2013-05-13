@@ -69,6 +69,11 @@ newoption {
    description = "Build a shared library"
 }
 
+newoption {
+  trigger      = "thin",
+  description  = "don't include server code in library"
+}
+
 if _ACTION == "clean" then
     matches = os.matchfiles("**.orig")
     for i=1, #matches do
@@ -90,6 +95,10 @@ solution "arg3"
 
     linkoptions { "-stdlib=libc++" }
     
+    if _OPTIONS["thin"] then
+      buildoptions { "-DTHIN" }
+    end
+
     configuration "Debug"
         flags "Symbols"
         targetdir "bin/debug"
