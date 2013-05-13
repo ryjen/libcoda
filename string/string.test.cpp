@@ -59,9 +59,9 @@ Context(arg3strings)
 
     Spec(testInsensitiveEquals)
     {
-        Assert::That(iequals("ABC", "abc"), Equals(true));
+        Assert::That(equals("ABC", "abc"), Equals(true));
 
-        Assert::That(iequals("DEF", "ghi"), Equals(false));
+        Assert::That(equals("DEF", "ghi"), Equals(false));
     }
 
     Spec(testBase64)

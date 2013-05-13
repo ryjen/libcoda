@@ -30,7 +30,9 @@ namespace arg3
 
     vector<string> split(const string &s, const string &delim = ",", const bool keep_empty = true);
 
-    bool iequals(const string &a, const string &b);
+    bool equals(const string &a, const string &b, bool caseSensitive = false);
+
+    bool prefix(const string &a, const string &b, bool caseSensitive = false);
 
     namespace base64
     {

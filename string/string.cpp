@@ -182,15 +182,46 @@ namespace arg3
         return result;
     }
 
-    bool iequals(const string& a, const string& b)
+    bool equals(const string& a, const string& b, bool caseSensitive)
     {
-        unsigned int sz = a.size();
+        size_t sz = a.size();
         if (b.size() != sz)
             return false;
-        for (unsigned int i = 0; i < sz; ++i)
-            if (tolower(a[i]) != tolower(b[i]))
+        for (size_t i = 0; i < sz; ++i)
+        {
+            if (!caseSensitive)
+            {
+                if(tolower(a[i]) != tolower(b[i]))
+                    return false;
+            }
+            else if(a[i] != b[i]) {
                 return false;
+            }
+        }
         return true;
+    }
+
+
+    bool prefix(const string &astr, const string &bstr, bool caseSensitive)
+    {
+        if (astr.length() == 0)
+        {
+            return true;
+        }
+
+        for ( auto a = astr.cbegin(), b = bstr.cbegin();
+                a != astr.cend(); a++, b++ )
+        {
+            if(!caseSensitive) {
+                if ( tolower(*a) != tolower(*b) )
+                    return true;
+            }
+            else if(*a != *b) {
+                return false;
+            }
+        }
+
+        return false;
     }
 
     namespace base64

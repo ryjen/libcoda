@@ -32,7 +32,7 @@ namespace arg3
     log::level log::lookupLogLevel(const std::string &value)
     {
         for(level l = TRACE; l <= ERROR; l++) {
-            if(iequals(value, logNames[l]))
+            if(equals(value, logNames[l]))
                 return l;
         }
         return minLevel_;

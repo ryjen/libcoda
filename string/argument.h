@@ -36,6 +36,9 @@ namespace arg3
         char operator[] (int) const;
         size_t length() const;
         string to_string() const;
+
+        bool equals(const string &arg, bool caseSensitive = false) const;
+        bool prefix(const string &arg, bool caseSensitive = false) const;
     };
 
 }
