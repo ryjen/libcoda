@@ -30,14 +30,24 @@ newaction {
         os.mkdir(headerdir)
       end
 
-      libraries = { "libarg3.dylib", "libarg3db.a", "libarg3dice.a", "libarg3.log.a", "libarg3net.a", "libarg3format.a", "libarg3json.a", "libarg3math.a", "libarg3string.a"}
+      if _ARGS[2] then
+        if not os.isdir(_ARGS[2]) then
+          error("That is not a valid package name")
+        end
+        package = _ARGS[2]
+        libraries = { "libarg3#{package}.a" }
+        folders = { package }
+      else
+        libraries = { "libarg3.dylib", "libarg3db.a", "libarg3dice.a", "libarg3.log.a", "libarg3net.a", "libarg3format.a", "libarg3json.a", "libarg3math.a", "libarg3string.a"}
+        folders = {"collections", "db", "dice", "format", "net", "log", "json", "math", "string", "variant"}
+      end
+
       for l=1, #libraries do
         if os.isfile("bin/release/"..libraries[l]) then
             os.copyfile("bin/release/"..libraries[l], bindir)
         end
       end
 
-      folders = {"collections", "db", "dice", "format", "net", "log", "json", "math", "string", "variant"}
       for f=1, #folders do 
           headers = os.matchfiles(folders[f].."/**.h")
           tempdir = headerdir.."/"..folders[f]
