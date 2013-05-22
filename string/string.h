@@ -34,6 +34,10 @@ namespace arg3
 
     bool prefix(const string &a, const string &b, bool caseSensitive = false);
 
+    bool suffix(const string &a, const string &b, bool caseSensitive = false);
+
+    bool contains(const string &a, const string &b, bool caseSensitive = false);
+
     namespace base64
     {
         // reference: http://www.cplusplus.com/forum/beginner/51572/

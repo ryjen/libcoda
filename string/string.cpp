@@ -182,22 +182,15 @@ namespace arg3
         return result;
     }
 
-    bool equals(const string& a, const string& b, bool caseSensitive)
+    bool equals(const string& astr, const string& bstr, bool caseSensitive)
     {
-        size_t sz = a.size();
-        if (b.size() != sz)
-            return false;
-        for (size_t i = 0; i < sz; ++i)
+        for (auto a = astr.cbegin(), b = bstr.cbegin();
+                a != astr.cend() || b != bstr.cend(); a++, b++ )
         {
-            if (!caseSensitive)
-            {
-                if(tolower(a[i]) != tolower(b[i]))
-                    return false;
-            }
-            else if(a[i] != b[i]) {
+            if ( tolower(*a) != tolower(*b) )
                 return false;
-            }
         }
+
         return true;
     }
 
@@ -206,19 +199,50 @@ namespace arg3
     {
         if (astr.length() == 0)
         {
-            return true;
+            return false;
         }
 
         for ( auto a = astr.cbegin(), b = bstr.cbegin();
                 a != astr.cend(); a++, b++ )
         {
-            if(!caseSensitive) {
-                if ( tolower(*a) != tolower(*b) )
-                    return true;
-            }
-            else if(*a != *b) {
+            if ( tolower(*a) != tolower(*b) )
                 return false;
-            }
+        }
+
+        return true;
+    }
+
+    bool suffix( const string &astr, const string &bstr, bool caseSensitive )
+    {
+        string::size_type sstr1, sstr2;
+
+        sstr1 = astr.length();
+        sstr2 = bstr.length();
+
+        if ( sstr1 <= sstr2 && equals( astr, bstr.substr(sstr2 - sstr1), caseSensitive ) )
+            return true;
+        else
+            return false;
+    }
+
+    bool contains( const string &astr, const string &bstr, bool caseSensitive )
+    {
+        int sstr1;
+        int sstr2;
+        int ichar;
+        char c0;
+
+        if ( (sstr1 = astr.length()) == 0 )
+            return true;
+
+        c0 = tolower(astr[0]);
+
+        sstr2 = bstr.length();
+
+        for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
+        {
+            if ( c0 == tolower(bstr[ichar]) && prefix( astr, bstr.substr(ichar), caseSensitive ) )
+                return true;
         }
 
         return false;
