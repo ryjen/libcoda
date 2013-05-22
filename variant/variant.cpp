@@ -7,7 +7,7 @@ namespace arg3
 {
 
     variant::variant() :
-        type_(INT), refcount_(NULL), value_(0)
+        type_(NULLTYPE), refcount_(NULL), value_(NULL)
     {}
 
     variant::variant(char c) :
@@ -318,6 +318,8 @@ namespace arg3
     {
         switch (type_)
         {
+        case NULLTYPE:
+            return nullptr;
         case STRING:
         case CSTRING:
             return static_cast<const char *>(value_.p);
@@ -358,6 +360,8 @@ namespace arg3
     {
         switch (type_)
         {
+        case NULLTYPE:
+            return NULL;
         case STRING:
         case CSTRING:
             return static_cast<const char *>(value_.p);
@@ -372,6 +376,8 @@ namespace arg3
     {
         switch (type_)
         {
+        case NULLTYPE:
+            return NULL;
         case WSTRING:
         case WCSTRING:
             return static_cast<const wchar_t *>(value_.p);
@@ -386,6 +392,8 @@ namespace arg3
     {
         switch (type_)
         {
+        case NULLTYPE:
+            return nullptr;
         case STRING:
         case CSTRING:
             return D(def);
@@ -476,6 +484,24 @@ namespace arg3
         case DOUBLE:
         case LDOUBLE:
             return true;
+        default:
+            return false;
+        }
+    }
+
+    bool variant::is_null() const
+    {
+        switch(type_)
+        {
+        case NULLTYPE:
+            return true;
+        case STRING:
+        case WSTRING:
+            return value_.p == nullptr;
+        case CSTRING:
+        case WCSTRING:
+        case POINTER:
+            return value_.p == NULL;
         default:
             return false;
         }

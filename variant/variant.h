@@ -14,7 +14,7 @@ namespace arg3
     public:
         enum
         {
-            BOOL, CHAR, UCHAR, WCHAR, SHORT, USHORT, INT, UINT, LONG, ULONG, LLONG, ULLONG, FLOAT, DOUBLE, LDOUBLE, POINTER,
+            NULLTYPE, BOOL, CHAR, UCHAR, WCHAR, SHORT, USHORT, INT, UINT, LONG, ULONG, LLONG, ULLONG, FLOAT, DOUBLE, LDOUBLE, POINTER,
             CSTRING, STRING, WCSTRING, WSTRING
         };
     private:
@@ -209,6 +209,8 @@ namespace arg3
         bool is_numeric() const;
 
         bool is_real() const;
+
+        bool is_null() const;
 
         int to_int(int def = 0) const;
 
