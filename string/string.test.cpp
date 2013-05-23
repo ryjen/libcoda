@@ -76,4 +76,15 @@ Context(arg3strings)
 
         Assert::That(std::equal(decStr.begin(), decStr.end(), binStr.begin()), Equals(true));
     }
+
+    Spec(testSprintf)
+    {
+        string buf;
+
+        int ret = sprintf(buf, "%s %d $%.2f", "Harry", 1234, 12.344546);
+
+        Assert::That(ret > 0, Equals(true));
+
+        Assert::That(buf, Equals("Harry 1234 $12.34"));
+    }
 };

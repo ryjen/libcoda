@@ -7,100 +7,100 @@ namespace arg3
 {
 
     variant::variant() :
-        type_(NULLTYPE), refcount_(NULL), value_(NULL)
+        type_(NULLTYPE), refcount_(NULL), pSize_(0), value_(NULL)
     {}
 
     variant::variant(char c) :
-        type_(CHAR), refcount_(NULL), value_(c)
+        type_(CHAR), refcount_(NULL), pSize_(sizeof(c)), value_(c)
     {}
 
     variant::variant(unsigned char uc) :
-        type_(UCHAR), refcount_(NULL), value_(uc)
+        type_(UCHAR), refcount_(NULL), pSize_(sizeof(uc)), value_(uc)
     {}
 
     variant::variant(wchar_t wc) :
-        type_(WCHAR), refcount_(NULL), value_(wc)
+        type_(WCHAR), refcount_(NULL), pSize_(sizeof(wc)), value_(wc)
     {}
 
     variant::variant(short s) :
-        type_(SHORT), refcount_(NULL), value_(s)
+        type_(SHORT), refcount_(NULL), pSize_(sizeof(s)), value_(s)
     {}
 
     variant::variant(unsigned short us) :
-        type_(USHORT), refcount_(NULL), value_(us)
+        type_(USHORT), refcount_(NULL), pSize_(sizeof(us)), value_(us)
     {}
 
     variant::variant(int i) :
-        type_(INT), refcount_(NULL), value_(i)
+        type_(INT), refcount_(NULL), pSize_(sizeof(i)), value_(i)
     {}
 
     variant::variant(unsigned ui) :
-        type_(UINT), refcount_(NULL), value_(ui)
+        type_(UINT), refcount_(NULL), pSize_(sizeof(ui)), value_(ui)
     {}
 
     variant::variant(long l) :
-        type_(LONG), refcount_(NULL), value_(l)
+        type_(LONG), refcount_(NULL), pSize_(sizeof(l)), value_(l)
     {}
 
     variant::variant(unsigned long ul) :
-        type_(ULONG), refcount_(NULL), value_(ul)
+        type_(ULONG), refcount_(NULL), pSize_(sizeof(ul)), value_(ul)
     {}
 
     variant::variant(float f) :
-        type_(FLOAT), refcount_(NULL), value_(f)
+        type_(FLOAT), refcount_(NULL), pSize_(sizeof(f)), value_(f)
     {}
 
     variant::variant(double d) :
-        type_(DOUBLE), refcount_(NULL), value_(d)
+        type_(DOUBLE), refcount_(NULL), pSize_(sizeof(d)), value_(d)
     {}
 
     variant::variant(long double ld) :
-        type_(LDOUBLE), refcount_(NULL), value_(ld)
+        type_(LDOUBLE), refcount_(NULL), pSize_(sizeof(ld)), value_(ld)
     {}
 
     variant::variant(long long ll) :
-        type_(LLONG), refcount_(NULL), value_(ll)
+        type_(LLONG), refcount_(NULL), pSize_(sizeof(ll)), value_(ll)
     {}
 
     variant::variant(unsigned long long ull) :
-        type_(ULLONG), refcount_(NULL), value_(ull)
+        type_(ULLONG), refcount_(NULL), pSize_(sizeof(ull)), value_(ull)
     {}
 
-    variant::variant(void *p) :
-        type_(POINTER), refcount_(NULL), value_(p)
+    variant::variant(const void *p, size_t psize) :
+        type_(POINTER), refcount_(NULL), pSize_(psize), value_(p)
     { }
 
     // for strings we initialize refcount and make a copy of the cstring
 
     variant::variant(const char *str) :
-        type_(CSTRING), refcount_(new unsigned(0)), value_(strdup(str))
+        type_(CSTRING), refcount_(new unsigned(0)), pSize_(strlen(str)), value_(strdup(str))
     {}
 
     variant::variant(const wchar_t *str) :
-        type_(WCSTRING), refcount_(new unsigned(0)), value_(wcsdup(str))
+        type_(WCSTRING), refcount_(new unsigned(0)), pSize_(wcslen(str)), value_(wcsdup(str))
     {}
 
     variant::variant(const string &str) :
-        type_(STRING), refcount_(new unsigned(0)), value_(strdup(str.c_str()))
+        type_(STRING), refcount_(new unsigned(0)), pSize_(str.length()), value_(strdup(str.c_str()))
     {}
 
     variant::variant(const wstring &str) :
-        type_(WSTRING), refcount_(new unsigned(0)), value_(wcsdup(str.c_str()))
+        type_(WSTRING), refcount_(new unsigned(0)), pSize_(str.length()), value_(wcsdup(str.c_str()))
     {}
 
     // copy constructor
     variant::variant(const variant &other) :
-        type_(other.type_), refcount_(other.refcount_), value_(other.value_)
+        type_(other.type_), refcount_(other.refcount_), pSize_(other.pSize_), value_(other.value_)
     {
         // update refcount
         if (refcount_)
             (*refcount_)++;
     }
 
-    variant::variant(variant &&other) : type_(other.type_), refcount_(std::move(refcount_)), value_(std::move(other.value_))
+    variant::variant(variant &&other) : type_(other.type_), refcount_(other.refcount_), pSize_(other.pSize_), value_(std::move(other.value_))
     {
         other.refcount_ = NULL;
-        value_.p = NULL;
+        other.value_.p = NULL;
     }
 
     variant &variant::operator=(const variant &other)
@@ -113,6 +113,8 @@ namespace arg3
             value_ = other.value_;
 
             refcount_ = other.refcount_;
+
+            pSize_ = other.pSize_;
 
             // update refcount
             if (refcount_)
@@ -128,7 +130,8 @@ namespace arg3
         {
             type_ = std::move(other.type_);
             value_ = std::move(other.value_);
-            refcount_ = std::move(other.refcount_);
+            refcount_ = other.refcount_;
+            pSize_ = other.pSize_;
             other.refcount_ = NULL;
             other.value_.p = NULL;
         }
@@ -145,7 +148,10 @@ namespace arg3
             if (*refcount_ == 0)
             {
                 if(value_.p)
+                {
                     free(const_cast<void *>(value_.p));
+                    value_.p = NULL;
+                }
                 delete refcount_;
                 refcount_ = NULL;
             }
@@ -161,6 +167,11 @@ namespace arg3
     int variant::type() const
     {
         return type_;
+    }
+
+    size_t variant::size() const
+    {
+        return pSize_;
     }
 
     //operators
@@ -314,12 +325,15 @@ namespace arg3
         return equals(value);
     }
 
+    const void * variant::to_pointer() const
+    {
+        return value_.p;
+    }
+
     string variant::to_string(const string &def) const
     {
         switch (type_)
         {
-        case NULLTYPE:
-            return nullptr;
         case STRING:
         case CSTRING:
             return static_cast<const char *>(value_.p);
@@ -360,8 +374,6 @@ namespace arg3
     {
         switch (type_)
         {
-        case NULLTYPE:
-            return NULL;
         case STRING:
         case CSTRING:
             return static_cast<const char *>(value_.p);
@@ -376,8 +388,6 @@ namespace arg3
     {
         switch (type_)
         {
-        case NULLTYPE:
-            return NULL;
         case WSTRING:
         case WCSTRING:
             return static_cast<const wchar_t *>(value_.p);
@@ -392,8 +402,6 @@ namespace arg3
     {
         switch (type_)
         {
-        case NULLTYPE:
-            return nullptr;
         case STRING:
         case CSTRING:
             return D(def);

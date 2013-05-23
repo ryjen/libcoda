@@ -6,6 +6,10 @@
 
 using namespace std;
 
+#ifdef _WIN32
+#define __attribute__(x)
+#endif
+
 namespace arg3
 {
     typedef vector<uint8_t> binary;
@@ -47,6 +51,9 @@ namespace arg3
     }
 
     time_t datetime(const std::string &s, const std::string &format = "%FT%T%z");
+
+
+    int sprintf(std::string &, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
 }
 
 

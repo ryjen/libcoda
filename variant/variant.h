@@ -1,4 +1,5 @@
 #ifndef ARG3_VARIANT_H_
+#define ARG3_VARIANT_H_
 
 #include <string>
 #include <cmath>
@@ -21,6 +22,7 @@ namespace arg3
         static const int BASE = 0; // autodetect
         int type_;
         unsigned *refcount_;
+        size_t pSize_;
         union var
         {
             //members
@@ -44,7 +46,7 @@ namespace arg3
             var(long double ld) : ld(d) {}
             var(long long ll) : ll(ll) {}
             var(unsigned long long ull) : ull(ull) {}
-            var(void *p) : p(p) {}
+            var(const void *p) : p(p) {}
             var(const char *str) : p(str) {}
             var(const wchar_t *str) : p(str) {}
         } value_;
@@ -127,7 +129,7 @@ namespace arg3
         variant(long double ld);
         variant(long long ll);
         variant(unsigned long long ull);
-        variant(void *p);
+        variant(const void *p, size_t psize);
         variant(const char *str);
         variant(const wchar_t *str);
         variant(const string &str);
@@ -143,6 +145,8 @@ namespace arg3
         virtual ~variant();
 
         int type() const;
+
+        size_t size() const;
 
         // implicit cast operators
         operator string() const;
@@ -229,6 +233,8 @@ namespace arg3
         bool to_bool() const;
 
         float to_float(float def = numeric_limits<float>::quiet_NaN()) const;
+
+        const void *to_pointer() const;
     };
 
     // for streams
