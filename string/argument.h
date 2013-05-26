@@ -18,6 +18,7 @@ namespace arg3
         size_t next(string &) const;
     public:
         argument(const string &);
+        argument(const char *);
         argument();
         argument(const argument &other);
         argument(argument &&other);

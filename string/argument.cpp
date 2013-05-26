@@ -9,6 +9,9 @@ namespace arg3
     argument::argument(const string &str) : str_(str)
     {}
 
+    argument::argument(const char *str) : str_(str)
+    {}
+
     argument::~argument()
     {}
 
@@ -41,23 +44,26 @@ namespace arg3
      */
     size_t argument::next(string &arg) const
     {
+        static const char *const wrappers = " \t'\"(";
+
         char cEnd;
 
-        size_t pos = str_.find_first_not_of(' ');
+        size_t pos = str_.find_first_not_of(wrappers);
+
+        if(pos == string::npos)
+            pos = 0;
 
         cEnd = ' ';
 
-        if ( str_[pos] == '\'' || str_[pos] == '"'
-                || str_[pos] == '(' )
+        if (pos > 0 && strchr(wrappers, str_[pos-1]) != NULL)
         {
-            if ( str_[pos] == '(' )
+            if ( str_[pos-1] == '(' )
             {
                 cEnd = ')';
-                pos++;
             }
             else
             {
-                cEnd = str_[pos++];
+                cEnd = str_[pos-1];
             }
         }
 
