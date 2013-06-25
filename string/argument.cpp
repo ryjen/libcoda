@@ -19,7 +19,8 @@ namespace arg3
     {}
 
     argument::argument(argument &&other) : str_(std::move(other.str_))
-    {}
+    {
+    }
 
     argument &argument::operator=(const argument &other)
     {
@@ -44,26 +45,23 @@ namespace arg3
      */
     size_t argument::next(string &arg) const
     {
-        static const char *const wrappers = " \t'\"(";
-
         char cEnd;
 
-        size_t pos = str_.find_first_not_of(wrappers);
-
-        if(pos == string::npos)
-            pos = 0;
+        size_t pos = str_.find_first_not_of(' ');
 
         cEnd = ' ';
 
-        if (pos > 0 && strchr(wrappers, str_[pos-1]) != NULL)
+        if ( str_[pos] == '\'' || str_[pos] == '"'
+                || str_[pos] == '(' )
         {
-            if ( str_[pos-1] == '(' )
+            if ( str_[pos] == '(' )
             {
                 cEnd = ')';
+                pos++;
             }
             else
             {
-                cEnd = str_[pos-1];
+                cEnd = str_[pos++];
             }
         }
 
@@ -100,7 +98,7 @@ namespace arg3
 
         if (pos == string::npos)
         {
-            str_ = string();
+            str_.clear();
         }
         else
         {
