@@ -97,7 +97,7 @@ namespace arg3
             (*refcount_)++;
     }
 
-    variant::variant(variant &&other) : type_(other.type_), refcount_(other.refcount_), pSize_(other.pSize_), value_(std::move(other.value_))
+    variant::variant(variant &&other) : type_(other.type_), refcount_(other.refcount_), pSize_(other.pSize_), value_(other.value_)
     {
         other.refcount_ = NULL;
         other.value_.p = NULL;
@@ -128,8 +128,8 @@ namespace arg3
     {
         if(this != &other)
         {
-            type_ = std::move(other.type_);
-            value_ = std::move(other.value_);
+            type_ = other.type_;
+            value_ = other.value_;
             refcount_ = other.refcount_;
             pSize_ = other.pSize_;
             other.refcount_ = NULL;
@@ -337,8 +337,11 @@ namespace arg3
         case STRING:
         case CSTRING:
             return static_cast<const char *>(value_.p);
-        case CHAR:
-            return (const char *) &value_.i;
+        case CHAR: {
+            static char buf[2] = {0};
+            buf[0] = value_.i;
+            return buf;
+        }
         case BOOL:
             return value_.i == 0 ? "false" : "true";
         case WCHAR:
@@ -377,8 +380,11 @@ namespace arg3
         case STRING:
         case CSTRING:
             return static_cast<const char *>(value_.p);
-        case CHAR:
-            return (const char *) &value_.i;
+        case CHAR: {
+            static char buf[2] = {0};
+            buf[0] = value_.i;
+            return buf;
+        }
         default:
             return D(def);
         }
@@ -391,8 +397,11 @@ namespace arg3
         case WSTRING:
         case WCSTRING:
             return static_cast<const wchar_t *>(value_.p);
-        case WCHAR:
-            return (const wchar_t *) &value_.i;
+        case WCHAR: {
+            static wchar_t buf[2] = {0};
+            buf[0] = value_.i;
+            return buf;
+        }
         default:
             return D(def);
         }
@@ -411,8 +420,11 @@ namespace arg3
         case CHAR:
         case BOOL:
             return value_.i == 0 ? L"false" : L"true";
-        case WCHAR:
-            return (const wchar_t *) &value_.i;
+        case WCHAR: {
+            wchar_t buf[BUFSIZ+1] = {0};
+            swprintf(buf,BUFSIZ,L"%c", value_.i);
+            return wstring(buf);
+        }
         case UCHAR:
         case SHORT:
         case USHORT:

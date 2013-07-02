@@ -9,7 +9,7 @@ newaction {
 newaction {
     trigger     = "install",
     description = "Install headers and lib",
-    execute = function() 
+    execute = function()
 
       if not _ARGS[1] or not os.isdir(_ARGS[1]) then
         error("You must specify an install location")
@@ -104,7 +104,7 @@ solution "arg3"
     buildoptions { "-std=c++11", "-stdlib=libc++", "-Wall", "-Werror"}
 
     linkoptions { "-stdlib=libc++" }
-    
+
     if _OPTIONS["thin"] then
       buildoptions { "-DTHIN" }
     end
@@ -116,7 +116,7 @@ solution "arg3"
     configuration "release"
         targetdir "bin/release"
         buildoptions { "-O" }
-    
+
     if not _OPTIONS["shared"] then
         include "db"
 
@@ -155,15 +155,15 @@ solution "arg3"
             "arg3.test.cpp"
         }
         if _OPTIONS["shared"] then
-            links { "arg3" }
+            links { "arg3", "json", "sqlite3" }
         else
-            links { 
+            links {
                 "sqlite3",
                 "json",
                 "curl",
                 "arg3log",
-                "arg3db", 
-                "arg3dice", 
+                "arg3db",
+                "arg3dice",
                 "arg3format",
                 "arg3net",
                 "arg3json",

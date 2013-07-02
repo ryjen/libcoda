@@ -85,28 +85,28 @@ namespace arg3
                     return value_.i;
             case UINT:
                 if (value_.ui < numeric_limits<T>::max())
-                    return static_cast<int>(value_.ui);
+                    return static_cast<T>(value_.ui);
             case LONG:
                 if (value_.l <= numeric_limits<T>::max() && value_.l >= numeric_limits<T>::min())
-                    return static_cast<int>(value_.l);
+                    return static_cast<T>(value_.l);
             case ULONG:
                 if (value_.ul <= numeric_limits<T>::max())
-                    return static_cast<int>(value_.ul);
+                    return static_cast<T>(value_.ul);
             case LLONG:
                 if (value_.ll <= numeric_limits<T>::max() && value_.ll >= numeric_limits<T>::min())
-                    return static_cast<int>(value_.ll);
+                    return static_cast<T>(value_.ll);
             case ULLONG:
                 if (value_.ull <= numeric_limits<T>::max())
-                    return static_cast<int>(value_.ull);
+                    return static_cast<T>(value_.ull);
             case DOUBLE:
                 if (value_.d <= numeric_limits<T>::max() && value_.d >= numeric_limits<T>::min())
-                    return static_cast<int>(value_.d);
+                    return static_cast<T>(value_.d);
             case FLOAT:
                 if (value_.f <= numeric_limits<T>::max() && value_.f >= numeric_limits<T>::min())
-                    return static_cast<int>(value_.f);
+                    return static_cast<T>(value_.f);
             case LDOUBLE:
                 if (value_.ld <= numeric_limits<T>::max() && value_.ld >= numeric_limits<T>::min())
-                    return static_cast<int>(value_.ld);
+                    return static_cast<T>(value_.ld);
             }
             return D(def);
         };

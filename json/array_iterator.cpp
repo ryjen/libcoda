@@ -17,8 +17,8 @@ namespace arg3
 
         }
 
-        array_iterator::array_iterator(array_iterator &&other) : value_(other.value_), pos_(other.pos_), 
-                ref_(other.ref_)
+        array_iterator::array_iterator(array_iterator &&other) : value_(other.value_), pos_(other.pos_),
+            ref_(other.ref_)
         {
             other.value_ = NULL;
             other.ref_ = 0;
@@ -180,57 +180,6 @@ namespace arg3
             return pos_ >= other.pos_;
         }
 
-
-        bool operator==(const array_iterator &r1, const array_iterator &r2)
-        {
-            return r1.operator == (r2);
-        }
-
-
-        bool operator!=(const array_iterator &r1, const array_iterator &r2)
-        {
-            return r1.operator != (r2);
-        }
-
-
-        bool operator<(const array_iterator &r1, const array_iterator &r2)
-        {
-            return r1.operator < (r2);
-        }
-
-
-        bool operator>(const array_iterator &r1, const array_iterator &r2)
-        {
-            return r1.operator > (r2);
-        }
-
-
-        bool operator<=(const array_iterator &r1, const array_iterator &r2)
-        {
-            return r1.operator <= (r2);
-        }
-
-
-        bool operator>=(const array_iterator &r1, const array_iterator &r2)
-        {
-            return r1.operator >= (r2);
-        }
-
-
-        array_iterator::difference_type operator+(
-            const array_iterator &r1,
-            const array_iterator &r2)
-        {
-
-            return r1.pos_ + r2.pos_;
-        }
-
-
-        array_iterator::difference_type operator-(
-            const array_iterator &r1, const array_iterator &r2)
-        {
-            return r1.pos_ - r2.pos_;
-        }
 
     }
 }
