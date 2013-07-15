@@ -33,7 +33,7 @@ Context(base_record_test)
 
             Assert::That(user1.save(), Equals(true));
 
-            user1.loadBy("id", 1); // load values back up from db
+            user1.refreshBy("id", 1); // load values back up from db
 
             Assert::That(user1.get("first_name"), Equals("Ryan"));
 
@@ -42,7 +42,7 @@ Context(base_record_test)
 
             Assert::That(user1.save(), Equals(true));
 
-            user1.loadBy("id", 1); // load values back up from db
+            user1.refreshBy("id", 1); // load values back up from db
 
             Assert::That(user1.get("first_name"), Equals("Bryan"));
 
@@ -84,7 +84,7 @@ Context(base_record_test)
     {
         user user1;
 
-        Assert::That(user1.loadBy("id", 1432123), Equals(false));
+        Assert::That(user1.refreshBy("id", 1432123), Equals(false));
 
         Assert::That(user1.get("id").to_int(0), Equals(0));
 

@@ -12,6 +12,7 @@
 #include "../format/format.h"
 #include "schema.h"
 #include <map>
+#include <memory>
 
 namespace arg3
 {
@@ -24,35 +25,48 @@ namespace arg3
         class base_record
         {
         private:
+            static map<string,shared_ptr<schema>> schema_cache_;
+
+            sqldb *db_;
+            string tableName_;
+            shared_ptr<schema> schema_;
             map<string, variant> values_;
-            schema schema_;
 
-            void assert_schema()
+            void init_schema(sqldb *db, const string &tableName)
             {
-                if (!schema_.is_valid())
-                    schema_.init(db(), tableName());
+                if(schema_cache_.count(tableName))
+                {
+                    schema_ = schema_cache_[tableName];
+                }
+                else
+                {
+                    schema_cache_[tableName] = schema_ = make_shared<db::schema>(db, tableName);
+                }
             }
-
         public:
             /*!
              * default constructor
              */
-            base_record()
+            base_record(sqldb *db, const string &tableName) : db_(db), tableName_(tableName)
             {
+                init_schema(db, tableName);
             }
 
             /*!
              * construct with values from a database row
              */
-            base_record(const row &values)
+            base_record(sqldb *db, const string &tableName, const row &values) : db_(db), tableName_(tableName)
             {
+                init_schema(db, tableName);
                 init(values);
             }
 
-            base_record(const base_record &other) : values_(other.values_), schema_(other.schema_)
+            base_record(const base_record &other) :  db_(other.db_), tableName_(other.tableName_),
+                values_(other.values_), schema_(other.schema_)
             {}
 
-            base_record(base_record &&other) : values_(std::move(other.values_)), schema_(std::move(other.schema_))
+            base_record(base_record &&other) : db_(std::move(other.db_)), tableName_(std::move(other.tableName_)),
+                values_(std::move(other.values_)), schema_(std::move(other.schema_))
             {}
 
             virtual ~base_record()
@@ -64,6 +78,8 @@ namespace arg3
             {
                 if(this != &other)
                 {
+                    db_ = other.db_;
+                    tableName_ = other.tableName_;
                     values_ = other.values_;
                     schema_ = other.schema_;
                 }
@@ -74,6 +90,8 @@ namespace arg3
             {
                 if(this != &other)
                 {
+                    db_ = std::move(other.db_);
+                    tableName_ = std::move(other.tableName_);
                     values_ = std::move(other.values_);
                     schema_ = std::move(other.schema_);
                 }
@@ -93,7 +111,7 @@ namespace arg3
 
             bool is_valid() const
             {
-                return schema_.is_valid();
+                return schema_->is_valid();
             }
 
             /*!
@@ -104,17 +122,20 @@ namespace arg3
             /*!
              * should return the database for the record
              */
-            virtual sqldb *db() const = 0;
+            virtual sqldb *db() const {
+                return db_;
+            }
 
             /*!
              * should return the table name for the record
              */
-            virtual string tableName() const = 0;
+            string tableName() const {
+                return tableName_;
+            }
 
-            const schema &schema()
+            const schema &schema() const
             {
-                assert_schema();
-                return schema_;
+                return *schema_;
             }
 
             /*!
@@ -218,7 +239,7 @@ namespace arg3
                 return items;
             }
 
-            shared_ptr<T> findById()
+            bool refresh()
             {
                 auto query = select_query(db(), tableName(), schema().column_names());
 
@@ -247,10 +268,12 @@ namespace arg3
 
                 auto it = results.begin();
 
-                if (it != results.end())
-                    return make_shared<T>(*it);
+                if (it != results.end()) {
+                    init(*it);
+                    return  true;
+                }
 
-                throw record_not_found_exception();
+                return false;
             }
 
             template<typename V>
@@ -275,7 +298,7 @@ namespace arg3
             }
 
             template<typename V>
-            bool loadBy(const string &name, const V &value)
+            bool refreshBy(const string &name, const V &value)
             {
                 auto query = select_query(db(), tableName(), schema().column_names());
 
@@ -293,7 +316,11 @@ namespace arg3
                 return true;
             }
         };
+
+        template<typename T>
+        map<string,shared_ptr<schema>> base_record<T>::schema_cache_;
     }
+
 }
 
 #endif

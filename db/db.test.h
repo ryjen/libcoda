@@ -34,18 +34,9 @@ extern testsqldb testdb;
 class user : public arg3::db::base_record<user>
 {
 public:
-    user() {}
+    user() : base_record(&testdb, "users") {}
 
-    user(const arg3::db::row &values) : base_record(values) {}
-
-    arg3::db::sqldb* db() const
-    {
-        return &testdb;
-    }
-
-    string tableName() const {
-        return "users";
-    }
+    user(const arg3::db::row &values) : base_record(&testdb, "users", values) {}
 
     string to_string()
     {
