@@ -75,13 +75,13 @@ newaction {
     end
 }
 newoption {
-   trigger     = "shared",
-   description = "Build a shared library"
+   trigger     = "static",
+   description = "Build static libraries"
 }
 
 newoption {
-  trigger      = "thin",
-  description  = "don't include server code in library"
+  trigger      = "no-curl",
+  description  = "don't include libcurl in library"
 }
 
 if _ACTION == "clean" then
@@ -97,6 +97,16 @@ if _ACTION == "clean" then
     os.rmdir("obj")
 end
 
+if _ACTION == "gmake" then
+  if not os.isdir('db') then
+    os.execute('git clone git@github.com:c0der78/arg3db.git db');
+  end
+
+  if not os.isdir('dice') then
+    os.execute('git clone git@github.com:c0der78/arg3dice.git dice');
+  end
+end
+
 solution "arg3"
     configurations { "debug", "release" }
     language "C++"
@@ -105,8 +115,8 @@ solution "arg3"
 
     linkoptions { "-stdlib=libc++" }
 
-    if _OPTIONS["thin"] then
-      buildoptions { "-DTHIN" }
+    if _OPTIONS["no-curl"] then
+      buildoptions { "-DARG3_NO_CURL" }
     end
 
     configuration "Debug"
@@ -117,7 +127,7 @@ solution "arg3"
         targetdir "bin/release"
         buildoptions { "-O" }
 
-    if not _OPTIONS["shared"] then
+    if _OPTIONS["static"] then
         include "db"
 
         include "dice"
@@ -145,7 +155,11 @@ solution "arg3"
             excludes {
                 "**.test.cpp"
             }
-            links { "json", "sqlite3", "curl" }
+            if _OPTIONS["no-curl"] then
+              links { "json", "sqlite3" }
+            else
+              links { "json", "sqlite3", "curl" }
+            end
     end
 
     project "arg3test"
@@ -154,8 +168,9 @@ solution "arg3"
             "**.test.cpp",
             "arg3.test.cpp"
         }
-        if _OPTIONS["shared"] then
-            links { "arg3", "json", "sqlite3" }
+        includedirs { "vendor" }
+        if not _OPTIONS["static"] then
+            links { "arg3", "sqlite3" }
         else
             links {
                 "sqlite3",

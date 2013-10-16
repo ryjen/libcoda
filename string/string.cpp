@@ -256,24 +256,29 @@ namespace arg3
             "0123456789+/";
 
 
-        static inline bool is_base64(unsigned char c) {
+        static inline bool is_base64(unsigned char c)
+        {
             return (isalnum(c) || (c == '+') || (c == '/'));
         }
 
-        string encode(const binary &value) {
+        string encode(const binary &value)
+        {
             return encode(value.data(), value.size());
         }
 
-        string encode(unsigned char const* bytes_to_encode, size_t in_len) {
+        string encode(unsigned char const* bytes_to_encode, size_t in_len)
+        {
             string ret;
             int i = 0;
             int j = 0;
             unsigned char char_array_3[3];
             unsigned char char_array_4[4];
 
-            while (in_len--) {
+            while (in_len--)
+            {
                 char_array_3[i++] = *(bytes_to_encode++);
-                if (i == 3) {
+                if (i == 3)
+                {
                     char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
                     char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
                     char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
@@ -307,7 +312,8 @@ namespace arg3
 
         }
 
-        binary decode(const string &encoded_string) {
+        binary decode(const string &encoded_string)
+        {
             size_t in_len = encoded_string.size();
             size_t i = 0;
             size_t j = 0;
@@ -315,10 +321,12 @@ namespace arg3
             unsigned char char_array_4[4], char_array_3[3];
             binary ret;
 
-            while (in_len-- && ( encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
+            while (in_len-- && ( encoded_string[in_] != '=') && is_base64(encoded_string[in_]))
+            {
                 char_array_4[i++] = encoded_string[in_];
                 in_++;
-                if (i ==4) {
+                if (i ==4)
+                {
                     for (i = 0; i <4; i++)
                         char_array_4[i] = static_cast<unsigned char>(base64_chars.find(char_array_4[i]));
 
@@ -332,7 +340,8 @@ namespace arg3
                 }
             }
 
-            if (i) {
+            if (i)
+            {
                 for (j = i; j <4; j++)
                     char_array_4[j] = 0;
 
@@ -372,16 +381,23 @@ namespace arg3
 
         bufsize = 0;
         outsize = 0;
-        for (;;) {
-            if (bufsize == 0) {
+        for (;;)
+        {
+            if (bufsize == 0)
+            {
                 bufsize = strlen(fmt);
-                if ((buf = (char *)malloc(bufsize)) == NULL) {
+                if ((buf = (char *)malloc(bufsize)) == NULL)
+                {
                     return -1;
                 }
-            } else if ((newbuf = (char *)realloc(buf, nextsize)) != NULL) {
+            }
+            else if ((newbuf = (char *)realloc(buf, nextsize)) != NULL)
+            {
                 buf = newbuf;
                 bufsize = nextsize;
-            } else {
+            }
+            else
+            {
                 free(buf);
                 return outsize;
             }
@@ -392,14 +408,17 @@ namespace arg3
 
             va_end(args);
 
-            if (outsize == -1) {
+            if (outsize == -1)
+            {
                 /* Clear indication that output was truncated, but no
                  * clear indication of how big buffer needs to be, so
                  * simply double existing buffer size for next time.
                  */
                 nextsize = bufsize * 2;
 
-            } else if (outsize == bufsize) {
+            }
+            else if (outsize == bufsize)
+            {
                 /* Output was truncated (since at least the \0 could
                  * not fit), but no indication of how big the buffer
                  * needs to be, so just double existing buffer size
@@ -407,7 +426,9 @@ namespace arg3
                  */
                 nextsize = bufsize * 2;
 
-            } else if (outsize > bufsize) {
+            }
+            else if (outsize > bufsize)
+            {
                 /* Output was truncated, but we were told exactly how
                  * big the buffer needs to be next time. Add two chars
                  * to the returned size. One for the \0, and one to
@@ -415,7 +436,9 @@ namespace arg3
                  */
                 nextsize = outsize + 2;
 
-            } else if (outsize == bufsize - 1) {
+            }
+            else if (outsize == bufsize - 1)
+            {
                 /* This is ambiguous. May mean that the output string
                  * exactly fits, but on some systems the output string
                  * may have been trucated. We can't tell.
@@ -423,7 +446,9 @@ namespace arg3
                  */
                 nextsize = bufsize * 2;
 
-            } else {
+            }
+            else
+            {
                 /* Output was not truncated */
                 break;
             }

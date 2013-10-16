@@ -211,11 +211,13 @@ namespace arg3
             return reverse_iterator(begin());
         }
 
-        bool array::operator==(const array &other) const {
+        bool array::operator==(const array &other) const
+        {
             return value_ == other.value_;
         }
 
-        bool array::operator!=(const array &other) const {
+        bool array::operator!=(const array &other) const
+        {
             return value_ != other.value_;
         }
     }

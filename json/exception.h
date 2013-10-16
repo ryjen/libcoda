@@ -22,12 +22,14 @@ namespace arg3
 
             virtual ~exception() {}
 
-            exception &operator=(const exception &e) {
+            exception &operator=(const exception &e)
+            {
                 std::exception::operator=(e);
                 return *this;
             }
 
-            exception &operator=(exception &&e) {
+            exception &operator=(exception &&e)
+            {
                 std::exception::operator=(std::move(e));
                 return *this;
             }

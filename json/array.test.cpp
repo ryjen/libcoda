@@ -48,6 +48,6 @@ Context(ArrayTest)
     {
         json::array value;
 
-        
+
     }
 };

@@ -102,7 +102,8 @@ namespace arg3
     }
     bigint &bigint::operator= (bigint &&x)
     {
-        if(this != &x) {
+        if(this != &x)
+        {
             array = std::move(x.array);
             size = x.size;
             flipped = x.flipped;

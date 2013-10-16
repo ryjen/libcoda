@@ -337,7 +337,8 @@ namespace arg3
         case STRING:
         case CSTRING:
             return static_cast<const char *>(value_.p);
-        case CHAR: {
+        case CHAR:
+        {
             static char buf[2] = {0};
             buf[0] = value_.i;
             return buf;
@@ -380,7 +381,8 @@ namespace arg3
         case STRING:
         case CSTRING:
             return static_cast<const char *>(value_.p);
-        case CHAR: {
+        case CHAR:
+        {
             static char buf[2] = {0};
             buf[0] = value_.i;
             return buf;
@@ -397,7 +399,8 @@ namespace arg3
         case WSTRING:
         case WCSTRING:
             return static_cast<const wchar_t *>(value_.p);
-        case WCHAR: {
+        case WCHAR:
+        {
             static wchar_t buf[2] = {0};
             buf[0] = value_.i;
             return buf;
@@ -420,7 +423,8 @@ namespace arg3
         case CHAR:
         case BOOL:
             return value_.i == 0 ? L"false" : L"true";
-        case WCHAR: {
+        case WCHAR:
+        {
             wchar_t buf[BUFSIZ+1] = {0};
             swprintf(buf,BUFSIZ,L"%c", value_.i);
             return wstring(buf);

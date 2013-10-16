@@ -13,7 +13,7 @@ class Arg3 < Formula
   end
 
   def install
-    system "premake4", "--shared", "gmake"
+    system "premake4", "gmake"
 
     ENV["config"] = "release"
 

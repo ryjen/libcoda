@@ -156,11 +156,13 @@ namespace arg3
         return empty();
     }
 
-    bool argument::equals(const string &arg, bool caseSensitive) const {
+    bool argument::equals(const string &arg, bool caseSensitive) const
+    {
         return arg3::equals(str_, arg, caseSensitive);
     }
 
-    bool argument::prefix(const string &arg, bool caseSensitive) const {
+    bool argument::prefix(const string &arg, bool caseSensitive) const
+    {
         return arg3::prefix(str_, arg, caseSensitive);
     }
 }
