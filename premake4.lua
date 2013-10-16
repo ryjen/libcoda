@@ -105,6 +105,10 @@ if _ACTION == "gmake" then
   if not os.isdir('dice') then
     os.execute('git clone git@github.com:c0der78/arg3dice.git dice');
   end
+
+  if not os.isdir('json') then
+    os.execute('git clone git@github.com:c0der78/arg3json.git json');
+  end
 end
 
 solution "arg3"
@@ -154,9 +158,9 @@ solution "arg3"
                 "**.test.cpp"
             }
             if _OPTIONS["no-curl"] then
-              links { "json", "sqlite3" }
+              links { "json-c", "sqlite3" }
             else
-              links { "json", "sqlite3", "curl" }
+              links { "json-c", "sqlite3", "curl" }
             end
     end
 
@@ -174,7 +178,7 @@ solution "arg3"
         else
             links {
                 "sqlite3",
-                "json",
+                "json-c",
                 "curl",
                 "arg3log",
                 "arg3db",
