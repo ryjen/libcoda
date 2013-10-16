@@ -21,18 +21,17 @@
 #include <igloo/fluent/operators/notoperator.h>
 #include <igloo/fluent/expressionbuilder.h>
 
-namespace igloo
-{
+namespace igloo {
 
-    inline ExpressionBuilder<Nil> Is()
-    {
-        return ExpressionBuilder<Nil>(Nil());
-    }
+  inline ExpressionBuilder<Nil> Is()
+  {
+    return ExpressionBuilder<Nil>(Nil());
+  }
 
-    inline ExpressionBuilder<Nil> Has()
-    {
-        return ExpressionBuilder<Nil>(Nil());
-    }
+  inline ExpressionBuilder<Nil> Has()
+  {
+     return ExpressionBuilder<Nil>(Nil());
+  }
 
 }
 

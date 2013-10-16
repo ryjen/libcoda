@@ -12,45 +12,44 @@
 #include <igloo/core/testresult.h>
 #include <igloo/core/context.h>
 
-namespace igloo
-{
+namespace igloo {
 
-    template <typename ContextType>
+  template <typename ContextType>
     struct ContextAttributeStorage
     {
-        static void Set(const std::string name, std::string value)
-        {
-            attributeContainer()[name] = value;
-        }
+      static void Set(const std::string name, std::string value)
+      {
+        attributeContainer()[name] = value;
+      }
 
-        static const std::string& Get(const std::string& name)
-        {
-            return attributeContainer()[name];
-        }
+      static const std::string& Get(const std::string& name)
+      {
+        return attributeContainer()[name];
+      }
 
-    private:
+      private:
 
-        static std::map<std::string, std::string>& attributeContainer()
-        {
-            static std::map<std::string, std::string> attributeContainer;
-            return attributeContainer;
-        }
+      static std::map<std::string, std::string>& attributeContainer()
+      {
+        static std::map<std::string, std::string> attributeContainer;
+        return attributeContainer;
+      }
     };
 
 
-    template <typename ContextType>
-    struct ContextWithAttribute : ContextBase
+  template <typename ContextType>
+    struct ContextWithAttribute : ContextBase 
+  {
+    void SetAttribute(const std::string& name, const char* value) const
     {
-        void SetAttribute(const std::string& name, const char* value) const
-        {
-            ContextAttributeStorage<ContextType>::Set(name, value);
-        }
+      ContextAttributeStorage<ContextType>::Set(name, value);
+    }
 
-        const std::string& GetAttribute(const std::string& name) const
-        {
-            return ContextAttributeStorage<ContextType>::Get(name);
-        }
-    };
+    const std::string& GetAttribute(const std::string& name) const
+    {
+      return ContextAttributeStorage<ContextType>::Get(name);
+    }
+  };
 }
 
 #endif

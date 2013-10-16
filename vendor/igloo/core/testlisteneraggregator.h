@@ -7,76 +7,75 @@
 #ifndef IGLOO_TESTLISTENER_AGGREGATOR_H
 #define IGLOO_TESTLISTENER_AGGREGATOR_H
 
-namespace igloo
-{
-    class TestListenerAggregator : public TestListener
-    {
+namespace igloo {
+  class TestListenerAggregator : public TestListener
+  {
     public:
-        void AddListener(TestListener* listener)
-        {
-            listeners_.push_back(listener);
-        }
+      void AddListener(TestListener* listener)
+      {
+        listeners_.push_back(listener);
+      }
 
-        void TestRunStarting()
+      void TestRunStarting() 
+      {
+        for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
         {
-            for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
-            {
-                (*it)->TestRunStarting();
-            }
+          (*it)->TestRunStarting();
         }
+      }
 
-        void TestRunEnded(const TestResults& results)
+      void TestRunEnded(const TestResults& results)
+      {
+        for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
         {
-            for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
-            {
-                (*it)->TestRunEnded(results);
-            }
+          (*it)->TestRunEnded(results);
         }
+      }
 
-        void ContextRunStarting(const ContextBase& context)
+      void ContextRunStarting(const ContextBase& context)
+      {
+        for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
         {
-            for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
-            {
-                (*it)->ContextRunStarting(context);
-            }
+          (*it)->ContextRunStarting(context);
         }
+      }
 
-        void ContextRunEnded(const ContextBase& context)
+      void ContextRunEnded(const ContextBase& context)
+      {
+        for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
         {
-            for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
-            {
-                (*it)->ContextRunEnded(context);
-            }
+          (*it)->ContextRunEnded(context);
         }
+      }
 
-        void SpecRunStarting(const ContextBase& context, const std::string& specName)
+      void SpecRunStarting(const ContextBase& context, const std::string& specName)
+      {
+        for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
         {
-            for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
-            {
-                (*it)->SpecRunStarting(context, specName);
-            }
+          (*it)->SpecRunStarting(context, specName);
         }
+      }
 
-        void SpecSucceeded(const ContextBase& context, const std::string& specName)
+      void SpecSucceeded(const ContextBase& context, const std::string& specName)
+      {
+        for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
         {
-            for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
-            {
-                (*it)->SpecSucceeded(context, specName);
-            }
+          (*it)->SpecSucceeded(context, specName);
         }
+      }
 
-        void SpecFailed(const ContextBase& context, const std::string& specName)
+      void SpecFailed(const ContextBase& context, const std::string& specName)
+      {
+        for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
         {
-            for(TestListeners::const_iterator it = listeners_.begin(); it != listeners_.end(); it++)
-            {
-                (*it)->SpecFailed(context, specName);
-            }
+          (*it)->SpecFailed(context, specName);
         }
+      }
 
     private:
-        typedef std::list<TestListener*> TestListeners;
-        TestListeners listeners_;
-    };
+      typedef std::list<TestListener*> TestListeners;
+      TestListeners listeners_;
+  };
 }
 
 #endif

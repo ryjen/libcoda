@@ -7,29 +7,28 @@
 #ifndef TESTRESULTFACTORY_H
 #define TESTRESULTFACTORY_H
 
-namespace igloo
-{
+namespace igloo {
 
-    class TestResultFactory
-    {
+  class TestResultFactory
+  {
     public:
-        TestResultFactory(const std::string& contextName, const std::string& specName)
-            : m_contextName(contextName), m_specName(specName)
-        {}
+      TestResultFactory(const std::string& contextName, const std::string& specName)
+        : m_contextName(contextName), m_specName(specName)
+      {}
 
-        FailedTestResult CreateFromException(const AssertionException& exception) const
-        {
-            return FailedTestResult(m_contextName, m_specName, exception.GetMessage(), exception.GetFilename(), exception.GetLineNumber());
-        }
+      FailedTestResult CreateFromException(const AssertionException& exception) const
+      {
+        return FailedTestResult(m_contextName, m_specName, exception.GetMessage(), exception.GetFilename(), exception.GetLineNumber());
+      }
 
-        SucceededTestResult CreateSuccessful() const
-        {
-            return SucceededTestResult(m_contextName, m_specName);
-        }
+      SucceededTestResult CreateSuccessful() const
+      {
+        return SucceededTestResult(m_contextName, m_specName);
+      }
 
     private:
-        std::string m_contextName;
-        std::string m_specName;
-    };
+      std::string m_contextName;
+      std::string m_specName;
+  };
 }
 #endif

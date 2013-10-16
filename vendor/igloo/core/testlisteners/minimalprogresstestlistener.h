@@ -7,31 +7,30 @@
 #ifndef IGLOO_MINIMALPROGRESSTESTLISTENER_H
 #define IGLOO_MINIMALPROGRESSTESTLISTENER_H
 
-namespace igloo
-{
+namespace igloo {
 
-    class MinimalProgressTestListener : public TestListener
-    {
+  class MinimalProgressTestListener : public TestListener
+  {
     public:
-        virtual void TestRunStarting() {}
-        virtual void TestRunEnded(const TestResults&)
-        {
-            std::cout << std::endl;
-        }
+      virtual void TestRunStarting() {}
+      virtual void TestRunEnded(const TestResults&) 
+      {
+        std::cout << std::endl;
+      }
 
-        virtual void ContextRunStarting(const ContextBase& ) {}
-        virtual void ContextRunEnded(const ContextBase& ) {}
-        virtual void SpecRunStarting(const ContextBase& , const std::string& ) {}
-        virtual void SpecSucceeded(const ContextBase& , const std::string& )
-        {
-            std::cout << ".";
-        }
+      virtual void ContextRunStarting(const ContextBase& ) {}
+      virtual void ContextRunEnded(const ContextBase& ) {}
+      virtual void SpecRunStarting(const ContextBase& , const std::string& ) {}
+      virtual void SpecSucceeded(const ContextBase& , const std::string& )
+      {
+        std::cout << ".";
+      }
 
-        virtual void SpecFailed(const ContextBase& , const std::string& )
-        {
-            std::cout << "F";
-        }
-    };
+      virtual void SpecFailed(const ContextBase& , const std::string& )
+      {
+        std::cout << "F";
+      }
+  };
 
 }
 #endif

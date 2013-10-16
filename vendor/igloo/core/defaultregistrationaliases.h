@@ -20,7 +20,7 @@ IGLOO_CONTEXT_REGISTRATION(contextName)
 IGLOO_SUBCONTEXT_REGISTRATION(contextName, baseContextName)
 
 #define Spec(specName) \
-IGLOO_SPEC_REGISTRATION(specName)
+IGLOO_SPEC_REGISTRATION(specName)  
 
 #define ContextAttribute(attributeName, attributeValue) \
 IGLOO_CONTEXT_ATTRIBUTE_REGISTRATION(attributeName, attributeValue)

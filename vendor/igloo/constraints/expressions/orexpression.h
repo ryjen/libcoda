@@ -8,40 +8,39 @@
 #define IGLOO_OREXPRESSION_H
 
 #include <igloo/constraints/expressions/expression_fwd.h>
+       
+namespace igloo {
 
-namespace igloo
-{
-
-    template< typename LeftExpression, typename RightExpression >
-    struct OrExpression : Expression< OrExpression<LeftExpression, RightExpression> >
+  template< typename LeftExpression, typename RightExpression >
+  struct OrExpression : Expression< OrExpression<LeftExpression, RightExpression> >
+  {
+    OrExpression(const LeftExpression& left, const RightExpression& right)
+      : m_left(left)
+      , m_right(right)
     {
-        OrExpression(const LeftExpression& left, const RightExpression& right)
-            : m_left(left)
-            , m_right(right)
-        {
-        }
+    }
 
-        template< typename ActualType >
-        bool operator()(const ActualType& actual) const
-        {
-            return (m_left(actual) || m_right(actual));
-        }
-
-        LeftExpression m_left;
-        RightExpression m_right;
-    };
-
-    template< typename LeftExpression, typename RightExpression >
-    struct Stringizer< OrExpression<LeftExpression, RightExpression> >
+    template< typename ActualType >
+    bool operator()(const ActualType& actual) const
     {
-        static std::string ToString(const OrExpression<LeftExpression, RightExpression>& expression)
-        {
-            std::ostringstream builder;
-            builder << igloo::Stringize(expression.m_left) << " or " << igloo::Stringize(expression.m_right);
+      return (m_left(actual) || m_right(actual));
+    }
 
-            return builder.str();
-        }
-    };
+    LeftExpression m_left;
+    RightExpression m_right;
+  };
+
+  template< typename LeftExpression, typename RightExpression >
+  struct Stringizer< OrExpression<LeftExpression, RightExpression> >
+  {
+    static std::string ToString(const OrExpression<LeftExpression, RightExpression>& expression)
+    {
+      std::ostringstream builder;
+	  builder << igloo::Stringize(expression.m_left) << " or " << igloo::Stringize(expression.m_right);
+
+      return builder.str();
+    }
+  };
 }
 
 #endif

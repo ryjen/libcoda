@@ -7,27 +7,26 @@
 #ifndef IGLOO_NONEOPERATOR_H
 #define IGLOO_NONEOPERATOR_H
 
-namespace igloo
-{
+namespace igloo {
 
-    struct NoneOperator : public CollectionOperator
-    {
-        template <typename ConstraintListType, typename ActualType>
-        void Evaluate(ConstraintListType& list, ResultStack& result, OperatorStack& operators, const ActualType& actual)
-        {
-            unsigned int passed_elements = CollectionConstraintEvaluator<ConstraintListType, ActualType>::Evaluate(*this, list, result, operators, actual);
-            result.push(passed_elements == 0);
-        }
-    };
+   struct NoneOperator : public CollectionOperator
+   {
+      template <typename ConstraintListType, typename ActualType>
+      void Evaluate(ConstraintListType& list, ResultStack& result, OperatorStack& operators, const ActualType& actual)
+      {
+        unsigned int passed_elements = CollectionConstraintEvaluator<ConstraintListType, ActualType>::Evaluate(*this, list, result, operators, actual);
+        result.push(passed_elements == 0);
+      }
+   };
 
-    template<>
-    struct Stringizer<NoneOperator>
-    {
-        static std::string ToString(const NoneOperator&)
-        {
-            return "none";
-        }
-    };
+   template<>
+   struct Stringizer<NoneOperator>
+   {
+      static std::string ToString(const NoneOperator&)
+      {
+         return "none";
+      }
+   };
 
 }
 

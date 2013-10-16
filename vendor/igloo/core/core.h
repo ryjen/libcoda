@@ -15,8 +15,8 @@
 #include <igloo/core/testlisteneraggregator.h>
 #include <igloo/core/outputters/outputters.h>
 #include <igloo/core/assertionexception.h>
-#include <igloo/core/context.h>
-#include <igloo/core/contextregistry.h>
+#include <igloo/core/context.h> 
+#include <igloo/core/contextregistry.h> 
 #include <igloo/core/contextrunner.h>
 #include <igloo/core/testrunner.h>
 #include <igloo/core/assert.h>

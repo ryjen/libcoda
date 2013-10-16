@@ -12,173 +12,172 @@
 #include <igloo/core/testlisteners/minimalprogresstestlistener.h>
 #include <igloo/external/choices/choices.h>
 
-namespace igloo
-{
+namespace igloo {
 
-    namespace c = choices;
+  namespace c = choices;
 
-    class TestRunner
-    {
+  class TestRunner 
+  {
     public:
-        typedef std::list<BaseContextRunner*> ContextRunners;
+      typedef std::list<BaseContextRunner*> ContextRunners;
 
-        static int RunAllTests(int argc = 0, const char *argv[] = 0)
+      static int RunAllTests(int argc = 0, const char *argv[] = 0)
+      {
+        choices::options opt = choices::parse_cmd(argc, argv);
+
+        if(c::has_option("version", opt))
         {
-            choices::options opt = choices::parse_cmd(argc, argv);
+          std::cout << IGLOO_VERSION << std::endl;
+          return 0;
+        }
 
-            if(c::has_option("version", opt))
-            {
-                std::cout << IGLOO_VERSION << std::endl;
-                return 0;
-            }
+        if(c::has_option("help", opt))
+        {
+          std::cout << "Usage: <igloo-executable> [--version] [--output=color|vs|xunit|default]" << std::endl;
+          std::cout << "Options:" << std::endl;
+          std::cout << "  --version:\tPrint version of igloo and exit." << std::endl;
+          std::cout << "  --output:\tFormat output of test results." << std::endl;
+          std::cout << "\t\t--output=color:\t\tColored output" << std::endl;
+          std::cout << "\t\t--output=vs:\t\tVisual studio friendly output." << std::endl;
+          std::cout << "\t\t--output=xunit:\t\tXUnit formatted output." << std::endl;
+          std::cout << "\t\t--output=default:\t\tDefault output format." << std::endl;
+          return 0;
+        }
 
-            if(c::has_option("help", opt))
-            {
-                std::cout << "Usage: <igloo-executable> [--version] [--output=color|vs|xunit|default]" << std::endl;
-                std::cout << "Options:" << std::endl;
-                std::cout << "  --version:\tPrint version of igloo and exit." << std::endl;
-                std::cout << "  --output:\tFormat output of test results." << std::endl;
-                std::cout << "\t\t--output=color:\t\tColored output" << std::endl;
-                std::cout << "\t\t--output=vs:\t\tVisual studio friendly output." << std::endl;
-                std::cout << "\t\t--output=xunit:\t\tXUnit formatted output." << std::endl;
-                std::cout << "\t\t--output=default:\t\tDefault output format." << std::endl;
-                return 0;
-            }
-
-            std::auto_ptr<TestResultsOutput> output;
-            if(c::has_option("output", opt))
-            {
-                std::string val = c::option_value("output", opt);
-                if(val == "vs")
-                {
-                    output = std::auto_ptr<TestResultsOutput>(new VisualStudioResultsOutput());
-                }
-                else if(val == "color")
-                {
-                    output = std::auto_ptr<TestResultsOutput>(new ColoredConsoleTestResultsOutput());
-                }
-                else if(val == "xunit")
-                {
-                    output = std::auto_ptr<TestResultsOutput>(new XUnitResultsOutput());
-                }
-                else if(val == "default")
-                {
-                    output = std::auto_ptr<TestResultsOutput>(new DefaultTestResultsOutput());
-                }
-                else
-                {
-                    std::cerr << "Unknown output: " << c::option_value("output", opt) << std::endl;
-                    return 1;
-                }
-            }
-            else
-            {
-                output = std::auto_ptr<TestResultsOutput>(new DefaultTestResultsOutput());
-            }
-
-
-            TestRunner runner(*(output.get()));
-
-            MinimalProgressTestListener progressOutput;
-            runner.AddListener(&progressOutput);
-
-            return runner.Run();
+        std::auto_ptr<TestResultsOutput> output;
+        if(c::has_option("output", opt))
+        {
+          std::string val = c::option_value("output", opt);
+          if(val == "vs")
+          {
+            output = std::auto_ptr<TestResultsOutput>(new VisualStudioResultsOutput());
+          }
+          else if(val == "color")
+          {
+            output = std::auto_ptr<TestResultsOutput>(new ColoredConsoleTestResultsOutput());
+          }
+          else if(val == "xunit")
+          {
+            output = std::auto_ptr<TestResultsOutput>(new XUnitResultsOutput());
+          }
+          else if(val == "default")
+          {
+            output = std::auto_ptr<TestResultsOutput>(new DefaultTestResultsOutput());
+          }
+          else
+          {
+            std::cerr << "Unknown output: " << c::option_value("output", opt) << std::endl;
+            return 1;
+          }
+        }
+        else
+        {
+          output = std::auto_ptr<TestResultsOutput>(new DefaultTestResultsOutput());
         }
 
 
-        TestRunner(const TestResultsOutput& output)
-            : output_(output)
-        {}
+        TestRunner runner(*(output.get()));
 
-        int Run(const ContextRunners& runners)
+        MinimalProgressTestListener progressOutput;
+        runner.AddListener(&progressOutput);
+
+        return runner.Run();
+      }
+
+
+      TestRunner(const TestResultsOutput& output) 
+        : output_(output)
+      {}
+
+      int Run(const ContextRunners& runners)
+      {
+        TestResults results;
+
+        listenerAggregator_.TestRunStarting();
+
+        for (ContextRunners::const_iterator it = runners.begin(); it != runners.end(); it++)
         {
-            TestResults results;
-
-            listenerAggregator_.TestRunStarting();
-
-            for (ContextRunners::const_iterator it = runners.begin(); it != runners.end(); it++)
-            {
-                BaseContextRunner* contextRunner = *it;
-                contextRunner->Run(results, listenerAggregator_);
-            }
-
-            listenerAggregator_.TestRunEnded(results);
-
-            output_.PrintResult(results);
-            return results.NumberOfFailedTests();
+          BaseContextRunner* contextRunner = *it;
+          contextRunner->Run(results, listenerAggregator_);
         }
 
-        int Run()
-        {
-            int numberOfFailedTests = Run(RegisteredRunners());
-            CleanUpRunners();
-            return numberOfFailedTests;
-        }
+        listenerAggregator_.TestRunEnded(results);
+
+        output_.PrintResult(results);
+        return results.NumberOfFailedTests();
+      }
+
+      int Run()
+      {
+        int numberOfFailedTests = Run(RegisteredRunners());
+        CleanUpRunners();
+        return numberOfFailedTests;
+      }
 
 
-        template <typename ContextRunnerType>
+      template <typename ContextRunnerType>
         static void RegisterContext(const std::string& name)
         {
-            if(!ContextIsRegistered(name))
+          if(!ContextIsRegistered(name))
+          {
+            ContextRunnerType* contextRunner = 0;
+
+            try
             {
-                ContextRunnerType* contextRunner = 0;
+              // Must add runner first...
+              contextRunner = new ContextRunnerType(name);
+              TestRunner::RegisteredRunners().push_back(contextRunner);
 
-                try
-                {
-                    // Must add runner first...
-                    contextRunner = new ContextRunnerType(name);
-                    TestRunner::RegisteredRunners().push_back(contextRunner);
-
-                    // ... and then instantiate context, because context ctor calls this method again,
-                    // possibly for the same context, depending on inheritance chain.
-                    contextRunner->InstantiateContext();
-                }
-                catch (...)
-                {
-                    delete contextRunner;
-                    throw;
-                }
+              // ... and then instantiate context, because context ctor calls this method again,
+              // possibly for the same context, depending on inheritance chain.
+              contextRunner->InstantiateContext();
             }
+            catch (...)
+            {
+              delete contextRunner;
+              throw;
+            }
+          }
         }
 
-        void AddListener(TestListener* listener)
-        {
-            listenerAggregator_.AddListener(listener);
-        }
+      void AddListener(TestListener* listener)
+      {
+        listenerAggregator_.AddListener(listener);
+      }
 
     private:
-        static void CleanUpRunners()
+      static void CleanUpRunners()
+      {
+        while(!RegisteredRunners().empty())
         {
-            while(!RegisteredRunners().empty())
-            {
-                delete RegisteredRunners().front();
-                RegisteredRunners().pop_front();
-            }
+          delete RegisteredRunners().front();
+          RegisteredRunners().pop_front();
+        }
+      }
+
+      static bool ContextIsRegistered(const std::string& name)
+      {
+        for (ContextRunners::const_iterator it = RegisteredRunners().begin(); it != RegisteredRunners().end(); ++it)
+        {
+          if((*it)->ContextName() == name)
+          {
+            return true;
+          }
         }
 
-        static bool ContextIsRegistered(const std::string& name)
-        {
-            for (ContextRunners::const_iterator it = RegisteredRunners().begin(); it != RegisteredRunners().end(); ++it)
-            {
-                if((*it)->ContextName() == name)
-                {
-                    return true;
-                }
-            }
+        return false;
+      }
 
-            return false;
-        }
-
-        static TestRunner::ContextRunners& RegisteredRunners()
-        {
-            static TestRunner::ContextRunners contextRunners;
-            return contextRunners;
-        }
+      static TestRunner::ContextRunners& RegisteredRunners()
+      {
+        static TestRunner::ContextRunners contextRunners;
+        return contextRunners;
+      }
 
     private:
-        const TestResultsOutput& output_;
-        TestListenerAggregator listenerAggregator_;
-    };
+      const TestResultsOutput& output_;
+      TestListenerAggregator listenerAggregator_;
+  };
 }
 
 #endif // IGLOO_TESTRUNNER_H

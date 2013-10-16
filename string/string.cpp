@@ -148,7 +148,7 @@ namespace arg3
             for (string::size_type i = 0; i < count - 1; i++)
             {
                 buf.put(value);
-                buf.put(',');
+                buf << delimiter;
             }
 
             buf.put(value);
@@ -182,7 +182,7 @@ namespace arg3
         return result;
     }
 
-    bool equals(const string& astr, const string& bstr, bool caseSensitive)
+    bool equals(const string &astr, const string &bstr, bool caseSensitive)
     {
         for (auto a = astr.cbegin(), b = bstr.cbegin();
                 a != astr.cend() || b != bstr.cend(); a++, b++ )
@@ -266,7 +266,7 @@ namespace arg3
             return encode(value.data(), value.size());
         }
 
-        string encode(unsigned char const* bytes_to_encode, size_t in_len)
+        string encode(unsigned char const *bytes_to_encode, size_t in_len)
         {
             string ret;
             int i = 0;
@@ -284,7 +284,7 @@ namespace arg3
                     char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
                     char_array_4[3] = char_array_3[2] & 0x3f;
 
-                    for(i = 0; (i <4) ; i++)
+                    for (i = 0; (i < 4) ; i++)
                         ret += base64_chars[char_array_4[i]];
                     i = 0;
                 }
@@ -292,7 +292,7 @@ namespace arg3
 
             if (i)
             {
-                for(j = i; j < 3; j++)
+                for (j = i; j < 3; j++)
                     char_array_3[j] = '\0';
 
                 char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
@@ -303,7 +303,7 @@ namespace arg3
                 for (j = 0; (j < i + 1); j++)
                     ret += base64_chars[char_array_4[j]];
 
-                while((i++ < 3))
+                while ((i++ < 3))
                     ret += '=';
 
             }
@@ -325,9 +325,9 @@ namespace arg3
             {
                 char_array_4[i++] = encoded_string[in_];
                 in_++;
-                if (i ==4)
+                if (i == 4)
                 {
-                    for (i = 0; i <4; i++)
+                    for (i = 0; i < 4; i++)
                         char_array_4[i] = static_cast<unsigned char>(base64_chars.find(char_array_4[i]));
 
                     char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
@@ -342,10 +342,10 @@ namespace arg3
 
             if (i)
             {
-                for (j = i; j <4; j++)
+                for (j = i; j < 4; j++)
                     char_array_4[j] = 0;
 
-                for (j = 0; j <4; j++)
+                for (j = 0; j < 4; j++)
                     char_array_4[j] = static_cast<unsigned char>(base64_chars.find(char_array_4[j]));
 
                 char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);

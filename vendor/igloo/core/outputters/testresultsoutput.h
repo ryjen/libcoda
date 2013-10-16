@@ -7,17 +7,16 @@
 #ifndef IGLOO_TESTRESULTSOUTPUT_H
 #define IGLOO_TESTRESULTSOUTPUT_H
 
-namespace igloo
-{
+namespace igloo {
 
-    class TestResultsOutput
-    {
+  class TestResultsOutput
+  {
     protected:
-        std::ostream& output;
+      std::ostream& output;
     public:
-        TestResultsOutput(std::ostream& outstream = std::cout) : output(outstream) {}
-        virtual void PrintResult(const TestResults& results) const = 0;
-    };
+      TestResultsOutput(std::ostream& outstream = std::cout) : output(outstream) {}
+      virtual void PrintResult(const TestResults& results) const = 0;
+  };
 }
 
-#endif
+#endif 

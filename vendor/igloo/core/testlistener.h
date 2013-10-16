@@ -7,34 +7,33 @@
 #ifndef IGLOO_TESTLISTENER_H
 #define IGLOO_TESTLISTENER_H
 
-namespace igloo
-{
+namespace igloo {
 
-    struct ContextBase;
+  struct ContextBase;
 
-    class TestListener
-    {
+  class TestListener
+  {
     public:
-        virtual void TestRunStarting() = 0;
-        virtual void TestRunEnded(const TestResults& results) = 0;
-        virtual void ContextRunStarting(const ContextBase& context) = 0;
-        virtual void ContextRunEnded(const ContextBase& context) = 0;
-        virtual void SpecRunStarting(const ContextBase& context, const std::string& specName) = 0;
-        virtual void SpecSucceeded(const ContextBase& context, const std::string& specName) = 0;
-        virtual void SpecFailed(const ContextBase& context, const std::string& specName) = 0;
-    };
+      virtual void TestRunStarting() = 0;
+      virtual void TestRunEnded(const TestResults& results) = 0;
+      virtual void ContextRunStarting(const ContextBase& context) = 0;
+      virtual void ContextRunEnded(const ContextBase& context) = 0;
+      virtual void SpecRunStarting(const ContextBase& context, const std::string& specName) = 0;
+      virtual void SpecSucceeded(const ContextBase& context, const std::string& specName) = 0;
+      virtual void SpecFailed(const ContextBase& context, const std::string& specName) = 0;
+  };
 
-    class NullTestListener : public TestListener
-    {
+  class NullTestListener : public TestListener
+  {
     public:
-        virtual void TestRunStarting() {}
-        virtual void TestRunEnded(const TestResults&) {}
-        virtual void ContextRunStarting(const ContextBase&) {}
-        virtual void ContextRunEnded(const ContextBase&) {}
-        virtual void SpecRunStarting(const ContextBase&, const std::string&) {}
-        virtual void SpecSucceeded(const ContextBase&, const std::string&) {}
-        virtual void SpecFailed(const ContextBase&, const std::string&) {}
-    };
+      virtual void TestRunStarting() {}
+      virtual void TestRunEnded(const TestResults&) {}
+      virtual void ContextRunStarting(const ContextBase&) {}
+      virtual void ContextRunEnded(const ContextBase&) {}
+      virtual void SpecRunStarting(const ContextBase&, const std::string&) {}
+      virtual void SpecSucceeded(const ContextBase&, const std::string&) {}
+      virtual void SpecFailed(const ContextBase&, const std::string&) {}
+  };
 }
 
 #endif

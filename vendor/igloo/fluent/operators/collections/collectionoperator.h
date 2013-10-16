@@ -7,19 +7,18 @@
 #ifndef IGLOO_COLLECTIONOPERATOR_H
 #define IGLOO_COLLECTIONOPERATOR_H
 
-namespace igloo
-{
-    struct CollectionOperator : public ConstraintOperator
-    {
-        void PerformOperation(ResultStack&)
-        {
-        }
+namespace igloo {
+   struct CollectionOperator : public ConstraintOperator
+   {
+      void PerformOperation(ResultStack&)
+      {   
+      }
 
-        int Precedence() const
-        {
-            return 1;
-        }
-    };
+      int Precedence() const
+      {
+         return 1;
+      }
+   };
 }
 
 #endif

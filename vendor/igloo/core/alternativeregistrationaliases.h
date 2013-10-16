@@ -14,7 +14,7 @@
 IGLOO_CONTEXT_REGISTRATION(contextName)
 
 #define It(specName) \
-IGLOO_SPEC_REGISTRATION(specName)
+IGLOO_SPEC_REGISTRATION(specName)  
 
 #define DescriptionAttribute(attributeName, attributeValue) \
 IGLOO_CONTEXT_ATTRIBUTE_REGISTRATION(attributeName, attributeValue)
@@ -24,7 +24,7 @@ IGLOO_CONTEXT_ATTRIBUTE_REGISTRATION(attributeName, attributeValue)
 IGLOO_CONTEXT_REGISTRATION(contextName)
 
 #define Then(specName) \
-IGLOO_SPEC_REGISTRATION(specName)
+IGLOO_SPEC_REGISTRATION(specName)  
 
 #define ScenarioAttribute(attributeName, attributeValue) \
 IGLOO_CONTEXT_ATTRIBUTE_REGISTRATION(attributeName, attributeValue)

@@ -7,65 +7,64 @@
 #ifndef IGLOO_CONTEXTRUNNER_H
 #define IGLOO_CONTEXTRUNNER_H
 
-namespace igloo
-{
+namespace igloo {
 
-
-    struct BaseContextRunner
+  
+  struct BaseContextRunner 
+  {
+    BaseContextRunner(const std::string& contextName) : contextName_(contextName) {}
+    virtual ~BaseContextRunner() {}
+    void Run(TestResults& results, TestListener& testListener) const
     {
-        BaseContextRunner(const std::string& contextName) : contextName_(contextName) {}
-        virtual ~BaseContextRunner() {}
-        void Run(TestResults& results, TestListener& testListener) const
-        {
-            RunContext(results, testListener);
-        }
+      RunContext(results, testListener);
+    }
 
-        const std::string& ContextName() const
-        {
-            return contextName_;
-        }
+    const std::string& ContextName() const
+    {
+      return contextName_;
+    }
 
     protected:
-        virtual void RunContext(TestResults& results, TestListener& testListener) const = 0;
+    virtual void RunContext(TestResults& results, TestListener& testListener) const = 0;
 
     private:
-        std::string contextName_;
-    };
+      std::string contextName_;
+  };
+  
+  template <typename ContextRegistryType, typename ContextType>
+  struct ContextSelector
+  {
+    typedef ContextRegistryType ContextToExecute;
+    typedef ContextType ContextToCreate;
+  };
+  
+  template <typename ContextType>
+  struct ContextSelector<void, ContextType>
+  {
+    typedef ContextType ContextToExecute;
+    typedef ContextType ContextToCreate;
+  };
 
-    template <typename ContextRegistryType, typename ContextType>
-    struct ContextSelector
+  template <typename ContextRegistryType, typename ContextType>
+  class ContextRunner : public BaseContextRunner
+  {
+  public:   
+    typedef typename ContextSelector<ContextRegistryType, ContextType>::ContextToExecute CTE;
+    typedef typename ContextSelector<ContextRegistryType, ContextType>::ContextToCreate CTC;
+
+    ContextRunner(const std::string& contextName) : BaseContextRunner(contextName) {}
+
+    void InstantiateContext() const
     {
-        typedef ContextRegistryType ContextToExecute;
-        typedef ContextType ContextToCreate;
-    };
-
-    template <typename ContextType>
-    struct ContextSelector<void, ContextType>
+      CTC ctc;
+    }
+    
+    void RunContext(TestResults& results, TestListener& testListener) const
     {
-        typedef ContextType ContextToExecute;
-        typedef ContextType ContextToCreate;
-    };
-
-    template <typename ContextRegistryType, typename ContextType>
-    class ContextRunner : public BaseContextRunner
-    {
-    public:
-        typedef typename ContextSelector<ContextRegistryType, ContextType>::ContextToExecute CTE;
-        typedef typename ContextSelector<ContextRegistryType, ContextType>::ContextToCreate CTC;
-
-        ContextRunner(const std::string& contextName) : BaseContextRunner(contextName) {}
-
-        void InstantiateContext() const
-        {
-            CTC ctc;
-        }
-
-        void RunContext(TestResults& results, TestListener& testListener) const
-        {
-            typedef ContextRegistry<CTE> CR;
-            CR::template Run<CTC>(ContextName(), results, testListener);
-        }
-    };
+      typedef ContextRegistry<CTE> CR;
+      CR::template Run<CTC>(ContextName(), results, testListener);
+    }
+  };
 }
 
 #endif

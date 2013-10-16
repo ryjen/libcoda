@@ -7,44 +7,43 @@
 #ifndef IGLOO_CONTEXTPROVIDER_H_
 #define IGLOO_CONTEXTPROVIDER_H_
 
-namespace igloo
-{
-    template <typename InnerContext, typename OuterContext>
+namespace igloo {
+  template <typename InnerContext, typename OuterContext>
     struct ContextProvider : public igloo::ContextWithAttribute<InnerContext>
+  {
+    typedef InnerContext IGLOO_CURRENT_CONTEXT;
+    typedef InnerContext IGLOO_OUTER_CONTEXT;
+
+    virtual OuterContext& Parent()
     {
-        typedef InnerContext IGLOO_CURRENT_CONTEXT;
-        typedef InnerContext IGLOO_OUTER_CONTEXT;
+      if(m_outerContext.get() == 0)
+      {
+        m_outerContext = std::auto_ptr<OuterContext>(CreateIglooContext<OuterContext>());
+      }
+      return *(m_outerContext.get());
+    }
 
-        virtual OuterContext& Parent()
-        {
-            if(m_outerContext.get() == 0)
-            {
-                m_outerContext = std::auto_ptr<OuterContext>(CreateIglooContext<OuterContext>());
-            }
-            return *(m_outerContext.get());
-        }
+    virtual void IglooFrameworkSetUp()
+    {
+      Parent().IglooFrameworkSetUp();
+      this->SetUp();
+    }
 
-        virtual void IglooFrameworkSetUp()
-        {
-            Parent().IglooFrameworkSetUp();
-            this->SetUp();
-        }
-
-        virtual void IglooFrameworkTearDown()
-        {
-            this->TearDown();
-            Parent().IglooFrameworkTearDown();
-        }
+    virtual void IglooFrameworkTearDown()
+    {
+      this->TearDown();
+      Parent().IglooFrameworkTearDown();
+    }
 
 
     private:
-        template <typename ContextType>
-        ContextType* CreateIglooContext()
-        {
-            return new ContextType();
-        }
+    template <typename ContextType>
+      ContextType* CreateIglooContext()
+      {
+        return new ContextType();
+      }
 
-        std::auto_ptr<OuterContext> m_outerContext;
-    };
+    std::auto_ptr<OuterContext> m_outerContext;
+  };
 }
 #endif

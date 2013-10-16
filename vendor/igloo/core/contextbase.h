@@ -7,51 +7,50 @@
 #ifndef IGLOO_CONTEXT_BASE_H
 #define IGLOO_CONTEXT_BASE_H
 
-namespace igloo
-{
+namespace igloo {
 
-    struct ContextBase
+  struct ContextBase
+  {
+    virtual ~ContextBase() {}
+
+    virtual void IglooFrameworkSetUp()
+    {}
+
+    virtual void IglooFrameworkTearDown()
+    {}
+
+    virtual void SetUp()
     {
-        virtual ~ContextBase() {}
+    }
 
-        virtual void IglooFrameworkSetUp()
-        {}
+    virtual void TearDown()
+    {
+    }
 
-        virtual void IglooFrameworkTearDown()
-        {}
+    static void SetUpContext()
+    {
+    }
 
-        virtual void SetUp()
-        {
-        }
+    static void TearDownContext()
+    {
+    }
 
-        virtual void TearDown()
-        {
-        }
+    void SetName(const std::string& name)
+    {
+      m_name = name;
+    }
 
-        static void SetUpContext()
-        {
-        }
+    std::string Name() const
+    {
+      return m_name;
+    }
 
-        static void TearDownContext()
-        {
-        }
-
-        void SetName(const std::string& name)
-        {
-            m_name = name;
-        }
-
-        std::string Name() const
-        {
-            return m_name;
-        }
-
-        virtual void SetAttribute(const std::string& name, const char* value) const = 0;
-        virtual const std::string& GetAttribute(const std::string& name) const = 0;
+    virtual void SetAttribute(const std::string& name, const char* value) const = 0;
+    virtual const std::string& GetAttribute(const std::string& name) const = 0;
 
     private:
-        std::string m_name;
-    };
+    std::string m_name;
+  };
 
 }
 #endif

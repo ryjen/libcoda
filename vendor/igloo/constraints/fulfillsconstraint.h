@@ -9,43 +9,42 @@
 
 #include <igloo/constraints/expressions/expression.h>
 
-namespace igloo
-{
+namespace igloo {
 
-    template< typename MatcherType >
-    struct FulfillsConstraint : Expression< FulfillsConstraint<MatcherType> >
+  template< typename MatcherType >
+  struct FulfillsConstraint : Expression< FulfillsConstraint<MatcherType> >
+  {
+    FulfillsConstraint(const MatcherType& matcher)
+      : m_matcher(matcher)
     {
-        FulfillsConstraint(const MatcherType& matcher)
-            : m_matcher(matcher)
-        {
-        }
-
-        template<typename ActualType>
-        bool operator()(const ActualType& actual) const
-        {
-            return m_matcher.Matches(actual);
-        }
-
-        MatcherType m_matcher;
-    };
-
-    template< typename MatcherType >
-    inline FulfillsConstraint<MatcherType> Fulfills(const MatcherType& matcher)
-    {
-        return FulfillsConstraint<MatcherType>(matcher);
     }
 
-    template< typename MatcherType >
-    struct Stringizer< FulfillsConstraint< MatcherType > >
+    template<typename ActualType>
+    bool operator()(const ActualType& actual) const
     {
-        static std::string ToString(const FulfillsConstraint<MatcherType>& constraint)
-        {
-            std::ostringstream builder;
-            builder << igloo::Stringize(constraint.m_matcher);
+      return m_matcher.Matches(actual);
+    }
 
-            return builder.str();
-        }
-    };
+    MatcherType m_matcher;
+  };
+
+  template< typename MatcherType >
+  inline FulfillsConstraint<MatcherType> Fulfills(const MatcherType& matcher)
+  {
+    return FulfillsConstraint<MatcherType>(matcher);
+  }
+
+  template< typename MatcherType >
+  struct Stringizer< FulfillsConstraint< MatcherType > >
+  {
+    static std::string ToString(const FulfillsConstraint<MatcherType>& constraint)
+    {
+      std::ostringstream builder;
+      builder << igloo::Stringize(constraint.m_matcher);
+
+      return builder.str();
+    }
+  };
 
 }
 

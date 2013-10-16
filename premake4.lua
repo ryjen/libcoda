@@ -39,7 +39,7 @@ newaction {
         folders = { package }
       else
         libraries = { "libarg3.dylib", "libarg3db.a", "libarg3dice.a", "libarg3.log.a", "libarg3net.a", "libarg3format.a", "libarg3json.a", "libarg3math.a", "libarg3string.a"}
-        folders = {"collections", "db", "dice", "format", "net", "log", "json", "math", "string", "variant"}
+        folders = {"collections", "db", "dice", "format", "net", "log", "json", "math", "string"}
       end
 
       for l=1, #libraries do
@@ -111,7 +111,7 @@ solution "arg3"
     configurations { "debug", "release" }
     language "C++"
 
-    buildoptions { "-std=c++11", "-stdlib=libc++", "-Wall", "-Werror"}
+    buildoptions { "-std=c++11", "-stdlib=libc++", "-Wall", "-Werror", "-Ivendor"}
 
     linkoptions { "-stdlib=libc++" }
 
@@ -143,8 +143,6 @@ solution "arg3"
         include "math"
 
         include "string"
-
-        include "variant"
     else
         project "arg3"
             kind "SharedLib"
@@ -164,9 +162,11 @@ solution "arg3"
 
     project "arg3test"
         kind "ConsoleApp"
+        excludes {
+            "**/arg3.test.cpp"
+        }
         files {
-            "**.test.cpp",
-            "arg3.test.cpp"
+            "**.test.cpp"
         }
         includedirs { "vendor" }
         if not _OPTIONS["static"] then
@@ -183,8 +183,7 @@ solution "arg3"
                 "arg3net",
                 "arg3json",
                 "arg3math",
-                "arg3string",
-                "arg3variant"
+                "arg3string"
             }
         end
         configuration "Debug"

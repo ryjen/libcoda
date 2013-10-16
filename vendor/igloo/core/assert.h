@@ -10,108 +10,107 @@
 #include <igloo/core/stringize.h>
 #include <igloo/core/stringizers.h>
 
-namespace igloo
-{
+namespace igloo {
 
-    class Assert
-    {
-    public:
+   class Assert
+   {
+   public:
 
-        template <typename ActualType, typename ConstraintListType>
-        static void That(const ActualType& actual, ExpressionBuilder<ConstraintListType> expression)
-        {
-            const char* no_file = "";
-            int line_number = 0;
+      template <typename ActualType, typename ConstraintListType>
+      static void That(const ActualType& actual, ExpressionBuilder<ConstraintListType> expression)
+      {
+        const char* no_file = "";
+        int line_number = 0;
 
-            Assert::That(actual, expression, no_file, line_number);
-        }
+        Assert::That(actual, expression, no_file, line_number);
+      }
+      
+      template <typename ActualType, typename ConstraintListType>
+      static void That(const ActualType& actual, ExpressionBuilder<ConstraintListType> expression, const char* file_name, int line_number)
+      {
+         try 
+         {
+            ResultStack result;
+            OperatorStack operators;
+            expression.Evaluate(result, operators, actual);
 
-        template <typename ActualType, typename ConstraintListType>
-        static void That(const ActualType& actual, ExpressionBuilder<ConstraintListType> expression, const char* file_name, int line_number)
-        {
-            try
+            while (!operators.empty())
             {
-                ResultStack result;
-                OperatorStack operators;
-                expression.Evaluate(result, operators, actual);
-
-                while (!operators.empty())
-                {
-                    ConstraintOperator* op = operators.top();
-                    op->PerformOperation(result);
-                    operators.pop();
-                }
-
-                if (result.empty())
-                {
-                    throw InvalidExpressionException("The expression did not yield any result");
-                }
-
-                if (!result.top())
-                {
-                    throw AssertionException(CreateErrorText(expression, actual), file_name, line_number);
-                }
+               ConstraintOperator* op = operators.top();
+               op->PerformOperation(result);
+               operators.pop();
             }
-            catch (const InvalidExpressionException& e)
+
+            if (result.empty())
             {
-                throw AssertionException("Malformed expression: \"" + igloo::Stringize(expression) + "\"\n" + e.Message());
+               throw InvalidExpressionException("The expression did not yield any result");
             }
-        }
 
-        template <typename ConstraintListType>
-        static void That(const char* actual, ExpressionBuilder<ConstraintListType> expression)
-        {
-            return That(std::string(actual), expression);
-        }
-
-        template <typename ActualType, typename ExpressionType>
-        static void That(const ActualType& actual, const ExpressionType& expression)
-        {
-            const char* no_file = "";
-            int no_line = 0;
-            That(actual, expression, no_file, no_line);
-        }
-
-        template <typename ActualType, typename ExpressionType>
-        static void That(const ActualType& actual, const ExpressionType& expression, const char* file_name, int line_number)
-        {
-            if (!expression(actual))
+            if (!result.top())
             {
-                throw AssertionException(CreateErrorText(expression, actual), file_name, line_number);
-            }
-        }
+               throw AssertionException(CreateErrorText(expression, actual), file_name, line_number);
+            }      
+         }
+         catch (const InvalidExpressionException& e) 
+         {
+            throw AssertionException("Malformed expression: \"" + igloo::Stringize(expression) + "\"\n" + e.Message());
+         }
+      }
 
-        template <typename ExpressionType>
-        static void That(const char* actual, const ExpressionType& expression)
-        {
-            return That(std::string(actual), expression);
-        }
+      template <typename ConstraintListType>
+      static void That(const char* actual, ExpressionBuilder<ConstraintListType> expression)
+      {
+         return That(std::string(actual), expression);
+      }
 
-        static void That(bool actual)
-        {
-            if (!actual)
-            {
-                throw AssertionException("Expected: true\nActual: false");
-            }
-        }
+      template <typename ActualType, typename ExpressionType>
+      static void That(const ActualType& actual, const ExpressionType& expression)
+      {
+        const char* no_file = "";
+        int no_line = 0;
+        That(actual, expression, no_file, no_line);
+      }
 
-        static void Failure(const std::string& message)
-        {
-            throw AssertionException(message);
-        }
+      template <typename ActualType, typename ExpressionType>
+      static void That(const ActualType& actual, const ExpressionType& expression, const char* file_name, int line_number)
+      {
+         if (!expression(actual))
+         {
+            throw AssertionException(CreateErrorText(expression, actual), file_name, line_number);
+         }
+      }
 
-    private:
-        template <class ExpectedType, class ActualType>
-        static std::string CreateErrorText(const ExpectedType& expected, const ActualType& actual)
-        {
-            std::ostringstream str;
+      template <typename ExpressionType>
+      static void That(const char* actual, const ExpressionType& expression)
+      {
+         return That(std::string(actual), expression);
+      }
 
-            str << "Expected: " << igloo::Stringize(expected) << std::endl;
-            str << "Actual: " << igloo::Stringize(actual) << std::endl;
+      static void That(bool actual)
+      {
+         if (!actual)
+         {
+            throw AssertionException("Expected: true\nActual: false");
+         }
+      }
 
-            return str.str();
-        }
-    };
+      static void Failure(const std::string& message)
+      {
+         throw AssertionException(message);
+      }
+
+   private:
+      template <class ExpectedType, class ActualType>
+      static std::string CreateErrorText(const ExpectedType& expected, const ActualType& actual)
+      {
+         std::ostringstream str;
+
+         str << "Expected: " << igloo::Stringize(expected) << std::endl;
+         str << "Actual: " << igloo::Stringize(actual) << std::endl;
+
+         return str.str();
+      }
+   };
 }
 
 #endif	// IGLOO_ASSERT_H

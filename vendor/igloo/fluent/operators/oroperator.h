@@ -7,50 +7,49 @@
 #ifndef IGLOO_OROPERATOR_H
 #define IGLOO_OROPERATOR_H
 
-namespace igloo
-{
-
-    struct OrOperator : public ConstraintOperator
+namespace igloo {
+  
+  struct OrOperator : public ConstraintOperator
+  {
+    template <typename ConstraintListType, typename ActualType>
+    void Evaluate(ConstraintListType& list, ResultStack& result, OperatorStack& operators, const ActualType& actual)
     {
-        template <typename ConstraintListType, typename ActualType>
-        void Evaluate(ConstraintListType& list, ResultStack& result, OperatorStack& operators, const ActualType& actual)
-        {
-            EvaluateOperatorsWithLessOrEqualPrecedence(*this, operators, result);
-
-            operators.push(this);
-
-            EvaluateConstraintList(list.m_tail, result, operators, actual);
-        }
-
-        void PerformOperation(ResultStack& result)
-        {
-            if(result.size() < 2)
-            {
-                throw InvalidExpressionException("The expression contains an or operator with too few operands");
-            }
-
-            bool right = result.top();
-            result.pop();
-            bool left = result.top();
-            result.pop();
-
-            result.push(left || right);
-        }
-
-        int Precedence() const
-        {
-            return 4;
-        }
-    };
-
-    template<>
-    struct Stringizer<OrOperator>
+      EvaluateOperatorsWithLessOrEqualPrecedence(*this, operators, result);
+      
+      operators.push(this);
+      
+      EvaluateConstraintList(list.m_tail, result, operators, actual);
+    }
+    
+    void PerformOperation(ResultStack& result)
     {
-        static std::string ToString(const OrOperator&)
-        {
-            return "or";
-        }
-    };
+      if(result.size() < 2)
+      {
+        throw InvalidExpressionException("The expression contains an or operator with too few operands");
+      }
+      
+      bool right = result.top();
+      result.pop();
+      bool left = result.top();
+      result.pop();
+      
+      result.push(left || right);
+    }
+    
+    int Precedence() const
+    {
+      return 4;
+    }
+  };
+  
+  template<>
+  struct Stringizer<OrOperator>
+  {
+    static std::string ToString(const OrOperator&)
+    {
+      return "or";
+    }
+  };
 }
 
 #endif
