@@ -109,6 +109,10 @@ if _ACTION == "gmake" then
   if not os.isdir('json') then
     os.execute('git clone git@github.com:c0der78/arg3json.git json');
   end
+
+  if not os.isdir('net') then
+    os.execute('git clone git@github.com:c0der78/arg3net.git net');
+  end
 end
 
 solution "arg3"
