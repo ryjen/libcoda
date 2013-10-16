@@ -113,6 +113,10 @@ if _ACTION == "gmake" then
   if not os.isdir('net') then
     os.execute('git clone git@github.com:c0der78/arg3net.git net');
   end
+
+  if not os.isdir('format') then
+    os.execute('git clone git@github.com:c0der78/arg3format.git format');
+  end
 end
 
 solution "arg3"
