@@ -23,7 +23,7 @@ namespace arg3
         argument(const argument &other);
         argument(argument &&other);
         argument &operator=(const argument &other);
-        argument &operator=(argument &&other);
+        argument &operator=(argument && other);
         virtual ~argument();
         string peek() const;
         string next();
@@ -41,7 +41,6 @@ namespace arg3
         bool equals(const string &arg, bool caseSensitive = false) const;
         bool prefix(const string &arg, bool caseSensitive = false) const;
     };
-
 }
 
 #endif

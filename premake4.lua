@@ -123,9 +123,11 @@ solution "arg3"
     configurations { "debug", "release" }
     language "C++"
 
-    buildoptions { "-std=c++11", "-stdlib=libc++", "-Wall", "-Werror", "-Ivendor"}
+    buildoptions { "-std=c++11", "-stdlib=libc++", "-Wall", "-Werror"}
 
     linkoptions { "-stdlib=libc++" }
+
+    includedirs { "vendor" }
 
     if _OPTIONS["no-curl"] then
       buildoptions { "-DARG3_NO_CURL" }
