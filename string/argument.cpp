@@ -24,16 +24,16 @@ namespace arg3
 
     argument &argument::operator=(const argument &other)
     {
-        if(this != &other)
+        if (this != &other)
         {
             str_ = other.str_;
         }
         return *this;
     }
 
-    argument &argument::operator=(argument &&other)
+    argument &argument::operator=(argument && other)
     {
-        if(this != &other)
+        if (this != &other)
         {
             str_ = std::move(other.str_);
         }

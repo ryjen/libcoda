@@ -45,7 +45,7 @@ namespace arg3
     namespace base64
     {
         // reference: http://www.cplusplus.com/forum/beginner/51572/
-        std::string encode(unsigned char const* , size_t len);
+        std::string encode(unsigned char const * , size_t len);
         std::string encode(const binary &);
         binary decode(const string &s);
     }
