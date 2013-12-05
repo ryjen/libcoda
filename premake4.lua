@@ -127,7 +127,7 @@ solution "arg3"
 
     linkoptions { "-stdlib=libc++" }
 
-    includedirs { "vendor" }
+    includedirs { "vendor", "db/sqlite3" }
 
     if _OPTIONS["no-curl"] then
       buildoptions { "-DARG3_NO_CURL" }
