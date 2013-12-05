@@ -43,7 +43,7 @@ namespace arg3
 
         bigint &operator= (const bigint &x);
 
-        bigint &operator= (bigint &&x);
+        bigint &operator= (bigint && x);
 
         bool operator== (int32_t x) const;
 
@@ -98,6 +98,12 @@ namespace arg3
         return b == a;
     }
 
+    // user defined literals
+
+    bigint operator"" _bi ( char c );
+    bigint operator"" _bi ( const char *str, size_t sz );
+    bigint operator"" _bi ( const char *cstr );
+
 }
 
-#endif // #ifndef _STIMIM_BIG_INT_
+#endif

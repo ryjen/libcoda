@@ -27,10 +27,10 @@ namespace arg3
         virtual ~argument();
         string peek() const;
         string next();
-        int nextInt();
-        double nextDouble();
-        int64_t nextInt64();
-        bool nextBool();
+        int next_int();
+        double next_double();
+        int64_t next_int64();
+        bool next_bool();
         operator const string &();
         bool empty() const;
         bool operator ! () const;

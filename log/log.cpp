@@ -8,7 +8,7 @@ using namespace std;
 
 namespace arg3
 {
-    const char *logNames[] = { "TRACE", "DEBUG","INFO","WARN","ERROR",   };
+    const char *logNames[] = { "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "NONE"  };
 
     log::level log::minLevel_ = log::TRACE;
 
@@ -24,16 +24,16 @@ namespace arg3
         return out_;
     }
 
-    void log::setMinLogLevel(level lev)
+    void log::set_min_log_level(level lev)
     {
         minLevel_ = lev;
     }
 
-    log::level log::lookupLogLevel(const std::string &value)
+    log::level log::lookup_log_level(const std::string &value)
     {
-        for(level l = TRACE; l <= ERROR; l++)
+        for (level l = TRACE; l <= ERROR; l++)
         {
-            if(equals(value, logNames[l]))
+            if (equals(value, logNames[l]))
                 return l;
         }
         return minLevel_;

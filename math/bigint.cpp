@@ -8,6 +8,19 @@ using namespace std;
 
 namespace arg3
 {
+    bigint operator"" _bi ( char c )
+    {
+        return bigint(c);
+    }
+    bigint operator"" _bi ( const char *str, size_t sz )
+    {
+        return bigint(string(str).substr(0, sz).c_str());
+    }
+    bigint operator"" _bi ( const char *cstr )
+    {
+        return bigint(cstr);
+    }
+
     bigint::bigint()
     {
         init();
@@ -85,7 +98,7 @@ namespace arg3
 
     bigint::~bigint()
     {
-        if(array)
+        if (array)
             delete [] array;
     }
 
@@ -100,9 +113,9 @@ namespace arg3
         flipped = x.flipped;
         return *this;
     }
-    bigint &bigint::operator= (bigint &&x)
+    bigint &bigint::operator= (bigint && x)
     {
-        if(this != &x)
+        if (this != &x)
         {
             array = std::move(x.array);
             size = x.size;

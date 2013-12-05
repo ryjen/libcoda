@@ -5,7 +5,7 @@
 using namespace igloo;
 using namespace arg3;
 
-Context(ArgumentTest)
+Context(argument_test)
 {
     Spec(next)
     {
@@ -28,6 +28,17 @@ Context(ArgumentTest)
         Assert::That(arg, Equals("1 2 3"));
 
         Assert::That(argument.empty(), Equals(true));
+    }
+
+    Spec(next_int)
+    {
+        argument arg("1234");
+
+        Assert::That(arg.next_int(), Equals(1234));
+
+        argument arg2("abcdef");
+
+        AssertThrows(std::invalid_argument, arg.next_int());
     }
 
     Spec(peek)

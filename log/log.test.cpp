@@ -8,8 +8,8 @@ using namespace arg3;
 
 Context(arg3log)
 {
-    Spec(lookupLogLevel)
+    Spec(lookup_log_level)
     {
-        Assert::That(log::lookupLogLevel("debug"), Equals(log::DEBUG));
+        Assert::That(log::lookup_log_level("debug"), Equals(log::DEBUG));
     }
 };

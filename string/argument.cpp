@@ -107,19 +107,19 @@ namespace arg3
 
         return arg;
     }
-    int argument::nextInt()
+    int argument::next_int()
     {
         return stoi(next());
     }
-    double argument::nextDouble()
+    double argument::next_double()
     {
         return stod(next());
     }
-    int64_t argument::nextInt64()
+    int64_t argument::next_int64()
     {
         return stoll(next());
     }
-    bool argument::nextBool()
+    bool argument::next_bool()
     {
         string arg = next();
 

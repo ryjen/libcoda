@@ -4,15 +4,13 @@
 using namespace igloo;
 using namespace arg3;
 
-Context(BigIntTest)
+Context(bigint_test)
 {
-    Spec(toString)
+    Spec(literal_test)
     {
 
-        const char *bignum = "34098792871928374019287305239874052938465018273192387418273657623868726345";
+        bigint bi = 34098792871928374019287305239874052938465018273192387418273657623868726345_bi;
 
-        bigint bi(bignum);
-
-        Assert::That(bi.to_string(), Equals(bignum) );
+        Assert::That(bi.to_string(), Equals("34098792871928374019287305239874052938465018273192387418273657623868726345") );
     }
 };
