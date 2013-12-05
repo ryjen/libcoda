@@ -38,8 +38,8 @@ newaction {
         libraries = { "libarg3#{package}.a" }
         folders = { package }
       else
-        libraries = { "libarg3.dylib", "libarg3db.a", "libarg3dice.a", "libarg3.log.a", "libarg3net.a", "libarg3format.a", "libarg3json.a", "libarg3math.a", "libarg3string.a"}
-        folders = {"collections", "db", "dice", "format", "net", "log", "json", "math", "string"}
+        libraries = { "libarg3.dylib", "libarg3.so", "libarg3.a", "libarg3db.a", "libarg3dice.a", "libarg3.log.a", "libarg3net.a", "libarg3format.a", "libarg3json.a", "libarg3math.a", "libarg3string.a"}
+        folders = {"collections", "db", "db/sqlite3", "dice", "format", "net", "log", "json", "math", "string"}
       end
 
       for l=1, #libraries do
@@ -49,7 +49,7 @@ newaction {
       end
 
       for f=1, #folders do 
-          headers = os.matchfiles(folders[f].."/**.h")
+          headers = os.matchfiles("arg3/"..folders[f].."/*.h")
           tempdir = headerdir.."/"..folders[f]
           os.mkdir(tempdir)
           for i=1, #headers do
@@ -98,24 +98,24 @@ if _ACTION == "clean" then
 end
 
 if _ACTION == "gmake" then
-  if not os.isdir('db') then
-    os.execute('git clone git@github.com:c0der78/arg3db.git db');
+  if not os.isdir('arg3/db') then
+    os.execute('git clone git@github.com:c0der78/arg3db.git arg3/db');
   end
 
-  if not os.isdir('dice') then
-    os.execute('git clone git@github.com:c0der78/arg3dice.git dice');
+  if not os.isdir('arg3/dice') then
+    os.execute('git clone git@github.com:c0der78/arg3dice.git arg3/dice');
   end
 
-  if not os.isdir('json') then
-    os.execute('git clone git@github.com:c0der78/arg3json.git json');
+  if not os.isdir('arg3/json') then
+    os.execute('git clone git@github.com:c0der78/arg3json.git arg3/json');
   end
 
-  if not os.isdir('net') then
-    os.execute('git clone git@github.com:c0der78/arg3net.git net');
+  if not os.isdir('arg3/net') then
+    os.execute('git clone git@github.com:c0der78/arg3net.git arg3/net');
   end
 
-  if not os.isdir('format') then
-    os.execute('git clone git@github.com:c0der78/arg3format.git format');
+  if not os.isdir('arg3/format') then
+    os.execute('git clone git@github.com:c0der78/arg3format.git arg3/format');
   end
 end
 
@@ -127,7 +127,7 @@ solution "arg3"
 
     linkoptions { "-stdlib=libc++" }
 
-    includedirs { "vendor", "db/sqlite3" }
+    includedirs { "vendor", "." }
 
     if _OPTIONS["no-curl"] then
       buildoptions { "-DARG3_NO_CURL" }
@@ -142,21 +142,21 @@ solution "arg3"
         buildoptions { "-O" }
 
     if _OPTIONS["static"] then
-        include "db"
+        include "arg3/db"
 
-        include "dice"
+        include "arg3/dice"
 
-        include "format"
+        include "arg3/format"
 
-        include "log"
+        include "arg3/log"
 
-        include "net"
+        include "arg3/net"
 
-        include "json"
+        include "arg3/json"
 
-        include "math"
+        include "arg3/math"
 
-        include "string"
+        include "arg3/string"
     else
         project "arg3"
             kind "SharedLib"
