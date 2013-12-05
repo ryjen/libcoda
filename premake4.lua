@@ -100,22 +100,32 @@ end
 if _ACTION == "gmake" then
   if not os.isdir('arg3/db') then
     os.execute('git clone git@github.com:c0der78/arg3db.git arg3/db');
+  else
+    os.execute('cd arg3/db && git pull');
   end
 
   if not os.isdir('arg3/dice') then
     os.execute('git clone git@github.com:c0der78/arg3dice.git arg3/dice');
+  else
+    os.execute('cd arg3/dice && git pull');
   end
 
   if not os.isdir('arg3/json') then
     os.execute('git clone git@github.com:c0der78/arg3json.git arg3/json');
+  else
+    os.execute('cd arg3/json && git pull');
   end
 
   if not os.isdir('arg3/net') then
     os.execute('git clone git@github.com:c0der78/arg3net.git arg3/net');
+  else
+    os.execute('cd arg3/net && git pull');
   end
 
   if not os.isdir('arg3/format') then
     os.execute('git clone git@github.com:c0der78/arg3format.git arg3/format');
+  else
+    os.execute('cd arg3/format && git pull');
   end
 end
 
