@@ -39,7 +39,7 @@ newaction {
         folders = { package }
       else
         libraries = { "libarg3.dylib", "libarg3.so", "libarg3.a", "libarg3db.a", "libarg3dice.a", "libarg3.log.a", "libarg3net.a", "libarg3format.a", "libarg3json.a", "libarg3math.a", "libarg3string.a"}
-        folders = {"collections", "db", "db/sqlite3", "dice", "format", "net", "log", "json", "math", "string"}
+        folders = {"collections", "db", "dice", "dice/yacht", "format", "net", "log", "json", "math", "string"}
       end
 
       for l=1, #libraries do
@@ -178,9 +178,9 @@ solution "arg3"
                 "**.test.cpp"
             }
             if _OPTIONS["no-curl"] then
-              links { "json-c", "sqlite3" }
+              links { "json-c", "sqlite3", "mysql" }
             else
-              links { "json-c", "sqlite3", "curl" }
+              links { "json-c", "sqlite3", "curl", "mysql" }
             end
     end
 
@@ -194,7 +194,7 @@ solution "arg3"
         }
         includedirs { "vendor" }
         if not _OPTIONS["static"] then
-            links { "arg3", "sqlite3" }
+            links { "arg3", "sqlite3", "mysql" }
         else
             links {
                 "sqlite3",
@@ -207,7 +207,8 @@ solution "arg3"
                 "arg3net",
                 "arg3json",
                 "arg3math",
-                "arg3string"
+                "arg3string",
+                "mysql"
             }
         end
         configuration "Debug"
