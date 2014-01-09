@@ -1,0 +1,1628 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"mod",
+				"modify_query	class"
+			],
+			[
+				"result",
+				"resultset_iterator	class"
+			],
+			[
+				"resultset",
+				"resultset	class"
+			],
+			[
+				"curl_easy",
+				"curl_easy_init()	CURL *"
+			],
+			[
+				"json_object_new",
+				"json_object_new_int(int32_t i)	struct json_object *"
+			],
+			[
+				"has",
+				"hasInput() const	bool"
+			],
+			[
+				"getI",
+				"getInput() const	string"
+			],
+			[
+				"sockadd",
+				"sockaddr_in	struct"
+			],
+			[
+				"get",
+				"getSocket() const	SOCKET"
+			],
+			[
+				"sockad",
+				"sockaddr_in	struct"
+			],
+			[
+				"Inc",
+				"Increment()	int"
+			],
+			[
+				"current",
+				"currentUser_	cparse::PFUser *"
+			],
+			[
+				"response",
+				"responseCode_	int"
+			],
+			[
+				"curl_eas",
+				"curl_easy_init()	CURL *"
+			],
+			[
+				"curl_easy_",
+				"curl_easy_strerror(CURLcode)	const char *"
+			],
+			[
+				"er",
+				"erase(const key_type &__x)	size_type"
+			],
+			[
+				"cl",
+				"className() const	std::string"
+			],
+			[
+				"current_user",
+				"current_user_session"
+			],
+			[
+				"col",
+				"column_name(size_t nPosition) const	string"
+			],
+			[
+				"i",
+				"iNumRecords	size_t"
+			],
+			[
+				"json_object_o",
+				"json_object_object_del(struct json_object *obj, const char *key)	void"
+			],
+			[
+				"cparse",
+				"cparse_app_id_	string"
+			],
+			[
+				"cparse_err",
+				"cparse_error_messages_	bool"
+			],
+			[
+				"newFil",
+				"newFileSize	size_t"
+			],
+			[
+				"fileNam",
+				"fileNameSize	size_t"
+			],
+			[
+				"fileE",
+				"fileExtSize	size_t"
+			],
+			[
+				"newFile",
+				"newFileName	char *"
+			],
+			[
+				"newF",
+				"newFileSize	size_t"
+			],
+			[
+				"indexR",
+				"indexRecords	IndexRecord	*"
+			],
+			[
+				"Account",
+				"AccountIndexType	typedef"
+			],
+			[
+				"index",
+				"indexRecordCount	size_t"
+			],
+			[
+				"ACCOU",
+				"ACCOUNT_INDEX_ID	AccountIndexType"
+			],
+			[
+				"ACCOUNT",
+				"ACCOUNT_INDEX_NAME	AccountIndexType"
+			],
+			[
+				"f",
+				"fLastPayment	float"
+			],
+			[
+				"ACCOUNT_INDE",
+				"ACCOUNT_INDEX_LAST_PAYMENT	AccountIndexType"
+			],
+			[
+				"Accou",
+				"AccountIndexType	typedef"
+			],
+			[
+				"new",
+				"newFileSize	ssize_t"
+			],
+			[
+				"va",
+				"va_list	typedef"
+			],
+			[
+				"iNum",
+				"iNumAccounts	int"
+			],
+			[
+				"s",
+				"sName	char [255]"
+			],
+			[
+				"Index",
+				"IndexRecord	typedef"
+			],
+			[
+				"EXIT",
+				"EXIT_FAILURE	macro"
+			],
+			[
+				"indexF",
+				"indexFileNameSize	ssize_t"
+			],
+			[
+				"EX",
+				"EXIT_FAILURE	macro"
+			],
+			[
+				"CParse",
+				"CParseObjectBackgroundArg	typedef"
+			],
+			[
+				"kCPRe",
+				"kCPRequestGet	CParseRequestMethod"
+			],
+			[
+				"json_object_string",
+				"json_object_get_string(struct json_object *obj)	const char *"
+			],
+			[
+				"json_object_arr",
+				"json_object_array_get_idx(struct json_object *obj, int idx)	struct json_object *"
+			],
+			[
+				"json_object_a",
+				"json_object_get_array(struct json_object *obj)	struct array_list *"
+			],
+			[
+				"payload",
+				"payload_size	size_t"
+			],
+			[
+				"kCPRequ",
+				"kCPRequestPut	CParseRequestMethod"
+			],
+			[
+				"kCP",
+				"kCPRequestPost	CParseRequestMethod"
+			],
+			[
+				"CParseT",
+				"CParseTableEntry	typedef"
+			],
+			[
+				"kCPR",
+				"kCPRequestPut	CParseRequestMethod"
+			],
+			[
+				"kCPReq",
+				"kCPRequestPost	CParseRequestMethod"
+			],
+			[
+				"CParseUser",
+				"CParseUserCallback	typedef"
+			],
+			[
+				"cparse_error",
+				"cparse_error_messages_enabled(bool value)	void"
+			],
+			[
+				"SEEK",
+				"SEEK_SET	macro"
+			],
+			[
+				"column_",
+				"column_value	class"
+			],
+			[
+				"to_in",
+				"to_int() const	int"
+			],
+			[
+				"column",
+				"column_value"
+			],
+			[
+				"res",
+				"resultset_iterator	class"
+			],
+			[
+				"sqlite3_reset",
+				"sqlite3_reset(sqlite3_stmt *pStmt)	int"
+			],
+			[
+				"Double",
+				"Double64	arg3::variant_union::value_type"
+			],
+			[
+				"Int",
+				"Int64	arg3::variant_union::value_type"
+			],
+			[
+				"map_transf",
+				"map_transform_values<typename K, typename V>	class"
+			],
+			[
+				"UInt",
+				"UInt64	arg3::variant_union::value_type"
+			],
+			[
+				"uin",
+				"uint64_t	typedef"
+			],
+			[
+				"to",
+				"to_string() const	value_type"
+			],
+			[
+				"sqlite3_bind_in",
+				"sqlite3_bind_int64(sqlite3_stmt *, int, sqlite3_int64)	int"
+			],
+			[
+				"sqlite3_bind_",
+				"sqlite3_bind_int(sqlite3_stmt *, int, int)	int"
+			],
+			[
+				"sqlite3_bind",
+				"sqlite3_bind_text(sqlite3_stmt *, int, const char *, int n, void (*)(void *))	int"
+			],
+			[
+				"sqlite3_prepare",
+				"sqlite3_prepare_v2(sqlite3 *db, const char *zSql, int nByte, sqlite3_stmt **ppStmt, const char **pzTail)	int"
+			],
+			[
+				"sqlite3_open",
+				"sqlite3_open(const char *filename, sqlite3 **ppDb)	int"
+			],
+			[
+				"primary",
+				"primaryKey"
+			],
+			[
+				"primar",
+				"primaryKey"
+			],
+			[
+				"sqlite3_exec",
+				"sqlite3_exec(sqlite3 *, const char *sql, int (*callback)(void *, int, char **, char **), void *, char **errmsg)	int"
+			],
+			[
+				"iReverse",
+				"iReverseBitNum	unsigned"
+			],
+			[
+				"iTot",
+				"iTotalCube	int"
+			],
+			[
+				"iTotaC",
+				"iTotalCube	int"
+			],
+			[
+				"sequ",
+				"sequences"
+			],
+			[
+				"downv",
+				"downvote"
+			],
+			[
+				"passwor",
+				"password_confirmation"
+			],
+			[
+				"nav",
+				"nav_title"
+			],
+			[
+				"user",
+				"user_sessions"
+			],
+			[
+				"to_uint",
+				"to_uint64() const	uint64_t"
+			],
+			[
+				"sto",
+				"strtoll(const char *, char **, int)	long long"
+			],
+			[
+				"stol",
+				"strtoll(const char *, char **, int)	long long"
+			],
+			[
+				"Assert",
+				"AssertionException	class"
+			],
+			[
+				"b",
+				"b52	plane"
+			],
+			[
+				"r",
+				"readFile(const char *filename)	void"
+			],
+			[
+				"_cloud",
+				"_cloud1"
+			],
+			[
+				"getEleme",
+				"getElementsByClass"
+			],
+			[
+				"order",
+				"mOrderBy	string"
+			],
+			[
+				"mTabl",
+				"mTableNamePolicy	function<string(const string &)>"
+			],
+			[
+				"DIST",
+				"DIST_H_LOCATION"
+			],
+			[
+				"VER",
+				"VERSION_MAJOR"
+			],
+			[
+				"COMP",
+				"COMPATABILITY"
+			],
+			[
+				"VERSION",
+				"VERSION_MINOR"
+			],
+			[
+				"VERSI",
+				"VERSION_MAJOR"
+			],
+			[
+				"CHAR",
+				"CHAR_MAX	macro"
+			],
+			[
+				"pre",
+				"precision(streamsize __prec)	streamsize"
+			],
+			[
+				"LI",
+				"LIB_FLAGS_TEST"
+			],
+			[
+				"LIB_F",
+				"LIB_FLAGS_TEST"
+			],
+			[
+				"OBJ_",
+				"OBJ_LIB_TEST"
+			],
+			[
+				"po",
+				"pop_front()	void"
+			],
+			[
+				"uint",
+				"uint64_t	typedef"
+			],
+			[
+				"int",
+				"int8_t	typedef"
+			],
+			[
+				"in",
+				"int16_t	typedef"
+			],
+			[
+				"esca",
+				"escape_start	const string::const_iterator"
+			],
+			[
+				"DIST_H",
+				"DIST_H_LOCATION"
+			],
+			[
+				"DIS",
+				"DIST_H_LOCATION"
+			],
+			[
+				"DI",
+				"DIST_LIB_LOCATION"
+			],
+			[
+				"DiceT",
+				"DiceTestEngine	class"
+			],
+			[
+				"T",
+				"FIRST_TYPE	arg3::yacht::ScoreSheet::Type"
+			],
+			[
+				"ST",
+				"STRAIGHT_BIG	arg3::YachtScore::Type"
+			],
+			[
+				"KIND",
+				"KIND_THREE	arg3::YachtScore::Type"
+			],
+			[
+				"calc",
+				"calculateScore(YachtScore::Type) const	YachtScore::value_type"
+			],
+			[
+				"cal",
+				"calculateScore(YachtScore::Type) const	YachtScore::value_type"
+			],
+			[
+				"n",
+				"numberOfPlayers() const	size_t"
+			],
+			[
+				"emp",
+				"emplace_back(_Args &&__args...)	void"
+			],
+			[
+				"ca",
+				"calculateScore(ScoreSheet::Type) const	ScoreSheet::score_type"
+			],
+			[
+				"sc",
+				"calculateScore(ScoreSheet::Type) const	ScoreSheet::score_type"
+			],
+			[
+				"D",
+				"DefaultEngine	class"
+			],
+			[
+				"calculate",
+				"calculateYacht() const	ScoreSheet::score_type"
+			],
+			[
+				"S",
+				"STRAIGHT_SMALL	arg3::ScoreSheet::Type"
+			],
+			[
+				"K",
+				"KIND_THREE	arg3::ScoreSheet::Type"
+			],
+			[
+				"calcu",
+				"calculateUpperScore(Die::value_type) const	ScoreSheet::score_type"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "db/column.cpp",
+			"settings":
+			{
+				"buffer_size": 2881,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "arg3.sublime-project",
+			"settings":
+			{
+				"buffer_size": 241,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 53,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "premake4.lua",
+			"settings":
+			{
+				"buffer_size": 3951,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "string/premake4.lua",
+			"settings":
+			{
+				"buffer_size": 132,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Premake/Premake.sublime-build",
+	"command_palette":
+	{
+		"height": 270.0,
+		"selected_items":
+		[
+			[
+				"theme",
+				"Themr: List schemes"
+			],
+			[
+				"the",
+				"Themr: List schemes"
+			],
+			[
+				"th",
+				"Themr: List schemes"
+			],
+			[
+				"them",
+				"Themr: List schemes"
+			],
+			[
+				"Theme",
+				"Themr: List schemes"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"IN",
+				"Package Control: Install Package"
+			],
+			[
+				"i",
+				"Package Control: Install Package"
+			],
+			[
+				"The",
+				"Themr: List schemes"
+			],
+			[
+				"T",
+				"Themr: List schemes"
+			],
+			[
+				"Them",
+				"Themr: List schemes"
+			],
+			[
+				"sc",
+				"SchemeCycler : Next Color Scheme"
+			],
+			[
+				"sch",
+				"SchemeCycler : Next Color Scheme"
+			],
+			[
+				"poj",
+				"Project: Edit"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"f",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"form",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"as",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"As",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"clan",
+				"Preferences: SublimeClang Settings – User"
+			],
+			[
+				"ast",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"pre",
+				"Preferences: SublimeClang Settings – Default"
+			],
+			[
+				"pref",
+				"Preferences: SublimeClang Settings – User"
+			],
+			[
+				"ruby",
+				"Format: Ruby"
+			],
+			[
+				"rub",
+				"Format: Ruby"
+			],
+			[
+				"for",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"p",
+				"Package Control: Install Package"
+			],
+			[
+				"git",
+				"Package Control: Install Package"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"b",
+				"BeautifyRuby"
+			],
+			[
+				"",
+				"BeautifyRuby"
+			],
+			[
+				"html",
+				"TidyHTML"
+			],
+			[
+				"tidy",
+				"TidyHTML"
+			],
+			[
+				"ja",
+				"Format: Javascript"
+			],
+			[
+				"fo",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"asty",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"astyle",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"clang",
+				"Preferences: SublimeClang Settings – Default"
+			],
+			[
+				"jav",
+				"Format: Javascript"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"java",
+				"Format: Javascript"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"preview",
+				"Markdown Preview: preview in Browser"
+			],
+			[
+				"m",
+				"Markdown Preview: preview in Sublime Text"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"j",
+				"Format: Javascript"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"bro",
+				"Preferences: Browse Packages"
+			],
+			[
+				"brow",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 579.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/c0der78/Devel/cpp/arg3/arg3.sublime-project",
+		"/Users/c0der78/Devel/cpp/arg3/json/array.cpp",
+		"/Users/c0der78/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/c0der78/Library/Application Support/Sublime Text 2/Packages/SublimeClang/SublimeClang.sublime-settings",
+		"/Users/c0der78/Library/Application Support/Sublime Text 2/Packages/User/SublimeClang.sublime-settings",
+		"/Users/c0der78/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/c0der78/Devel/cpp/arg3/db/base_query.cpp",
+		"/Users/c0der78/Devel/sublime-projects/arg3.sublime-project",
+		"/Users/c0der78/Devel/cpp/arg3/premake4.lua",
+		"/Users/c0der78/Devel/cpp/jediacademy-code/code/0_compiled_first/0_SH_Leak.cpp",
+		"/Users/c0der78/Library/Application Support/Sublime Text 2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/Users/c0der78/Devel/cpp/dlm/src/engine/argument.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/object.h",
+		"/Users/c0der78/Devel/cpp/cparse/object.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/exception.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/parse.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/user.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/op/array.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/op/decrement.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/op/increment.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/type/bytes.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/type/date.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/type/file.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/type/geopoint.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/type/pointer.h",
+		"/Users/c0der78/Devel/cpp/cparse/op/array.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/op/decrement.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/op/increment.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/type/bytes.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/type/date.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/type/file.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/type/geopoint.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/type/pointer.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/client.h",
+		"/Users/c0der78/Devel/cpp/cparse/client.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/parse.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/user.cpp",
+		"/Users/c0der78/Devel/cpp/cparse/util.h",
+		"/Users/c0der78/Devel/cpp/arg3/string/string.h",
+		"/Users/c0der78/Devel/cpp/arg3/string/string.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/log/log.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/dice/dice.h",
+		"/Users/c0der78/Devel/cpp/arg3/dice/dice.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/dice/dice_game.h",
+		"/Users/c0der78/Devel/cpp/arg3/dice/dice_game.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/dice/yacht/scoresheet.h",
+		"/Users/c0der78/Devel/cpp/arg3/dice/yacht/scoresheet.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/dice/yacht/player.h",
+		"/Users/c0der78/Devel/cpp/arg3/dice/yacht/player.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/dice/yacht/engine.h",
+		"/Users/c0der78/Devel/cpp/arg3/dice/yacht/engine.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/db/sqldb.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/sqldb.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/db/select_query.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/select_query.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/db/schema.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/schema.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/db/row.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/row.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/db/resultset.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/resultset.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/db/modify_query.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/modify_query.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/db/exception.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/column.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/column.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/db/base_record.h",
+		"/Users/c0der78/Devel/cpp/arg3/db/base_query.h",
+		"/Users/c0der78/Library/Application Support/Sublime Text 2/Packages/User/SublimeAStyleFormatter.sublime-settings",
+		"/Users/c0der78/Devel/cpp/arg3/net/bufferedsocket.h",
+		"/Users/c0der78/Devel/cpp/arg3/net/bufferedsocket.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/net/socket.h",
+		"/Users/c0der78/Devel/cpp/arg3/net/socketserver.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/net/socket.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/net/exception.h",
+		"/Users/c0der78/Devel/cpp/arg3/net/protocol.h",
+		"/Users/c0der78/Devel/cpp/arg3/net/protocol.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/net/restclient.h",
+		"/Users/c0der78/Devel/cpp/arg3/net/restclient.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/variant/variant.h",
+		"/Users/c0der78/Devel/cpp/arg3/variant/variant.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/variant/variant_alt.h",
+		"/Users/c0der78/Devel/cpp/arg3/string/argument.h",
+		"/Users/c0der78/Devel/cpp/arg3/string/argument.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/net/socketserver.h",
+		"/Users/c0der78/Devel/cpp/arg3/arg3.test.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/math/bigint.h",
+		"/Users/c0der78/Devel/cpp/arg3/math/bigint.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/log/log.h",
+		"/Users/c0der78/Devel/cpp/arg3/json/object_iterator.h",
+		"/Users/c0der78/Devel/cpp/arg3/json/object.h",
+		"/Users/c0der78/Devel/cpp/arg3/json/object.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/json/exception.h",
+		"/Users/c0der78/Devel/cpp/arg3/json/array.h",
+		"/Users/c0der78/Devel/cpp/arg3/json/array.test.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/json/object.test.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/json/array_iterator.h",
+		"/Users/c0der78/Devel/cpp/arg3/json/array_iterator.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/json/object_iterator.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/format/format.h",
+		"/Users/c0der78/Devel/cpp/arg3/format/format.cpp",
+		"/Users/c0der78/Devel/cpp/dlm/src/engine/util.h",
+		"/Users/c0der78/Devel/cpp/arg3/math/premake4.lua",
+		"/Users/c0der78/Devel/cpp/arg3/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/variant/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/string/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/net/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/math/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/log/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/json/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/format/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/db/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/collections/README.md",
+		"/Users/c0der78/Devel/cpp/arg3/net/serversocket.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/net/restclient.test.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/test.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/net/serversocket.h",
+		"/Users/c0der78/Devel/cpp/dlm/legacy/v1/comm.cpp",
+		"/Users/c0der78/Devel/cpp/dlm/legacy/v1/descriptor.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/net/clientsocket.cpp",
+		"/Users/c0der78/Devel/cpp/dlm/src/engine/argument.h",
+		"/Users/c0der78/Devel/cpp/arg3/strings/argument.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/strings/argument.h",
+		"/Users/c0der78/Devel/cpp/arg3/strings/argument.test.cpp",
+		"/Users/c0der78/Devel/cpp/arg3/string/string.test.cpp",
+		"/Users/c0der78/Devel/cpp/dlm/legacy/v1/descriptor.h",
+		"/Users/c0der78/Devel/cpp/cparse/cparse/type/parsetype.h",
+		"/Users/c0der78/Devel/cpp/arg3/strings/strings.h"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Users/c0der78/Devel/cpp/cparse",
+			"/Users/c0der78/Devel/c/muddyplains/master/",
+			"/Users/c0der78/Devel/c/muddyplains/master/src/muddyengine",
+			"/Users/c0der78/Devel/muddyplains/src/engine",
+			"/Users/c0der78/Devel/muddyplains/src/engine/*.h",
+			"/Users/c0der78/Devel/muddyplains/src/telnet",
+			"/Users/c0der78/Devel/muddyplains/src"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"Date",
+			"Bytes",
+			"Array",
+			"Decrement",
+			"premake",
+			"m_lastRoll",
+			"m_dice",
+			"m_bonus",
+			"m_dice",
+			"m_currentPlayer",
+			"m_engine",
+			"m_players",
+			"m_name",
+			"m_rollCount",
+			"m_score",
+			"m_lowerValues",
+			"m_upperValues",
+			"m_dice",
+			"m_keep",
+			"m_value",
+			"m_sides",
+			"m_engine",
+			"mStr",
+			"read_from_descr",
+			"EventServerSocket",
+			"ServerSocket",
+			".sock_",
+			"getSocket",
+			"read_from_descriptor",
+			"std::string",
+			"PFException",
+			"PFArray",
+			"PFValue",
+			"PFLog",
+			"PFClient",
+			"PFPointer",
+			"PFUser",
+			"PFObject",
+			"destroy",
+			"curl,",
+			"perform",
+			" ;",
+			";\n",
+			"to_int",
+			"ruby",
+			"m_curSpecifier",
+			"m_specifiers",
+			"format_",
+			"m_format",
+			"m_curSpecifier",
+			"m_specifiers",
+			"m_format",
+			"m_type",
+			"m_value",
+			"m_refcount",
+			"m_value",
+			"m_refcount",
+			"m_type",
+			"m_fileName",
+			"m_db",
+			"m_limit",
+			"m_tableName",
+			"m_columns",
+			"m_where",
+			"m_or",
+			"m_and",
+			"m_value",
+			"m_columns",
+			"m_type",
+			"m_pk",
+			"m_size",
+			"m_stmt",
+			"m_results",
+			"m_position",
+			"m_row",
+			"m_value",
+			"m_pos",
+			"m_rs",
+			"m_status",
+			"m_stmt",
+			"m_columns",
+			"m_tableName",
+			"m_what",
+			"m_p",
+			"m_schema",
+			"m_values",
+			"m_stmt",
+			"indexFileName",
+			"recCount",
+			"readCount",
+			"fpAccountsdexLastName",
+			"fpIn",
+			"fpData",
+			"realloc",
+			"_copy",
+			"CParseTable",
+			"CParseObjectEntry",
+			"CParseTable",
+			"cparse_table",
+			".data",
+			"hash_key",
+			"rehash",
+			"findPrimeGreaterThan",
+			"isPrime",
+			"std::",
+			"convert_number",
+			"\"here",
+			"m_refcount(NULL), ",
+			"update_m_refcount",
+			"m_m_refcount",
+			"refcount",
+			"BOOL",
+			"refcount",
+			"BOOL",
+			"  *	               Many thanks to creators of muds before me.                 *",
+			" *	               Many thanks to creators of muds before me.                 *",
+			"*	           Many thanks to creators of muds before me.                 *",
+			" *    (C) 2010 by Ryan Jennings <c0der78@gmail.com> www.ryan-jennings.net     *",
+			"hEntry",
+			"db_open",
+			"rom_convert_affect_flags",
+			"std::",
+			"mBonus",
+			"mLowerValues",
+			"mUpperValues",
+			"mDice",
+			"mScore",
+			"mName"
+		],
+		"highlight": true,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"SocketServer",
+			"Socket",
+			"string",
+			"Exception",
+			"Array",
+			"Value",
+			"Log",
+			"Client",
+			"Pointer",
+			"User",
+			"Object",
+			";",
+			"CParseObject",
+			"CParseObjectAttribute",
+			"CParseObject",
+			"cparse_object",
+			".value",
+			"cparse_table_hash_key",
+			"cparse_table_rehash",
+			"cparse_table_find_prime_greater_than",
+			"cparse_table_is_prime",
+			"",
+			"convert_numeric",
+			"",
+			"update_refcount",
+			"m_refcount",
+			" *	               Many thanks to creators of muds before me.                 *",
+			" *         (C) 2010 by Ryan Jennings <c0der78@gmail.com> www.arg3.com         *",
+			"hash_entry",
+			"",
+			"m_bonus",
+			"m_lowerValues",
+			"m_upperValues",
+			"m_dice",
+			"m_score",
+			"m_name",
+			"m_rollCount",
+			"m_name",
+			"m_currentPlayer",
+			"m_engine",
+			"m_players",
+			"keep",
+			"m_dice",
+			"m_lastRoll",
+			"m_keep",
+			"m_value",
+			"m_sides",
+			"m_engine",
+			"m_dice",
+			"m_curSpecifier",
+			"m_specifiers",
+			"m_format",
+			"m_value",
+			"m_fileName",
+			"m_db",
+			"m_stmt",
+			"m_row",
+			"m_position",
+			"m_stmt",
+			"m_values",
+			"m_stmt",
+			"",
+			"columnset",
+			"",
+			"variant ",
+			"variant_value",
+			"",
+			"Posgre",
+			"",
+			"Where",
+			"Result::",
+			"DateTime::",
+			"Record::",
+			"}",
+			"{",
+			"( SQLITE_ERROR, \"SQL error or missing database\" )\n		( SQLITE_INTERNAL, \"Internal logic error in SQLite\" )\n		( SQLITE_PERM, \"Access permission denied\" )\n		( SQLITE_ABORT, \"Callback routine requested an abort\" )\n		( SQLITE_BUSY, \"The database file is locked\" )\n		( SQLITE_LOCKED, \"A table in the database is locked\" )\n		( SQLITE_NOMEM, \"A malloc() failed\" )\n		( SQLITE_READONLY, \"Attempt to write a readonly database\" )\n		( SQLITE_INTERRUPT, \"Operation terminated by sqlite3_interrupt()\" )\n		( SQLITE_IOERR, \"Some kind of disk I/O error occurred\" )\n		( SQLITE_CORRUPT, \"The database disk image is malformed\" )\n		( SQLITE_NOTFOUND, \"NOT USED. Table or record not found\" )\n		( SQLITE_FULL, \"Insertion failed because database is full\" )\n		( SQLITE_CANTOPEN, \"Unable to open the database file\" )\n		( SQLITE_PROTOCOL, \"NOT USED. Database lock protocol error\" )\n		( SQLITE_EMPTY, \"Database is empty\" )\n		( SQLITE_SCHEMA, \"The database schema changed\" )\n		( SQLITE_TOOBIG, \"String or BLOB exceeds size limit\" )\n		( SQLITE_CONSTRAINT, \"Abort due to constraint violation\" )\n		( SQLITE_MISMATCH, \"Data type mismatch\" )\n		( SQLITE_MISUSE, \"Library used incorrectly\" )\n		( SQLITE_NOLFS, \"Uses OS features not supported on host\" )\n		( SQLITE_AUTH, \"Authorization denied\" )\n		( SQLITE_FORMAT, \"Auxiliary database format error\" )\n		( SQLITE_RANGE, \"2nd parameter to sqlite3_bind out of range\" )\n		( SQLITE_NOTADB, \"File opened that is not a database file\" )\n		( SQLITE_ROW, \"sqlite3_step() has another row ready\" )\n		( SQLITE_DONE, \"sqlite3_step() has finished executing\" )",
+			"{",
+			"mTablePrefix",
+			"",
+			"string",
+			"player.",
+			"/*!\\n *",
+			"STATIC_ASSERT",
+			"mStr",
+			"bigint",
+			"to_string",
+			"bigint",
+			"That(\\2), Equals(\\1)",
+			"That(\\2), Equals(\\1))",
+			"That(\\2, Equals(\\1))",
+			"string",
+			"argument",
+			"format::operator<<",
+			"operator+",
+			"",
+			"ScoreSheet",
+			"Player",
+			"ScoreSheet",
+			"Player",
+			"unsigned int",
+			"",
+			"Assert::That",
+			"",
+			"string",
+			"UIViewFlowManager",
+			"\\033"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "db/column.cpp",
+					"settings":
+					{
+						"buffer_size": 2881,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								584,
+								584
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "arg3.sublime-project",
+					"settings":
+					{
+						"buffer_size": 241,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								70,
+								223
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": ".gitignore",
+					"settings":
+					{
+						"buffer_size": 53,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16,
+								16
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "premake4.lua",
+					"settings":
+					{
+						"buffer_size": 3951,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3688,
+								3688
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Lua/Lua.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 13.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "string/premake4.lua",
+					"settings":
+					{
+						"buffer_size": 132,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								116,
+								116
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Lua/Lua.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.clang":
+	{
+		"height": 116.0
+	},
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 283.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"string",
+				"cpp/dlm/src/string.h"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 182.0,
+	"status_bar_visible": true
+}

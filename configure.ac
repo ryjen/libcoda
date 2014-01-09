@@ -32,6 +32,8 @@ AC_FUNC_MKTIME
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([strchr])
 
+./update_dependencies.sh
+
 AC_CONFIG_FILES([Makefile
                  src/Makefile
                  src/collections/Makefile
@@ -45,4 +47,5 @@ AC_CONFIG_SUBDIRS([src/db
                    src/format
                    src/json
                    src/net])
+
 AC_OUTPUT

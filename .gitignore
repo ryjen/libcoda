@@ -5,3 +5,14 @@ src/dice
 src/format
 src/json
 src/net
+*.tar.gz
+.deps
+stamp-h1
+.libs
+*.la
+*.cache
+*.o
+*.lo
+Makefile
+arg3_test
+libtool

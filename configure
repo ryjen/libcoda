@@ -16748,11 +16748,14 @@ fi
 done
 
 
+./update_dependencies.sh
+
 ac_config_files="$ac_config_files Makefile src/Makefile src/collections/Makefile src/log/Makefile src/math/Makefile src/string/Makefile src/terminal/Makefile tests/Makefile"
 
 
 
 subdirs="$subdirs src/db src/dice src/format src/json src/net"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
