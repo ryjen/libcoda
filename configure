@@ -595,7 +595,7 @@ PACKAGE_STRING='arg3 0.5'
 PACKAGE_BUGREPORT='c0der78@gmail.com'
 PACKAGE_URL=''
 
-ac_unique_file="config.h.in"
+ac_unique_file="src/config.h.in"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>
@@ -785,11 +785,11 @@ CXX
 CXXFLAGS
 CCC
 CXXCPP'
-ac_subdirs_all='arg3/db
-                   arg3/dice
-                   arg3/format
-                   arg3/json
-                   arg3/net'
+ac_subdirs_all='src/db
+                   src/dice
+                   src/format
+                   src/json
+                   src/net'
 
 # Initialize some variables set by options.
 ac_init_help=
@@ -2533,7 +2533,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-ac_config_headers="$ac_config_headers config.h"
+ac_config_headers="$ac_config_headers src/config.h"
 
 am__api_version='1.14'
 
@@ -16748,11 +16748,11 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile arg3/Makefile arg3/collections/Makefile arg3/log/Makefile arg3/math/Makefile arg3/string/Makefile arg3/terminal/Makefile tests/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile src/collections/Makefile src/log/Makefile src/math/Makefile src/string/Makefile src/terminal/Makefile tests/Makefile"
 
 
 
-subdirs="$subdirs arg3/db arg3/dice arg3/format arg3/json arg3/net"
+subdirs="$subdirs src/db src/dice src/format src/json src/net"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -17862,16 +17862,16 @@ cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
-    "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
+    "src/config.h") CONFIG_HEADERS="$CONFIG_HEADERS src/config.h" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
-    "arg3/Makefile") CONFIG_FILES="$CONFIG_FILES arg3/Makefile" ;;
-    "arg3/collections/Makefile") CONFIG_FILES="$CONFIG_FILES arg3/collections/Makefile" ;;
-    "arg3/log/Makefile") CONFIG_FILES="$CONFIG_FILES arg3/log/Makefile" ;;
-    "arg3/math/Makefile") CONFIG_FILES="$CONFIG_FILES arg3/math/Makefile" ;;
-    "arg3/string/Makefile") CONFIG_FILES="$CONFIG_FILES arg3/string/Makefile" ;;
-    "arg3/terminal/Makefile") CONFIG_FILES="$CONFIG_FILES arg3/terminal/Makefile" ;;
+    "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
+    "src/collections/Makefile") CONFIG_FILES="$CONFIG_FILES src/collections/Makefile" ;;
+    "src/log/Makefile") CONFIG_FILES="$CONFIG_FILES src/log/Makefile" ;;
+    "src/math/Makefile") CONFIG_FILES="$CONFIG_FILES src/math/Makefile" ;;
+    "src/string/Makefile") CONFIG_FILES="$CONFIG_FILES src/string/Makefile" ;;
+    "src/terminal/Makefile") CONFIG_FILES="$CONFIG_FILES src/terminal/Makefile" ;;
     "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;

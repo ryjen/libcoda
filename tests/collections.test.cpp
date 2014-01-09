@@ -1,5 +1,5 @@
 #include <igloo/igloo.h>
-#include "collections.h"
+#include "../src/collections/collections.h"
 
 using namespace arg3;
 

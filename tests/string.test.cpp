@@ -1,5 +1,5 @@
 #include <igloo/igloo.h>
-#include "string.h"
+#include "../src/string/a3string.h"
 #include <algorithm>
 
 using namespace igloo;

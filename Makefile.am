@@ -1,4 +1,4 @@
-SUBDIRS = arg3 tests
+SUBDIRS = src tests
 
 all-local:
 	tests/arg3_test

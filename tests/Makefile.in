@@ -87,7 +87,7 @@ am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
-CONFIG_HEADER = $(top_builddir)/config.h
+CONFIG_HEADER = $(top_builddir)/src/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
@@ -95,7 +95,8 @@ am_arg3_test_OBJECTS = arg3.test.$(OBJEXT) argument.test.$(OBJEXT) \
 	collections.test.$(OBJEXT) log.test.$(OBJEXT) \
 	string.test.$(OBJEXT)
 arg3_test_OBJECTS = $(am_arg3_test_OBJECTS)
-arg3_test_DEPENDENCIES = ../src/libarg3-0.5.la
+arg3_test_DEPENDENCIES = ../src/format/src/libarg3fmt-0.2.la \
+	../src/string/libarg3str-0.1.la ../src/log/libarg3log-0.1.la
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -112,7 +113,7 @@ AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
 am__v_at_1 = 
-DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
@@ -283,7 +284,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 arg3_test_SOURCES = arg3.test.cpp argument.test.cpp collections.test.cpp log.test.cpp string.test.cpp
 AM_CPPFLAGS = -std=c++11 -stdlib=libc++ -Ivendor -Wall -Werror
-arg3_test_LDADD = ../src/libarg3-0.5.la
+arg3_test_LDADD = ../src/format/src/libarg3fmt-0.2.la ../src/string/libarg3str-0.1.la ../src/log/libarg3log-0.1.la
 all: all-am
 
 .SUFFIXES:

@@ -1,6 +1,6 @@
 
 #include <igloo/igloo.h>
-#include <arg3/log/log.h>
+#include "../src/log/log.h"
 
 using namespace igloo;
 

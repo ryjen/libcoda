@@ -1,9 +1,10 @@
 
 #include <igloo/igloo.h>
-#include "argument.h"
+#include "../src/string/argument.h"
 
 using namespace igloo;
 using namespace arg3;
+using namespace std;
 
 Context(argument_test)
 {

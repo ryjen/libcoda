@@ -1,5 +1,5 @@
 #include <igloo/igloo.h>
-#include "log.h"
+#include "../src/log/log.h"
 
 using namespace igloo;
 
