@@ -1,6 +1,10 @@
 #ifndef ARG3_TERMINAL_BASE_TERMINAL_H_
 #define ARG3_TERMINAL_BASE_TERMINAL_H_
 
+#include <vector>
+
+using namespace std;
+
 namespace arg3
 {
     namespace terminal
@@ -13,7 +17,7 @@ namespace arg3
 
             virtual data_buffer parse(const data_buffer &input) = 0;
         private:
-        }
+        };
     }
 }
 

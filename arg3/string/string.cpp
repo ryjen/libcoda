@@ -1,8 +1,8 @@
 #include <iterator>
 #include <sstream>
 #include <algorithm>
-#include "string.h"
-#include "../format/format.h"
+#include "a3string.h"
+#include "../format/src/format.h"
 
 namespace arg3
 {
@@ -12,8 +12,8 @@ namespace arg3
     }
 
     /*
-     * Returns an initial-capped string.
-     */
+    * Returns an initial-capped string.
+    */
     string capitalize( const string &str )
     {
         string buf;
@@ -28,13 +28,13 @@ namespace arg3
         return buf;
     }
     /*
-     * Credit: http://www.secureprogramming.com/?action=view&feature=recipes&recipeid=3
-     */
+    * Credit: http://www.secureprogramming.com/?action=view&feature=recipes&recipeid=3
+    */
     bool is_valid_email(const string &address)
     {
         int count = 0;
         string::const_iterator c, domain;
-        static char rfc822_specials[] = "()<>@,;:\\\"[]";
+        static char rfc822_specials[] = "()<>@,; : \\\"[]";
 
         /* first we validate the name portion (name@domain) */
         for (c = address.cbegin();  c  != address.cend();  c++)

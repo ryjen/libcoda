@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ctime>
 #include "log.h"
-#include "../string/string.h"
+#include <arg3/string/a3string.h>
 
 using namespace std;
 

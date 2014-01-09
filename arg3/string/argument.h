@@ -3,8 +3,6 @@
 
 #include <string>
 
-using namespace std;
-
 namespace arg3
 {
     /*
@@ -13,11 +11,11 @@ namespace arg3
     class argument
     {
     private:
-        string str_;
+        std::string str_;
     protected:
-        size_t next(string &) const;
+        size_t next(std::string &) const;
     public:
-        argument(const string &);
+        argument(const std::string &);
         argument(const char *);
         argument();
         argument(const argument &other);
@@ -25,21 +23,21 @@ namespace arg3
         argument &operator=(const argument &other);
         argument &operator=(argument && other);
         virtual ~argument();
-        string peek() const;
-        string next();
+        std::string peek() const;
+        std::string next();
         int next_int();
         double next_double();
         int64_t next_int64();
         bool next_bool();
-        operator const string &();
+        operator const std::string &();
         bool empty() const;
         bool operator ! () const;
         char operator[] (int) const;
         size_t length() const;
-        string to_string() const;
+        std::string to_string() const;
 
-        bool equals(const string &arg, bool caseSensitive = false) const;
-        bool prefix(const string &arg, bool caseSensitive = false) const;
+        bool equals(const std::string &arg, bool caseSensitive = false) const;
+        bool prefix(const std::string &arg, bool caseSensitive = false) const;
     };
 }
 
