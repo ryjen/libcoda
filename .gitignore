@@ -1,7 +1,7 @@
 *~
 *.log
-arg3/db
-arg3/dice
-arg3/format
-arg3/json
-arg3/net
+src/db
+src/dice
+src/format
+src/json
+src/net

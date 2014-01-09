@@ -3,8 +3,8 @@
 
 AC_PREREQ([2.69])
 AC_INIT([arg3], [0.5], [c0der78@gmail.com])
-AC_CONFIG_SRCDIR([config.h.in])
-AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_SRCDIR([src/config.h.in])
+AC_CONFIG_HEADERS([src/config.h])
 AM_INIT_AUTOMAKE
 LT_INIT
 
@@ -33,16 +33,16 @@ AC_FUNC_REALLOC
 AC_CHECK_FUNCS([strchr])
 
 AC_CONFIG_FILES([Makefile
-                 arg3/Makefile
-                 arg3/collections/Makefile
-                 arg3/log/Makefile
-                 arg3/math/Makefile
-                 arg3/string/Makefile
-                 arg3/terminal/Makefile
+                 src/Makefile
+                 src/collections/Makefile
+                 src/log/Makefile
+                 src/math/Makefile
+                 src/string/Makefile
+                 src/terminal/Makefile
                  tests/Makefile])
-AC_CONFIG_SUBDIRS([arg3/db
-                   arg3/dice
-                   arg3/format
-                   arg3/json
-                   arg3/net])
+AC_CONFIG_SUBDIRS([src/db
+                   src/dice
+                   src/format
+                   src/json
+                   src/net])
 AC_OUTPUT
