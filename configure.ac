@@ -5,7 +5,7 @@ AC_PREREQ([2.69])
 AC_INIT([arg3], [0.5], [c0der78@gmail.com])
 AC_CONFIG_SRCDIR([src/config.h.in])
 AC_CONFIG_HEADERS([src/config.h])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([silent-rules check-news])
 LT_INIT
 
 # Checks for programs.
@@ -13,6 +13,10 @@ AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
+AC_CHECK_PROG(GIT_CHECK,git,yes)
+if test x"$GIT_CHECK" != x"yes" ; then
+    AC_MSG_ERROR([Required program 'git' not found.])
+fi
 
 # Checks for header files.
 
@@ -34,7 +38,7 @@ AC_CHECK_FUNCS([strchr])
 
 ./update_dependencies.sh
 
-AC_CONFIG_FILES([Makefile
+AC_CONFIG_FILES([Makefile arg3.pc
                  src/Makefile
                  src/collections/Makefile
                  src/log/Makefile
@@ -42,6 +46,7 @@ AC_CONFIG_FILES([Makefile
                  src/string/Makefile
                  src/terminal/Makefile
                  tests/Makefile])
+
 AC_CONFIG_SUBDIRS([src/db
                    src/dice
                    src/format
