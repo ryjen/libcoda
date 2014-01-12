@@ -16,3 +16,6 @@ stamp-h1
 Makefile
 arg3_test
 libtool
+*.pc
+*.status
+config.h
