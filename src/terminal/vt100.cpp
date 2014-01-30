@@ -21,7 +21,7 @@ namespace arg3
 
                 if (*pos == '[')
                 {
-                    parse_parameter_tag(buf, pos, input.end());
+                    parse_parameter_tag(buf, pos + 1, input.end());
                 }
                 else
                 {
@@ -33,10 +33,35 @@ namespace arg3
         }
 
         void vt100::parse_parameter_tag( data_buffer &output, const data_buffer::const_iterator &start, const data_buffer::const_iterator &end) const
-        {}
+        {
+
+        }
 
         void vt100::parse_tag(data_buffer &output, const data_buffer::const_iterator &start, const data_buffer::const_iterator &end) const
         {}
 
+
+        attribute::attribute(initializer_list<int> values) : values_(values)
+        {}
+
+        string attribute::to_string() const
+        {
+            ostringstream buf;
+
+            buf << ESCAPE;
+            buf << "[";
+
+            for (int i = 0, size = values_.size(); i < size; i++)
+            {
+                buf << values_[i];
+
+                if (i + 1 == size)
+                    buf << "m";
+                else
+                    buf << ";";
+            }
+
+            return buf.str();
+        }
     }
 }
