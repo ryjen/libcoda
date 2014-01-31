@@ -1,7 +1,7 @@
 #include <iterator>
 #include <sstream>
 #include <algorithm>
-#include "a3string.h"
+#include "util.h"
 #include "../format/src/format.h"
 
 namespace arg3
@@ -187,7 +187,7 @@ namespace arg3
         for (auto a = astr.cbegin(), b = bstr.cbegin();
                 a != astr.cend() || b != bstr.cend(); a++, b++ )
         {
-            if ( tolower(*a) != tolower(*b) )
+            if ( caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b)) )
                 return false;
         }
 
@@ -205,7 +205,7 @@ namespace arg3
         for ( auto a = astr.cbegin(), b = bstr.cbegin();
                 a != astr.cend(); a++, b++ )
         {
-            if ( tolower(*a) != tolower(*b) )
+            if ( caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b) ) )
                 return false;
         }
 
@@ -241,7 +241,7 @@ namespace arg3
 
         for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
         {
-            if ( c0 == tolower(bstr[ichar]) && prefix( astr, bstr.substr(ichar), caseSensitive ) )
+            if ( c0 == (caseSensitive ? bstr[ichar] : tolower(bstr[ichar]) ) && prefix( astr, bstr.substr(ichar), caseSensitive ) )
                 return true;
         }
 
