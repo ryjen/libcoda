@@ -43,12 +43,22 @@ namespace arg3
         return buffer_;
     }
 
+    buffered_data &buffered_reader::input()
+    {
+        return buffer_;
+    }
+
     bool buffered_writer::has_output() const
     {
         return !buffer_.empty();
     }
 
     const buffered_data &buffered_writer::output() const
+    {
+        return buffer_;
+    }
+
+    buffered_data &buffered_writer::output()
     {
         return buffer_;
     }
