@@ -1,4 +1,4 @@
-#include "buffered_io.h"
+#include "buffer.h"
 
 using namespace std;
 
