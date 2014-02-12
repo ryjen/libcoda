@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
 
 namespace arg3
 {
@@ -10,6 +11,56 @@ namespace arg3
     typedef std::vector<unsigned char> buffered_data;
 
     static const buffered_data NEWLINE = { '\r', '\n' };
+
+    class buffer
+    {
+    private:
+        std::ostringstream buf_;
+    public:
+        buffer();
+        template<typename T>
+        buffer(const T &value)
+        {
+            buf_ << value;
+        }
+        buffer(const buffer &other);
+        buffer(buffer &&other);
+        buffer &operator=(const buffer &other);
+        buffer &operator=(buffer && other);
+
+        buffer &writeln();
+
+        template<typename T>
+        buffer &writeln(const T &value)
+        {
+            buf_ << value << std::endl;
+            return *this;
+        }
+
+        template<typename T>
+        buffer &write(const T &value)
+        {
+            buf_ << value;
+            return *this;
+        }
+
+        template<typename T>
+        buffer &operator<<(const T &value)
+        {
+            buf_ << value;
+            return *this;
+        }
+
+        operator std::string() const;
+
+        std::string to_string() const;
+
+        bool empty() const;
+
+        buffer &remove(size_t start, size_t end = std::string::npos);
+
+        size_t length() const;
+    };
 
     class buffered_reader
     {

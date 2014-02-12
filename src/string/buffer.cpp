@@ -4,6 +4,74 @@ using namespace std;
 
 namespace arg3
 {
+    buffer::buffer() {}
+
+    buffer::buffer(const buffer &other)
+    {
+        buf_ << other.buf_.str();
+    }
+
+    buffer::buffer(buffer &&other) : buf_(std::move(other.buf_))
+    {
+
+    }
+    buffer &buffer::operator=(const buffer &other)
+    {
+        buf_.clear();
+        buf_ << other.buf_.str();
+        return *this;
+    }
+    buffer &buffer::operator=(buffer && other)
+    {
+        buf_ = std::move(other.buf_);
+        return *this;
+    }
+
+    buffer &buffer::writeln()
+    {
+        buf_ << endl;
+        return *this;
+    }
+
+    buffer::operator string() const
+    {
+        return buf_.str();
+    }
+
+    std::string buffer::to_string() const
+    {
+        return buf_.str();
+    }
+
+    bool buffer::empty() const
+    {
+        return buf_.str().empty();
+    }
+
+    size_t buffer::length() const
+    {
+        return buf_.str().length();
+    }
+
+    buffer &buffer::remove(size_t start, size_t end)
+    {
+        string str = buf_.str();
+
+        string temp = str.substr(0, start);
+
+        if (end != string::npos)
+        {
+            string endStr = str.substr(end);
+            temp = temp.append(endStr);
+        }
+
+        buf_ = ostringstream();
+
+        buf_ << temp;
+
+        return *this;
+    }
+
     string buffered_reader::readln()
     {
         if (buffer_.empty()) return string();
