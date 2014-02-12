@@ -165,4 +165,29 @@ namespace arg3
     {
         return arg3::prefix(str_, arg, caseSensitive);
     }
+
+    bool argument::operator==(const std::string &arg) const
+    {
+        return str_ == arg;
+    }
+    bool argument::operator!=(const std::string &arg) const
+    {
+        return str_ != arg;
+    }
+    bool argument::operator==(const argument &arg) const
+    {
+        return str_ == arg.str_;
+    }
+    bool argument::operator!=(const argument &arg) const
+    {
+        return str_ == arg.str_;
+    }
+    bool operator==(const std::string &a1, const argument &a2)
+    {
+        return a1 == a2.to_string();
+    }
+    bool operator!=(const std::string &a1, const argument &a2)
+    {
+        return a1 == a2.to_string();
+    }
 }

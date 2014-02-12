@@ -38,7 +38,15 @@ namespace arg3
 
         bool equals(const std::string &arg, bool caseSensitive = false) const;
         bool prefix(const std::string &arg, bool caseSensitive = false) const;
+
+        bool operator==(const std::string &arg) const;
+        bool operator!=(const std::string &arg) const;
+        bool operator==(const argument &arg) const;
+        bool operator!=(const argument &arg) const;
     };
+
+    bool operator==(const std::string &a1, const argument &a2);
+    bool operator!=(const std::string &a1, const argument &a2);
 }
 
 #endif
