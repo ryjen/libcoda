@@ -90,4 +90,17 @@ Context(argument_test)
         Assert::That(arg[1], Equals('e'));
     }
 
+    Spec(equality_test)
+    {
+        argument arg("test");
+
+        Assert::That("test" == arg, Equals(true));
+
+        Assert::That(arg == "test" , Equals(true));
+
+        Assert::That("test" != arg, Equals(false));
+
+        Assert::That(arg != "test", Equals(false));
+
+    }
 };

@@ -174,13 +174,21 @@ namespace arg3
     {
         return str_ != arg;
     }
+    bool argument::operator==(const char *const arg) const
+    {
+        return str_ == arg;
+    }
+    bool argument::operator!=(const char *const arg) const
+    {
+        return str_ != arg;
+    }
     bool argument::operator==(const argument &arg) const
     {
         return str_ == arg.str_;
     }
     bool argument::operator!=(const argument &arg) const
     {
-        return str_ == arg.str_;
+        return str_ != arg.str_;
     }
     bool operator==(const std::string &a1, const argument &a2)
     {
@@ -188,6 +196,14 @@ namespace arg3
     }
     bool operator!=(const std::string &a1, const argument &a2)
     {
+        return a1 != a2.to_string();
+    }
+    bool operator==(const char *const a1, const argument &a2)
+    {
         return a1 == a2.to_string();
+    }
+    bool operator!=(const char *const a1, const argument &a2)
+    {
+        return a1 != a2.to_string();
     }
 }

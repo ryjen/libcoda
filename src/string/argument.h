@@ -41,12 +41,16 @@ namespace arg3
 
         bool operator==(const std::string &arg) const;
         bool operator!=(const std::string &arg) const;
+        bool operator==(const char *const arg) const;
+        bool operator!=(const char *const arg) const;
         bool operator==(const argument &arg) const;
         bool operator!=(const argument &arg) const;
     };
 
     bool operator==(const std::string &a1, const argument &a2);
     bool operator!=(const std::string &a1, const argument &a2);
+    bool operator==(const char *const a1, const argument &a2);
+    bool operator!=(const char *const a1, const argument &a2);
 }
 
 #endif
