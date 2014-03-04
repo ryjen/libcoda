@@ -9,8 +9,14 @@ AM_INIT_AUTOMAKE([silent-rules check-news])
 LT_INIT
 
 # Checks for programs.
-AC_PROG_CXX
+AC_PROG_CXX([clang++ g++])
 AC_PROG_CC
+
+if test "x$CXX" = "xclang++"; then
+  AC_SUBST([AM_CPPFLAGS], ["-std=c++11 -stdlib=libc++ -Wall -Werror"])
+else
+  AC_SUBST([AM_CPPFLAGS], ["-std=c++0x -Wall -Werror"])
+fi
 
 # Checks for libraries.
 AC_CHECK_PROG(GIT_CHECK,git,yes)
