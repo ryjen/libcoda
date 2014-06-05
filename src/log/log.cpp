@@ -31,7 +31,7 @@ namespace arg3
 
     log::level log::lookup_log_level(const std::string &value)
     {
-        for (level l = TRACE; l <= ERROR; l++)
+        for (level l = TRACE; l <= ERROR; l = static_cast<level>(static_cast<int>(l) + 1))
         {
             if (equals(value, logNames[l]))
                 return l;
