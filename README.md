@@ -3,6 +3,14 @@ libarg3
 
 a c++11 utility library.  Its my toolkit for anything c++11.
 
+Submodules
+==========
+
+After cloning run two commands to initialize submodules:
+
+git submodule init
+git submodule update
+
 Building
 ========
 
