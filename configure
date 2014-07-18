@@ -16798,8 +16798,6 @@ fi
 done
 
 
-./update_dependencies.sh
-
 ac_config_files="$ac_config_files Makefile arg3.pc src/Makefile src/collections/Makefile src/log/Makefile src/math/Makefile src/string/Makefile src/terminal/Makefile tests/Makefile"
 
 

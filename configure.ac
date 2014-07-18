@@ -42,8 +42,6 @@ AC_FUNC_MKTIME
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([strchr])
 
-./update_dependencies.sh
-
 AC_CONFIG_FILES([Makefile arg3.pc
                  src/Makefile
                  src/collections/Makefile
