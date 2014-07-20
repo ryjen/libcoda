@@ -18,6 +18,8 @@ Context(arg3strings)
         Assert::That(is_number("-45"), Equals(1));
 
         Assert::That(is_number("asdf"), Equals(0));
+
+        Assert::That(is_number(""), Equals(0));
     }
 
     Spec(isValidEmail)
@@ -28,6 +30,8 @@ Context(arg3strings)
         Assert::That(is_valid_email("@blah.com"), Equals(false));
         Assert::That(is_valid_email("ryan@"), Equals(false));
         Assert::That(is_valid_email("ryan.jennings.net"), Equals(false));
+        Assert::That(is_valid_email("\"ryan.jennings\"@email.com"), Equals(true));
+        Assert::That(is_valid_email("\"ryan\".jennings@email.com"), Equals(true));
     }
 
     Spec(ordinalString)
@@ -47,6 +51,8 @@ Context(arg3strings)
     {
 
         Assert::That(capitalize("fooBAR"), Equals("Foobar"));
+
+        Assert::That(capitalize(""), Equals(""));
     }
 
 
@@ -86,5 +92,74 @@ Context(arg3strings)
         Assert::That(ret > 0, Equals(true));
 
         Assert::That(buf, Equals("Harry 1234 $12.34"));
+    }
+
+    Spec(join)
+    {
+        string test = arg3::join("abc", 3, ",");
+
+        Assert::That(test, Equals("abc,abc,abc"));
+
+        test = arg3::join('Z', 3, "-");
+
+        Assert::That(test, Equals("Z-Z-Z"));
+    }
+
+    Spec(split)
+    {
+        auto parts = arg3::split("abc,123,xyz", ",", true);
+
+        Assert::That(parts.size(), Equals(3));
+
+        Assert::That(parts[0], Equals("abc"));
+        Assert::That(parts[1], Equals("123"));
+        Assert::That(parts[2], Equals("xyz"));
+
+        parts = arg3::split("abc//123//xyz", "/", true);
+
+        Assert::That(parts.size(), Equals(5));
+
+        Assert::That(parts[0], Equals("abc"));
+        Assert::That(parts[1], Equals(""));
+        Assert::That(parts[2], Equals("123"));
+        Assert::That(parts[3], Equals(""));
+        Assert::That(parts[4], Equals("xyz"));
+
+        parts = arg3::split("abc,123,xyz", "", true);
+
+        Assert::That(parts.size(), Equals(1));
+
+        Assert::That(parts[0], Equals("abc,123,xyz"));
+    }
+
+    Spec(prefix)
+    {
+        std::string test = "abc123";
+
+        Assert::That(arg3::prefix("abc", test), Equals(true));
+
+        Assert::That(arg3::prefix("123", test), Equals(false));
+
+        Assert::That(arg3::prefix("", test), Equals(false));
+    }
+
+    Spec(suffix)
+    {
+        std::string test = "abc123";
+
+        Assert::That(arg3::suffix("abc", test), Equals(false));
+        Assert::That(arg3::suffix("123", test), Equals(true));
+        Assert::That(arg3::suffix("", test), Equals(false));
+    }
+
+    Spec(contains)
+    {
+        std::string test = "abc123";
+
+        Assert::That(arg3::contains("bc12", test), Equals(true));
+
+        Assert::That(arg3::contains("asd", test), Equals(false));
+
+        Assert::That(arg3::contains("", test), Equals(false));
     }
 };

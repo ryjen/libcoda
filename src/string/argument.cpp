@@ -6,6 +6,8 @@ using namespace std;
 namespace arg3
 {
 
+    argument::argument() {}
+
     argument::argument(const string &str) : str_(str)
     {}
 
@@ -163,7 +165,7 @@ namespace arg3
 
     bool argument::prefix(const string &arg, bool caseSensitive) const
     {
-        return arg3::prefix(str_, arg, caseSensitive);
+        return arg3::prefix(arg, str_, caseSensitive);
     }
 
     bool argument::operator==(const std::string &arg) const

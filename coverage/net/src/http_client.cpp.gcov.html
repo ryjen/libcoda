@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-07-19</td>
+            <td class="headerValue">2014-07-20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -86,20 +86,20 @@
 <span class="lineNum">      16 </span>            : 
 <span class="lineNum">      17 </span>            :         size_t curl_append_response_callback(void *ptr, size_t size, size_t nmemb, string *s)
 <span class="lineNum">      18 </span>            :         {
-<span class="lineNum">      19 </span><span class="lineCov">         17 :             if (s == NULL) return 0;</span>
+<span class="lineNum">      19 </span><span class="lineCov">         18 :             if (s == NULL) return 0;</span>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">         17 :             const size_t new_len = size * nmemb;</span>
+<span class="lineNum">      21 </span><span class="lineCov">         18 :             const size_t new_len = size * nmemb;</span>
 <span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">         17 :             char buf[new_len + 1];</span>
+<span class="lineNum">      23 </span><span class="lineCov">         18 :             char buf[new_len + 1];</span>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">         17 :             memcpy(buf, ptr, size * nmemb);</span>
+<span class="lineNum">      25 </span><span class="lineCov">         18 :             memcpy(buf, ptr, size * nmemb);</span>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">         17 :             buf[new_len] = '\0';</span>
+<span class="lineNum">      27 </span><span class="lineCov">         18 :             buf[new_len] = '\0';</span>
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">         17 :             s-&gt;append(buf);</span>
+<span class="lineNum">      29 </span><span class="lineCov">         18 :             s-&gt;append(buf);</span>
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">         17 :             return new_len;</span>
-<span class="lineNum">      32 </span><span class="lineCov">         34 :         }</span>
+<span class="lineNum">      31 </span><span class="lineCov">         18 :             return new_len;</span>
+<span class="lineNum">      32 </span><span class="lineCov">         36 :         }</span>
 <a name="33"><span class="lineNum">      33 </span>            : #endif</a>
 <span class="lineNum">      34 </span>            : 
 <span class="lineNum">      35 </span>            :         http_client::http_client(const string &amp;host) : scheme_(http::SCHEME), host_(host)
