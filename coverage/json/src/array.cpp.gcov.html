@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Code Coverage - json/src/array.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">json/src</a> - array.cpp<span style="font-size: 80%;"> (source / <a href="array.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">72</td>
+            <td class="headerCovTableEntryLo">25.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2014-07-19</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntryLo">22.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;array.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;object.h&quot;
+<span class="lineNum">       3 </span>            : #include &quot;exception.h&quot;
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span>            : using namespace std;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : namespace arg3
+<span class="lineNum">       8 </span>            : {
+<a name="9"><span class="lineNum">       9 </span>            :     namespace json</a>
+<span class="lineNum">      10 </span>            :     {
+<span class="lineNum">      11 </span><span class="lineCov">          1 :         array::array() : value_(json_object_new_array())</span>
+<span class="lineNum">      12 </span><span class="lineCov">          1 :         {</span>
+<a name="13"><span class="lineNum">      13 </span>            : </a>
+<span class="lineNum">      14 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">      15 </span><span class="lineNoCov">          0 :         array::array(json_object *other) : value_(json_object_get(other))</span>
+<span class="lineNum">      16 </span><span class="lineNoCov">          0 :         {</span>
+<span class="lineNum">      17 </span><span class="lineNoCov">          0 :             if (!json_object_is_type(value_, json_type_array))</span>
+<span class="lineNum">      18 </span><span class="lineNoCov">          0 :                 throw exception(&quot;object is not an array&quot;);</span>
+<a name="19"><span class="lineNum">      19 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span><span class="lineNoCov">          0 :         array::array(const array &amp;other) : value_(json_object_get(other.value_))</span>
+<span class="lineNum">      22 </span><span class="lineNoCov">          0 :         {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            :         array::array(array &amp;&amp;other) : value_(other.value_)
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :         {</span>
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 :             other.value_ = NULL;</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :         array::~array()
+<span class="lineNum">      31 </span><span class="lineCov">          2 :         {</span>
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span><span class="lineCov">          1 :             if (value_ != NULL)</span>
+<span class="lineNum">      34 </span>            :             {
+<span class="lineNum">      35 </span><span class="lineCov">          1 :                 json_object_put(value_);</span>
+<span class="lineNum">      36 </span><span class="lineCov">          1 :                 value_ = NULL;</span>
+<span class="lineNum">      37 </span><span class="lineCov">          1 :             }</span>
+<span class="lineNum">      38 </span>            : 
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">          2 :         }</span></a>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span>            :         array &amp;array::operator=(const array &amp;other)
+<span class="lineNum">      42 </span>            :         {
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :             if (this != &amp;other)</span>
+<span class="lineNum">      44 </span>            :             {
+<span class="lineNum">      45 </span><span class="lineNoCov">          0 :                 value_ = json_object_get(other.value_);</span>
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :             }</span>
+<span class="lineNum">      47 </span>            : 
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :             return *this;</span>
+<a name="49"><span class="lineNum">      49 </span>            :         }</a>
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            :         array &amp;array::operator=(array &amp;&amp; other)
+<span class="lineNum">      52 </span>            :         {
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :             if (this != &amp;other)</span>
+<span class="lineNum">      54 </span>            :             {
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :                 value_ = other.value_;</span>
+<span class="lineNum">      56 </span><span class="lineNoCov">          0 :                 other.value_ = NULL;</span>
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :             }</span>
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :             return *this;</span>
+<a name="59"><span class="lineNum">      59 </span>            :         }</a>
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span>            :         size_t array::size() const
+<span class="lineNum">      62 </span>            :         {
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :             return json_object_array_length(value_);</span>
+<a name="64"><span class="lineNum">      64 </span>            :         }</a>
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            :         void array::add(const object &amp;value)
+<span class="lineNum">      67 </span>            :         {
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :             json_object_array_add(value_, json_object_get(value.value_));</span>
+<a name="69"><span class="lineNum">      69 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span>            :         void array::add_string(const string &amp;value)
+<span class="lineNum">      72 </span>            :         {
+<span class="lineNum">      73 </span><span class="lineCov">          1 :             json_object_array_add(value_, json_object_new_string(value.c_str()));</span>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          1 :         }</span></a>
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span>            :         void array::add_int(int32_t value)
+<span class="lineNum">      77 </span>            :         {
+<span class="lineNum">      78 </span><span class="lineCov">          1 :             json_object_array_add(value_, json_object_new_int(value));</span>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          1 :         }</span></a>
+<span class="lineNum">      80 </span>            : 
+<span class="lineNum">      81 </span>            :         void array::add_int64(int64_t value)
+<span class="lineNum">      82 </span>            :         {
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :             json_object_array_add(value_, json_object_new_int64(value));</span>
+<a name="84"><span class="lineNum">      84 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span>            :         void array::add_double(double value)
+<span class="lineNum">      87 </span>            :         {
+<span class="lineNum">      88 </span><span class="lineCov">          1 :             json_object_array_add(value_, json_object_new_double(value));</span>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">          1 :         }</span></a>
+<span class="lineNum">      90 </span>            : 
+<span class="lineNum">      91 </span>            :         void array::add_bool(bool value)
+<span class="lineNum">      92 </span>            :         {
+<span class="lineNum">      93 </span><span class="lineCov">          1 :             json_object_array_add(value_, json_object_new_boolean(value));</span>
+<a name="94"><span class="lineNum">      94 </span><span class="lineCov">          1 :         }</span></a>
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span>            :         void array::add_array(const array &amp;value)
+<span class="lineNum">      97 </span>            :         {
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :             json_object_array_add(value_, json_object_get(value.value_));</span>
+<a name="99"><span class="lineNum">      99 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     100 </span>            : 
+<span class="lineNum">     101 </span>            :         int32_t array::get_int(size_t idx) const
+<span class="lineNum">     102 </span>            :         {
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :             return json_object_get_int(json_object_array_get_idx(value_, idx));</span>
+<a name="104"><span class="lineNum">     104 </span>            :         }</a>
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span>            :         int64_t array::get_int64(size_t idx) const
+<span class="lineNum">     107 </span>            :         {
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :             return json_object_get_int64(json_object_array_get_idx(value_, idx));</span>
+<a name="109"><span class="lineNum">     109 </span>            :         }</a>
+<span class="lineNum">     110 </span>            : 
+<span class="lineNum">     111 </span>            :         string array::get_string(size_t idx) const
+<span class="lineNum">     112 </span>            :         {
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 :             return json_object_get_string(json_object_array_get_idx(value_, idx));</span>
+<a name="114"><span class="lineNum">     114 </span>            :         }</a>
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span>            :         double array::get_double(size_t idx) const
+<span class="lineNum">     117 </span>            :         {
+<span class="lineNum">     118 </span><span class="lineNoCov">          0 :             return json_object_get_double(json_object_array_get_idx(value_, idx));</span>
+<a name="119"><span class="lineNum">     119 </span>            :         }</a>
+<span class="lineNum">     120 </span>            : 
+<span class="lineNum">     121 </span>            :         array array::get_array(size_t idx) const
+<span class="lineNum">     122 </span>            :         {
+<span class="lineNum">     123 </span><span class="lineNoCov">          0 :             json_object *obj = json_object_array_get_idx(value_, idx);</span>
+<span class="lineNum">     124 </span>            : 
+<span class="lineNum">     125 </span><span class="lineNoCov">          0 :             if (json_object_is_type(obj, json_type_array))</span>
+<span class="lineNum">     126 </span><span class="lineNoCov">          0 :                 return array(obj);</span>
+<span class="lineNum">     127 </span>            :             else
+<span class="lineNum">     128 </span><span class="lineNoCov">          0 :                 return array();</span>
+<a name="129"><span class="lineNum">     129 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     130 </span>            : 
+<span class="lineNum">     131 </span>            :         bool array::empty() const
+<span class="lineNum">     132 </span>            :         {
+<span class="lineNum">     133 </span><span class="lineNoCov">          0 :             return json_object_array_length(value_) == 0;</span>
+<a name="134"><span class="lineNum">     134 </span>            :         }</a>
+<span class="lineNum">     135 </span>            : 
+<span class="lineNum">     136 </span>            :         object array::operator[](size_t idx) const
+<span class="lineNum">     137 </span>            :         {
+<span class="lineNum">     138 </span><span class="lineNoCov">          0 :             return get(idx);</span>
+<a name="139"><span class="lineNum">     139 </span>            :         }</a>
+<span class="lineNum">     140 </span>            : 
+<span class="lineNum">     141 </span>            :         object array::get(size_t idx) const
+<span class="lineNum">     142 </span>            :         {
+<span class="lineNum">     143 </span><span class="lineNoCov">          0 :             return json_object_array_get_idx(value_, idx);</span>
+<a name="144"><span class="lineNum">     144 </span>            :         }</a>
+<span class="lineNum">     145 </span>            : 
+<span class="lineNum">     146 </span>            :         object array::front() const
+<span class="lineNum">     147 </span>            :         {
+<span class="lineNum">     148 </span><span class="lineNoCov">          0 :             return get(0);</span>
+<a name="149"><span class="lineNum">     149 </span>            :         }</a>
+<span class="lineNum">     150 </span>            : 
+<span class="lineNum">     151 </span>            :         object array::back() const
+<span class="lineNum">     152 </span>            :         {
+<span class="lineNum">     153 </span><span class="lineNoCov">          0 :             return get(size() - 1);</span>
+<a name="154"><span class="lineNum">     154 </span>            :         }</a>
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span>            :         array::iterator array::begin() const
+<span class="lineNum">     157 </span>            :         {
+<span class="lineNum">     158 </span><span class="lineNoCov">          0 :             return iterator(value_, 0);</span>
+<a name="159"><span class="lineNum">     159 </span>            :         }</a>
+<span class="lineNum">     160 </span>            : 
+<span class="lineNum">     161 </span>            :         array::iterator array::end() const
+<span class="lineNum">     162 </span>            :         {
+<span class="lineNum">     163 </span><span class="lineNoCov">          0 :             return iterator(value_, json_object_array_length(value_));</span>
+<a name="164"><span class="lineNum">     164 </span>            :         }</a>
+<span class="lineNum">     165 </span>            : 
+<span class="lineNum">     166 </span>            :         array::reverse_iterator array::rbegin() const
+<span class="lineNum">     167 </span>            :         {
+<span class="lineNum">     168 </span><span class="lineNoCov">          0 :             return reverse_iterator(end());</span>
+<a name="169"><span class="lineNum">     169 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     170 </span>            : 
+<span class="lineNum">     171 </span>            :         array::reverse_iterator array::rend() const
+<span class="lineNum">     172 </span>            :         {
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :             return reverse_iterator(begin());</span>
+<a name="174"><span class="lineNum">     174 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     175 </span>            : 
+<span class="lineNum">     176 </span>            :         array::iterator array::begin()
+<span class="lineNum">     177 </span>            :         {
+<span class="lineNum">     178 </span><span class="lineCov">          1 :             return iterator(value_, 0);</span>
+<a name="179"><span class="lineNum">     179 </span>            :         }</a>
+<span class="lineNum">     180 </span>            : 
+<span class="lineNum">     181 </span>            :         array::iterator array::end()
+<span class="lineNum">     182 </span>            :         {
+<span class="lineNum">     183 </span><span class="lineNoCov">          0 :             return iterator(value_, json_object_array_length(value_));</span>
+<a name="184"><span class="lineNum">     184 </span>            :         }</a>
+<span class="lineNum">     185 </span>            : 
+<span class="lineNum">     186 </span>            :         array::reverse_iterator array::rbegin()
+<span class="lineNum">     187 </span>            :         {
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :             return reverse_iterator(end());</span>
+<a name="189"><span class="lineNum">     189 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     190 </span>            : 
+<span class="lineNum">     191 </span>            :         array::reverse_iterator array::rend()
+<span class="lineNum">     192 </span>            :         {
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :             return reverse_iterator(begin());</span>
+<a name="194"><span class="lineNum">     194 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     195 </span>            : 
+<span class="lineNum">     196 </span>            :         bool array::operator==(const array &amp;other) const
+<span class="lineNum">     197 </span>            :         {
+<span class="lineNum">     198 </span><span class="lineNoCov">          0 :             return value_ == other.value_;</span>
+<a name="199"><span class="lineNum">     199 </span>            :         }</a>
+<span class="lineNum">     200 </span>            : 
+<span class="lineNum">     201 </span>            :         bool array::operator!=(const array &amp;other) const
+<span class="lineNum">     202 </span>            :         {
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :             return value_ != other.value_;</span>
+<span class="lineNum">     204 </span>            :         }
+<span class="lineNum">     205 </span>            :     }
+<span class="lineNum">     206 </span>            : }
+<span class="lineNum">     207 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

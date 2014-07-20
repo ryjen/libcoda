@@ -3,6 +3,8 @@ libarg3
 
 a c++11 utility library.  Its my toolkit for anything c++11.
 
+[View Testing Code Coverage](http://htmlpreview.github.com/?https://github.com/c0der78/libarg3/blob/master/coverage/index.html)
+
 Submodules
 ==========
 
