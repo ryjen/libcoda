@@ -133,15 +133,15 @@
 <span class="lineNum">      63 </span><span class="lineCov">          8 :         if ((domain = ++c) == address.cend()) return 0;</span>
 <span class="lineNum">      64 </span><span class="lineCov">          6 :         do</span>
 <span class="lineNum">      65 </span>            :         {
-<span class="lineNum">      66 </span><span class="lineCov">         41 :             if (*c == '.')</span>
+<span class="lineNum">      66 </span><span class="lineCov">         40 :             if (*c == '.')</span>
 <span class="lineNum">      67 </span>            :             {
 <span class="lineNum">      68 </span><span class="lineCov">          8 :                 if (c == domain || *(c - 1) == '.') return 0;</span>
 <span class="lineNum">      69 </span><span class="lineCov">          4 :                 count++;</span>
 <span class="lineNum">      70 </span><span class="lineCov">          4 :             }</span>
-<span class="lineNum">      71 </span><span class="lineCov">         82 :             if (*c &lt;= ' ' || *c &gt;= 127) return 0;</span>
-<span class="lineNum">      72 </span><span class="lineCov">         40 :             if (strchr(rfc822_specials, *c)) return 0;</span>
-<span class="lineNum">      73 </span><span class="lineCov">         40 :         }</span>
-<span class="lineNum">      74 </span><span class="lineCov">         40 :         while (++c != address.cend());</span>
+<span class="lineNum">      71 </span><span class="lineCov">         80 :             if (*c &lt;= ' ' || *c &gt;= 127) return 0;</span>
+<span class="lineNum">      72 </span><span class="lineCov">         41 :             if (strchr(rfc822_specials, *c)) return 0;</span>
+<span class="lineNum">      73 </span><span class="lineCov">         39 :         }</span>
+<span class="lineNum">      74 </span><span class="lineCov">         39 :         while (++c != address.cend());</span>
 <span class="lineNum">      75 </span>            : 
 <span class="lineNum">      76 </span><span class="lineCov">          5 :         return (count &gt;= 1);</span>
 <span class="lineNum">      77 </span><span class="lineCov">          8 :     }</span>

@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Code Coverage - json/src/object.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">json/src</a> - object.h<span style="font-size: 80%;"> (source / <a href="object.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2014-07-20</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef ARG3_JSON_OBJECT_H_</a>
+<span class="lineNum">       2 </span>            : #define ARG3_JSON_OBJECT_H_
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : #include &lt;json/json.h&gt;
+<span class="lineNum">       5 </span>            : #include &lt;string&gt;
+<span class="lineNum">       6 </span>            : #include &lt;complex&gt;
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : namespace arg3
+<span class="lineNum">       9 </span>            : {
+<span class="lineNum">      10 </span>            : 
+<a name="11"><span class="lineNum">      11 </span>            :     template&lt;class T&gt;</a>
+<span class="lineNum">      12 </span>            :     typename std::enable_if &lt; !std::numeric_limits&lt;T&gt;::is_integer, bool &gt;::type
+<span class="lineNum">      13 </span>            :     almost_equal(T x, T y, int ulp)
+<span class="lineNum">      14 </span>            :     {
+<span class="lineNum">      15 </span>            :         // the machine epsilon has to be scaled to the magnitude of the larger value
+<span class="lineNum">      16 </span>            :         // and multiplied by the desired precision in ULPs (units in the last place)
+<span class="lineNum">      17 </span><span class="lineCov">          3 :         return std::abs(x - y) &lt;= std::numeric_limits&lt;T&gt;::epsilon()</span>
+<span class="lineNum">      18 </span><span class="lineCov">          3 :                * std::max(std::abs(x), std::abs(y))</span>
+<span class="lineNum">      19 </span>            :                * ulp;
+<span class="lineNum">      20 </span>            :     }
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            :     namespace json
+<span class="lineNum">      23 </span>            :     {
+<span class="lineNum">      24 </span>            :         class array;
+<span class="lineNum">      25 </span>            :         class object_iterator;
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            :         class object
+<span class="lineNum">      29 </span>            :         {
+<span class="lineNum">      30 </span>            :             friend class array;
+<span class="lineNum">      31 </span>            :         public:
+<span class="lineNum">      32 </span>            :             typedef object_iterator iterator;
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            :             object(json_object *value);
+<span class="lineNum">      35 </span>            :             object();
+<span class="lineNum">      36 </span>            :             object(const std::string &amp;value);
+<span class="lineNum">      37 </span>            :             object(const char *value);
+<span class="lineNum">      38 </span>            :             object(std::istream &amp;is);
+<span class="lineNum">      39 </span>            :             object(int32_t value);
+<span class="lineNum">      40 </span>            :             object(int64_t value);
+<span class="lineNum">      41 </span>            :             object(double value);
+<span class="lineNum">      42 </span>            :             object(bool value);
+<span class="lineNum">      43 </span>            :             object(const object &amp;object);
+<span class="lineNum">      44 </span>            :             object(object &amp;&amp;other);
+<span class="lineNum">      45 </span>            :             virtual ~object();
+<span class="lineNum">      46 </span>            :             object &amp;operator=(const object &amp;obj);
+<span class="lineNum">      47 </span>            :             object &amp;operator=(object &amp;&amp; other);
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span>            :             bool is_valid() const;
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            :             int32_t get_int(const std::string &amp;key) const;
+<span class="lineNum">      52 </span>            :             int64_t get_int64(const std::string &amp;key) const;
+<span class="lineNum">      53 </span>            :             bool get_bool(const std::string &amp;key) const;
+<span class="lineNum">      54 </span>            :             double get_double(const std::string &amp;key) const;
+<span class="lineNum">      55 </span>            :             std::string get_string(const std::string &amp;key) const;
+<span class="lineNum">      56 </span>            :             array get_array(const std::string &amp;key) const;
+<span class="lineNum">      57 </span>            :             object get(const std::string &amp;key) const;
+<span class="lineNum">      58 </span>            :             size_t size() const;
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            :             json_type type() const;
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span>            :             bool contains(const std::string &amp;key) const;
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            :             object remove(const std::string &amp;key);
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            :             bool parse(const std::string &amp;value);
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span>            :             void set_int(const std::string &amp;key, int32_t value);
+<span class="lineNum">      69 </span>            :             void set_int64(const std::string &amp;key, int64_t value);
+<span class="lineNum">      70 </span>            :             void set_bool(const std::string &amp;key, bool value);
+<span class="lineNum">      71 </span>            :             void set_double(const std::string &amp;key, double value);
+<span class="lineNum">      72 </span>            :             void set_string(const std::string &amp;key, const std::string &amp;value);
+<span class="lineNum">      73 </span>            :             void set_array(const std::string &amp;key, const array &amp;value);
+<span class="lineNum">      74 </span>            :             void set_null(const std::string &amp;key);
+<span class="lineNum">      75 </span>            :             void set(const std::string &amp;key, const object &amp;value);
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span>            :             int32_t to_int() const;
+<span class="lineNum">      78 </span>            :             int64_t to_int64() const;
+<span class="lineNum">      79 </span>            :             bool to_bool() const;
+<span class="lineNum">      80 </span>            :             double to_double() const;
+<span class="lineNum">      81 </span>            :             std::string to_string() const;
+<span class="lineNum">      82 </span>            : 
+<span class="lineNum">      83 </span>            :             bool is_int() const;
+<span class="lineNum">      84 </span>            :             bool is_bool() const;
+<span class="lineNum">      85 </span>            :             bool is_double() const;
+<span class="lineNum">      86 </span>            :             bool is_string() const;
+<span class="lineNum">      87 </span>            :             bool is_object() const;
+<span class="lineNum">      88 </span>            :             bool is_null() const;
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span>            :             iterator begin();
+<span class="lineNum">      91 </span>            :             iterator end();
+<span class="lineNum">      92 </span>            :             iterator begin() const;
+<span class="lineNum">      93 </span>            :             iterator end() const;
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span>            :             operator std::string() const;
+<span class="lineNum">      96 </span>            : 
+<span class="lineNum">      97 </span>            :             bool operator==(const object &amp;other) const;
+<span class="lineNum">      98 </span>            :             bool operator!=(const object &amp;other) const;
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span>            :             friend bool operator==(const array &amp;val, const object &amp;other);
+<span class="lineNum">     101 </span>            :         protected:
+<span class="lineNum">     102 </span>            :             void set_value(const std::string &amp;key, json_object *obj);
+<span class="lineNum">     103 </span>            :             void add_value(const std::string &amp;key, json_object *obj);
+<span class="lineNum">     104 </span>            :         private:
+<span class="lineNum">     105 </span>            :             json_object *value_;
+<span class="lineNum">     106 </span>            :         };
+<span class="lineNum">     107 </span>            : 
+<span class="lineNum">     108 </span>            :         bool operator==(const std::string &amp;val, const object &amp;other);
+<span class="lineNum">     109 </span>            :         bool operator==(int32_t val, const object &amp;other);
+<span class="lineNum">     110 </span>            :         bool operator==(int64_t val, const object &amp;other);
+<span class="lineNum">     111 </span>            :         bool operator==(double val, const object &amp;other);
+<span class="lineNum">     112 </span>            :         bool operator==(bool val, const object &amp;other);
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span>            :         bool operator!=(const std::string &amp;val, const object &amp;other);
+<span class="lineNum">     116 </span>            :         bool operator!=(int32_t val, const object &amp;other);
+<span class="lineNum">     117 </span>            :         bool operator!=(int64_t val, const object &amp;other);
+<span class="lineNum">     118 </span>            :         bool operator!=(double val, const object &amp;other);
+<span class="lineNum">     119 </span>            :         bool operator!=(bool val, const object &amp;other);
+<span class="lineNum">     120 </span>            :     }
+<span class="lineNum">     121 </span>            : }
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span>            : #include &quot;object_iterator.h&quot;
+<span class="lineNum">     124 </span>            : 
+<span class="lineNum">     125 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
