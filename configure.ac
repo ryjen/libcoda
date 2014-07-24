@@ -28,6 +28,11 @@ if test x"$GIT_CHECK" != x"yes" ; then
     AC_MSG_ERROR([Required program 'git' not found.])
 fi
 
+<<<<<<< HEAD
+=======
+#coverage
+
+>>>>>>> 8d3f9626fcdf93e097c4f1832fe6854659c17ff8
 m4_include([m4/gcov.m4])
 AC_TDD_GCOV
 AC_SUBST(COVERAGE_CFLAGS)

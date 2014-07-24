@@ -129,10 +129,11 @@ namespace arg3
 
         if (value.length() > 0)
         {
-            ostream_iterator<string::value_type> it(buf, delimiter.c_str());
-
             for (string::size_type i = 0; i < count - 1; i++)
-                copy(value.begin(), value.end(), it);
+            {
+                buf << value;
+                buf << delimiter;
+            }
 
             buf << value;
         }
@@ -217,6 +218,9 @@ namespace arg3
         string::size_type sstr1, sstr2;
 
         sstr1 = astr.length();
+
+        if (sstr1 == 0) return false;
+
         sstr2 = bstr.length();
 
         if ( sstr1 <= sstr2 && equals( astr, bstr.substr(sstr2 - sstr1), caseSensitive ) )
@@ -233,7 +237,7 @@ namespace arg3
         char c0;
 
         if ( (sstr1 = astr.length()) == 0 )
-            return true;
+            return false;
 
         c0 = tolower(astr[0]);
 
