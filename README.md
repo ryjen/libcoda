@@ -16,7 +16,7 @@ git submodule update
 Building
 ========
 
-Requires [autotools](http://en.wikipedia.org/wiki/GNU_build_system).
+I use [autotools](http://en.wikipedia.org/wiki/GNU_build_system).
 
 ```bash
 ./configure --prefix=/usr/local
