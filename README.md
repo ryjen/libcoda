@@ -10,8 +10,10 @@ Submodules
 
 After cloning run two commands to initialize submodules:
 
+```bash
 git submodule init
 git submodule update
+```
 
 Building
 ========
