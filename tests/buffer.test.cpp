@@ -1,7 +1,7 @@
-#include <igloo/igloo.h>
+#include <bandit/bandit.h>
 #include "../src/string/buffer.h"
 
-using namespace igloo;
+using namespace bandit;
 using namespace arg3;
 
 
@@ -22,240 +22,247 @@ public:
     }
 };
 
-Context(buffer_test)
+go_bandit([]()
 {
-    Spec(copy_constructor)
+
+    describe("a buffer", []()
     {
-        buffer buf;
+        it("has a copy constructor", []()
+        {
+            buffer buf;
 
-        buf.write("lorum ipsum");
+            buf.write("lorum ipsum");
 
-        buffer other(buf);
+            buffer other(buf);
 
-        Assert::That(other.to_string(), Equals("lorum ipsum"));
-    }
+            Assert::That(other.to_string(), Equals("lorum ipsum"));
+        });
 
-    Spec(move_constructor)
-    {
-        buffer buf;
+        it("has a move constructor", []()
+        {
+            buffer buf;
 
-        buf.writeln("test");
+            buf.writeln("test");
 
-        buffer other = std::move(buf);
+            buffer other = std::move(buf);
 
-        Assert::That(other.to_string(), Equals("test\n"));
+            Assert::That(other.to_string(), Equals("test\n"));
 
-        Assert::That(buf.empty(), Equals(true));
+            Assert::That(buf.empty(), Equals(true));
 
-    }
+        });
 
-    Spec(copy_assignment)
-    {
-        buffer buf;
+        it("can be copy assigned", []()
+        {
+            buffer buf;
 
-        buf.write("lorum ipsum");
+            buf.write("lorum ipsum");
 
-        buffer other;
+            buffer other;
 
-        other = buf;
+            other = buf;
 
-        Assert::That(other.to_string(), Equals("lorum ipsum"));
-    }
+            Assert::That(other.to_string(), Equals("lorum ipsum"));
+        });
 
-    Spec(writeln)
-    {
-        test_buffer buf;
+        it("can write a line", []()
+        {
+            test_buffer buf;
 
-        buf.writeln("lorum ipsum");
+            buf.writeln("lorum ipsum");
 
-        Assert::That(buf.output().size(), Equals(13));
+            Assert::That(buf.output().size(), Equals(13));
 
-        buf.output().clear();
+            buf.output().clear();
 
-        buffered_data data = {'h', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd' };
+            buffered_data data = {'h', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd' };
 
-        buf.writeln(data);
+            buf.writeln(data);
 
-        Assert::That(buf.output().size(), Equals(data.size() + 2));
+            Assert::That(buf.output().size(), Equals(data.size() + 2));
 
-        buf.writeln();
+            buf.writeln();
 
-        Assert::That(buf.output().size(), Equals(data.size() + 4));
+            Assert::That(buf.output().size(), Equals(data.size() + 4));
 
-        buffer buf2;
+            buffer buf2;
 
-        buf2.writeln("test");
+            buf2.writeln("test");
 
-        Assert::That(buf2.to_string(), Equals("test\n"));
+            Assert::That(buf2.to_string(), Equals("test\n"));
 
-        buf2.writeln();
+            buf2.writeln();
 
-        Assert::That(buf2.to_string(), Equals("test\n\n"));
-    }
+            Assert::That(buf2.to_string(), Equals("test\n\n"));
+        });
 
-    Spec(empty)
-    {
-        buffer buf;
+        it("can be empty", []()
+        {
+            buffer buf;
 
-        Assert::That(buf.empty(), Equals(true));
+            Assert::That(buf.empty(), Equals(true));
 
-        buf.write("lorum ipsum");
+            buf.write("lorum ipsum");
 
-        Assert::That(buf.empty(), Equals(false));
-    }
+            Assert::That(buf.empty(), Equals(false));
+        });
 
-    Spec(write)
-    {
-        buffer buf;
+        it("can write", []()
+        {
+            buffer buf;
 
-        buf.write("test");
+            buf.write("test");
 
-        Assert::That(buf.to_string(), Equals("test"));
+            Assert::That(buf.to_string(), Equals("test"));
 
-        test_buffer testBuf;
+            test_buffer testBuf;
 
-        testBuf.write("lorum ipsum");
+            testBuf.write("lorum ipsum");
 
-        Assert::That(testBuf.output().size(), Equals(11));
+            Assert::That(testBuf.output().size(), Equals(11));
 
-        buffered_data data = { 't', 'e', 's', 't', 'i', 'n', 'g' };
+            buffered_data data = { 't', 'e', 's', 't', 'i', 'n', 'g' };
 
-        testBuf.write(data);
+            testBuf.write(data);
 
-        Assert::That(testBuf.output().size(), Equals(18));
-    }
+            Assert::That(testBuf.output().size(), Equals(18));
+        });
 
-    Spec(readln)
-    {
-        test_buffer buf;
+        it("can read a line", []()
+        {
+            test_buffer buf;
 
-        buf.writeln("lorum ipsum");
+            buf.writeln("lorum ipsum");
 
-        buf.writeln("testing 1234");
+            buf.writeln("testing 1234");
 
-        buf.read_to_buffer();
+            buf.read_to_buffer();
 
-        std::string test = buf.readln();
+            std::string test = buf.readln();
 
-        Assert::That(test, Equals("lorum ipsum"));
+            Assert::That(test, Equals("lorum ipsum"));
 
-        test = buf.readln();
+            test = buf.readln();
 
-        Assert::That(test, Equals("testing 1234"));
+            Assert::That(test, Equals("testing 1234"));
 
-        test = buf.readln();
+            test = buf.readln();
 
-        Assert::That(test.empty(), Equals(true));
+            Assert::That(test.empty(), Equals(true));
 
-        buf.write("test");
+            buf.write("test");
 
-        buf.read_to_buffer();
+            buf.read_to_buffer();
 
-        Assert::That(buf.readln(), Equals("test"));
-    }
+            Assert::That(buf.readln(), Equals("test"));
+        });
 
-    Spec(has_input)
-    {
-        test_buffer buf;
+        it("can test for input", []()
+        {
+            test_buffer buf;
 
-        buf.writeln("lorum ipsum");
+            buf.writeln("lorum ipsum");
 
-        buf.read_to_buffer();
+            buf.read_to_buffer();
 
-        Assert::That(buf.has_input(), Equals(true));
+            Assert::That(buf.has_input(), Equals(true));
 
-        buf.readln();
+            buf.readln();
 
-        Assert::That(buf.has_input(), Equals(false));
-    }
+            Assert::That(buf.has_input(), Equals(false));
+        });
 
-    Spec(input)
-    {
-        test_buffer buf;
+        it("can get input", []()
+        {
+            test_buffer buf;
 
-        Assert::That(buf.input().size(), Equals(0));
+            Assert::That(buf.input().size(), Equals(0));
 
-        buf.writeln("lorum ipsum");
+            buf.writeln("lorum ipsum");
 
-        buf.read_to_buffer();
+            buf.read_to_buffer();
 
-        auto input = buf.input();
+            auto input = buf.input();
 
-        Assert::That(input.size(), Equals(13));
-    }
+            Assert::That(input.size(), Equals(13));
+        });
 
-    Spec(append)
-    {
-        buffer buf;
+        it("can append", []()
+        {
+            buffer buf;
 
-        buf.write("test").write("ing").write(" ").write("1 2 3");
+            buf.write("test").write("ing").write(" ").write("1 2 3");
 
-        Assert::That(buf.to_string(), Equals("testing 1 2 3"));
-    }
+            Assert::That(buf.to_string(), Equals("testing 1 2 3"));
+        });
 
-    Spec(has_output)
-    {
-        test_buffer buf;
+        it("can test for output", []()
+        {
+            test_buffer buf;
 
-        Assert::That(buf.has_output(), Equals(false));
+            Assert::That(buf.has_output(), Equals(false));
 
-        buf.writeln("lorum ipsum");
+            buf.writeln("lorum ipsum");
 
-        Assert::That(buf.has_output(), Equals(true));
-    }
+            Assert::That(buf.has_output(), Equals(true));
+        });
 
-    Spec(output)
-    {
-        test_buffer buf;
+        it("can get output", []()
+        {
+            test_buffer buf;
 
-        Assert::That(buf.output().size(), Equals(0));
+            Assert::That(buf.output().size(), Equals(0));
 
-        buf.writeln("lorum ipsum");
+            buf.writeln("lorum ipsum");
 
-        Assert::That(buf.output().size(), Equals(13));
-    }
+            Assert::That(buf.output().size(), Equals(13));
+        });
 
-    Spec(append_operator)
-    {
-        buffer buf;
+        it("can left shift output", []()
+        {
+            buffer buf;
 
-        buf << "testing";
+            buf << "testing";
 
-        buf << " " << "1 2 3" << "\n";
+            buf << " " << "1 2 3" << "\n";
 
-        Assert::That(buf.to_string(), Equals("testing 1 2 3\n"));
-    }
+            Assert::That(buf.to_string(), Equals("testing 1 2 3\n"));
+        });
 
-    Spec(string_operator)
-    {
-        buffer buf;
+        it("can be cast to a string", []()
+        {
+            buffer buf;
 
-        buf << "testing";
+            buf << "testing";
 
-        std::string temp = buf;
+            std::string temp = buf;
 
-        Assert::That(temp, Equals("testing"));
-    }
+            Assert::That(temp, Equals("testing"));
+        });
 
-    Spec(string_constructor)
-    {
-        buffer buf = "testing 1 2 3";
+        it("can be constructed from a string", []()
+        {
+            buffer buf = "testing 1 2 3";
 
-        Assert::That(buf.to_string(), Equals("testing 1 2 3"));
-    }
+            Assert::That(buf.to_string(), Equals("testing 1 2 3"));
+        });
 
-    Spec(remove)
-    {
-        buffer buf = "testing 1 2 3";
+        it("can remove output", []()
+        {
+            buffer buf = "testing 1 2 3";
 
-        buf.remove(buf.length() - 2);
+            buf.remove(buf.length() - 2);
 
-        Assert::That(buf.to_string(), Equals("testing 1 2"));
+            Assert::That(buf.to_string(), Equals("testing 1 2"));
 
-        buf = "testing 1 2 3";
+            buf = "testing 1 2 3";
 
-        buf.remove(buf.length() - 4, buf.length() - 2);
+            buf.remove(buf.length() - 4, buf.length() - 2);
 
-        Assert::That(buf.to_string(), Equals("testing 1 3"));
-    }
-};
+            Assert::That(buf.to_string(), Equals("testing 1 3"));
+        });
+    });
+
+
+});
+

@@ -1,15 +1,19 @@
-#include <igloo/igloo.h>
+#include <bandit/bandit.h>
 #include "../src/log/log.h"
 
-using namespace igloo;
+using namespace bandit;
 
 using namespace arg3;
 
-
-Context(arg3log)
+go_bandit([]()
 {
-    Spec(lookup_log_level)
+
+    describe("a log", []()
     {
-        Assert::That(log::lookup_log_level("debug"), Equals(log::DEBUG));
-    }
-};
+        it("can lookup a log level", []()
+        {
+            Assert::That(log::lookup_log_level("debug"), Equals(log::DEBUG));
+        });
+    });
+
+});

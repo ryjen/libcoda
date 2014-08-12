@@ -1,11 +1,12 @@
 
-#include <igloo/igloo.h>
+#include <bandit/bandit.h>
 #include "../src/log/log.h"
 
-using namespace igloo;
+using namespace bandit;
 
-int main()
+int main(int argc, char *argv[])
 {
     arg3::log::set_min_log_level(arg3::log::DEBUG);
-    return TestRunner::RunAllTests();
+
+    return bandit::run(argc, argv);
 }

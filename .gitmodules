@@ -13,3 +13,6 @@
 [submodule "src/db"]
 	path = src/db
 	url = http://github.com/c0der78/arg3db
+[submodule "tests/vendor/bandit"]
+	path = tests/vendor/bandit
+	url = https://github.com/joakimkarlsson/bandit.git
