@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-08-08 16:51:48</td>
+            <td class="headerValue">2014-08-12 00:40:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">14</td>
@@ -78,25 +78,25 @@
 <a name="8"><span class="lineNum">       8 </span>            : </a>
 <span class="lineNum">       9 </span>            : 
 <span class="lineNum">      10 </span>            :         scoresheet::scoresheet()
-<span class="lineNum">      11 </span><span class="lineCov">          7 :         {</span>
-<span class="lineNum">      12 </span><span class="lineCov">          7 :             lowerValues_.fill(0);</span>
-<span class="lineNum">      13 </span><span class="lineCov">          7 :             upperValues_.fill(0);</span>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">         14 :         }</span></a>
+<span class="lineNum">      11 </span><span class="lineCov">         25 :         {</span>
+<span class="lineNum">      12 </span><span class="lineCov">         25 :             lowerValues_.fill(0);</span>
+<span class="lineNum">      13 </span><span class="lineCov">         25 :             upperValues_.fill(0);</span>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">         50 :         }</span></a>
 <span class="lineNum">      15 </span>            : 
 <span class="lineNum">      16 </span>            :         scoresheet::scoresheet(const scoresheet &amp;other) : upperValues_(other.upperValues_), lowerValues_(other.lowerValues_)
 <span class="lineNum">      17 </span><span class="lineCov">          1 :         {</span>
 <span class="lineNum">      18 </span>            : 
 <a name="19"><span class="lineNum">      19 </span><span class="lineCov">          2 :         }</span></a>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">          2 :         scoresheet::scoresheet(scoresheet &amp;&amp;other) : upperValues_(std::move(other.upperValues_)), lowerValues_(std::move(other.lowerValues_))</span>
-<span class="lineNum">      22 </span><span class="lineCov">          2 :         {</span>
+<span class="lineNum">      21 </span><span class="lineCov">          3 :         scoresheet::scoresheet(scoresheet &amp;&amp;other) : upperValues_(std::move(other.upperValues_)), lowerValues_(std::move(other.lowerValues_))</span>
+<span class="lineNum">      22 </span><span class="lineCov">          3 :         {</span>
 <span class="lineNum">      23 </span>            : 
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          4 :         }</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          6 :         }</span></a>
 <span class="lineNum">      25 </span>            : 
 <span class="lineNum">      26 </span>            :         scoresheet::~scoresheet()
-<span class="lineNum">      27 </span><span class="lineCov">         14 :         {</span>
+<span class="lineNum">      27 </span><span class="lineCov">         33 :         {</span>
 <span class="lineNum">      28 </span>            : 
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">         24 :         }</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">         62 :         }</span></a>
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span>            :         scoresheet &amp;scoresheet::operator=(const scoresheet &amp;other)
 <span class="lineNum">      32 </span>            :         {
@@ -126,22 +126,22 @@
 <span class="lineNum">      56 </span>            : 
 <span class="lineNum">      57 </span>            :         void scoresheet::lower_score(type index, scoresheet::value_type value)
 <span class="lineNum">      58 </span>            :         {
-<span class="lineNum">      59 </span><span class="lineCov">          1 :             lowerValues_[index] = value;</span>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          1 :         }</span></a>
+<span class="lineNum">      59 </span><span class="lineCov">          8 :             lowerValues_[index] = value;</span>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          8 :         }</span></a>
 <span class="lineNum">      61 </span>            : 
 <span class="lineNum">      62 </span>            :         void scoresheet::upper_score(die::value_type index, scoresheet::value_type value)
 <span class="lineNum">      63 </span>            :         {
-<span class="lineNum">      64 </span><span class="lineCov">         15 :             upperValues_[index] = value;</span>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         15 :         }</span></a>
+<span class="lineNum">      64 </span><span class="lineCov">          8 :             upperValues_[index] = value;</span>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          8 :         }</span></a>
 <span class="lineNum">      66 </span>            : 
 <span class="lineNum">      67 </span>            :         scoresheet::value_type scoresheet::lower_score(type index) const
 <span class="lineNum">      68 </span>            :         {
-<span class="lineNum">      69 </span><span class="lineCov">         21 :             return lowerValues_[index];</span>
+<span class="lineNum">      69 </span><span class="lineCov">         28 :             return lowerValues_[index];</span>
 <a name="70"><span class="lineNum">      70 </span>            :         }</a>
 <span class="lineNum">      71 </span>            : 
 <span class="lineNum">      72 </span>            :         scoresheet::value_type scoresheet::upper_score(die::value_type index) const
 <span class="lineNum">      73 </span>            :         {
-<span class="lineNum">      74 </span><span class="lineCov">         34 :             return upperValues_[index];</span>
+<span class="lineNum">      74 </span><span class="lineCov">         27 :             return upperValues_[index];</span>
 <span class="lineNum">      75 </span>            :         }
 <span class="lineNum">      76 </span>            : 
 <span class="lineNum">      77 </span>            :     }

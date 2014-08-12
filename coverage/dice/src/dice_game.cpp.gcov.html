@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-08-08 16:51:48</td>
+            <td class="headerValue">2014-08-12 00:40:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -73,22 +73,22 @@
 <a name="3"><span class="lineNum">       3 </span>            : namespace arg3</a>
 <span class="lineNum">       4 </span>            : {
 <span class="lineNum">       5 </span>            :     dice_game::dice_game(unsigned int count, unsigned int sides, die::engine *const engine) : dice_(count, sides, engine)
-<span class="lineNum">       6 </span><span class="lineCov">          3 :     {</span>
+<span class="lineNum">       6 </span><span class="lineCov">         21 :     {</span>
 <span class="lineNum">       7 </span>            : 
-<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          3 :     }</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">         21 :     }</span></a>
 <span class="lineNum">       9 </span>            : 
 <span class="lineNum">      10 </span>            :     dice_game::dice_game(const dice_game &amp;other) : dice_(other.dice_)
 <span class="lineNum">      11 </span><span class="lineCov">          1 :     {</span>
 <span class="lineNum">      12 </span>            : 
 <a name="13"><span class="lineNum">      13 </span><span class="lineCov">          1 :     }</span></a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">          2 :     dice_game::dice_game(dice_game &amp;&amp;other) : dice_(std::move(other.dice_))</span>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          4 :     {}</span></a>
+<span class="lineNum">      15 </span><span class="lineCov">          3 :     dice_game::dice_game(dice_game &amp;&amp;other) : dice_(std::move(other.dice_))</span>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          6 :     {}</span></a>
 <span class="lineNum">      17 </span>            : 
 <span class="lineNum">      18 </span>            :     dice_game::~dice_game()
-<span class="lineNum">      19 </span><span class="lineCov">          6 :     {</span>
+<span class="lineNum">      19 </span><span class="lineCov">         25 :     {</span>
 <span class="lineNum">      20 </span>            : 
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          6 :     }</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">         25 :     }</span></a>
 <span class="lineNum">      22 </span>            : 
 <span class="lineNum">      23 </span>            :     dice_game &amp;dice_game::operator=(const dice_game &amp;other)
 <span class="lineNum">      24 </span>            :     {

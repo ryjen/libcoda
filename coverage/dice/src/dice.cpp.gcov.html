@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-08-08 16:51:48</td>
+            <td class="headerValue">2014-08-12 00:40:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">33</td>
@@ -98,21 +98,21 @@
 <a name="28"><span class="lineNum">      28 </span><span class="lineNoCov">          0 :     }</span></a>
 <span class="lineNum">      29 </span>            : 
 <span class="lineNum">      30 </span>            :     die::die(const unsigned int sides, die::engine *const engine) : engine_(engine), value_(0), keep_(false)
-<span class="lineNum">      31 </span><span class="lineCov">         62 :     {</span>
-<span class="lineNum">      32 </span><span class="lineCov">         62 :         if (sides == 0)</span>
+<span class="lineNum">      31 </span><span class="lineCov">        152 :     {</span>
+<span class="lineNum">      32 </span><span class="lineCov">        152 :         if (sides == 0)</span>
 <span class="lineNum">      33 </span>            :         {
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 :             throw new invalid_argument(&quot;dice must have one or more sides.&quot;);</span>
 <span class="lineNum">      35 </span>            :         }
 <span class="lineNum">      36 </span>            : 
-<span class="lineNum">      37 </span><span class="lineCov">         62 :         sides_ = sides;</span>
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">        124 :     }</span></a>
+<span class="lineNum">      37 </span><span class="lineCov">        152 :         sides_ = sides;</span>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">        304 :     }</span></a>
 <span class="lineNum">      39 </span>            : 
 <span class="lineNum">      40 </span>            :     die::die(const die &amp;other) : engine_(other.engine_), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
-<span class="lineNum">      41 </span><span class="lineCov">         88 :     {</span>
-<a name="42"><span class="lineNum">      42 </span><span class="lineCov">        176 :     }</span></a>
+<span class="lineNum">      41 </span><span class="lineCov">        214 :     {</span>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">        428 :     }</span></a>
 <span class="lineNum">      43 </span>            : 
-<span class="lineNum">      44 </span><span class="lineCov">         57 :     die::die(die &amp;&amp;other) : engine_(std::move(other.engine_)), sides_(other.sides_), value_(other.value_), keep_(other.keep_)</span>
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">        171 :     {}</span></a>
+<span class="lineNum">      44 </span><span class="lineCov">        147 :     die::die(die &amp;&amp;other) : engine_(std::move(other.engine_)), sides_(other.sides_), value_(other.value_), keep_(other.keep_)</span>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">        441 :     {}</span></a>
 <span class="lineNum">      46 </span>            : 
 <span class="lineNum">      47 </span>            :     die &amp;die::operator= (const die &amp;other)
 <span class="lineNum">      48 </span>            :     {
@@ -135,9 +135,9 @@
 <a name="65"><span class="lineNum">      65 </span>            :     }</a>
 <span class="lineNum">      66 </span>            : 
 <span class="lineNum">      67 </span>            :     die::~die()
-<span class="lineNum">      68 </span><span class="lineCov">        207 :     {</span>
+<span class="lineNum">      68 </span><span class="lineCov">        513 :     {</span>
 <span class="lineNum">      69 </span>            :         // nothing to do
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">        414 :     }</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">       1026 :     }</span></a>
 <span class="lineNum">      71 </span>            : 
 <span class="lineNum">      72 </span>            :     bool die::operator== (const die &amp;rhs) const
 <span class="lineNum">      73 </span>            :     {
@@ -201,10 +201,10 @@
 <a name="131"><span class="lineNum">     131 </span>            : </a>
 <span class="lineNum">     132 </span>            :     // creates x dice with y sides
 <span class="lineNum">     133 </span>            :     dice::dice(const unsigned int count, const unsigned int sides, die::engine *const engine) : bonus_(0), dice_(), lastRoll_()
-<span class="lineNum">     134 </span><span class="lineCov">          8 :     {</span>
-<span class="lineNum">     135 </span><span class="lineCov">        130 :         for (int i = 0; i &lt; count; i++)</span>
-<span class="lineNum">     136 </span><span class="lineCov">        171 :             dice_.push_back(die(sides, engine));</span>
-<span class="lineNum">     137 </span><span class="lineCov">         16 :     }</span>
+<span class="lineNum">     134 </span><span class="lineCov">         26 :     {</span>
+<span class="lineNum">     135 </span><span class="lineCov">        346 :         for (int i = 0; i &lt; count; i++)</span>
+<span class="lineNum">     136 </span><span class="lineCov">        441 :             dice_.push_back(die(sides, engine));</span>
+<span class="lineNum">     137 </span><span class="lineCov">         52 :     }</span>
 <a name="138"><span class="lineNum">     138 </span>            : </a>
 <span class="lineNum">     139 </span>            :     // copy constructor
 <span class="lineNum">     140 </span>            :     dice::dice(const dice &amp;other) : bonus_(other.bonus_), dice_(other.dice_), lastRoll_(other.lastRoll_)
@@ -212,9 +212,9 @@
 <span class="lineNum">     142 </span><span class="lineCov">          2 :     }</span>
 <a name="143"><span class="lineNum">     143 </span>            : </a>
 <span class="lineNum">     144 </span>            :     // move constructor
-<span class="lineNum">     145 </span><span class="lineCov">          4 :     dice::dice(dice &amp;&amp;other) : bonus_(other.bonus_), dice_(std::move(other.dice_)), lastRoll_(std::move(other.lastRoll_))</span>
-<span class="lineNum">     146 </span><span class="lineCov">          6 :     {</span>
-<a name="147"><span class="lineNum">     147 </span><span class="lineCov">          4 :     }</span></a>
+<span class="lineNum">     145 </span><span class="lineCov">          6 :     dice::dice(dice &amp;&amp;other) : bonus_(other.bonus_), dice_(std::move(other.dice_)), lastRoll_(std::move(other.lastRoll_))</span>
+<span class="lineNum">     146 </span><span class="lineCov">          9 :     {</span>
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">          6 :     }</span></a>
 <span class="lineNum">     148 </span>            : 
 <span class="lineNum">     149 </span>            :     dice &amp;dice::operator=(const dice &amp;other)
 <span class="lineNum">     150 </span>            :     {
@@ -246,9 +246,9 @@
 <a name="176"><span class="lineNum">     176 </span>            : </a>
 <span class="lineNum">     177 </span>            :     // deconstructor
 <span class="lineNum">     178 </span>            :     dice::~dice()
-<span class="lineNum">     179 </span><span class="lineCov">         22 :     {</span>
+<span class="lineNum">     179 </span><span class="lineCov">         60 :     {</span>
 <span class="lineNum">     180 </span>            : 
-<span class="lineNum">     181 </span><span class="lineCov">         22 :     }</span>
+<span class="lineNum">     181 </span><span class="lineCov">         60 :     }</span>
 <a name="182"><span class="lineNum">     182 </span>            : </a>
 <span class="lineNum">     183 </span>            :     // iterator methods
 <span class="lineNum">     184 </span>            :     dice::iterator dice::begin()
