@@ -8,4 +8,4 @@ AM_CPPFLAGS = -std=c++11 -stdlib=libc++ -Ivendor/bandit -Wall -Werror
 arg3_test_LDADD =  ../src/format/src/libarg3fmt-0.2.la ../src/string/libarg3str-0.1.la ../src/log/libarg3log-0.1.la
 
 all-local: arg3_test$(EXEEXT)
-	./arg3_test
+	./arg3_test$(EXEEXT)
