@@ -588,7 +588,7 @@ uninstall-am:
 
 
 all-local: arg3_test$(EXEEXT)
-	./arg3_test
+	./arg3_test$(EXEEXT)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

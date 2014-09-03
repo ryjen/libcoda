@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-08-24 22:28:36</td>
+            <td class="headerValue">2014-09-03 00:25:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">25</td>
@@ -204,22 +204,22 @@
 <a name="134"><span class="lineNum">     134 </span>            :         /* cached version */</a>
 <span class="lineNum">     135 </span>            : 
 <span class="lineNum">     136 </span>            :         sqlite3_cached_column::sqlite3_cached_column(shared_ptr&lt;sqlite3_stmt&gt; stmt, int column)
-<span class="lineNum">     137 </span><span class="lineCov">        212 :         {</span>
-<span class="lineNum">     138 </span><span class="lineCov">        424 :             name_ = sqlite3_column_name(stmt.get(), column);</span>
-<span class="lineNum">     139 </span><span class="lineCov">        424 :             type_ = sqlite3_column_type(stmt.get(), column);</span>
+<span class="lineNum">     137 </span><span class="lineCov">        222 :         {</span>
+<span class="lineNum">     138 </span><span class="lineCov">        444 :             name_ = sqlite3_column_name(stmt.get(), column);</span>
+<span class="lineNum">     139 </span><span class="lineCov">        444 :             type_ = sqlite3_column_type(stmt.get(), column);</span>
 <span class="lineNum">     140 </span>            : 
-<span class="lineNum">     141 </span><span class="lineCov">        509 :             switch (sqlite3_column_type(stmt.get(), column))</span>
+<span class="lineNum">     141 </span><span class="lineCov">        533 :             switch (sqlite3_column_type(stmt.get(), column))</span>
 <span class="lineNum">     142 </span>            :             {
 <span class="lineNum">     143 </span>            :             case SQLITE_INTEGER:
-<span class="lineNum">     144 </span><span class="lineCov">        172 :                 value_ = sqlite3_column_int64(stmt.get(), column);</span>
-<span class="lineNum">     145 </span><span class="lineCov">        128 :                 break;</span>
+<span class="lineNum">     144 </span><span class="lineCov">        180 :                 value_ = sqlite3_column_int64(stmt.get(), column);</span>
+<span class="lineNum">     145 </span><span class="lineCov">        134 :                 break;</span>
 <span class="lineNum">     146 </span>            :             case SQLITE_TEXT:
 <span class="lineNum">     147 </span>            :             default:
 <span class="lineNum">     148 </span>            :             {
-<span class="lineNum">     149 </span><span class="lineCov">        314 :                 const unsigned char *textValue = sqlite3_column_text(stmt.get(), column);</span>
-<span class="lineNum">     150 </span><span class="lineCov">        157 :                 if (textValue != NULL)</span>
-<span class="lineNum">     151 </span><span class="lineCov">        340 :                     value_ = std::string(reinterpret_cast&lt;const char *&gt;(textValue));</span>
-<span class="lineNum">     152 </span><span class="lineCov">        157 :                 break;</span>
+<span class="lineNum">     149 </span><span class="lineCov">        330 :                 const unsigned char *textValue = sqlite3_column_text(stmt.get(), column);</span>
+<span class="lineNum">     150 </span><span class="lineCov">        165 :                 if (textValue != NULL)</span>
+<span class="lineNum">     151 </span><span class="lineCov">        356 :                     value_ = std::string(reinterpret_cast&lt;const char *&gt;(textValue));</span>
+<span class="lineNum">     152 </span><span class="lineCov">        165 :                 break;</span>
 <span class="lineNum">     153 </span>            :             }
 <span class="lineNum">     154 </span>            :             case SQLITE_FLOAT:
 <span class="lineNum">     155 </span><span class="lineCov">         24 :                 value_ = sqlite3_column_double(stmt.get(), column);</span>
@@ -228,14 +228,14 @@
 <span class="lineNum">     158 </span><span class="lineCov">         36 :                 value_ = sql_blob(sqlite3_column_blob(stmt.get(), column), sqlite3_column_bytes(stmt.get(), column), NULL);</span>
 <span class="lineNum">     159 </span><span class="lineCov">          6 :                 break;</span>
 <span class="lineNum">     160 </span>            :             }
-<span class="lineNum">     161 </span><span class="lineCov">        424 :         }</span>
+<span class="lineNum">     161 </span><span class="lineCov">        444 :         }</span>
 <a name="162"><span class="lineNum">     162 </span>            : </a>
 <span class="lineNum">     163 </span>            : 
 <span class="lineNum">     164 </span><span class="lineNoCov">          0 :         sqlite3_cached_column::sqlite3_cached_column(sqlite3_cached_column &amp;&amp;other) : name_(std::move(other.name_)),</span>
 <span class="lineNum">     165 </span><span class="lineNoCov">          0 :             value_(std::move(other.value_)), type_(other.type_)</span>
 <a name="166"><span class="lineNum">     166 </span><span class="lineNoCov">          0 :         {}</span></a>
 <span class="lineNum">     167 </span>            : 
-<a name="168"><span class="lineNum">     168 </span><span class="lineCov">        424 :         sqlite3_cached_column::~sqlite3_cached_column() {}</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">        444 :         sqlite3_cached_column::~sqlite3_cached_column() {}</span></a>
 <span class="lineNum">     169 </span>            : 
 <span class="lineNum">     170 </span>            :         sqlite3_cached_column &amp;sqlite3_cached_column::operator=(sqlite3_cached_column &amp;&amp; other)
 <span class="lineNum">     171 </span>            :         {
