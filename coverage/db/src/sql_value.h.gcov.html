@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-09-03 00:25:07</td>
+            <td class="headerValue">2014-09-03 00:27:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">25</td>
@@ -125,7 +125,7 @@
 <span class="lineNum">      55 </span>            :         public:
 <a name="56"><span class="lineNum">      56 </span>            :             static const sql_null_type instance;</a>
 <span class="lineNum">      57 </span>            :         private:
-<span class="lineNum">      58 </span><span class="lineCov">          8 :             sql_null_type() {}</span>
+<span class="lineNum">      58 </span><span class="lineCov">          4 :             sql_null_type() {}</span>
 <span class="lineNum">      59 </span>            :         };
 <span class="lineNum">      60 </span>            : 
 <span class="lineNum">      61 </span>            :         /*!
@@ -164,8 +164,8 @@
 <a name="94"><span class="lineNum">      94 </span>            : </a>
 <span class="lineNum">      95 </span>            :             template&lt;typename T&gt;
 <span class="lineNum">      96 </span>            :             sql_value(const T &amp;value) : value_(value)
-<span class="lineNum">      97 </span><span class="lineCov">       2266 :             {</span>
-<span class="lineNum">      98 </span><span class="lineCov">       4532 :             }</span>
+<span class="lineNum">      97 </span><span class="lineCov">        999 :             {</span>
+<span class="lineNum">      98 </span><span class="lineCov">       1998 :             }</span>
 <span class="lineNum">      99 </span>            : 
 <span class="lineNum">     100 </span>            :             operator std::string() const;
 <span class="lineNum">     101 </span>            : 
@@ -249,12 +249,12 @@
 <span class="lineNum">     179 </span>            :             typedef bool result_type;
 <span class="lineNum">     180 </span>            :             bool operator()(const T &amp;value) const
 <span class="lineNum">     181 </span>            :             {
-<span class="lineNum">     182 </span><span class="lineCov">          3 :                 return true;</span>
+<span class="lineNum">     182 </span><span class="lineCov">          1 :                 return true;</span>
 <a name="183"><span class="lineNum">     183 </span>            :             }</a>
 <span class="lineNum">     184 </span>            :             template&lt;typename U&gt;
 <span class="lineNum">     185 </span>            :             bool operator()(const U &amp;value) const
 <span class="lineNum">     186 </span>            :             {
-<span class="lineNum">     187 </span><span class="lineCov">          4 :                 return false;</span>
+<span class="lineNum">     187 </span><span class="lineCov">          2 :                 return false;</span>
 <span class="lineNum">     188 </span>            :             }
 <span class="lineNum">     189 </span>            :         };
 <span class="lineNum">     190 </span>            : 
@@ -309,13 +309,13 @@
 <a name="239"><span class="lineNum">     239 </span>            :         public:</a>
 <span class="lineNum">     240 </span>            :             typedef void result_type;
 <span class="lineNum">     241 </span>            :             ostream_sql_value_visitor(std::ostream &amp;out) : out_(out)
-<span class="lineNum">     242 </span><span class="lineCov">        284 :             {}</span>
+<span class="lineNum">     242 </span><span class="lineCov">        124 :             {}</span>
 <a name="243"><span class="lineNum">     243 </span>            : </a>
 <span class="lineNum">     244 </span>            :             template&lt;typename T&gt;
 <span class="lineNum">     245 </span>            :             void operator()(const T &amp;value) const
 <span class="lineNum">     246 </span>            :             {
-<span class="lineNum">     247 </span><span class="lineCov">        142 :                 out_ &lt;&lt; value;</span>
-<span class="lineNum">     248 </span><span class="lineCov">        142 :             }</span>
+<span class="lineNum">     247 </span><span class="lineCov">         62 :                 out_ &lt;&lt; value;</span>
+<span class="lineNum">     248 </span><span class="lineCov">         62 :             }</span>
 <span class="lineNum">     249 </span>            :         };
 <span class="lineNum">     250 </span>            :         inline bool operator==(const std::string &amp;other, const sql_value &amp;value)
 <span class="lineNum">     251 </span>            :         {

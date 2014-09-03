@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-09-03 00:25:07</td>
+            <td class="headerValue">2014-09-03 00:27:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">21</td>
@@ -87,12 +87,12 @@
 <span class="lineNum">      17 </span>            :         class row_impl
 <a name="18"><span class="lineNum">      18 </span>            :         {</a>
 <a name="19"><span class="lineNum">      19 </span>            :         public:</a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">        998 :             row_impl() = default;</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">        513 :             row_impl() = default;</span></a>
 <span class="lineNum">      21 </span><span class="lineNoCov">          0 :             row_impl(const row_impl &amp;other) = default;</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :             row_impl(row_impl &amp;&amp;other) = default;</span>
 <a name="23"><span class="lineNum">      23 </span>            :             row_impl &amp;operator=(const row_impl &amp;other) = default;</a>
 <span class="lineNum">      24 </span>            :             row_impl &amp;operator=(row_impl &amp;&amp; other) = default;
-<span class="lineNum">      25 </span><span class="lineCov">        998 :             virtual ~row_impl() = default;</span>
+<span class="lineNum">      25 </span><span class="lineCov">        513 :             virtual ~row_impl() = default;</span>
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span>            :             virtual string column_name(size_t nPosition) const = 0;
 <span class="lineNum">      28 </span>            : 
@@ -117,11 +117,11 @@
 <span class="lineNum">      47 </span>            :             NonConst currentValue_;
 <span class="lineNum">      48 </span>            :             void set_current_value(size_t index)
 <span class="lineNum">      49 </span>            :             {
-<span class="lineNum">      50 </span><span class="lineCov">        208 :                 assert(row_ != nullptr);</span>
+<span class="lineNum">      50 </span><span class="lineCov">        104 :                 assert(row_ != nullptr);</span>
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">        104 :                 if (index &lt; row_-&gt;size())</span>
-<span class="lineNum">      53 </span><span class="lineCov">        208 :                     currentValue_ = row_-&gt;column(index);</span>
-<span class="lineNum">      54 </span><span class="lineCov">        104 :             }</span>
+<span class="lineNum">      52 </span><span class="lineCov">         52 :                 if (index &lt; row_-&gt;size())</span>
+<span class="lineNum">      53 </span><span class="lineCov">        104 :                     currentValue_ = row_-&gt;column(index);</span>
+<span class="lineNum">      54 </span><span class="lineCov">         52 :             }</span>
 <span class="lineNum">      55 </span>            :         public:
 <span class="lineNum">      56 </span>            :             row_iterator() : row_(nullptr),
 <span class="lineNum">      57 </span>            :                 position_(-1)
@@ -130,19 +130,19 @@
 <span class="lineNum">      60 </span>            : 
 <span class="lineNum">      61 </span>            :             row_iterator(shared_ptr&lt;RowType&gt; pRow, int nPosition) : row_(pRow),
 <span class="lineNum">      62 </span>            :                 position_(nPosition)
-<span class="lineNum">      63 </span><span class="lineCov">        388 :             {</span>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">        776 :             }</span></a>
+<span class="lineNum">      63 </span><span class="lineCov">        194 :             {</span>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">        388 :             }</span></a>
 <span class="lineNum">      65 </span>            : 
 <span class="lineNum">      66 </span>            :             row_iterator(const row_iterator &amp;other) : row_(other.row_), position_(other.position_)
-<span class="lineNum">      67 </span><span class="lineCov">        112 :             {</span>
-<span class="lineNum">      68 </span><span class="lineCov">        224 :             }</span>
+<span class="lineNum">      67 </span><span class="lineCov">         56 :             {</span>
+<span class="lineNum">      68 </span><span class="lineCov">        112 :             }</span>
 <span class="lineNum">      69 </span>            : 
 <span class="lineNum">      70 </span>            :             row_iterator(row_iterator &amp;&amp;other) : row_(std::move(other.row_)), position_(other.position_)
 <span class="lineNum">      71 </span>            :             {
 <span class="lineNum">      72 </span>            :                 other.row_ = nullptr;
 <a name="73"><span class="lineNum">      73 </span>            :             }</a>
 <span class="lineNum">      74 </span>            : 
-<span class="lineNum">      75 </span><span class="lineCov">        200 :             virtual ~row_iterator() {}</span>
+<span class="lineNum">      75 </span><span class="lineCov">        100 :             virtual ~row_iterator() {}</span>
 <span class="lineNum">      76 </span>            : 
 <span class="lineNum">      77 </span>            :             row_iterator &amp;operator=(const row_iterator &amp;other)
 <span class="lineNum">      78 </span>            :             {
@@ -163,8 +163,8 @@
 <span class="lineNum">      93 </span>            : 
 <span class="lineNum">      94 </span>            :             ValueType &amp;operator*()
 <span class="lineNum">      95 </span>            :             {
-<span class="lineNum">      96 </span><span class="lineCov">        104 :                 set_current_value(position_);</span>
-<span class="lineNum">      97 </span><span class="lineCov">        104 :                 return currentValue_;</span>
+<span class="lineNum">      96 </span><span class="lineCov">         52 :                 set_current_value(position_);</span>
+<span class="lineNum">      97 </span><span class="lineCov">         52 :                 return currentValue_;</span>
 <span class="lineNum">      98 </span>            :             }
 <span class="lineNum">      99 </span>            : 
 <span class="lineNum">     100 </span>            :             ValueType *operator-&gt;()
@@ -181,8 +181,8 @@
 <span class="lineNum">     111 </span>            : 
 <span class="lineNum">     112 </span>            :             row_iterator &amp;operator++()
 <span class="lineNum">     113 </span>            :             {
-<span class="lineNum">     114 </span><span class="lineCov">        100 :                 ++position_;</span>
-<span class="lineNum">     115 </span><span class="lineCov">        100 :                 return *this;</span>
+<span class="lineNum">     114 </span><span class="lineCov">         50 :                 ++position_;</span>
+<span class="lineNum">     115 </span><span class="lineCov">         50 :                 return *this;</span>
 <span class="lineNum">     116 </span>            :             }
 <span class="lineNum">     117 </span>            : 
 <span class="lineNum">     118 </span>            :             row_iterator operator++(int)
@@ -233,12 +233,12 @@
 <span class="lineNum">     163 </span>            : 
 <span class="lineNum">     164 </span>            :             bool operator==(const row_iterator &amp;other) const
 <span class="lineNum">     165 </span>            :             {
-<span class="lineNum">     166 </span><span class="lineCov">        120 :                 return position_ == other.position_;</span>
+<span class="lineNum">     166 </span><span class="lineCov">         60 :                 return position_ == other.position_;</span>
 <a name="167"><span class="lineNum">     167 </span>            :             }</a>
 <span class="lineNum">     168 </span>            : 
 <span class="lineNum">     169 </span>            :             bool operator!=(const row_iterator &amp;other) const
 <span class="lineNum">     170 </span>            :             {
-<span class="lineNum">     171 </span><span class="lineCov">        120 :                 return !operator==(other);</span>
+<span class="lineNum">     171 </span><span class="lineCov">         60 :                 return !operator==(other);</span>
 <span class="lineNum">     172 </span>            :             }
 <span class="lineNum">     173 </span>            : 
 <span class="lineNum">     174 </span>            :             bool operator&lt;(const row_iterator &amp;other) const

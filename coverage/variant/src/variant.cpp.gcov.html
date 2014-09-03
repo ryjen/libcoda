@@ -31,18 +31,18 @@
             <td class="headerValue">Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">210</td>
-            <td class="headerCovTableEntry">379</td>
-            <td class="headerCovTableEntryLo">55.4 %</td>
+            <td class="headerCovTableEntry">295</td>
+            <td class="headerCovTableEntry">358</td>
+            <td class="headerCovTableEntryMed">82.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-09-03 00:25:07</td>
+            <td class="headerValue">2014-09-03 00:27:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">122</td>
-            <td class="headerCovTableEntry">133</td>
-            <td class="headerCovTableEntryHi">91.7 %</td>
+            <td class="headerCovTableEntry">147</td>
+            <td class="headerCovTableEntry">166</td>
+            <td class="headerCovTableEntryMed">88.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -72,1034 +72,1061 @@
 <span class="lineNum">       2 </span>            : 
 <span class="lineNum">       3 </span>            : #include &quot;variant.h&quot;
 <span class="lineNum">       4 </span>            : #include &lt;cstdlib&gt;
-<span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span>            : namespace arg3
-<a name="7"><span class="lineNum">       7 </span>            : {</a>
+<span class="lineNum">       5 </span>            : #include &lt;cstdio&gt;
+<span class="lineNum">       6 </span>            : #include &lt;wchar.h&gt;
+<span class="lineNum">       7 </span>            : #include &lt;cerrno&gt;
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span>            :     variant::variant() :
-<span class="lineNum">      10 </span>            :         type_(NULLTYPE), refcount_(NULL), size_(0), value_(NULL)
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">         12 :     {}</span></a>
-<span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span>            :     variant::variant(bool value) : type_(BOOL), refcount_(NULL), size_(0), value_(NULL)
-<a name="14"><span class="lineNum">      14 </span><span class="lineNoCov">          0 :     {}</span></a>
+<span class="lineNum">       9 </span>            : namespace arg3
+<a name="10"><span class="lineNum">      10 </span>            : {</a>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            :     variant::variant() :
+<span class="lineNum">      13 </span>            :         type_(NULLTYPE), refcount_(NULL), size_(0), value_(NULL)
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">         18 :     {}</span></a>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span>            :     variant::variant(char c) :
-<span class="lineNum">      17 </span>            :         type_(CHAR), refcount_(NULL), size_(sizeof(c)), value_(c)
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          2 :     {}</span></a>
+<span class="lineNum">      16 </span>            :     variant::variant(const nullptr_t &amp;null) :
+<span class="lineNum">      17 </span>            :         type_(NULLTYPE), refcount_(NULL), size_(0), value_(NULL)
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          8 :     {}</span></a>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span>            :     variant::variant(unsigned char uc) :
-<span class="lineNum">      21 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(uc)), value_(uc)
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          2 :     {}</span></a>
-<span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span>            :     variant::variant(wchar_t wc) :
-<span class="lineNum">      25 </span>            :         type_(WCHAR), refcount_(NULL), size_(sizeof(wc)), value_(wc)
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          2 :     {}</span></a>
-<span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span>            :     variant::variant(short s) :
-<span class="lineNum">      29 </span>            :         type_(NUMBER), refcount_(NULL), size_(sizeof(s)), value_(s)
-<a name="30"><span class="lineNum">      30 </span><span class="lineCov">          2 :     {}</span></a>
-<span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span>            :     variant::variant(unsigned short us) :
-<span class="lineNum">      33 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(us)), value_(us)
-<a name="34"><span class="lineNum">      34 </span><span class="lineCov">          2 :     {}</span></a>
-<span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span>            :     variant::variant(int i) :
-<span class="lineNum">      37 </span>            :         type_(NUMBER), refcount_(NULL), size_(sizeof(i)), value_(i)
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">         18 :     {}</span></a>
-<span class="lineNum">      39 </span>            : 
-<span class="lineNum">      40 </span>            :     variant::variant(unsigned ui) :
-<span class="lineNum">      41 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(ui)), value_(ui)
-<a name="42"><span class="lineNum">      42 </span><span class="lineCov">          2 :     {}</span></a>
-<span class="lineNum">      43 </span>            : 
-<span class="lineNum">      44 </span>            :     variant::variant(long l) :
-<span class="lineNum">      45 </span>            :         type_(NUMBER), refcount_(NULL), size_(sizeof(l)), value_(l)
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">          8 :     {}</span></a>
-<span class="lineNum">      47 </span>            : 
-<span class="lineNum">      48 </span>            :     variant::variant(unsigned long ul) :
-<span class="lineNum">      49 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(ul)), value_(ul)
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">          2 :     {}</span></a>
-<span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span>            :     variant::variant(float f) :
-<span class="lineNum">      53 </span>            :         type_(DOUBLE), refcount_(NULL), size_(sizeof(f)), value_(f)
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          4 :     {}</span></a>
-<span class="lineNum">      55 </span>            : 
-<span class="lineNum">      56 </span>            :     variant::variant(double d) :
-<span class="lineNum">      57 </span>            :         type_(DOUBLE), refcount_(NULL), size_(sizeof(d)), value_(d)
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          4 :     {}</span></a>
-<span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span>            :     variant::variant(long double ld) :
-<span class="lineNum">      61 </span>            :         type_(DOUBLE), refcount_(NULL), size_(sizeof(ld)), value_(ld)
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          4 :     {}</span></a>
-<span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span>            :     variant::variant(long long ll) :
-<span class="lineNum">      65 </span>            :         type_(NUMBER), refcount_(NULL), size_(sizeof(ll)), value_(ll)
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          6 :     {}</span></a>
-<span class="lineNum">      67 </span>            : 
-<span class="lineNum">      68 </span>            :     variant::variant(unsigned long long ull) :
-<span class="lineNum">      69 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(ull)), value_(ull)
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          6 :     {}</span></a>
-<span class="lineNum">      71 </span>            : 
-<span class="lineNum">      72 </span>            :     variant::variant(const void *p, size_t psize) :
-<span class="lineNum">      73 </span>            :         type_(POINTER), refcount_(NULL), size_(psize), value_(NULL)
-<span class="lineNum">      74 </span><span class="lineCov">          1 :     {</span>
-<span class="lineNum">      75 </span><span class="lineCov">          1 :         value_.p = malloc(psize);</span>
-<span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span><span class="lineCov">          1 :         memmove(value_.p, p, psize);</span>
-<span class="lineNum">      78 </span><span class="lineCov">          2 :     }</span>
-<span class="lineNum">      79 </span>            : 
-<a name="80"><span class="lineNum">      80 </span>            :     // for strings we initialize refcount and make a copy of the cstring</a>
-<span class="lineNum">      81 </span>            : 
-<span class="lineNum">      82 </span>            :     variant::variant(const char *str) :
-<span class="lineNum">      83 </span><span class="lineCov">         25 :         type_(STRING), refcount_(new unsigned(0)), size_(strlen(str)), value_(strdup(str))</span>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">         75 :     {}</span></a>
-<span class="lineNum">      85 </span>            : 
-<span class="lineNum">      86 </span>            :     variant::variant(const wchar_t *str) :
-<span class="lineNum">      87 </span><span class="lineCov">          3 :         type_(WSTRING), refcount_(new unsigned(0)), size_(wcslen(str)), value_(wcsdup(str))</span>
-<a name="88"><span class="lineNum">      88 </span><span class="lineCov">          9 :     {}</span></a>
-<span class="lineNum">      89 </span>            : 
-<span class="lineNum">      90 </span>            :     variant::variant(const string &amp;str) :
-<span class="lineNum">      91 </span><span class="lineCov">          2 :         type_(STRING), refcount_(new unsigned(0)), size_(str.length()), value_(strdup(str.c_str()))</span>
-<a name="92"><span class="lineNum">      92 </span><span class="lineCov">          6 :     {}</span></a>
-<span class="lineNum">      93 </span>            : 
-<span class="lineNum">      94 </span>            :     variant::variant(const wstring &amp;str) :
-<span class="lineNum">      95 </span><span class="lineCov">          2 :         type_(WSTRING), refcount_(new unsigned(0)), size_(str.length()), value_(wcsdup(str.c_str()))</span>
-<span class="lineNum">      96 </span><span class="lineCov">          2 :     {</span>
-<span class="lineNum">      97 </span><span class="lineCov">          4 :     }</span>
-<a name="98"><span class="lineNum">      98 </span>            : </a>
-<span class="lineNum">      99 </span>            :     // copy constructor
-<span class="lineNum">     100 </span>            :     variant::variant(const variant &amp;other) :
-<span class="lineNum">     101 </span>            :         type_(other.type_), refcount_(other.refcount_), size_(other.size_), value_(other.value_)
-<span class="lineNum">     102 </span><span class="lineCov">          4 :     {</span>
-<span class="lineNum">     103 </span>            :         // update refcount
-<span class="lineNum">     104 </span><span class="lineCov">          4 :         if (refcount_)</span>
-<span class="lineNum">     105 </span><span class="lineCov">          4 :             (*refcount_)++;</span>
-<a name="106"><span class="lineNum">     106 </span><span class="lineCov">          8 :     }</span></a>
-<span class="lineNum">     107 </span>            : 
-<span class="lineNum">     108 </span>            :     variant::variant(variant &amp;&amp;other) : type_(other.type_), refcount_(other.refcount_), size_(other.size_), value_(other.value_)
-<span class="lineNum">     109 </span><span class="lineCov">          1 :     {</span>
-<span class="lineNum">     110 </span><span class="lineCov">          1 :         other.refcount_ = NULL;</span>
-<span class="lineNum">     111 </span><span class="lineCov">          1 :         other.value_.p = NULL;</span>
-<span class="lineNum">     112 </span><span class="lineCov">          1 :         other.type_ = NULLTYPE;</span>
-<span class="lineNum">     113 </span><span class="lineCov">          1 :         other.size_ = 0;</span>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          2 :     }</span></a>
-<span class="lineNum">     115 </span>            : 
-<span class="lineNum">     116 </span>            :     variant &amp;variant::operator=(const variant &amp;other)
-<span class="lineNum">     117 </span>            :     {
-<span class="lineNum">     118 </span><span class="lineCov">          1 :         type_ = other.type_;</span>
-<span class="lineNum">     119 </span>            : 
-<span class="lineNum">     120 </span><span class="lineCov">          1 :         value_ = other.value_;</span>
+<span class="lineNum">      20 </span>            :     variant::variant(bool value) : type_(BOOL), refcount_(NULL), size_(sizeof(bool)), value_(value)
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          4 :     {}</span></a>
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            :     variant::variant(char c) :
+<span class="lineNum">      24 </span>            :         type_(CHAR), refcount_(NULL), size_(sizeof(c)), value_(c)
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          2 :     {}</span></a>
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            :     variant::variant(unsigned char uc) :
+<span class="lineNum">      28 </span>            :         type_(CHAR), refcount_(NULL), size_(sizeof(uc)), value_(uc)
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          2 :     {}</span></a>
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            :     variant::variant(wchar_t wc) :
+<span class="lineNum">      32 </span>            :         type_(WCHAR), refcount_(NULL), size_(sizeof(wc)), value_(wc)
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">          2 :     {}</span></a>
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span>            :     variant::variant(short s) :
+<span class="lineNum">      36 </span>            :         type_(NUMBER), refcount_(NULL), size_(sizeof(s)), value_(s)
+<a name="37"><span class="lineNum">      37 </span><span class="lineCov">          2 :     {}</span></a>
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            :     variant::variant(unsigned short us) :
+<span class="lineNum">      40 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(us)), value_(us)
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">          2 :     {}</span></a>
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            :     variant::variant(int i) :
+<span class="lineNum">      44 </span>            :         type_(NUMBER), refcount_(NULL), size_(sizeof(i)), value_(i)
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">         18 :     {}</span></a>
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            :     variant::variant(unsigned ui) :
+<span class="lineNum">      48 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(ui)), value_(ui)
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          6 :     {}</span></a>
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            :     variant::variant(long l) :
+<span class="lineNum">      52 </span>            :         type_(NUMBER), refcount_(NULL), size_(sizeof(l)), value_(l)
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          6 :     {}</span></a>
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            :     variant::variant(unsigned long ul) :
+<span class="lineNum">      56 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(ul)), value_(ul)
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">          4 :     {}</span></a>
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            :     variant::variant(float f) :
+<span class="lineNum">      60 </span>            :         type_(DOUBLE), refcount_(NULL), size_(sizeof(f)), value_(f)
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">          6 :     {}</span></a>
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            :     variant::variant(double d) :
+<span class="lineNum">      64 </span>            :         type_(DOUBLE), refcount_(NULL), size_(sizeof(d)), value_(d)
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         10 :     {}</span></a>
+<span class="lineNum">      66 </span>            : 
+<span class="lineNum">      67 </span>            :     variant::variant(long double ld) :
+<span class="lineNum">      68 </span>            :         type_(DOUBLE), refcount_(NULL), size_(sizeof(ld)), value_(ld)
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          4 :     {}</span></a>
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span>            :     variant::variant(long long ll) :
+<span class="lineNum">      72 </span>            :         type_(NUMBER), refcount_(NULL), size_(sizeof(ll)), value_(ll)
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          6 :     {}</span></a>
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span>            :     variant::variant(unsigned long long ull) :
+<span class="lineNum">      76 </span>            :         type_(UNUMBER), refcount_(NULL), size_(sizeof(ull)), value_(ull)
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          6 :     {}</span></a>
+<span class="lineNum">      78 </span>            : 
+<span class="lineNum">      79 </span>            :     variant::variant(const void *p, size_t psize) : type_(NULLTYPE), refcount_(NULL), size_(0), value_(NULL)
+<span class="lineNum">      80 </span><span class="lineCov">          2 :     {</span>
+<span class="lineNum">      81 </span><span class="lineCov">          4 :         if (p &amp;&amp; psize &gt; 0)</span>
+<span class="lineNum">      82 </span>            :         {
+<span class="lineNum">      83 </span><span class="lineCov">          2 :             type_ = POINTER;</span>
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span><span class="lineCov">          2 :             value_.p = malloc(psize);</span>
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span><span class="lineCov">          2 :             memmove(value_.p, p, psize);</span>
+<span class="lineNum">      88 </span>            : 
+<span class="lineNum">      89 </span><span class="lineCov">          2 :             size_ = psize;</span>
+<span class="lineNum">      90 </span>            : 
+<span class="lineNum">      91 </span><span class="lineCov">          2 :             refcount_ = new unsigned(0);</span>
+<span class="lineNum">      92 </span><span class="lineCov">          2 :         }</span>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">          4 :     }</span></a>
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span>            :     variant::variant(const char *str) : type_(NULLTYPE), refcount_(NULL), size_(0), value_(NULL)
+<span class="lineNum">      96 </span><span class="lineCov">         40 :     {</span>
+<span class="lineNum">      97 </span><span class="lineCov">         40 :         if (str)</span>
+<span class="lineNum">      98 </span>            :         {
+<span class="lineNum">      99 </span>            :             // for strings we initialize refcount and make a copy of the cstring
+<span class="lineNum">     100 </span><span class="lineCov">         40 :             type_ = STRING;</span>
+<span class="lineNum">     101 </span><span class="lineCov">         40 :             refcount_ = new unsigned(0);</span>
+<span class="lineNum">     102 </span><span class="lineCov">         40 :             size_ = strlen(str);</span>
+<span class="lineNum">     103 </span><span class="lineCov">         40 :             value_ = strdup(str);</span>
+<span class="lineNum">     104 </span><span class="lineCov">         40 :         }</span>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">         80 :     }</span></a>
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            :     variant::variant(const wchar_t *str) : type_(NULLTYPE), refcount_(NULL), size_(0), value_(NULL)
+<span class="lineNum">     108 </span><span class="lineCov">         17 :     {</span>
+<span class="lineNum">     109 </span><span class="lineCov">         17 :         if (str)</span>
+<span class="lineNum">     110 </span>            :         {
+<span class="lineNum">     111 </span><span class="lineCov">         17 :             type_ = WSTRING;</span>
+<span class="lineNum">     112 </span><span class="lineCov">         17 :             refcount_ = new unsigned(0);</span>
+<span class="lineNum">     113 </span><span class="lineCov">         17 :             size_ = wcslen(str);</span>
+<span class="lineNum">     114 </span><span class="lineCov">         17 :             value_ = wcsdup(str);</span>
+<span class="lineNum">     115 </span><span class="lineCov">         17 :         }</span>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">         34 :     }</span></a>
+<span class="lineNum">     117 </span>            : 
+<span class="lineNum">     118 </span>            :     variant::variant(const string &amp;str) :
+<span class="lineNum">     119 </span><span class="lineCov">          2 :         type_(STRING), refcount_(new unsigned(0)), size_(str.length()), value_(strdup(str.c_str()))</span>
+<a name="120"><span class="lineNum">     120 </span><span class="lineCov">          6 :     {}</span></a>
 <span class="lineNum">     121 </span>            : 
-<span class="lineNum">     122 </span><span class="lineCov">          1 :         size_ = other.size_;</span>
-<span class="lineNum">     123 </span>            : 
-<span class="lineNum">     124 </span><span class="lineCov">          1 :         if (refcount_ != other.refcount_)</span>
-<span class="lineNum">     125 </span>            :         {
-<span class="lineNum">     126 </span><span class="lineCov">          1 :             refcount_ = other.refcount_;</span>
-<span class="lineNum">     127 </span>            : 
-<span class="lineNum">     128 </span>            :             // update refcount
-<span class="lineNum">     129 </span><span class="lineCov">          1 :             if (refcount_)</span>
-<span class="lineNum">     130 </span><span class="lineCov">          1 :                 (*refcount_)++;</span>
-<span class="lineNum">     131 </span><span class="lineCov">          1 :         }</span>
-<span class="lineNum">     132 </span><span class="lineCov">          1 :         return *this;</span>
-<a name="133"><span class="lineNum">     133 </span>            :     }</a>
-<span class="lineNum">     134 </span>            : 
-<span class="lineNum">     135 </span>            :     variant &amp;variant::operator=(variant &amp;&amp; other)
-<span class="lineNum">     136 </span>            :     {
-<span class="lineNum">     137 </span><span class="lineCov">         26 :         type_ = other.type_;</span>
-<span class="lineNum">     138 </span><span class="lineCov">         26 :         value_ = other.value_;</span>
-<span class="lineNum">     139 </span><span class="lineCov">         26 :         refcount_ = other.refcount_;</span>
-<span class="lineNum">     140 </span><span class="lineCov">         26 :         size_ = other.size_;</span>
-<span class="lineNum">     141 </span><span class="lineCov">         26 :         other.refcount_ = NULL;</span>
-<span class="lineNum">     142 </span><span class="lineCov">         26 :         other.value_.p = NULL;</span>
-<span class="lineNum">     143 </span><span class="lineCov">         26 :         other.type_ = NULLTYPE;</span>
-<span class="lineNum">     144 </span><span class="lineCov">         26 :         other.size_ = 0;</span>
-<span class="lineNum">     145 </span>            : 
-<span class="lineNum">     146 </span><span class="lineCov">         26 :         return *this;</span>
-<a name="147"><span class="lineNum">     147 </span>            :     }</a>
-<span class="lineNum">     148 </span>            : 
-<span class="lineNum">     149 </span>            :     variant::~variant()
-<span class="lineNum">     150 </span><span class="lineCov">        152 :     {</span>
-<span class="lineNum">     151 </span>            :         // check refcounts to free a pointer
-<span class="lineNum">     152 </span><span class="lineCov">         76 :         if (refcount_)</span>
+<span class="lineNum">     122 </span>            :     variant::variant(const wstring &amp;str) :
+<span class="lineNum">     123 </span><span class="lineCov">          3 :         type_(WSTRING), refcount_(new unsigned(0)), size_(str.length()), value_(wcsdup(str.c_str()))</span>
+<span class="lineNum">     124 </span><span class="lineCov">          3 :     {</span>
+<span class="lineNum">     125 </span><span class="lineCov">          6 :     }</span>
+<a name="126"><span class="lineNum">     126 </span>            : </a>
+<span class="lineNum">     127 </span>            :     // copy constructor
+<span class="lineNum">     128 </span>            :     variant::variant(const variant &amp;other) :
+<span class="lineNum">     129 </span>            :         type_(other.type_), refcount_(other.refcount_), size_(other.size_), value_(other.value_)
+<span class="lineNum">     130 </span><span class="lineCov">          5 :     {</span>
+<span class="lineNum">     131 </span>            :         // update refcount
+<span class="lineNum">     132 </span><span class="lineCov">          5 :         if (refcount_)</span>
+<span class="lineNum">     133 </span><span class="lineCov">          5 :             (*refcount_)++;</span>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">         10 :     }</span></a>
+<span class="lineNum">     135 </span>            : 
+<span class="lineNum">     136 </span>            :     variant::variant(variant &amp;&amp;other) : type_(other.type_), refcount_(other.refcount_), size_(other.size_), value_(other.value_)
+<span class="lineNum">     137 </span><span class="lineCov">          1 :     {</span>
+<span class="lineNum">     138 </span><span class="lineCov">          1 :         other.refcount_ = NULL;</span>
+<span class="lineNum">     139 </span><span class="lineCov">          1 :         other.value_.p = NULL;</span>
+<span class="lineNum">     140 </span><span class="lineCov">          1 :         other.type_ = NULLTYPE;</span>
+<span class="lineNum">     141 </span><span class="lineCov">          1 :         other.size_ = 0;</span>
+<a name="142"><span class="lineNum">     142 </span><span class="lineCov">          2 :     }</span></a>
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span>            :     variant &amp;variant::operator=(const variant &amp;other)
+<span class="lineNum">     145 </span>            :     {
+<span class="lineNum">     146 </span><span class="lineCov">          1 :         type_ = other.type_;</span>
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span><span class="lineCov">          1 :         value_ = other.value_;</span>
+<span class="lineNum">     149 </span>            : 
+<span class="lineNum">     150 </span><span class="lineCov">          1 :         size_ = other.size_;</span>
+<span class="lineNum">     151 </span>            : 
+<span class="lineNum">     152 </span><span class="lineCov">          1 :         if (refcount_ != other.refcount_)</span>
 <span class="lineNum">     153 </span>            :         {
-<span class="lineNum">     154 </span>            :             // no references except this one
-<span class="lineNum">     155 </span><span class="lineCov">         25 :             if (*refcount_ == 0)</span>
-<span class="lineNum">     156 </span>            :             {
-<span class="lineNum">     157 </span><span class="lineCov">         20 :                 if (value_.p)</span>
-<span class="lineNum">     158 </span>            :                 {
-<span class="lineNum">     159 </span><span class="lineCov">         20 :                     free(value_.p);</span>
-<span class="lineNum">     160 </span><span class="lineCov">         20 :                     value_.p = NULL;</span>
-<span class="lineNum">     161 </span><span class="lineCov">         20 :                 }</span>
-<span class="lineNum">     162 </span><span class="lineCov">         40 :                 delete refcount_;</span>
-<span class="lineNum">     163 </span><span class="lineCov">         20 :                 refcount_ = NULL;</span>
-<span class="lineNum">     164 </span><span class="lineCov">         20 :             }</span>
-<span class="lineNum">     165 </span>            :             // decrement reference count
-<span class="lineNum">     166 </span>            :             else
-<span class="lineNum">     167 </span>            :             {
-<span class="lineNum">     168 </span><span class="lineCov">          5 :                 (*refcount_)--;</span>
-<span class="lineNum">     169 </span>            :             }
-<span class="lineNum">     170 </span><span class="lineCov">         25 :         }</span>
-<span class="lineNum">     171 </span>            : 
-<a name="172"><span class="lineNum">     172 </span><span class="lineCov">        152 :     }</span></a>
+<span class="lineNum">     154 </span><span class="lineCov">          1 :             refcount_ = other.refcount_;</span>
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span>            :             // update refcount
+<span class="lineNum">     157 </span><span class="lineCov">          1 :             if (refcount_)</span>
+<span class="lineNum">     158 </span><span class="lineCov">          1 :                 (*refcount_)++;</span>
+<span class="lineNum">     159 </span><span class="lineCov">          1 :         }</span>
+<span class="lineNum">     160 </span><span class="lineCov">          1 :         return *this;</span>
+<a name="161"><span class="lineNum">     161 </span>            :     }</a>
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span>            :     variant &amp;variant::operator=(variant &amp;&amp; other)
+<span class="lineNum">     164 </span>            :     {
+<span class="lineNum">     165 </span><span class="lineCov">         54 :         type_ = other.type_;</span>
+<span class="lineNum">     166 </span><span class="lineCov">         54 :         value_ = other.value_;</span>
+<span class="lineNum">     167 </span><span class="lineCov">         54 :         refcount_ = other.refcount_;</span>
+<span class="lineNum">     168 </span><span class="lineCov">         54 :         size_ = other.size_;</span>
+<span class="lineNum">     169 </span><span class="lineCov">         54 :         other.refcount_ = NULL;</span>
+<span class="lineNum">     170 </span><span class="lineCov">         54 :         other.value_.p = NULL;</span>
+<span class="lineNum">     171 </span><span class="lineCov">         54 :         other.type_ = NULLTYPE;</span>
+<span class="lineNum">     172 </span><span class="lineCov">         54 :         other.size_ = 0;</span>
 <span class="lineNum">     173 </span>            : 
-<span class="lineNum">     174 </span>            :     size_t variant::size() const
-<span class="lineNum">     175 </span>            :     {
-<span class="lineNum">     176 </span><span class="lineCov">          3 :         return size_;</span>
-<span class="lineNum">     177 </span>            :     }
-<a name="178"><span class="lineNum">     178 </span>            : </a>
-<span class="lineNum">     179 </span>            :     //operators
-<span class="lineNum">     180 </span>            :     variant::operator string() const
-<span class="lineNum">     181 </span>            :     {
-<span class="lineNum">     182 </span><span class="lineCov">          2 :         return to_string();</span>
-<a name="183"><span class="lineNum">     183 </span><span class="lineNoCov">          0 :     }</span></a>
-<span class="lineNum">     184 </span>            : 
-<span class="lineNum">     185 </span>            :     variant::operator int() const
-<span class="lineNum">     186 </span>            :     {
-<span class="lineNum">     187 </span><span class="lineCov">          1 :         return to_int();</span>
-<a name="188"><span class="lineNum">     188 </span>            :     }</a>
-<span class="lineNum">     189 </span>            : 
-<span class="lineNum">     190 </span>            :     variant::operator long() const
-<span class="lineNum">     191 </span>            :     {
-<span class="lineNum">     192 </span><span class="lineCov">          1 :         return to_long();</span>
-<a name="193"><span class="lineNum">     193 </span>            :     }</a>
-<span class="lineNum">     194 </span>            : 
-<span class="lineNum">     195 </span>            :     variant::operator long long() const
-<span class="lineNum">     196 </span>            :     {
-<span class="lineNum">     197 </span><span class="lineCov">          1 :         return to_llong();</span>
-<a name="198"><span class="lineNum">     198 </span>            :     }</a>
-<span class="lineNum">     199 </span>            : 
-<span class="lineNum">     200 </span>            :     variant::operator long double() const
-<span class="lineNum">     201 </span>            :     {
-<span class="lineNum">     202 </span><span class="lineCov">          1 :         return to_ldouble();</span>
-<a name="203"><span class="lineNum">     203 </span>            :     }</a>
-<span class="lineNum">     204 </span>            : 
-<span class="lineNum">     205 </span>            :     variant::operator unsigned long() const
-<span class="lineNum">     206 </span>            :     {
-<a name="207"><span class="lineNum">     207 </span><span class="lineCov">          1 :         return to_ulong();</span></a>
-<span class="lineNum">     208 </span>            :     }
-<span class="lineNum">     209 </span>            :     variant::operator unsigned long long() const
+<span class="lineNum">     174 </span><span class="lineCov">         54 :         return *this;</span>
+<a name="175"><span class="lineNum">     175 </span>            :     }</a>
+<span class="lineNum">     176 </span>            : 
+<span class="lineNum">     177 </span>            :     variant::~variant()
+<span class="lineNum">     178 </span><span class="lineCov">        246 :     {</span>
+<span class="lineNum">     179 </span>            :         // check refcounts to free a pointer.
+<span class="lineNum">     180 </span>            :         // anything with a refcount needs to be freed eventually
+<span class="lineNum">     181 </span><span class="lineCov">        123 :         if (refcount_)</span>
+<span class="lineNum">     182 </span>            :         {
+<span class="lineNum">     183 </span>            :             // no references except this one
+<span class="lineNum">     184 </span><span class="lineCov">         33 :             if (*refcount_ == 0)</span>
+<span class="lineNum">     185 </span>            :             {
+<span class="lineNum">     186 </span><span class="lineCov">         27 :                 if (value_.p)</span>
+<span class="lineNum">     187 </span>            :                 {
+<span class="lineNum">     188 </span><span class="lineCov">         27 :                     free(value_.p);</span>
+<span class="lineNum">     189 </span><span class="lineCov">         27 :                     value_.p = NULL;</span>
+<span class="lineNum">     190 </span><span class="lineCov">         27 :                 }</span>
+<span class="lineNum">     191 </span><span class="lineCov">         54 :                 delete refcount_;</span>
+<span class="lineNum">     192 </span><span class="lineCov">         27 :                 refcount_ = NULL;</span>
+<span class="lineNum">     193 </span><span class="lineCov">         27 :             }</span>
+<span class="lineNum">     194 </span>            :             // decrement reference count
+<span class="lineNum">     195 </span>            :             else
+<span class="lineNum">     196 </span>            :             {
+<span class="lineNum">     197 </span><span class="lineCov">          6 :                 (*refcount_)--;</span>
+<span class="lineNum">     198 </span>            :             }
+<span class="lineNum">     199 </span><span class="lineCov">         33 :         }</span>
+<span class="lineNum">     200 </span>            : 
+<a name="201"><span class="lineNum">     201 </span><span class="lineCov">        246 :     }</span></a>
+<span class="lineNum">     202 </span>            : 
+<span class="lineNum">     203 </span>            :     size_t variant::size() const
+<span class="lineNum">     204 </span>            :     {
+<span class="lineNum">     205 </span><span class="lineCov">          3 :         return size_;</span>
+<span class="lineNum">     206 </span>            :     }
+<a name="207"><span class="lineNum">     207 </span>            : </a>
+<span class="lineNum">     208 </span>            :     //operators
+<span class="lineNum">     209 </span>            :     variant::operator string() const
 <span class="lineNum">     210 </span>            :     {
-<span class="lineNum">     211 </span><span class="lineCov">          1 :         return to_ullong();</span>
+<span class="lineNum">     211 </span><span class="lineCov">          1 :         return to_string();</span>
 <a name="212"><span class="lineNum">     212 </span>            :     }</a>
 <span class="lineNum">     213 </span>            : 
-<span class="lineNum">     214 </span>            :     variant::operator double() const
+<span class="lineNum">     214 </span>            :     variant::operator int() const
 <span class="lineNum">     215 </span>            :     {
-<span class="lineNum">     216 </span><span class="lineCov">          1 :         return to_double();</span>
+<span class="lineNum">     216 </span><span class="lineCov">          1 :         return to_int();</span>
 <a name="217"><span class="lineNum">     217 </span>            :     }</a>
 <span class="lineNum">     218 </span>            : 
-<span class="lineNum">     219 </span>            :     variant::operator float() const
+<span class="lineNum">     219 </span>            :     variant::operator long() const
 <span class="lineNum">     220 </span>            :     {
-<span class="lineNum">     221 </span><span class="lineCov">          1 :         return to_float();</span>
+<span class="lineNum">     221 </span><span class="lineCov">          1 :         return to_long();</span>
 <a name="222"><span class="lineNum">     222 </span>            :     }</a>
 <span class="lineNum">     223 </span>            : 
-<span class="lineNum">     224 </span>            :     variant::operator bool() const
+<span class="lineNum">     224 </span>            :     variant::operator long long() const
 <span class="lineNum">     225 </span>            :     {
-<span class="lineNum">     226 </span><span class="lineCov">          3 :         return to_bool();</span>
+<span class="lineNum">     226 </span><span class="lineCov">          1 :         return to_llong();</span>
 <a name="227"><span class="lineNum">     227 </span>            :     }</a>
 <span class="lineNum">     228 </span>            : 
-<span class="lineNum">     229 </span>            :     variant::operator wstring() const
+<span class="lineNum">     229 </span>            :     variant::operator long double() const
 <span class="lineNum">     230 </span>            :     {
-<span class="lineNum">     231 </span><span class="lineCov">          2 :         return to_wstring();</span>
-<a name="232"><span class="lineNum">     232 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     231 </span><span class="lineCov">          1 :         return to_ldouble();</span>
+<a name="232"><span class="lineNum">     232 </span>            :     }</a>
 <span class="lineNum">     233 </span>            : 
-<span class="lineNum">     234 </span>            :     variant::operator unsigned() const
+<span class="lineNum">     234 </span>            :     variant::operator unsigned long() const
 <span class="lineNum">     235 </span>            :     {
-<span class="lineNum">     236 </span><span class="lineCov">          1 :         return to_uint();</span>
-<a name="237"><span class="lineNum">     237 </span>            :     }</a>
-<span class="lineNum">     238 </span>            : 
-<span class="lineNum">     239 </span>            :     variant::operator const wchar_t *() const
-<span class="lineNum">     240 </span>            :     {
-<span class="lineNum">     241 </span><span class="lineCov">          1 :         return to_wcstring();</span>
-<a name="242"><span class="lineNum">     242 </span>            :     }</a>
-<span class="lineNum">     243 </span>            : 
-<span class="lineNum">     244 </span>            :     variant::operator const char *() const
-<span class="lineNum">     245 </span>            :     {
-<span class="lineNum">     246 </span><span class="lineCov">          2 :         return to_cstring();</span>
-<a name="247"><span class="lineNum">     247 </span>            :     }</a>
-<span class="lineNum">     248 </span>            : 
-<span class="lineNum">     249 </span>            :     variant::operator char() const
-<span class="lineNum">     250 </span>            :     {
-<span class="lineNum">     251 </span><span class="lineCov">          1 :         return to_char();</span>
-<a name="252"><span class="lineNum">     252 </span>            :     }</a>
-<span class="lineNum">     253 </span>            : 
-<span class="lineNum">     254 </span>            :     bool variant::operator==(bool other) const
-<span class="lineNum">     255 </span>            :     {
-<span class="lineNum">     256 </span><span class="lineCov">          4 :         return to_bool() == other;</span>
-<a name="257"><span class="lineNum">     257 </span>            :     }</a>
-<span class="lineNum">     258 </span>            : 
-<span class="lineNum">     259 </span>            :     bool variant::operator==(float other) const
-<span class="lineNum">     260 </span>            :     {
-<span class="lineNum">     261 </span><span class="lineCov">          2 :         return to_float() == other;</span>
-<a name="262"><span class="lineNum">     262 </span>            :     }</a>
-<span class="lineNum">     263 </span>            : 
-<span class="lineNum">     264 </span>            :     bool variant::operator==(double other) const
-<span class="lineNum">     265 </span>            :     {
-<span class="lineNum">     266 </span><span class="lineCov">          2 :         return to_double() == other;</span>
-<a name="267"><span class="lineNum">     267 </span>            :     }</a>
-<span class="lineNum">     268 </span>            : 
-<span class="lineNum">     269 </span>            :     bool variant::operator==(long double other) const
-<span class="lineNum">     270 </span>            :     {
-<span class="lineNum">     271 </span><span class="lineCov">          2 :         return to_ldouble() == other;</span>
-<a name="272"><span class="lineNum">     272 </span>            :     }</a>
-<span class="lineNum">     273 </span>            : 
-<span class="lineNum">     274 </span>            :     bool variant::operator==(const wstring &amp;str) const
-<span class="lineNum">     275 </span>            :     {
-<span class="lineNum">     276 </span><span class="lineCov">          4 :         return to_wstring() == str;</span>
-<a name="277"><span class="lineNum">     277 </span><span class="lineNoCov">          0 :     }</span></a>
-<span class="lineNum">     278 </span>            : 
-<span class="lineNum">     279 </span>            :     bool variant::operator==(const string &amp;str) const
-<span class="lineNum">     280 </span>            :     {
-<span class="lineNum">     281 </span><span class="lineCov">         16 :         return to_string() == str;</span>
-<a name="282"><span class="lineNum">     282 </span><span class="lineNoCov">          0 :     }</span></a>
-<span class="lineNum">     283 </span>            : 
-<span class="lineNum">     284 </span>            :     bool variant::operator==(unsigned long long ull) const
-<span class="lineNum">     285 </span>            :     {
-<span class="lineNum">     286 </span><span class="lineCov">          3 :         return to_ullong() == ull;</span>
-<a name="287"><span class="lineNum">     287 </span>            :     }</a>
-<span class="lineNum">     288 </span>            : 
-<span class="lineNum">     289 </span>            :     bool variant::operator==(long long ll) const
-<span class="lineNum">     290 </span>            :     {
-<span class="lineNum">     291 </span><span class="lineCov">          3 :         return to_llong() == ll;</span>
-<a name="292"><span class="lineNum">     292 </span>            :     }</a>
-<span class="lineNum">     293 </span>            : 
-<span class="lineNum">     294 </span>            :     bool variant::operator==(long l) const
-<span class="lineNum">     295 </span>            :     {
-<span class="lineNum">     296 </span><span class="lineCov">          3 :         return to_long() == l;</span>
-<a name="297"><span class="lineNum">     297 </span>            :     }</a>
-<span class="lineNum">     298 </span>            : 
-<span class="lineNum">     299 </span>            :     bool variant::operator==(int i) const
-<span class="lineNum">     300 </span>            :     {
-<span class="lineNum">     301 </span><span class="lineCov">          3 :         return to_int() == i;</span>
-<a name="302"><span class="lineNum">     302 </span>            :     }</a>
-<span class="lineNum">     303 </span>            : 
-<span class="lineNum">     304 </span>            :     bool variant::operator==(unsigned ui) const
-<span class="lineNum">     305 </span>            :     {
-<span class="lineNum">     306 </span><span class="lineCov">          1 :         return to_uint() == ui;</span>
-<a name="307"><span class="lineNum">     307 </span>            :     }</a>
-<span class="lineNum">     308 </span>            : 
-<span class="lineNum">     309 </span>            :     bool variant::operator==(unsigned long ul) const
-<span class="lineNum">     310 </span>            :     {
-<span class="lineNum">     311 </span><span class="lineCov">          1 :         return to_ulong() == ul;</span>
-<a name="312"><span class="lineNum">     312 </span>            :     }</a>
-<span class="lineNum">     313 </span>            : 
-<span class="lineNum">     314 </span>            :     bool variant::operator==(const char *str) const
-<span class="lineNum">     315 </span>            :     {
-<span class="lineNum">     316 </span><span class="lineCov">          2 :         return to_string() == str;</span>
-<a name="317"><span class="lineNum">     317 </span><span class="lineNoCov">          0 :     }</span></a>
-<span class="lineNum">     318 </span>            : 
-<span class="lineNum">     319 </span>            :     bool variant::operator==(const wchar_t *str) const
-<span class="lineNum">     320 </span>            :     {
-<span class="lineNum">     321 </span><span class="lineCov">          2 :         return to_wstring() == str;</span>
-<a name="322"><span class="lineNum">     322 </span><span class="lineNoCov">          0 :     }</span></a>
-<span class="lineNum">     323 </span>            : 
-<span class="lineNum">     324 </span>            :     bool variant::operator!=(bool other) const
-<span class="lineNum">     325 </span>            :     {
-<span class="lineNum">     326 </span><span class="lineCov">          2 :         return !operator==(other);</span>
-<a name="327"><span class="lineNum">     327 </span>            :     }</a>
-<span class="lineNum">     328 </span>            : 
-<span class="lineNum">     329 </span>            :     bool variant::operator!=(float other) const
-<span class="lineNum">     330 </span>            :     {
-<span class="lineNum">     331 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="332"><span class="lineNum">     332 </span>            :     }</a>
-<span class="lineNum">     333 </span>            : 
-<span class="lineNum">     334 </span>            :     bool variant::operator!=(double other) const
-<span class="lineNum">     335 </span>            :     {
-<span class="lineNum">     336 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="337"><span class="lineNum">     337 </span>            :     }</a>
-<span class="lineNum">     338 </span>            : 
-<span class="lineNum">     339 </span>            :     bool variant::operator!=(long double other) const
-<span class="lineNum">     340 </span>            :     {
-<span class="lineNum">     341 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="342"><span class="lineNum">     342 </span>            :     }</a>
-<span class="lineNum">     343 </span>            : 
-<span class="lineNum">     344 </span>            :     bool variant::operator!=(const wstring &amp;other) const
-<span class="lineNum">     345 </span>            :     {
-<span class="lineNum">     346 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="347"><span class="lineNum">     347 </span>            :     }</a>
-<span class="lineNum">     348 </span>            : 
-<span class="lineNum">     349 </span>            :     bool variant::operator!=(const string &amp;other) const
-<span class="lineNum">     350 </span>            :     {
-<span class="lineNum">     351 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="352"><span class="lineNum">     352 </span>            :     }</a>
-<span class="lineNum">     353 </span>            : 
-<span class="lineNum">     354 </span>            :     bool variant::operator!=(unsigned long long other) const
-<span class="lineNum">     355 </span>            :     {
-<span class="lineNum">     356 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="357"><span class="lineNum">     357 </span>            :     }</a>
-<span class="lineNum">     358 </span>            : 
-<span class="lineNum">     359 </span>            :     bool variant::operator!=(long long other) const
-<span class="lineNum">     360 </span>            :     {
-<span class="lineNum">     361 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="362"><span class="lineNum">     362 </span>            :     }</a>
-<span class="lineNum">     363 </span>            : 
-<span class="lineNum">     364 </span>            :     bool variant::operator!=(long other) const
-<span class="lineNum">     365 </span>            :     {
-<span class="lineNum">     366 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="367"><span class="lineNum">     367 </span>            :     }</a>
-<span class="lineNum">     368 </span>            : 
-<span class="lineNum">     369 </span>            :     bool variant::operator!=(int other) const
-<span class="lineNum">     370 </span>            :     {
-<span class="lineNum">     371 </span><span class="lineCov">          1 :         return !operator==(other);</span>
-<a name="372"><span class="lineNum">     372 </span>            :     }</a>
-<span class="lineNum">     373 </span>            : 
-<span class="lineNum">     374 </span>            :     bool variant::operator!=(unsigned other) const
-<span class="lineNum">     375 </span>            :     {
-<span class="lineNum">     376 </span><span class="lineNoCov">          0 :         return !operator==(other);</span>
-<a name="377"><span class="lineNum">     377 </span>            :     }</a>
-<span class="lineNum">     378 </span>            : 
-<span class="lineNum">     379 </span>            :     bool variant::operator!=(unsigned long other) const
-<span class="lineNum">     380 </span>            :     {
-<span class="lineNum">     381 </span><span class="lineNoCov">          0 :         return !operator==(other);</span>
-<a name="382"><span class="lineNum">     382 </span>            :     }</a>
-<span class="lineNum">     383 </span>            : 
-<span class="lineNum">     384 </span>            :     bool variant::operator!=(const char *other) const
-<span class="lineNum">     385 </span>            :     {
-<span class="lineNum">     386 </span><span class="lineNoCov">          0 :         return !operator==(other);</span>
-<a name="387"><span class="lineNum">     387 </span>            :     }</a>
-<span class="lineNum">     388 </span>            : 
-<span class="lineNum">     389 </span>            :     bool variant::operator!=(const wchar_t *other) const
-<span class="lineNum">     390 </span>            :     {
-<span class="lineNum">     391 </span><span class="lineNoCov">          0 :         return !operator==(other);</span>
-<a name="392"><span class="lineNum">     392 </span>            :     }</a>
-<span class="lineNum">     393 </span>            : 
-<span class="lineNum">     394 </span>            :     bool variant::operator!=(const variant &amp;other) const
-<span class="lineNum">     395 </span>            :     {
-<span class="lineNum">     396 </span><span class="lineNoCov">          0 :         return !operator==(other);</span>
-<a name="397"><span class="lineNum">     397 </span>            :     }</a>
-<span class="lineNum">     398 </span>            : 
-<span class="lineNum">     399 </span>            :     bool variant::equals(const variant &amp;value) const
-<span class="lineNum">     400 </span>            :     {
+<a name="236"><span class="lineNum">     236 </span><span class="lineCov">          1 :         return to_ulong();</span></a>
+<span class="lineNum">     237 </span>            :     }
+<span class="lineNum">     238 </span>            :     variant::operator unsigned long long() const
+<span class="lineNum">     239 </span>            :     {
+<span class="lineNum">     240 </span><span class="lineCov">          1 :         return to_ullong();</span>
+<a name="241"><span class="lineNum">     241 </span>            :     }</a>
+<span class="lineNum">     242 </span>            : 
+<span class="lineNum">     243 </span>            :     variant::operator double() const
+<span class="lineNum">     244 </span>            :     {
+<span class="lineNum">     245 </span><span class="lineCov">          1 :         return to_double();</span>
+<a name="246"><span class="lineNum">     246 </span>            :     }</a>
+<span class="lineNum">     247 </span>            : 
+<span class="lineNum">     248 </span>            :     variant::operator float() const
+<span class="lineNum">     249 </span>            :     {
+<span class="lineNum">     250 </span><span class="lineCov">          1 :         return to_float();</span>
+<a name="251"><span class="lineNum">     251 </span>            :     }</a>
+<span class="lineNum">     252 </span>            : 
+<span class="lineNum">     253 </span>            :     variant::operator bool() const
+<span class="lineNum">     254 </span>            :     {
+<span class="lineNum">     255 </span><span class="lineCov">          3 :         return to_bool();</span>
+<a name="256"><span class="lineNum">     256 </span>            :     }</a>
+<span class="lineNum">     257 </span>            : 
+<span class="lineNum">     258 </span>            :     variant::operator wstring() const
+<span class="lineNum">     259 </span>            :     {
+<span class="lineNum">     260 </span><span class="lineCov">          1 :         return to_wstring();</span>
+<a name="261"><span class="lineNum">     261 </span>            :     }</a>
+<span class="lineNum">     262 </span>            : 
+<span class="lineNum">     263 </span>            :     variant::operator unsigned() const
+<span class="lineNum">     264 </span>            :     {
+<span class="lineNum">     265 </span><span class="lineCov">          1 :         return to_uint();</span>
+<a name="266"><span class="lineNum">     266 </span>            :     }</a>
+<span class="lineNum">     267 </span>            : 
+<span class="lineNum">     268 </span>            :     variant::operator const wchar_t *() const
+<span class="lineNum">     269 </span>            :     {
+<span class="lineNum">     270 </span><span class="lineCov">          1 :         return to_wcstring();</span>
+<a name="271"><span class="lineNum">     271 </span>            :     }</a>
+<span class="lineNum">     272 </span>            : 
+<span class="lineNum">     273 </span>            :     variant::operator const char *() const
+<span class="lineNum">     274 </span>            :     {
+<span class="lineNum">     275 </span><span class="lineCov">          2 :         return to_cstring();</span>
+<a name="276"><span class="lineNum">     276 </span>            :     }</a>
+<span class="lineNum">     277 </span>            : 
+<span class="lineNum">     278 </span>            :     variant::operator char() const
+<span class="lineNum">     279 </span>            :     {
+<span class="lineNum">     280 </span><span class="lineCov">          1 :         return to_char();</span>
+<a name="281"><span class="lineNum">     281 </span>            :     }</a>
+<span class="lineNum">     282 </span>            : 
+<span class="lineNum">     283 </span>            :     bool variant::operator==(const nullptr_t &amp;other) const
+<span class="lineNum">     284 </span>            :     {
+<span class="lineNum">     285 </span><span class="lineCov">          1 :         return is_null();</span>
+<a name="286"><span class="lineNum">     286 </span>            :     }</a>
+<span class="lineNum">     287 </span>            : 
+<span class="lineNum">     288 </span>            :     bool variant::operator==(bool other) const
+<span class="lineNum">     289 </span>            :     {
+<span class="lineNum">     290 </span><span class="lineCov">          4 :         return to_bool() == other;</span>
+<a name="291"><span class="lineNum">     291 </span>            :     }</a>
+<span class="lineNum">     292 </span>            : 
+<span class="lineNum">     293 </span>            :     bool variant::operator==(float other) const
+<span class="lineNum">     294 </span>            :     {
+<span class="lineNum">     295 </span><span class="lineCov">          2 :         return to_float() == other;</span>
+<a name="296"><span class="lineNum">     296 </span>            :     }</a>
+<span class="lineNum">     297 </span>            : 
+<span class="lineNum">     298 </span>            :     bool variant::operator==(double other) const
+<span class="lineNum">     299 </span>            :     {
+<span class="lineNum">     300 </span><span class="lineCov">          2 :         return to_double() == other;</span>
+<a name="301"><span class="lineNum">     301 </span>            :     }</a>
+<span class="lineNum">     302 </span>            : 
+<span class="lineNum">     303 </span>            :     bool variant::operator==(long double other) const
+<span class="lineNum">     304 </span>            :     {
+<span class="lineNum">     305 </span><span class="lineCov">          2 :         return to_ldouble() == other;</span>
+<a name="306"><span class="lineNum">     306 </span>            :     }</a>
+<span class="lineNum">     307 </span>            : 
+<span class="lineNum">     308 </span>            :     bool variant::operator==(const wstring &amp;str) const
+<span class="lineNum">     309 </span>            :     {
+<span class="lineNum">     310 </span><span class="lineCov">          2 :         return to_wstring() == str;</span>
+<a name="311"><span class="lineNum">     311 </span>            :     }</a>
+<span class="lineNum">     312 </span>            : 
+<span class="lineNum">     313 </span>            :     bool variant::operator==(const string &amp;str) const
+<span class="lineNum">     314 </span>            :     {
+<span class="lineNum">     315 </span><span class="lineCov">          8 :         return to_string() == str;</span>
+<a name="316"><span class="lineNum">     316 </span>            :     }</a>
+<span class="lineNum">     317 </span>            : 
+<span class="lineNum">     318 </span>            :     bool variant::operator==(unsigned long long ull) const
+<span class="lineNum">     319 </span>            :     {
+<span class="lineNum">     320 </span><span class="lineCov">          3 :         return to_ullong() == ull;</span>
+<a name="321"><span class="lineNum">     321 </span>            :     }</a>
+<span class="lineNum">     322 </span>            : 
+<span class="lineNum">     323 </span>            :     bool variant::operator==(long long ll) const
+<span class="lineNum">     324 </span>            :     {
+<span class="lineNum">     325 </span><span class="lineCov">          3 :         return to_llong() == ll;</span>
+<a name="326"><span class="lineNum">     326 </span>            :     }</a>
+<span class="lineNum">     327 </span>            : 
+<span class="lineNum">     328 </span>            :     bool variant::operator==(long l) const
+<span class="lineNum">     329 </span>            :     {
+<span class="lineNum">     330 </span><span class="lineCov">          3 :         return to_long() == l;</span>
+<a name="331"><span class="lineNum">     331 </span>            :     }</a>
+<span class="lineNum">     332 </span>            : 
+<span class="lineNum">     333 </span>            :     bool variant::operator==(int i) const
+<span class="lineNum">     334 </span>            :     {
+<span class="lineNum">     335 </span><span class="lineCov">          3 :         return to_int() == i;</span>
+<a name="336"><span class="lineNum">     336 </span>            :     }</a>
+<span class="lineNum">     337 </span>            : 
+<span class="lineNum">     338 </span>            :     bool variant::operator==(unsigned ui) const
+<span class="lineNum">     339 </span>            :     {
+<span class="lineNum">     340 </span><span class="lineCov">          3 :         return to_uint() == ui;</span>
+<a name="341"><span class="lineNum">     341 </span>            :     }</a>
+<span class="lineNum">     342 </span>            : 
+<span class="lineNum">     343 </span>            :     bool variant::operator==(unsigned long ul) const
+<span class="lineNum">     344 </span>            :     {
+<span class="lineNum">     345 </span><span class="lineCov">          3 :         return to_ulong() == ul;</span>
+<a name="346"><span class="lineNum">     346 </span>            :     }</a>
+<span class="lineNum">     347 </span>            : 
+<span class="lineNum">     348 </span>            :     bool variant::operator==(const char *str) const
+<span class="lineNum">     349 </span>            :     {
+<span class="lineNum">     350 </span><span class="lineCov">          3 :         return to_string() == str;</span>
+<a name="351"><span class="lineNum">     351 </span>            :     }</a>
+<span class="lineNum">     352 </span>            : 
+<span class="lineNum">     353 </span>            :     bool variant::operator==(const wchar_t *str) const
+<span class="lineNum">     354 </span>            :     {
+<span class="lineNum">     355 </span><span class="lineCov">          3 :         return to_wstring() == str;</span>
+<a name="356"><span class="lineNum">     356 </span>            :     }</a>
+<span class="lineNum">     357 </span>            : 
+<span class="lineNum">     358 </span>            :     bool variant::operator!=(const nullptr_t &amp;other) const
+<span class="lineNum">     359 </span>            :     {
+<a name="360"><span class="lineNum">     360 </span><span class="lineNoCov">          0 :         return !operator==(other);</span></a>
+<span class="lineNum">     361 </span>            :     }
+<span class="lineNum">     362 </span>            :     bool variant::operator!=(bool other) const
+<span class="lineNum">     363 </span>            :     {
+<span class="lineNum">     364 </span><span class="lineCov">          2 :         return !operator==(other);</span>
+<a name="365"><span class="lineNum">     365 </span>            :     }</a>
+<span class="lineNum">     366 </span>            : 
+<span class="lineNum">     367 </span>            :     bool variant::operator!=(float other) const
+<span class="lineNum">     368 </span>            :     {
+<span class="lineNum">     369 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="370"><span class="lineNum">     370 </span>            :     }</a>
+<span class="lineNum">     371 </span>            : 
+<span class="lineNum">     372 </span>            :     bool variant::operator!=(double other) const
+<span class="lineNum">     373 </span>            :     {
+<span class="lineNum">     374 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="375"><span class="lineNum">     375 </span>            :     }</a>
+<span class="lineNum">     376 </span>            : 
+<span class="lineNum">     377 </span>            :     bool variant::operator!=(long double other) const
+<span class="lineNum">     378 </span>            :     {
+<span class="lineNum">     379 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="380"><span class="lineNum">     380 </span>            :     }</a>
+<span class="lineNum">     381 </span>            : 
+<span class="lineNum">     382 </span>            :     bool variant::operator!=(const wstring &amp;other) const
+<span class="lineNum">     383 </span>            :     {
+<span class="lineNum">     384 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="385"><span class="lineNum">     385 </span>            :     }</a>
+<span class="lineNum">     386 </span>            : 
+<span class="lineNum">     387 </span>            :     bool variant::operator!=(const string &amp;other) const
+<span class="lineNum">     388 </span>            :     {
+<span class="lineNum">     389 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="390"><span class="lineNum">     390 </span>            :     }</a>
+<span class="lineNum">     391 </span>            : 
+<span class="lineNum">     392 </span>            :     bool variant::operator!=(unsigned long long other) const
+<span class="lineNum">     393 </span>            :     {
+<span class="lineNum">     394 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="395"><span class="lineNum">     395 </span>            :     }</a>
+<span class="lineNum">     396 </span>            : 
+<span class="lineNum">     397 </span>            :     bool variant::operator!=(long long other) const
+<span class="lineNum">     398 </span>            :     {
+<span class="lineNum">     399 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="400"><span class="lineNum">     400 </span>            :     }</a>
 <span class="lineNum">     401 </span>            : 
-<span class="lineNum">     402 </span><span class="lineCov">          1 :         switch (type_)</span>
-<span class="lineNum">     403 </span>            :         {
-<span class="lineNum">     404 </span>            :         case NUMBER:
-<span class="lineNum">     405 </span>            :         case CHAR:
-<span class="lineNum">     406 </span>            :         case WCHAR:
-<span class="lineNum">     407 </span>            :         case BOOL:
-<span class="lineNum">     408 </span><span class="lineNoCov">          0 :             return value_.i == value.value_.i;</span>
-<span class="lineNum">     409 </span>            :         case UNUMBER:
-<span class="lineNum">     410 </span><span class="lineNoCov">          0 :             return value_.ui == value.value_.ui;</span>
-<span class="lineNum">     411 </span>            :         case DOUBLE:
-<span class="lineNum">     412 </span><span class="lineNoCov">          0 :             return value_.d == value.value_.d;</span>
-<span class="lineNum">     413 </span>            :         case POINTER:
-<span class="lineNum">     414 </span><span class="lineNoCov">          0 :             return value_.p == value.value_.p;</span>
-<span class="lineNum">     415 </span>            :         case STRING:
-<span class="lineNum">     416 </span><span class="lineCov">          4 :             return to_string() == value.to_string();</span>
-<span class="lineNum">     417 </span>            :         case WSTRING:
-<span class="lineNum">     418 </span><span class="lineNoCov">          0 :             return to_wstring() == value.to_wstring();</span>
-<span class="lineNum">     419 </span>            :         default:
-<span class="lineNum">     420 </span><span class="lineNoCov">          0 :             return this == &amp;value;</span>
-<span class="lineNum">     421 </span>            :         }
-<span class="lineNum">     422 </span>            : 
-<a name="423"><span class="lineNum">     423 </span><span class="lineCov">          1 :     }</span></a>
-<span class="lineNum">     424 </span>            : 
-<span class="lineNum">     425 </span>            :     bool variant::operator==(const variant &amp;value) const
-<span class="lineNum">     426 </span>            :     {
-<span class="lineNum">     427 </span><span class="lineCov">          1 :         return equals(value);</span>
-<a name="428"><span class="lineNum">     428 </span>            :     }</a>
-<span class="lineNum">     429 </span>            : 
-<span class="lineNum">     430 </span>            :     const void *variant::to_pointer() const
-<span class="lineNum">     431 </span>            :     {
-<span class="lineNum">     432 </span><span class="lineCov">          1 :         return value_.p;</span>
-<a name="433"><span class="lineNum">     433 </span>            :     }</a>
-<span class="lineNum">     434 </span>            : 
-<span class="lineNum">     435 </span>            :     string variant::to_string(const string &amp;def) const
-<span class="lineNum">     436 </span>            :     {
-<span class="lineNum">     437 </span><span class="lineCov">         22 :         switch (type_)</span>
-<span class="lineNum">     438 </span>            :         {
-<span class="lineNum">     439 </span>            :         case STRING:
-<span class="lineNum">     440 </span><span class="lineCov">         15 :             if (value_.p == NULL) return string();</span>
-<span class="lineNum">     441 </span><span class="lineCov">         15 :             return static_cast&lt;const char *&gt;(value_.p);</span>
+<span class="lineNum">     402 </span>            :     bool variant::operator!=(long other) const
+<span class="lineNum">     403 </span>            :     {
+<span class="lineNum">     404 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="405"><span class="lineNum">     405 </span>            :     }</a>
+<span class="lineNum">     406 </span>            : 
+<span class="lineNum">     407 </span>            :     bool variant::operator!=(int other) const
+<span class="lineNum">     408 </span>            :     {
+<span class="lineNum">     409 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="410"><span class="lineNum">     410 </span>            :     }</a>
+<span class="lineNum">     411 </span>            : 
+<span class="lineNum">     412 </span>            :     bool variant::operator!=(unsigned other) const
+<span class="lineNum">     413 </span>            :     {
+<span class="lineNum">     414 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="415"><span class="lineNum">     415 </span>            :     }</a>
+<span class="lineNum">     416 </span>            : 
+<span class="lineNum">     417 </span>            :     bool variant::operator!=(unsigned long other) const
+<span class="lineNum">     418 </span>            :     {
+<span class="lineNum">     419 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="420"><span class="lineNum">     420 </span>            :     }</a>
+<span class="lineNum">     421 </span>            : 
+<span class="lineNum">     422 </span>            :     bool variant::operator!=(const char *other) const
+<span class="lineNum">     423 </span>            :     {
+<span class="lineNum">     424 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="425"><span class="lineNum">     425 </span>            :     }</a>
+<span class="lineNum">     426 </span>            : 
+<span class="lineNum">     427 </span>            :     bool variant::operator!=(const wchar_t *other) const
+<span class="lineNum">     428 </span>            :     {
+<span class="lineNum">     429 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="430"><span class="lineNum">     430 </span>            :     }</a>
+<span class="lineNum">     431 </span>            : 
+<span class="lineNum">     432 </span>            :     bool variant::operator!=(const variant &amp;other) const
+<span class="lineNum">     433 </span>            :     {
+<span class="lineNum">     434 </span><span class="lineCov">          1 :         return !operator==(other);</span>
+<a name="435"><span class="lineNum">     435 </span>            :     }</a>
+<span class="lineNum">     436 </span>            : 
+<span class="lineNum">     437 </span>            :     bool variant::equals(const variant &amp;value) const
+<span class="lineNum">     438 </span>            :     {
+<span class="lineNum">     439 </span><span class="lineCov">         13 :         switch (type_)</span>
+<span class="lineNum">     440 </span>            :         {
+<span class="lineNum">     441 </span>            :         case NUMBER:
 <span class="lineNum">     442 </span>            :         case CHAR:
-<span class="lineNum">     443 </span>            :         {
-<span class="lineNum">     444 </span>            :             static char buf[2] = {0};
-<span class="lineNum">     445 </span><span class="lineCov">          1 :             buf[0] = value_.i;</span>
-<span class="lineNum">     446 </span><span class="lineCov">          1 :             return buf;</span>
-<span class="lineNum">     447 </span>            :         }
-<span class="lineNum">     448 </span>            :         case BOOL:
-<span class="lineNum">     449 </span><span class="lineNoCov">          0 :             return value_.i == 0 ? &quot;false&quot; : &quot;true&quot;;</span>
-<span class="lineNum">     450 </span>            :         case NUMBER:
-<span class="lineNum">     451 </span><span class="lineCov">          3 :             return std::to_string(value_.i);</span>
-<span class="lineNum">     452 </span>            :         case UNUMBER:
-<span class="lineNum">     453 </span><span class="lineNoCov">          0 :             return std::to_string(value_.ui);</span>
-<span class="lineNum">     454 </span>            :         case DOUBLE:
-<span class="lineNum">     455 </span><span class="lineCov">          3 :             return std::to_string(value_.d);</span>
+<span class="lineNum">     443 </span>            :         case WCHAR:
+<span class="lineNum">     444 </span>            :         case BOOL:
+<span class="lineNum">     445 </span><span class="lineCov">          1 :             return value_.i == value.value_.i;</span>
+<span class="lineNum">     446 </span>            :         case UNUMBER:
+<span class="lineNum">     447 </span><span class="lineCov">          1 :             return value_.ui == value.value_.ui;</span>
+<span class="lineNum">     448 </span>            :         case DOUBLE:
+<span class="lineNum">     449 </span><span class="lineCov">          3 :             return value_.d == value.value_.d;</span>
+<span class="lineNum">     450 </span>            :         case POINTER:
+<span class="lineNum">     451 </span><span class="lineCov">          1 :             return value_.p == value.value_.p;</span>
+<span class="lineNum">     452 </span>            :         case STRING:
+<span class="lineNum">     453 </span><span class="lineCov">          8 :             return to_string() == value.to_string();</span>
+<span class="lineNum">     454 </span>            :         case WSTRING:
+<span class="lineNum">     455 </span><span class="lineCov">          2 :             return to_wstring() == value.to_wstring();</span>
 <span class="lineNum">     456 </span>            :         default:
-<span class="lineNum">     457 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
+<span class="lineNum">     457 </span><span class="lineCov">          2 :             return this == &amp;value;</span>
 <span class="lineNum">     458 </span>            :         }
-<a name="459"><span class="lineNum">     459 </span><span class="lineCov">         22 :     }</span></a>
-<span class="lineNum">     460 </span>            : 
-<span class="lineNum">     461 </span>            :     const char *variant::to_cstring(const char *def) const
-<span class="lineNum">     462 </span>            :     {
-<span class="lineNum">     463 </span><span class="lineCov">          2 :         switch (type_)</span>
-<span class="lineNum">     464 </span>            :         {
-<span class="lineNum">     465 </span>            :         case STRING:
-<span class="lineNum">     466 </span><span class="lineCov">          2 :             return static_cast&lt;const char *&gt;(value_.p);</span>
-<span class="lineNum">     467 </span>            :         case CHAR:
-<span class="lineNum">     468 </span>            :         {
-<span class="lineNum">     469 </span>            :             static char buf[2] = {0};
-<span class="lineNum">     470 </span><span class="lineNoCov">          0 :             buf[0] = value_.i;</span>
-<span class="lineNum">     471 </span><span class="lineNoCov">          0 :             return buf;</span>
-<span class="lineNum">     472 </span>            :         }
+<span class="lineNum">     459 </span>            : 
+<a name="460"><span class="lineNum">     460 </span><span class="lineCov">         13 :     }</span></a>
+<span class="lineNum">     461 </span>            : 
+<span class="lineNum">     462 </span>            :     bool variant::operator==(const variant &amp;value) const
+<span class="lineNum">     463 </span>            :     {
+<span class="lineNum">     464 </span><span class="lineCov">          3 :         return equals(value);</span>
+<a name="465"><span class="lineNum">     465 </span>            :     }</a>
+<span class="lineNum">     466 </span>            : 
+<span class="lineNum">     467 </span>            :     bool variant::is_string() const
+<span class="lineNum">     468 </span>            :     {
+<span class="lineNum">     469 </span><span class="lineCov">         50 :         switch (type_)</span>
+<span class="lineNum">     470 </span>            :         {
+<span class="lineNum">     471 </span>            :         case STRING:
+<span class="lineNum">     472 </span><span class="lineCov">         30 :             return true;</span>
 <span class="lineNum">     473 </span>            :         default:
-<span class="lineNum">     474 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
+<span class="lineNum">     474 </span><span class="lineCov">         20 :             return false;</span>
 <span class="lineNum">     475 </span>            :         }
-<a name="476"><span class="lineNum">     476 </span><span class="lineCov">          2 :     }</span></a>
+<a name="476"><span class="lineNum">     476 </span><span class="lineCov">         50 :     }</span></a>
 <span class="lineNum">     477 </span>            : 
-<span class="lineNum">     478 </span>            :     const wchar_t *variant::to_wcstring(const wchar_t *def) const
+<span class="lineNum">     478 </span>            :     bool variant::is_wstring() const
 <span class="lineNum">     479 </span>            :     {
-<span class="lineNum">     480 </span><span class="lineCov">          1 :         switch (type_)</span>
+<span class="lineNum">     480 </span><span class="lineCov">         20 :         switch (type_)</span>
 <span class="lineNum">     481 </span>            :         {
 <span class="lineNum">     482 </span>            :         case WSTRING:
-<span class="lineNum">     483 </span><span class="lineCov">          1 :             return static_cast&lt;const wchar_t *&gt;(value_.p);</span>
-<span class="lineNum">     484 </span>            :         case WCHAR:
-<span class="lineNum">     485 </span>            :         {
-<span class="lineNum">     486 </span>            :             static wchar_t buf[2] = {0};
-<span class="lineNum">     487 </span><span class="lineNoCov">          0 :             buf[0] = value_.i;</span>
-<span class="lineNum">     488 </span><span class="lineNoCov">          0 :             return buf;</span>
-<span class="lineNum">     489 </span>            :         }
-<span class="lineNum">     490 </span>            :         default:
-<span class="lineNum">     491 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     492 </span>            :         }
-<a name="493"><span class="lineNum">     493 </span><span class="lineCov">          1 :     }</span></a>
-<span class="lineNum">     494 </span>            : 
-<span class="lineNum">     495 </span>            :     wstring variant::to_wstring(const wstring &amp;def) const
-<span class="lineNum">     496 </span>            :     {
-<span class="lineNum">     497 </span><span class="lineCov">          6 :         switch (type_)</span>
-<span class="lineNum">     498 </span>            :         {
-<span class="lineNum">     499 </span>            :         case WSTRING:
-<span class="lineNum">     500 </span><span class="lineCov">          6 :             return static_cast&lt;const wchar_t *&gt;(value_.p);</span>
-<span class="lineNum">     501 </span>            :         case BOOL:
-<span class="lineNum">     502 </span><span class="lineNoCov">          0 :             return value_.i == 0 ? L&quot;false&quot; : L&quot;true&quot;;</span>
-<span class="lineNum">     503 </span>            :         case WCHAR:
-<span class="lineNum">     504 </span>            :         {
-<span class="lineNum">     505 </span><span class="lineNoCov">          0 :             wchar_t buf[3] = {0};</span>
-<span class="lineNum">     506 </span><span class="lineNoCov">          0 :             swprintf(buf, 2, L&quot;%c&quot;, value_.i);</span>
-<span class="lineNum">     507 </span><span class="lineNoCov">          0 :             return buf;</span>
-<span class="lineNum">     508 </span>            :         }
-<span class="lineNum">     509 </span>            :         case NUMBER:
-<span class="lineNum">     510 </span><span class="lineNoCov">          0 :             return std::to_wstring(value_.i);</span>
-<span class="lineNum">     511 </span>            :         case UNUMBER:
-<span class="lineNum">     512 </span><span class="lineNoCov">          0 :             return std::to_wstring(value_.ui);</span>
-<span class="lineNum">     513 </span>            :         case DOUBLE:
-<span class="lineNum">     514 </span><span class="lineNoCov">          0 :             return std::to_wstring(value_.d);</span>
-<span class="lineNum">     515 </span>            :         default:
-<span class="lineNum">     516 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     517 </span>            :         }
-<a name="518"><span class="lineNum">     518 </span><span class="lineCov">          6 :     }</span></a>
-<span class="lineNum">     519 </span>            : 
-<span class="lineNum">     520 </span>            :     bool variant::is_string() const
-<span class="lineNum">     521 </span>            :     {
-<span class="lineNum">     522 </span><span class="lineCov">         16 :         switch (type_)</span>
-<span class="lineNum">     523 </span>            :         {
-<span class="lineNum">     524 </span>            :         case STRING:
-<span class="lineNum">     525 </span><span class="lineCov">         15 :             return true;</span>
+<span class="lineNum">     483 </span><span class="lineCov">         14 :             return true;</span>
+<span class="lineNum">     484 </span>            :         default:
+<span class="lineNum">     485 </span><span class="lineCov">          6 :             return false;</span>
+<span class="lineNum">     486 </span>            :         }
+<a name="487"><span class="lineNum">     487 </span><span class="lineCov">         20 :     }</span></a>
+<span class="lineNum">     488 </span>            : 
+<span class="lineNum">     489 </span>            :     bool variant::is_numeric() const
+<span class="lineNum">     490 </span>            :     {
+<span class="lineNum">     491 </span><span class="lineCov">        102 :         switch (type_)</span>
+<span class="lineNum">     492 </span>            :         {
+<span class="lineNum">     493 </span>            :         case NUMBER:
+<span class="lineNum">     494 </span>            :         case UNUMBER:
+<span class="lineNum">     495 </span>            :         case CHAR:
+<span class="lineNum">     496 </span>            :         case WCHAR:
+<span class="lineNum">     497 </span>            :         case BOOL:
+<span class="lineNum">     498 </span>            :         case DOUBLE:
+<span class="lineNum">     499 </span><span class="lineCov">         54 :             return true;</span>
+<span class="lineNum">     500 </span>            :         default:
+<span class="lineNum">     501 </span><span class="lineCov">         48 :             return false;</span>
+<span class="lineNum">     502 </span>            :         }
+<a name="503"><span class="lineNum">     503 </span><span class="lineCov">        102 :     }</span></a>
+<span class="lineNum">     504 </span>            : 
+<span class="lineNum">     505 </span>            :     bool variant::is_real() const
+<span class="lineNum">     506 </span>            :     {
+<span class="lineNum">     507 </span><span class="lineCov">         50 :         switch (type_)</span>
+<span class="lineNum">     508 </span>            :         {
+<span class="lineNum">     509 </span>            :         case DOUBLE:
+<span class="lineNum">     510 </span><span class="lineCov">          2 :             return true;</span>
+<span class="lineNum">     511 </span>            :         default:
+<span class="lineNum">     512 </span><span class="lineCov">         48 :             return false;</span>
+<span class="lineNum">     513 </span>            :         }
+<a name="514"><span class="lineNum">     514 </span><span class="lineCov">         50 :     }</span></a>
+<span class="lineNum">     515 </span>            : 
+<span class="lineNum">     516 </span>            :     bool variant::is_null() const
+<span class="lineNum">     517 </span>            :     {
+<span class="lineNum">     518 </span><span class="lineCov">          4 :         switch (type_)</span>
+<span class="lineNum">     519 </span>            :         {
+<span class="lineNum">     520 </span>            :         case NULLTYPE:
+<span class="lineNum">     521 </span><span class="lineCov">          2 :             return true;</span>
+<span class="lineNum">     522 </span>            :         case STRING:
+<span class="lineNum">     523 </span>            :         case WSTRING:
+<span class="lineNum">     524 </span>            :         case POINTER:
+<span class="lineNum">     525 </span><span class="lineCov">          1 :             return value_.p == NULL;</span>
 <span class="lineNum">     526 </span>            :         default:
 <span class="lineNum">     527 </span><span class="lineCov">          1 :             return false;</span>
 <span class="lineNum">     528 </span>            :         }
-<a name="529"><span class="lineNum">     529 </span><span class="lineCov">         16 :     }</span></a>
+<a name="529"><span class="lineNum">     529 </span><span class="lineCov">          4 :     }</span></a>
 <span class="lineNum">     530 </span>            : 
-<span class="lineNum">     531 </span>            :     bool variant::is_wstring() const
+<span class="lineNum">     531 </span>            :     const void *variant::to_pointer() const
 <span class="lineNum">     532 </span>            :     {
-<span class="lineNum">     533 </span><span class="lineCov">          1 :         switch (type_)</span>
-<span class="lineNum">     534 </span>            :         {
-<span class="lineNum">     535 </span>            :         case WSTRING:
-<span class="lineNum">     536 </span><span class="lineCov">          1 :             return true;</span>
-<span class="lineNum">     537 </span>            :         default:
-<span class="lineNum">     538 </span><span class="lineNoCov">          0 :             return false;</span>
-<span class="lineNum">     539 </span>            :         }
-<a name="540"><span class="lineNum">     540 </span><span class="lineCov">          1 :     }</span></a>
-<span class="lineNum">     541 </span>            : 
-<span class="lineNum">     542 </span>            :     bool variant::is_numeric() const
-<span class="lineNum">     543 </span>            :     {
-<span class="lineNum">     544 </span><span class="lineCov">         64 :         switch (type_)</span>
-<span class="lineNum">     545 </span>            :         {
-<span class="lineNum">     546 </span>            :         case NUMBER:
-<span class="lineNum">     547 </span>            :         case UNUMBER:
-<span class="lineNum">     548 </span>            :         case CHAR:
-<span class="lineNum">     549 </span>            :         case WCHAR:
-<span class="lineNum">     550 </span>            :         case BOOL:
-<span class="lineNum">     551 </span>            :         case DOUBLE:
-<span class="lineNum">     552 </span><span class="lineCov">         50 :             return true;</span>
-<span class="lineNum">     553 </span>            :         default:
-<span class="lineNum">     554 </span><span class="lineCov">         14 :             return false;</span>
-<span class="lineNum">     555 </span>            :         }
-<a name="556"><span class="lineNum">     556 </span><span class="lineCov">         64 :     }</span></a>
-<span class="lineNum">     557 </span>            : 
-<span class="lineNum">     558 </span>            :     bool variant::is_real() const
-<span class="lineNum">     559 </span>            :     {
-<span class="lineNum">     560 </span><span class="lineCov">         14 :         switch (type_)</span>
-<span class="lineNum">     561 </span>            :         {
-<span class="lineNum">     562 </span>            :         case DOUBLE:
-<span class="lineNum">     563 </span><span class="lineNoCov">          0 :             return true;</span>
-<span class="lineNum">     564 </span>            :         default:
-<span class="lineNum">     565 </span><span class="lineCov">         14 :             return false;</span>
-<span class="lineNum">     566 </span>            :         }
-<a name="567"><span class="lineNum">     567 </span><span class="lineCov">         14 :     }</span></a>
-<span class="lineNum">     568 </span>            : 
-<span class="lineNum">     569 </span>            :     bool variant::is_null() const
-<span class="lineNum">     570 </span>            :     {
-<span class="lineNum">     571 </span><span class="lineCov">          1 :         switch (type_)</span>
-<span class="lineNum">     572 </span>            :         {
-<span class="lineNum">     573 </span>            :         case NULLTYPE:
-<span class="lineNum">     574 </span><span class="lineCov">          1 :             return true;</span>
-<span class="lineNum">     575 </span>            :         case STRING:
-<span class="lineNum">     576 </span>            :         case WSTRING:
-<span class="lineNum">     577 </span>            :         case POINTER:
-<span class="lineNum">     578 </span><span class="lineNoCov">          0 :             return value_.p == NULL;</span>
-<span class="lineNum">     579 </span>            :         default:
-<span class="lineNum">     580 </span><span class="lineNoCov">          0 :             return false;</span>
-<span class="lineNum">     581 </span>            :         }
-<a name="582"><span class="lineNum">     582 </span><span class="lineCov">          1 :     }</span></a>
-<span class="lineNum">     583 </span>            : 
-<span class="lineNum">     584 </span>            :     int variant::to_int(const int def) const
-<span class="lineNum">     585 </span>            :     {
-<span class="lineNum">     586 </span><span class="lineCov">         30 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     587 </span><span class="lineCov">         14 :             return convert_numeric(def);</span>
-<span class="lineNum">     588 </span>            : 
-<span class="lineNum">     589 </span><span class="lineCov">          8 :         if (is_string())</span>
+<a name="533"><span class="lineNum">     533 </span><span class="lineCov">          1 :         return value_.p;</span></a>
+<span class="lineNum">     534 </span>            :     }
+<span class="lineNum">     535 </span>            :     string variant::to_string(const string &amp;def) const
+<span class="lineNum">     536 </span>            :     {
+<span class="lineNum">     537 </span>            :         try
+<span class="lineNum">     538 </span>            :         {
+<span class="lineNum">     539 </span><span class="lineCov">          1 :             return to_string();</span>
+<span class="lineNum">     540 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">     541 </span>            :         catch ( const illegal_conversion &amp;e)
+<span class="lineNum">     542 </span>            :         {
+<span class="lineNum">     543 </span><span class="lineCov">          1 :             return def;</span>
+<a name="544"><span class="lineNum">     544 </span><span class="lineCov">          1 :         }</span></a>
+<span class="lineNum">     545 </span><span class="lineCov">          2 :     }</span>
+<span class="lineNum">     546 </span>            :     string variant::to_string() const throw(illegal_conversion)
+<span class="lineNum">     547 </span>            :     {
+<span class="lineNum">     548 </span><span class="lineCov">         33 :         switch (type_)</span>
+<span class="lineNum">     549 </span>            :         {
+<span class="lineNum">     550 </span>            :         case STRING:
+<span class="lineNum">     551 </span><span class="lineCov">         21 :             if (value_.p == NULL) return string();</span>
+<span class="lineNum">     552 </span><span class="lineCov">         42 :             return static_cast&lt;const char *&gt;(value_.p);</span>
+<span class="lineNum">     553 </span>            :         case CHAR:
+<span class="lineNum">     554 </span>            :         {
+<span class="lineNum">     555 </span>            :             static char buf[2] = {0};
+<span class="lineNum">     556 </span><span class="lineCov">          1 :             buf[0] = value_.i;</span>
+<span class="lineNum">     557 </span><span class="lineCov">          2 :             return buf;</span>
+<span class="lineNum">     558 </span>            :         }
+<span class="lineNum">     559 </span>            :         case BOOL:
+<span class="lineNum">     560 </span><span class="lineCov">          4 :             return value_.i == 0 ? &quot;false&quot; : &quot;true&quot;;</span>
+<span class="lineNum">     561 </span>            :         case NUMBER:
+<span class="lineNum">     562 </span><span class="lineCov">          6 :             return std::to_string(value_.i);</span>
+<span class="lineNum">     563 </span>            :         case UNUMBER:
+<span class="lineNum">     564 </span><span class="lineCov">          4 :             return std::to_string(value_.ui);</span>
+<span class="lineNum">     565 </span>            :         case DOUBLE:
+<span class="lineNum">     566 </span><span class="lineCov">          6 :             return std::to_string(value_.d);</span>
+<span class="lineNum">     567 </span>            :         default:
+<span class="lineNum">     568 </span><span class="lineCov">          1 :             throw illegal_conversion();</span>
+<a name="569"><span class="lineNum">     569 </span>            :         }</a>
+<span class="lineNum">     570 </span><span class="lineCov">         32 :     }</span>
+<span class="lineNum">     571 </span>            :     const char *variant::to_cstring(const char *def) const
+<span class="lineNum">     572 </span>            :     {
+<span class="lineNum">     573 </span>            :         try
+<span class="lineNum">     574 </span>            :         {
+<span class="lineNum">     575 </span><span class="lineCov">          1 :             return to_cstring();</span>
+<span class="lineNum">     576 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">     577 </span>            :         catch ( const illegal_conversion &amp;e)
+<span class="lineNum">     578 </span>            :         {
+<span class="lineNum">     579 </span><span class="lineCov">          1 :             return def;</span>
+<span class="lineNum">     580 </span><span class="lineCov">          1 :         }</span>
+<a name="581"><span class="lineNum">     581 </span><span class="lineCov">          2 :     }</span></a>
+<span class="lineNum">     582 </span>            : 
+<span class="lineNum">     583 </span>            :     const char *variant::to_cstring() const throw(illegal_conversion)
+<span class="lineNum">     584 </span>            :     {
+<span class="lineNum">     585 </span><span class="lineCov">          4 :         switch (type_)</span>
+<span class="lineNum">     586 </span>            :         {
+<span class="lineNum">     587 </span>            :         case STRING:
+<span class="lineNum">     588 </span><span class="lineCov">          2 :             return static_cast&lt;const char *&gt;(value_.p);</span>
+<span class="lineNum">     589 </span>            :         case CHAR:
 <span class="lineNum">     590 </span>            :         {
-<span class="lineNum">     591 </span>            :             try
-<span class="lineNum">     592 </span>            :             {
-<span class="lineNum">     593 </span><span class="lineCov">         22 :                 return value(stoi(static_cast&lt;const char *&gt;(value_.p), NULL, BASE));</span>
-<span class="lineNum">     594 </span><span class="lineCov">          6 :             }</span>
-<span class="lineNum">     595 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     596 </span>            :             {
-<span class="lineNum">     597 </span><span class="lineCov">          6 :                 return defau1t(def);</span>
-<span class="lineNum">     598 </span><span class="lineCov">          3 :             }</span>
-<span class="lineNum">     599 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     600 </span><span class="lineCov">          1 :         else if (is_wstring())</span>
-<span class="lineNum">     601 </span>            :         {
-<span class="lineNum">     602 </span>            :             try
-<span class="lineNum">     603 </span>            :             {
-<span class="lineNum">     604 </span><span class="lineCov">          3 :                 return value(wcstol(static_cast&lt;const wchar_t *&gt;(value_.p), NULL, BASE));</span>
-<span class="lineNum">     605 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     606 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     607 </span>            :             {
-<span class="lineNum">     608 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     609 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     610 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     611 </span>            :         else
-<span class="lineNum">     612 </span>            :         {
-<span class="lineNum">     613 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     614 </span>            :         }
-<a name="615"><span class="lineNum">     615 </span><span class="lineCov">         25 :     }</span></a>
-<span class="lineNum">     616 </span>            : 
-<span class="lineNum">     617 </span>            :     unsigned variant::to_uint(const unsigned def) const
-<span class="lineNum">     618 </span>            :     {
-<span class="lineNum">     619 </span><span class="lineCov">          3 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     620 </span><span class="lineCov">          3 :             return convert_numeric(def);</span>
-<span class="lineNum">     621 </span>            : 
-<span class="lineNum">     622 </span><span class="lineNoCov">          0 :         if (is_string())</span>
-<span class="lineNum">     623 </span>            :         {
-<span class="lineNum">     624 </span>            :             try
-<span class="lineNum">     625 </span>            :             {
-<span class="lineNum">     626 </span><span class="lineNoCov">          0 :                 return value(stol(static_cast&lt;const char *&gt;(value_.p), NULL, BASE));</span>
-<span class="lineNum">     627 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     628 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     629 </span>            :             {
-<span class="lineNum">     630 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     631 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     632 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     633 </span><span class="lineNoCov">          0 :         else if (is_wstring())</span>
-<span class="lineNum">     634 </span>            :         {
-<span class="lineNum">     635 </span>            :             try
-<span class="lineNum">     636 </span>            :             {
-<span class="lineNum">     637 </span><span class="lineNoCov">          0 :                 return value(wcstoul(static_cast&lt;const wchar_t *&gt;(value_.p), NULL, BASE));</span>
-<span class="lineNum">     638 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     639 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     640 </span>            :             {
-<span class="lineNum">     641 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     642 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     643 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     644 </span>            :         else
-<span class="lineNum">     645 </span>            :         {
-<span class="lineNum">     646 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     647 </span>            :         }
-<a name="648"><span class="lineNum">     648 </span><span class="lineCov">          3 :     }</span></a>
-<span class="lineNum">     649 </span>            : 
-<span class="lineNum">     650 </span>            :     long variant::to_long(const long def) const
-<span class="lineNum">     651 </span>            :     {
-<span class="lineNum">     652 </span><span class="lineCov">         15 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     653 </span>            :         {
-<span class="lineNum">     654 </span><span class="lineCov">          7 :             return convert_numeric(def);</span>
-<span class="lineNum">     655 </span>            :         }
-<span class="lineNum">     656 </span><span class="lineCov">          4 :         else if (is_string())</span>
-<span class="lineNum">     657 </span>            :         {
-<span class="lineNum">     658 </span>            :             try
-<span class="lineNum">     659 </span>            :             {
-<span class="lineNum">     660 </span><span class="lineCov">         14 :                 return value(stol(static_cast&lt;const char *&gt;(value_.p), 0, BASE));</span>
-<span class="lineNum">     661 </span><span class="lineCov">          2 :             }</span>
-<span class="lineNum">     662 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     663 </span>            :             {
-<span class="lineNum">     664 </span><span class="lineCov">          2 :                 return defau1t(def);</span>
-<span class="lineNum">     665 </span><span class="lineCov">          1 :             }</span>
-<span class="lineNum">     666 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     667 </span><span class="lineNoCov">          0 :         else if (is_wstring())</span>
-<span class="lineNum">     668 </span>            :         {
-<span class="lineNum">     669 </span>            :             try
-<span class="lineNum">     670 </span>            :             {
-<span class="lineNum">     671 </span><span class="lineNoCov">          0 :                 return value(wcstol(static_cast&lt;const wchar_t *&gt;(value_.p), NULL, BASE));</span>
-<span class="lineNum">     672 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     673 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     674 </span>            :             {
-<span class="lineNum">     675 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     676 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     677 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     678 </span>            :         else
-<span class="lineNum">     679 </span>            :         {
-<span class="lineNum">     680 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     681 </span>            :         }
-<a name="682"><span class="lineNum">     682 </span><span class="lineCov">         12 :     }</span></a>
-<span class="lineNum">     683 </span>            : 
-<span class="lineNum">     684 </span>            :     unsigned long variant::to_ulong(const unsigned long def) const
-<span class="lineNum">     685 </span>            :     {
-<span class="lineNum">     686 </span><span class="lineCov">          3 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     687 </span>            :         {
-<span class="lineNum">     688 </span><span class="lineCov">          3 :             return convert_numeric(def);</span>
-<span class="lineNum">     689 </span>            :         }
-<span class="lineNum">     690 </span><span class="lineNoCov">          0 :         else if (is_string())</span>
-<span class="lineNum">     691 </span>            :         {
-<span class="lineNum">     692 </span>            :             try
-<span class="lineNum">     693 </span>            :             {
-<span class="lineNum">     694 </span><span class="lineNoCov">          0 :                 return value(stoul(static_cast&lt;const char *&gt;(value_.p), 0, BASE));</span>
-<span class="lineNum">     695 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     696 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     697 </span>            :             {
-<span class="lineNum">     698 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     699 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     700 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     701 </span><span class="lineNoCov">          0 :         else if (is_wstring())</span>
+<span class="lineNum">     591 </span>            :             static char buf[2] = {0};
+<span class="lineNum">     592 </span><span class="lineCov">          1 :             buf[0] = value_.i;</span>
+<span class="lineNum">     593 </span><span class="lineCov">          1 :             return buf;</span>
+<span class="lineNum">     594 </span>            :         }
+<span class="lineNum">     595 </span>            :         default:
+<span class="lineNum">     596 </span><span class="lineCov">          1 :             throw illegal_conversion();</span>
+<span class="lineNum">     597 </span>            :         }
+<a name="598"><span class="lineNum">     598 </span><span class="lineCov">          3 :     }</span></a>
+<span class="lineNum">     599 </span>            : 
+<span class="lineNum">     600 </span>            :     const wchar_t *variant::to_wcstring(const wchar_t *def) const
+<span class="lineNum">     601 </span>            :     {
+<span class="lineNum">     602 </span>            :         try
+<span class="lineNum">     603 </span>            :         {
+<span class="lineNum">     604 </span><span class="lineCov">          1 :             return to_wcstring();</span>
+<span class="lineNum">     605 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">     606 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     607 </span>            :         {
+<span class="lineNum">     608 </span><span class="lineCov">          1 :             return def;</span>
+<a name="609"><span class="lineNum">     609 </span><span class="lineCov">          1 :         }</span></a>
+<span class="lineNum">     610 </span><span class="lineCov">          2 :     }</span>
+<span class="lineNum">     611 </span>            :     const wchar_t *variant::to_wcstring() const throw(illegal_conversion)
+<span class="lineNum">     612 </span>            :     {
+<span class="lineNum">     613 </span><span class="lineCov">          3 :         switch (type_)</span>
+<span class="lineNum">     614 </span>            :         {
+<span class="lineNum">     615 </span>            :         case WSTRING:
+<span class="lineNum">     616 </span><span class="lineCov">          1 :             return static_cast&lt;const wchar_t *&gt;(value_.p);</span>
+<span class="lineNum">     617 </span>            :         case WCHAR:
+<span class="lineNum">     618 </span>            :         {
+<span class="lineNum">     619 </span>            :             static wchar_t buf[2] = {0};
+<span class="lineNum">     620 </span><span class="lineCov">          1 :             buf[0] = value_.i;</span>
+<span class="lineNum">     621 </span><span class="lineCov">          1 :             return buf;</span>
+<span class="lineNum">     622 </span>            :         }
+<span class="lineNum">     623 </span>            :         default:
+<span class="lineNum">     624 </span><span class="lineCov">          1 :             throw illegal_conversion();</span>
+<span class="lineNum">     625 </span>            :         }
+<a name="626"><span class="lineNum">     626 </span><span class="lineCov">          2 :     }</span></a>
+<span class="lineNum">     627 </span>            : 
+<span class="lineNum">     628 </span>            :     wstring variant::to_wstring(const wstring &amp;def) const
+<span class="lineNum">     629 </span>            :     {
+<span class="lineNum">     630 </span>            :         try
+<span class="lineNum">     631 </span>            :         {
+<span class="lineNum">     632 </span><span class="lineCov">          1 :             return to_wstring();</span>
+<span class="lineNum">     633 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">     634 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     635 </span>            :         {
+<span class="lineNum">     636 </span><span class="lineCov">          1 :             return def;</span>
+<span class="lineNum">     637 </span><span class="lineCov">          1 :         }</span>
+<a name="638"><span class="lineNum">     638 </span><span class="lineCov">          2 :     }</span></a>
+<span class="lineNum">     639 </span>            : 
+<span class="lineNum">     640 </span>            :     wstring variant::to_wstring() const throw(illegal_conversion)
+<span class="lineNum">     641 </span>            :     {
+<span class="lineNum">     642 </span><span class="lineCov">         16 :         switch (type_)</span>
+<span class="lineNum">     643 </span>            :         {
+<span class="lineNum">     644 </span>            :         case WSTRING:
+<span class="lineNum">     645 </span><span class="lineCov">         16 :             return static_cast&lt;const wchar_t *&gt;(value_.p);</span>
+<span class="lineNum">     646 </span>            :         case BOOL:
+<span class="lineNum">     647 </span><span class="lineCov">          2 :             return value_.i == 0 ? L&quot;false&quot; : L&quot;true&quot;;</span>
+<span class="lineNum">     648 </span>            :         case WCHAR:
+<span class="lineNum">     649 </span>            :         {
+<span class="lineNum">     650 </span><span class="lineCov">          1 :             wchar_t buf[3] = {0};</span>
+<span class="lineNum">     651 </span><span class="lineCov">          1 :             swprintf(buf, 2, L&quot;%c&quot;, value_.i);</span>
+<span class="lineNum">     652 </span><span class="lineCov">          2 :             return buf;</span>
+<span class="lineNum">     653 </span>            :         }
+<span class="lineNum">     654 </span>            :         case NUMBER:
+<span class="lineNum">     655 </span><span class="lineCov">          2 :             return std::to_wstring(value_.i);</span>
+<span class="lineNum">     656 </span>            :         case UNUMBER:
+<span class="lineNum">     657 </span><span class="lineCov">          6 :             return std::to_wstring(value_.ui);</span>
+<span class="lineNum">     658 </span>            :         case DOUBLE:
+<span class="lineNum">     659 </span><span class="lineCov">          2 :             return std::to_wstring(value_.d);</span>
+<span class="lineNum">     660 </span>            :         default:
+<span class="lineNum">     661 </span><span class="lineCov">          1 :             throw illegal_conversion();</span>
+<span class="lineNum">     662 </span>            :         }
+<a name="663"><span class="lineNum">     663 </span><span class="lineCov">         15 :     }</span></a>
+<span class="lineNum">     664 </span>            : 
+<span class="lineNum">     665 </span>            :     int variant::to_int() const throw(illegal_conversion)
+<span class="lineNum">     666 </span>            :     {
+<span class="lineNum">     667 </span><span class="lineCov">         32 :         return convert_base&lt;int, int&gt;(stoi, stoi, BASE);</span>
+<a name="668"><span class="lineNum">     668 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     669 </span>            : 
+<span class="lineNum">     670 </span>            :     int variant::to_int(const int def) const
+<span class="lineNum">     671 </span>            :     {
+<span class="lineNum">     672 </span>            :         try
+<span class="lineNum">     673 </span>            :         {
+<span class="lineNum">     674 </span><span class="lineCov">          7 :             return to_int();</span>
+<span class="lineNum">     675 </span><span class="lineCov">         10 :         }</span>
+<span class="lineNum">     676 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     677 </span>            :         {
+<span class="lineNum">     678 </span><span class="lineCov">          5 :             return def;</span>
+<span class="lineNum">     679 </span><span class="lineCov">          5 :         }</span>
+<a name="680"><span class="lineNum">     680 </span><span class="lineCov">         11 :     }</span></a>
+<span class="lineNum">     681 </span>            : 
+<span class="lineNum">     682 </span>            :     unsigned variant::to_uint(const unsigned def) const
+<span class="lineNum">     683 </span>            :     {
+<span class="lineNum">     684 </span>            :         try
+<span class="lineNum">     685 </span>            :         {
+<span class="lineNum">     686 </span><span class="lineCov">          7 :             return to_uint();</span>
+<span class="lineNum">     687 </span><span class="lineCov">          6 :         }</span>
+<span class="lineNum">     688 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     689 </span>            :         {
+<span class="lineNum">     690 </span><span class="lineCov">          3 :             return def;</span>
+<span class="lineNum">     691 </span><span class="lineCov">          3 :         }</span>
+<a name="692"><span class="lineNum">     692 </span><span class="lineCov">          8 :     }</span></a>
+<span class="lineNum">     693 </span>            : 
+<span class="lineNum">     694 </span>            :     unsigned variant::to_uint() const throw(illegal_conversion)
+<span class="lineNum">     695 </span>            :     {
+<span class="lineNum">     696 </span><span class="lineCov">         14 :         return convert_base&lt;unsigned, unsigned long&gt;(stoul, stoul, BASE);</span>
+<a name="697"><span class="lineNum">     697 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     698 </span>            : 
+<span class="lineNum">     699 </span>            :     long variant::to_long(const long def) const
+<span class="lineNum">     700 </span>            :     {
+<span class="lineNum">     701 </span>            :         try
 <span class="lineNum">     702 </span>            :         {
-<span class="lineNum">     703 </span>            :             try
-<span class="lineNum">     704 </span>            :             {
-<span class="lineNum">     705 </span><span class="lineNoCov">          0 :                 return value(wcstoul(static_cast&lt;const wchar_t *&gt;(value_.p), NULL, BASE));</span>
-<span class="lineNum">     706 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     707 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     708 </span>            :             {
-<span class="lineNum">     709 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     710 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     711 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     712 </span>            :         else
-<span class="lineNum">     713 </span>            :         {
-<span class="lineNum">     714 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     715 </span>            :         }
-<a name="716"><span class="lineNum">     716 </span><span class="lineCov">          3 :     }</span></a>
-<span class="lineNum">     717 </span>            : 
-<span class="lineNum">     718 </span>            :     long long variant::to_llong(const long long def) const
-<span class="lineNum">     719 </span>            :     {
-<span class="lineNum">     720 </span><span class="lineCov">          5 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     721 </span>            :         {
-<span class="lineNum">     722 </span><span class="lineCov">          5 :             return convert_numeric(def);</span>
-<span class="lineNum">     723 </span>            :         }
-<span class="lineNum">     724 </span><span class="lineNoCov">          0 :         else if (is_string())</span>
-<span class="lineNum">     725 </span>            :         {
-<span class="lineNum">     726 </span>            :             try
-<span class="lineNum">     727 </span>            :             {
-<span class="lineNum">     728 </span><span class="lineNoCov">          0 :                 return value(stoll(static_cast&lt;const char *&gt;(value_.p), 0, BASE));</span>
-<span class="lineNum">     729 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     730 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     731 </span>            :             {
-<span class="lineNum">     732 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     733 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     734 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     735 </span><span class="lineNoCov">          0 :         else if (is_wstring())</span>
+<span class="lineNum">     703 </span><span class="lineCov">          4 :             return to_long();</span>
+<span class="lineNum">     704 </span><span class="lineCov">          4 :         }</span>
+<span class="lineNum">     705 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     706 </span>            :         {
+<span class="lineNum">     707 </span><span class="lineCov">          2 :             return def;</span>
+<span class="lineNum">     708 </span><span class="lineCov">          2 :         }</span>
+<a name="709"><span class="lineNum">     709 </span><span class="lineCov">          5 :     }</span></a>
+<span class="lineNum">     710 </span>            : 
+<span class="lineNum">     711 </span>            :     long variant::to_long() const throw(illegal_conversion)
+<span class="lineNum">     712 </span>            :     {
+<span class="lineNum">     713 </span><span class="lineCov">         20 :         return convert_base&lt;long, long&gt;(stol, stol, BASE);</span>
+<a name="714"><span class="lineNum">     714 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     715 </span>            : 
+<span class="lineNum">     716 </span>            :     unsigned long variant::to_ulong(const unsigned long def) const
+<span class="lineNum">     717 </span>            :     {
+<span class="lineNum">     718 </span>            :         try
+<span class="lineNum">     719 </span>            :         {
+<span class="lineNum">     720 </span><span class="lineCov">          6 :             return to_ulong();</span>
+<span class="lineNum">     721 </span><span class="lineCov">          4 :         }</span>
+<span class="lineNum">     722 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     723 </span>            :         {
+<span class="lineNum">     724 </span><span class="lineCov">          2 :             return def;</span>
+<span class="lineNum">     725 </span><span class="lineCov">          2 :         }</span>
+<a name="726"><span class="lineNum">     726 </span><span class="lineCov">          6 :     }</span></a>
+<span class="lineNum">     727 </span>            : 
+<span class="lineNum">     728 </span>            :     unsigned long variant::to_ulong() const throw(illegal_conversion)
+<span class="lineNum">     729 </span>            :     {
+<span class="lineNum">     730 </span><span class="lineCov">         14 :         return convert_base&lt;unsigned long, unsigned long&gt;(stoul, stoul, BASE);</span>
+<a name="731"><span class="lineNum">     731 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     732 </span>            : 
+<span class="lineNum">     733 </span>            :     long long variant::to_llong(const long long def) const
+<span class="lineNum">     734 </span>            :     {
+<span class="lineNum">     735 </span>            :         try
 <span class="lineNum">     736 </span>            :         {
-<span class="lineNum">     737 </span>            :             try
-<span class="lineNum">     738 </span>            :             {
-<span class="lineNum">     739 </span><span class="lineNoCov">          0 :                 return value(wcstoll(static_cast&lt;const wchar_t *&gt;(value_.p), NULL, BASE));</span>
-<span class="lineNum">     740 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     741 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     742 </span>            :             {
-<span class="lineNum">     743 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     744 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     745 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     746 </span>            :         else
-<span class="lineNum">     747 </span>            :         {
-<span class="lineNum">     748 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     749 </span>            :         }
-<a name="750"><span class="lineNum">     750 </span><span class="lineCov">          5 :     }</span></a>
-<span class="lineNum">     751 </span>            : 
-<span class="lineNum">     752 </span>            :     unsigned long long variant::to_ullong(const unsigned long long def) const
-<span class="lineNum">     753 </span>            :     {
-<span class="lineNum">     754 </span><span class="lineCov">          5 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     755 </span>            :         {
-<span class="lineNum">     756 </span><span class="lineCov">          5 :             return convert_numeric(def);</span>
-<span class="lineNum">     757 </span>            :         }
-<span class="lineNum">     758 </span><span class="lineNoCov">          0 :         else if (is_string())</span>
-<span class="lineNum">     759 </span>            :         {
-<span class="lineNum">     760 </span>            :             try
-<span class="lineNum">     761 </span>            :             {
-<span class="lineNum">     762 </span><span class="lineNoCov">          0 :                 return value(stoull(static_cast&lt;const char *&gt;(value_.p), 0, BASE));</span>
-<span class="lineNum">     763 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     764 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     765 </span>            :             {
-<span class="lineNum">     766 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     767 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     768 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     769 </span><span class="lineNoCov">          0 :         else if (is_wstring())</span>
-<span class="lineNum">     770 </span>            :         {
-<span class="lineNum">     771 </span>            :             try
-<span class="lineNum">     772 </span>            :             {
-<span class="lineNum">     773 </span><span class="lineNoCov">          0 :                 return value(wcstoull(static_cast&lt;const wchar_t *&gt;(value_.p), NULL, BASE));</span>
-<span class="lineNum">     774 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     775 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     776 </span>            :             {
-<span class="lineNum">     777 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     778 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     779 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     780 </span>            :         else
-<span class="lineNum">     781 </span>            :         {
-<span class="lineNum">     782 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     783 </span>            :         }
-<a name="784"><span class="lineNum">     784 </span><span class="lineCov">          5 :     }</span></a>
-<span class="lineNum">     785 </span>            : 
-<span class="lineNum">     786 </span>            :     double variant::to_double(const double def) const
-<span class="lineNum">     787 </span>            :     {
-<span class="lineNum">     788 </span><span class="lineCov">          4 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     789 </span>            :         {
-<span class="lineNum">     790 </span><span class="lineCov">          2 :             return convert_numeric(def);</span>
-<span class="lineNum">     791 </span>            :         }
-<span class="lineNum">     792 </span><span class="lineCov">          1 :         else if (is_string())</span>
-<span class="lineNum">     793 </span>            :         {
-<span class="lineNum">     794 </span>            :             try
-<span class="lineNum">     795 </span>            :             {
-<span class="lineNum">     796 </span><span class="lineCov">          4 :                 return value(stod(static_cast&lt;const char *&gt;(value_.p), 0));</span>
-<span class="lineNum">     797 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     798 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     799 </span>            :             {
-<span class="lineNum">     800 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     801 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     802 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     803 </span><span class="lineNoCov">          0 :         else if (is_wstring())</span>
-<span class="lineNum">     804 </span>            :         {
-<span class="lineNum">     805 </span>            :             try
-<span class="lineNum">     806 </span>            :             {
-<span class="lineNum">     807 </span><span class="lineNoCov">          0 :                 return value(wcstod(static_cast&lt;const wchar_t *&gt;(value_.p), NULL));</span>
-<span class="lineNum">     808 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     809 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     810 </span>            :             {
-<span class="lineNum">     811 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     812 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     813 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     814 </span>            :         else
-<span class="lineNum">     815 </span>            :         {
-<span class="lineNum">     816 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     817 </span>            :         }
-<a name="818"><span class="lineNum">     818 </span><span class="lineCov">          3 :     }</span></a>
-<span class="lineNum">     819 </span>            : 
-<span class="lineNum">     820 </span>            :     long double variant::to_ldouble(const long double def) const
-<span class="lineNum">     821 </span>            :     {
-<span class="lineNum">     822 </span><span class="lineCov">          4 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     823 </span>            :         {
-<span class="lineNum">     824 </span><span class="lineCov">          4 :             return convert_numeric(def);</span>
-<span class="lineNum">     825 </span>            :         }
-<span class="lineNum">     826 </span><span class="lineNoCov">          0 :         else if (is_string())</span>
-<span class="lineNum">     827 </span>            :         {
-<span class="lineNum">     828 </span>            :             try
-<span class="lineNum">     829 </span>            :             {
-<span class="lineNum">     830 </span><span class="lineNoCov">          0 :                 return value(stold(static_cast&lt;const char *&gt;(value_.p), 0));</span>
-<span class="lineNum">     831 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     832 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     833 </span>            :             {
-<span class="lineNum">     834 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     835 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     836 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     837 </span><span class="lineNoCov">          0 :         else if (is_wstring())</span>
-<span class="lineNum">     838 </span>            :         {
-<span class="lineNum">     839 </span>            :             try
-<span class="lineNum">     840 </span>            :             {
-<span class="lineNum">     841 </span><span class="lineNoCov">          0 :                 return value(wcstold(static_cast&lt;const wchar_t *&gt;(value_.p), NULL));</span>
-<span class="lineNum">     842 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     843 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     844 </span>            :             {
-<span class="lineNum">     845 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     846 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     847 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     848 </span>            :         else
+<span class="lineNum">     737 </span><span class="lineCov">          7 :             return to_llong();</span>
+<span class="lineNum">     738 </span><span class="lineCov">          6 :         }</span>
+<span class="lineNum">     739 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     740 </span>            :         {
+<span class="lineNum">     741 </span><span class="lineCov">          3 :             return def;</span>
+<span class="lineNum">     742 </span><span class="lineCov">          3 :         }</span>
+<a name="743"><span class="lineNum">     743 </span><span class="lineCov">          8 :     }</span></a>
+<span class="lineNum">     744 </span>            : 
+<span class="lineNum">     745 </span>            :     long long variant::to_llong() const throw(illegal_conversion)
+<span class="lineNum">     746 </span>            :     {
+<span class="lineNum">     747 </span><span class="lineCov">         14 :         return convert_base&lt;long long, long long&gt;(stoll, stoll, BASE);</span>
+<a name="748"><span class="lineNum">     748 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     749 </span>            : 
+<span class="lineNum">     750 </span>            :     unsigned long long variant::to_ullong(const unsigned long long def) const
+<span class="lineNum">     751 </span>            :     {
+<span class="lineNum">     752 </span>            :         try
+<span class="lineNum">     753 </span>            :         {
+<span class="lineNum">     754 </span><span class="lineCov">          7 :             return to_ullong();</span>
+<span class="lineNum">     755 </span><span class="lineCov">          6 :         }</span>
+<span class="lineNum">     756 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     757 </span>            :         {
+<span class="lineNum">     758 </span><span class="lineCov">          3 :             return def;</span>
+<a name="759"><span class="lineNum">     759 </span><span class="lineCov">          3 :         }</span></a>
+<span class="lineNum">     760 </span><span class="lineCov">          8 :     }</span>
+<span class="lineNum">     761 </span>            :     unsigned long long variant::to_ullong() const throw(illegal_conversion)
+<span class="lineNum">     762 </span>            :     {
+<span class="lineNum">     763 </span><span class="lineCov">         14 :         return convert_base&lt;unsigned long long, unsigned long long&gt;(stoull, stoull, BASE);</span>
+<a name="764"><span class="lineNum">     764 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     765 </span>            : 
+<span class="lineNum">     766 </span>            :     double variant::to_double(const double def) const
+<span class="lineNum">     767 </span>            :     {
+<span class="lineNum">     768 </span>            :         try
+<span class="lineNum">     769 </span>            :         {
+<span class="lineNum">     770 </span><span class="lineCov">          5 :             return to_double();</span>
+<span class="lineNum">     771 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">     772 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     773 </span>            :         {
+<span class="lineNum">     774 </span><span class="lineCov">          1 :             return def;</span>
+<span class="lineNum">     775 </span><span class="lineCov">          1 :         }</span>
+<a name="776"><span class="lineNum">     776 </span><span class="lineCov">          4 :     }</span></a>
+<span class="lineNum">     777 </span>            : 
+<span class="lineNum">     778 </span>            :     double variant::to_double() const throw(illegal_conversion)
+<span class="lineNum">     779 </span>            :     {
+<span class="lineNum">     780 </span><span class="lineCov">         12 :         return convert&lt;double, double&gt;(stod, stod);</span>
+<a name="781"><span class="lineNum">     781 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     782 </span>            : 
+<span class="lineNum">     783 </span>            :     long double variant::to_ldouble(const long double def) const
+<span class="lineNum">     784 </span>            :     {
+<span class="lineNum">     785 </span>            :         try
+<span class="lineNum">     786 </span>            :         {
+<span class="lineNum">     787 </span><span class="lineCov">          2 :             return to_ldouble();</span>
+<span class="lineNum">     788 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     789 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     790 </span>            :         {
+<span class="lineNum">     791 </span><span class="lineNoCov">          0 :             return def;</span>
+<span class="lineNum">     792 </span><span class="lineNoCov">          0 :         }</span>
+<a name="793"><span class="lineNum">     793 </span><span class="lineCov">          1 :     }</span></a>
+<span class="lineNum">     794 </span>            : 
+<span class="lineNum">     795 </span>            :     long double variant::to_ldouble() const throw(illegal_conversion)
+<span class="lineNum">     796 </span>            :     {
+<a name="797"><span class="lineNum">     797 </span><span class="lineCov">         10 :         return convert&lt;long double, long double&gt;(stold, stold);</span></a>
+<span class="lineNum">     798 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     799 </span>            :     bool variant::to_bool() const
+<span class="lineNum">     800 </span>            :     {
+<span class="lineNum">     801 </span><span class="lineCov">         12 :         switch (type_)</span>
+<span class="lineNum">     802 </span>            :         {
+<span class="lineNum">     803 </span>            :         case BOOL:
+<span class="lineNum">     804 </span>            :         case CHAR:
+<span class="lineNum">     805 </span>            :         case WCHAR:
+<span class="lineNum">     806 </span>            :         case NUMBER:
+<span class="lineNum">     807 </span><span class="lineCov">          4 :             return value_.i != 0;</span>
+<span class="lineNum">     808 </span>            :         case UNUMBER:
+<span class="lineNum">     809 </span><span class="lineNoCov">          0 :             return value_.ui != 0;</span>
+<span class="lineNum">     810 </span>            :         case DOUBLE:
+<span class="lineNum">     811 </span><span class="lineNoCov">          0 :             return !isnan(value_.d);</span>
+<span class="lineNum">     812 </span>            :         case STRING:
+<span class="lineNum">     813 </span>            :         {
+<span class="lineNum">     814 </span><span class="lineCov">          7 :             const char *temp = static_cast&lt;const char *&gt;(value_.p);</span>
+<span class="lineNum">     815 </span><span class="lineCov">         17 :             return temp &amp;&amp; (!strcasecmp(temp, &quot;true&quot;) || !strcasecmp(temp, &quot;yes&quot;));</span>
+<span class="lineNum">     816 </span>            :         }
+<span class="lineNum">     817 </span>            :         case WSTRING:
+<span class="lineNum">     818 </span>            :         {
+<span class="lineNum">     819 </span><span class="lineNoCov">          0 :             const wchar_t *temp = static_cast&lt;const wchar_t *&gt;(value_.p);</span>
+<span class="lineNum">     820 </span><span class="lineNoCov">          0 :             return temp &amp;&amp; (!wcscasecmp(temp, L&quot;true&quot;) || !wcscasecmp(temp, L&quot;yes&quot;));</span>
+<span class="lineNum">     821 </span>            :         }
+<span class="lineNum">     822 </span>            :         case POINTER:
+<span class="lineNum">     823 </span><span class="lineNoCov">          0 :             return value_.p != 0;</span>
+<span class="lineNum">     824 </span>            :         default:
+<span class="lineNum">     825 </span><span class="lineCov">          1 :             return false;</span>
+<span class="lineNum">     826 </span>            :         }
+<a name="827"><span class="lineNum">     827 </span><span class="lineCov">         12 :     }</span></a>
+<span class="lineNum">     828 </span>            : 
+<span class="lineNum">     829 </span>            :     float variant::to_float(const float def) const
+<span class="lineNum">     830 </span>            :     {
+<span class="lineNum">     831 </span>            :         try
+<span class="lineNum">     832 </span>            :         {
+<span class="lineNum">     833 </span><span class="lineNoCov">          0 :             return to_float();</span>
+<span class="lineNum">     834 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     835 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     836 </span>            :         {
+<span class="lineNum">     837 </span><span class="lineNoCov">          0 :             return def;</span>
+<span class="lineNum">     838 </span><span class="lineNoCov">          0 :         }</span>
+<a name="839"><span class="lineNum">     839 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     840 </span>            : 
+<span class="lineNum">     841 </span>            :     float variant::to_float() const throw(illegal_conversion)
+<span class="lineNum">     842 </span>            :     {
+<span class="lineNum">     843 </span><span class="lineCov">         12 :         return convert&lt;float, float&gt;(stof, stof);</span>
+<a name="844"><span class="lineNum">     844 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">     845 </span>            : 
+<span class="lineNum">     846 </span>            :     char variant::to_char(const char def) const
+<span class="lineNum">     847 </span>            :     {
+<span class="lineNum">     848 </span>            :         try
 <span class="lineNum">     849 </span>            :         {
-<span class="lineNum">     850 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<a name="851"><span class="lineNum">     851 </span>            :         }</a>
-<span class="lineNum">     852 </span><span class="lineCov">          4 :     }</span>
-<span class="lineNum">     853 </span>            :     bool variant::to_bool() const
-<span class="lineNum">     854 </span>            :     {
-<span class="lineNum">     855 </span><span class="lineCov">         12 :         switch (type_)</span>
-<span class="lineNum">     856 </span>            :         {
-<span class="lineNum">     857 </span>            :         case BOOL:
-<span class="lineNum">     858 </span>            :         case CHAR:
-<span class="lineNum">     859 </span>            :         case WCHAR:
-<span class="lineNum">     860 </span>            :         case NUMBER:
-<span class="lineNum">     861 </span><span class="lineCov">          5 :             return value_.i != 0;</span>
-<span class="lineNum">     862 </span>            :         case UNUMBER:
-<span class="lineNum">     863 </span><span class="lineNoCov">          0 :             return value_.ui != 0;</span>
-<span class="lineNum">     864 </span>            :         case DOUBLE:
-<span class="lineNum">     865 </span><span class="lineNoCov">          0 :             return !isnan(value_.d);</span>
-<span class="lineNum">     866 </span>            :         case STRING:
-<span class="lineNum">     867 </span>            :         {
-<span class="lineNum">     868 </span><span class="lineCov">          7 :             const char *temp = static_cast&lt;const char *&gt;(value_.p);</span>
-<span class="lineNum">     869 </span><span class="lineCov">         17 :             return temp &amp;&amp; (!strcasecmp(temp, &quot;true&quot;) || !strcasecmp(temp, &quot;yes&quot;));</span>
-<span class="lineNum">     870 </span>            :         }
-<span class="lineNum">     871 </span>            :         case WSTRING:
-<span class="lineNum">     872 </span>            :         {
-<span class="lineNum">     873 </span><span class="lineNoCov">          0 :             const wchar_t *temp = static_cast&lt;const wchar_t *&gt;(value_.p);</span>
-<span class="lineNum">     874 </span><span class="lineNoCov">          0 :             return temp &amp;&amp; (!wcscasecmp(temp, L&quot;true&quot;) || !wcscasecmp(temp, L&quot;yes&quot;));</span>
-<span class="lineNum">     875 </span>            :         }
-<span class="lineNum">     876 </span>            :         case POINTER:
-<span class="lineNum">     877 </span><span class="lineNoCov">          0 :             return value_.p != 0;</span>
-<span class="lineNum">     878 </span>            :         default:
-<span class="lineNum">     879 </span><span class="lineNoCov">          0 :             return false;</span>
-<span class="lineNum">     880 </span>            :         }
-<a name="881"><span class="lineNum">     881 </span><span class="lineCov">         12 :     }</span></a>
-<span class="lineNum">     882 </span>            : 
-<span class="lineNum">     883 </span>            :     float variant::to_float(const float def) const
-<span class="lineNum">     884 </span>            :     {
-<span class="lineNum">     885 </span><span class="lineCov">          7 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     886 </span>            :         {
-<span class="lineNum">     887 </span><span class="lineCov">          5 :             return convert_numeric(def);</span>
-<span class="lineNum">     888 </span>            :         }
-<span class="lineNum">     889 </span><span class="lineCov">          1 :         else if (is_string())</span>
-<span class="lineNum">     890 </span>            :         {
-<span class="lineNum">     891 </span>            :             try
-<span class="lineNum">     892 </span>            :             {
-<span class="lineNum">     893 </span><span class="lineCov">          4 :                 return value(stof(static_cast&lt;const char *&gt;(value_.p), NULL));</span>
-<span class="lineNum">     894 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     895 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     896 </span>            :             {
-<span class="lineNum">     897 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     898 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     899 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     900 </span><span class="lineNoCov">          0 :         else if (is_wstring())</span>
-<span class="lineNum">     901 </span>            :         {
-<span class="lineNum">     902 </span>            :             try
-<span class="lineNum">     903 </span>            :             {
-<span class="lineNum">     904 </span><span class="lineNoCov">          0 :                 return value(wcstof(static_cast&lt;const wchar_t *&gt;(value_.p), NULL));</span>
-<span class="lineNum">     905 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     906 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     907 </span>            :             {
-<span class="lineNum">     908 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     909 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     910 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     911 </span>            :         else
-<span class="lineNum">     912 </span>            :         {
-<span class="lineNum">     913 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     914 </span>            :         }
-<a name="915"><span class="lineNum">     915 </span><span class="lineCov">          6 :     }</span></a>
+<span class="lineNum">     850 </span><span class="lineCov">          1 :             return to_char();</span>
+<span class="lineNum">     851 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">     852 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     853 </span>            :         {
+<span class="lineNum">     854 </span><span class="lineCov">          1 :             return def;</span>
+<a name="855"><span class="lineNum">     855 </span><span class="lineCov">          1 :         }</span></a>
+<span class="lineNum">     856 </span><span class="lineCov">          2 :     }</span>
+<span class="lineNum">     857 </span>            :     char variant::to_char() const throw(illegal_conversion)
+<span class="lineNum">     858 </span>            :     {
+<span class="lineNum">     859 </span><span class="lineCov">          6 :         if (is_numeric() || is_real())</span>
+<span class="lineNum">     860 </span><span class="lineCov">          2 :             return convert_numeric&lt;char&gt;();</span>
+<span class="lineNum">     861 </span>            : 
+<span class="lineNum">     862 </span><span class="lineNoCov">          0 :         if (is_string())</span>
+<span class="lineNum">     863 </span>            :         {
+<span class="lineNum">     864 </span>            :             try
+<span class="lineNum">     865 </span>            :             {
+<span class="lineNum">     866 </span><span class="lineNoCov">          0 :                 const char *temp = static_cast&lt;const char *&gt;(value_.p);</span>
+<span class="lineNum">     867 </span>            : 
+<span class="lineNum">     868 </span><span class="lineNoCov">          0 :                 if (!temp)</span>
+<span class="lineNum">     869 </span><span class="lineNoCov">          0 :                     throw illegal_conversion(&quot;value is null&quot;);</span>
+<span class="lineNum">     870 </span>            : 
+<span class="lineNum">     871 </span><span class="lineNoCov">          0 :                 return *temp;</span>
+<span class="lineNum">     872 </span>            : 
+<span class="lineNum">     873 </span><span class="lineNoCov">          0 :             }</span>
+<span class="lineNum">     874 </span>            :             catch (const exception &amp;e)
+<span class="lineNum">     875 </span>            :             {
+<span class="lineNum">     876 </span><span class="lineNoCov">          0 :                 throw illegal_conversion(e.what());</span>
+<span class="lineNum">     877 </span>            :             }
+<span class="lineNum">     878 </span><span class="lineNoCov">          0 :         }</span>
+<a name="879"><span class="lineNum">     879 </span><span class="lineNoCov">          0 :         throw illegal_conversion(&quot;no conversion found&quot;);</span></a>
+<span class="lineNum">     880 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     881 </span>            :     unsigned char variant::to_uchar(const unsigned char def) const
+<span class="lineNum">     882 </span>            :     {
+<span class="lineNum">     883 </span>            :         try
+<span class="lineNum">     884 </span>            :         {
+<span class="lineNum">     885 </span><span class="lineNoCov">          0 :             return to_uchar();</span>
+<span class="lineNum">     886 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     887 </span>            :         catch (const illegal_conversion &amp;e)
+<span class="lineNum">     888 </span>            :         {
+<span class="lineNum">     889 </span><span class="lineNoCov">          0 :             return def;</span>
+<a name="890"><span class="lineNum">     890 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     891 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     892 </span>            :     unsigned char variant::to_uchar() const throw(illegal_conversion)
+<span class="lineNum">     893 </span>            :     {
+<span class="lineNum">     894 </span><span class="lineCov">          2 :         if (is_numeric() || is_real())</span>
+<span class="lineNum">     895 </span>            :         {
+<span class="lineNum">     896 </span><span class="lineCov">          2 :             return convert_numeric&lt;unsigned char&gt;();</span>
+<span class="lineNum">     897 </span>            :         }
+<span class="lineNum">     898 </span>            : 
+<span class="lineNum">     899 </span><span class="lineNoCov">          0 :         if (is_string())</span>
+<span class="lineNum">     900 </span>            :         {
+<span class="lineNum">     901 </span>            :             try
+<span class="lineNum">     902 </span>            :             {
+<span class="lineNum">     903 </span><span class="lineNoCov">          0 :                 const unsigned char *temp = reinterpret_cast&lt;const unsigned char *&gt;(value_.p);</span>
+<span class="lineNum">     904 </span><span class="lineNoCov">          0 :                 if (!temp)</span>
+<span class="lineNum">     905 </span><span class="lineNoCov">          0 :                     throw illegal_conversion(&quot;value is null&quot;);</span>
+<span class="lineNum">     906 </span>            : 
+<span class="lineNum">     907 </span><span class="lineNoCov">          0 :                 return *temp;</span>
+<span class="lineNum">     908 </span><span class="lineNoCov">          0 :             }</span>
+<span class="lineNum">     909 </span>            :             catch (const exception &amp;e)
+<span class="lineNum">     910 </span>            :             {
+<span class="lineNum">     911 </span><span class="lineNoCov">          0 :                 throw illegal_conversion(e.what());</span>
+<span class="lineNum">     912 </span>            :             }
+<span class="lineNum">     913 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     914 </span><span class="lineNoCov">          0 :         throw illegal_conversion();</span>
+<span class="lineNum">     915 </span><span class="lineCov">          1 :     }</span>
 <span class="lineNum">     916 </span>            : 
-<span class="lineNum">     917 </span>            :     char variant::to_char(const char def) const
-<span class="lineNum">     918 </span>            :     {
-<span class="lineNum">     919 </span><span class="lineCov">          2 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     920 </span><span class="lineCov">          2 :             return convert_numeric(def);</span>
-<span class="lineNum">     921 </span>            : 
-<span class="lineNum">     922 </span><span class="lineNoCov">          0 :         if (is_string())</span>
-<span class="lineNum">     923 </span>            :         {
-<span class="lineNum">     924 </span>            :             try
-<span class="lineNum">     925 </span>            :             {
-<span class="lineNum">     926 </span><span class="lineNoCov">          0 :                 return value(*static_cast&lt;const char *&gt;(value_.p));</span>
-<span class="lineNum">     927 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     928 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     929 </span>            :             {
-<span class="lineNum">     930 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     931 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     932 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     933 </span>            :         else
-<span class="lineNum">     934 </span>            :         {
-<span class="lineNum">     935 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     936 </span>            :         }
-<a name="937"><span class="lineNum">     937 </span><span class="lineCov">          2 :     }</span></a>
-<span class="lineNum">     938 </span>            : 
-<span class="lineNum">     939 </span>            :     unsigned char variant::to_uchar(const unsigned char def) const
-<span class="lineNum">     940 </span>            :     {
-<span class="lineNum">     941 </span><span class="lineNoCov">          0 :         if (is_numeric() || is_real())</span>
-<span class="lineNum">     942 </span><span class="lineNoCov">          0 :             return convert_numeric(def);</span>
-<span class="lineNum">     943 </span>            : 
-<span class="lineNum">     944 </span><span class="lineNoCov">          0 :         if (is_string())</span>
-<span class="lineNum">     945 </span>            :         {
-<span class="lineNum">     946 </span>            :             try
-<span class="lineNum">     947 </span>            :             {
-<span class="lineNum">     948 </span><span class="lineNoCov">          0 :                 return value(*static_cast&lt;const char *&gt;(value_.p));</span>
-<span class="lineNum">     949 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     950 </span>            :             catch (const exception &amp;e)
-<span class="lineNum">     951 </span>            :             {
-<span class="lineNum">     952 </span><span class="lineNoCov">          0 :                 return defau1t(def);</span>
-<span class="lineNum">     953 </span><span class="lineNoCov">          0 :             }</span>
-<span class="lineNum">     954 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     955 </span>            :         else
-<span class="lineNum">     956 </span>            :         {
-<span class="lineNum">     957 </span><span class="lineNoCov">          0 :             return defau1t(def);</span>
-<span class="lineNum">     958 </span>            :         }
-<span class="lineNum">     959 </span><span class="lineNoCov">          0 :     }</span>
-<span class="lineNum">     960 </span>            : 
-<a name="961"><span class="lineNum">     961 </span>            :     // for streams</a>
-<span class="lineNum">     962 </span>            : 
-<span class="lineNum">     963 </span>            :     ostream &amp;operator&lt;&lt;(ostream &amp;stream, const variant &amp;v)
-<span class="lineNum">     964 </span>            :     {
-<span class="lineNum">     965 </span><span class="lineNoCov">          0 :         stream &lt;&lt; v.to_string();</span>
-<span class="lineNum">     966 </span><span class="lineNoCov">          0 :         return stream;</span>
-<span class="lineNum">     967 </span><span class="lineNoCov">          0 :     }</span>
-<span class="lineNum">     968 </span>            : 
-<a name="969"><span class="lineNum">     969 </span>            :     // utility operators</a>
-<span class="lineNum">     970 </span>            : 
-<span class="lineNum">     971 </span>            :     bool operator==(float f, const variant &amp;v)
-<span class="lineNum">     972 </span>            :     {
-<span class="lineNum">     973 </span><span class="lineCov">          2 :         return f == v.to_float();</span>
-<a name="974"><span class="lineNum">     974 </span>            :     }</a>
-<span class="lineNum">     975 </span>            : 
-<span class="lineNum">     976 </span>            :     bool operator==(const wstring &amp;str, const variant &amp;v)
-<span class="lineNum">     977 </span>            :     {
-<span class="lineNum">     978 </span><span class="lineCov">          4 :         return str == v.to_wstring();</span>
-<a name="979"><span class="lineNum">     979 </span><span class="lineNoCov">          0 :     }</span></a>
-<span class="lineNum">     980 </span>            : 
-<span class="lineNum">     981 </span>            :     bool operator==(const string &amp;str, const variant &amp;v)
-<span class="lineNum">     982 </span>            :     {
-<span class="lineNum">     983 </span><span class="lineCov">         12 :         return str == v.to_string();</span>
-<a name="984"><span class="lineNum">     984 </span><span class="lineNoCov">          0 :     }</span></a>
-<span class="lineNum">     985 </span>            : 
-<span class="lineNum">     986 </span>            :     bool operator==(unsigned long long ull, const variant &amp;v)
-<span class="lineNum">     987 </span>            :     {
-<span class="lineNum">     988 </span><span class="lineCov">          1 :         return ull == v.to_ullong();</span>
-<a name="989"><span class="lineNum">     989 </span>            :     }</a>
-<span class="lineNum">     990 </span>            : 
-<span class="lineNum">     991 </span>            :     bool operator==(long long ll, const variant &amp;v)
-<span class="lineNum">     992 </span>            :     {
-<span class="lineNum">     993 </span><span class="lineCov">          1 :         return ll == v.to_llong();</span>
-<a name="994"><span class="lineNum">     994 </span>            :     }</a>
-<span class="lineNum">     995 </span>            : 
-<span class="lineNum">     996 </span>            :     bool operator==(long l, const variant &amp;v)
-<span class="lineNum">     997 </span>            :     {
-<span class="lineNum">     998 </span><span class="lineCov">          4 :         return l == v.to_long();</span>
-<a name="999"><span class="lineNum">     999 </span>            :     }</a>
-<span class="lineNum">    1000 </span>            : 
-<span class="lineNum">    1001 </span>            :     bool operator==(int i, const variant &amp;v)
-<span class="lineNum">    1002 </span>            :     {
-<span class="lineNum">    1003 </span><span class="lineCov">          8 :         return i == v.to_int();</span>
-<a name="1004"><span class="lineNum">    1004 </span>            :     }</a>
-<span class="lineNum">    1005 </span>            : 
-<span class="lineNum">    1006 </span>            :     bool operator==(unsigned ui, const variant &amp;v)
-<span class="lineNum">    1007 </span>            :     {
-<span class="lineNum">    1008 </span><span class="lineCov">          1 :         return ui == v.to_uint();</span>
-<a name="1009"><span class="lineNum">    1009 </span>            :     }</a>
-<span class="lineNum">    1010 </span>            : 
-<span class="lineNum">    1011 </span>            :     bool operator==(unsigned long ul, const variant &amp;v)
-<span class="lineNum">    1012 </span>            :     {
-<span class="lineNum">    1013 </span><span class="lineCov">          1 :         return ul == v.to_ulong();</span>
-<a name="1014"><span class="lineNum">    1014 </span>            :     }</a>
-<span class="lineNum">    1015 </span>            : 
-<span class="lineNum">    1016 </span>            :     bool operator==(bool b, const variant &amp;v)
-<span class="lineNum">    1017 </span>            :     {
-<span class="lineNum">    1018 </span><span class="lineCov">          1 :         return b == v.to_bool();</span>
-<a name="1019"><span class="lineNum">    1019 </span>            :     }</a>
-<span class="lineNum">    1020 </span>            : 
-<span class="lineNum">    1021 </span>            :     bool operator==(double d, const variant &amp;v)
-<span class="lineNum">    1022 </span>            :     {
-<span class="lineNum">    1023 </span><span class="lineNoCov">          0 :         return d == v.to_double();</span>
-<a name="1024"><span class="lineNum">    1024 </span>            :     }</a>
-<span class="lineNum">    1025 </span>            : 
-<span class="lineNum">    1026 </span>            :     bool operator==(long double d, const variant &amp;v)
-<span class="lineNum">    1027 </span>            :     {
-<span class="lineNum">    1028 </span><span class="lineCov">          1 :         return d == v.to_ldouble();</span>
-<span class="lineNum">    1029 </span>            :     }
-<span class="lineNum">    1030 </span>            : }
+<a name="917"><span class="lineNum">     917 </span>            :     // for streams</a>
+<span class="lineNum">     918 </span>            : 
+<span class="lineNum">     919 </span>            :     ostream &amp;operator&lt;&lt;(ostream &amp;stream, const variant &amp;v)
+<span class="lineNum">     920 </span>            :     {
+<span class="lineNum">     921 </span><span class="lineNoCov">          0 :         stream &lt;&lt; v.to_string();</span>
+<span class="lineNum">     922 </span><span class="lineNoCov">          0 :         return stream;</span>
+<span class="lineNum">     923 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     924 </span>            : 
+<a name="925"><span class="lineNum">     925 </span>            :     // utility operators</a>
+<span class="lineNum">     926 </span>            : 
+<span class="lineNum">     927 </span>            :     bool operator==(const nullptr_t &amp;f, const variant &amp;v)
+<span class="lineNum">     928 </span>            :     {
+<span class="lineNum">     929 </span><span class="lineNoCov">          0 :         return v.is_null();</span>
+<a name="930"><span class="lineNum">     930 </span>            :     }</a>
+<span class="lineNum">     931 </span>            : 
+<span class="lineNum">     932 </span>            :     bool operator==(float f, const variant &amp;v)
+<span class="lineNum">     933 </span>            :     {
+<span class="lineNum">     934 </span><span class="lineCov">          2 :         return f == v.to_float();</span>
+<a name="935"><span class="lineNum">     935 </span>            :     }</a>
+<span class="lineNum">     936 </span>            : 
+<span class="lineNum">     937 </span>            :     bool operator==(const wstring &amp;str, const variant &amp;v)
+<span class="lineNum">     938 </span>            :     {
+<span class="lineNum">     939 </span><span class="lineCov">          2 :         return str == v.to_wstring();</span>
+<a name="940"><span class="lineNum">     940 </span>            :     }</a>
+<span class="lineNum">     941 </span>            : 
+<span class="lineNum">     942 </span>            :     bool operator==(const string &amp;str, const variant &amp;v)
+<span class="lineNum">     943 </span>            :     {
+<span class="lineNum">     944 </span><span class="lineCov">          6 :         return str == v.to_string();</span>
+<a name="945"><span class="lineNum">     945 </span>            :     }</a>
+<span class="lineNum">     946 </span>            : 
+<span class="lineNum">     947 </span>            :     bool operator==(unsigned long long ull, const variant &amp;v)
+<span class="lineNum">     948 </span>            :     {
+<span class="lineNum">     949 </span><span class="lineCov">          1 :         return ull == v.to_ullong();</span>
+<a name="950"><span class="lineNum">     950 </span>            :     }</a>
+<span class="lineNum">     951 </span>            : 
+<span class="lineNum">     952 </span>            :     bool operator==(long long ll, const variant &amp;v)
+<span class="lineNum">     953 </span>            :     {
+<span class="lineNum">     954 </span><span class="lineCov">          1 :         return ll == v.to_llong();</span>
+<a name="955"><span class="lineNum">     955 </span>            :     }</a>
+<span class="lineNum">     956 </span>            : 
+<span class="lineNum">     957 </span>            :     bool operator==(long l, const variant &amp;v)
+<span class="lineNum">     958 </span>            :     {
+<span class="lineNum">     959 </span><span class="lineCov">          3 :         return l == v.to_long();</span>
+<a name="960"><span class="lineNum">     960 </span>            :     }</a>
+<span class="lineNum">     961 </span>            : 
+<span class="lineNum">     962 </span>            :     bool operator==(int i, const variant &amp;v)
+<span class="lineNum">     963 </span>            :     {
+<span class="lineNum">     964 </span><span class="lineCov">          7 :         return i == v.to_int();</span>
+<a name="965"><span class="lineNum">     965 </span>            :     }</a>
+<span class="lineNum">     966 </span>            : 
+<span class="lineNum">     967 </span>            :     bool operator==(unsigned ui, const variant &amp;v)
+<span class="lineNum">     968 </span>            :     {
+<span class="lineNum">     969 </span><span class="lineCov">          1 :         return ui == v.to_uint();</span>
+<a name="970"><span class="lineNum">     970 </span>            :     }</a>
+<span class="lineNum">     971 </span>            : 
+<span class="lineNum">     972 </span>            :     bool operator==(unsigned long ul, const variant &amp;v)
+<span class="lineNum">     973 </span>            :     {
+<span class="lineNum">     974 </span><span class="lineCov">          1 :         return ul == v.to_ulong();</span>
+<a name="975"><span class="lineNum">     975 </span>            :     }</a>
+<span class="lineNum">     976 </span>            : 
+<span class="lineNum">     977 </span>            :     bool operator==(bool b, const variant &amp;v)
+<span class="lineNum">     978 </span>            :     {
+<span class="lineNum">     979 </span><span class="lineCov">          1 :         return b == v.to_bool();</span>
+<a name="980"><span class="lineNum">     980 </span>            :     }</a>
+<span class="lineNum">     981 </span>            : 
+<span class="lineNum">     982 </span>            :     bool operator==(double d, const variant &amp;v)
+<span class="lineNum">     983 </span>            :     {
+<span class="lineNum">     984 </span><span class="lineCov">          1 :         return d == v.to_double();</span>
+<a name="985"><span class="lineNum">     985 </span>            :     }</a>
+<span class="lineNum">     986 </span>            : 
+<span class="lineNum">     987 </span>            :     bool operator==(long double d, const variant &amp;v)
+<span class="lineNum">     988 </span>            :     {
+<span class="lineNum">     989 </span><span class="lineCov">          1 :         return d == v.to_ldouble();</span>
+<a name="990"><span class="lineNum">     990 </span>            :     }</a>
+<span class="lineNum">     991 </span>            : 
+<span class="lineNum">     992 </span>            :     bool operator!=(const nullptr_t &amp;n, const variant &amp;v)
+<span class="lineNum">     993 </span>            :     {
+<span class="lineNum">     994 </span><span class="lineNoCov">          0 :         return !operator==(n, v);</span>
+<a name="995"><span class="lineNum">     995 </span>            :     }</a>
+<span class="lineNum">     996 </span>            : 
+<span class="lineNum">     997 </span>            :     bool operator!=(float f, const variant &amp;v)
+<span class="lineNum">     998 </span>            :     {
+<span class="lineNum">     999 </span><span class="lineNoCov">          0 :         return !operator==(f, v);</span>
+<a name="1000"><span class="lineNum">    1000 </span>            :     }</a>
+<span class="lineNum">    1001 </span>            : 
+<span class="lineNum">    1002 </span>            :     bool operator!=(const wstring &amp;str, const variant &amp;v)
+<span class="lineNum">    1003 </span>            :     {
+<span class="lineNum">    1004 </span><span class="lineNoCov">          0 :         return !operator==(str, v);</span>
+<a name="1005"><span class="lineNum">    1005 </span>            :     }</a>
+<span class="lineNum">    1006 </span>            : 
+<span class="lineNum">    1007 </span>            :     bool operator!=(const string &amp;str, const variant &amp;v)
+<span class="lineNum">    1008 </span>            :     {
+<span class="lineNum">    1009 </span><span class="lineNoCov">          0 :         return !operator==(str, v);</span>
+<a name="1010"><span class="lineNum">    1010 </span>            :     }</a>
+<span class="lineNum">    1011 </span>            : 
+<span class="lineNum">    1012 </span>            :     bool operator!=(unsigned long long ull, const variant &amp;v)
+<span class="lineNum">    1013 </span>            :     {
+<span class="lineNum">    1014 </span><span class="lineNoCov">          0 :         return !operator==(ull, v);</span>
+<a name="1015"><span class="lineNum">    1015 </span>            :     }</a>
+<span class="lineNum">    1016 </span>            : 
+<span class="lineNum">    1017 </span>            :     bool operator!=(long long ll, const variant &amp;v)
+<span class="lineNum">    1018 </span>            :     {
+<span class="lineNum">    1019 </span><span class="lineNoCov">          0 :         return !operator==(ll, v);</span>
+<a name="1020"><span class="lineNum">    1020 </span>            :     }</a>
+<span class="lineNum">    1021 </span>            : 
+<span class="lineNum">    1022 </span>            :     bool operator!=(long l, const variant &amp;v)
+<span class="lineNum">    1023 </span>            :     {
+<span class="lineNum">    1024 </span><span class="lineNoCov">          0 :         return !operator==(l, v);</span>
+<a name="1025"><span class="lineNum">    1025 </span>            :     }</a>
+<span class="lineNum">    1026 </span>            : 
+<span class="lineNum">    1027 </span>            :     bool operator!=(int i, const variant &amp;v)
+<span class="lineNum">    1028 </span>            :     {
+<span class="lineNum">    1029 </span><span class="lineNoCov">          0 :         return !operator==(i, v);</span>
+<a name="1030"><span class="lineNum">    1030 </span>            :     }</a>
 <span class="lineNum">    1031 </span>            : 
-<span class="lineNum">    1032 </span>            : #endif
+<span class="lineNum">    1032 </span>            :     bool operator!=(unsigned ui, const variant &amp;v)
+<span class="lineNum">    1033 </span>            :     {
+<span class="lineNum">    1034 </span><span class="lineNoCov">          0 :         return !operator==(ui, v);</span>
+<a name="1035"><span class="lineNum">    1035 </span>            :     }</a>
+<span class="lineNum">    1036 </span>            : 
+<span class="lineNum">    1037 </span>            :     bool operator!=(unsigned long ul, const variant &amp;v)
+<span class="lineNum">    1038 </span>            :     {
+<span class="lineNum">    1039 </span><span class="lineNoCov">          0 :         return !operator==(ul, v);</span>
+<a name="1040"><span class="lineNum">    1040 </span>            :     }</a>
+<span class="lineNum">    1041 </span>            : 
+<span class="lineNum">    1042 </span>            :     bool operator!=(bool b, const variant &amp;v)
+<span class="lineNum">    1043 </span>            :     {
+<span class="lineNum">    1044 </span><span class="lineNoCov">          0 :         return !operator==(b, v);</span>
+<a name="1045"><span class="lineNum">    1045 </span>            :     }</a>
+<span class="lineNum">    1046 </span>            : 
+<span class="lineNum">    1047 </span>            :     bool operator!=(double d, const variant &amp;v)
+<span class="lineNum">    1048 </span>            :     {
+<span class="lineNum">    1049 </span><span class="lineNoCov">          0 :         return !operator==(d, v);</span>
+<a name="1050"><span class="lineNum">    1050 </span>            :     }</a>
+<span class="lineNum">    1051 </span>            : 
+<span class="lineNum">    1052 </span>            :     bool operator!=(long double ld, const variant &amp;v)
+<span class="lineNum">    1053 </span>            :     {
+<span class="lineNum">    1054 </span><span class="lineNoCov">          0 :         return !operator==(ld, v);</span>
+<span class="lineNum">    1055 </span>            :     }
+<span class="lineNum">    1056 </span>            : 
+<span class="lineNum">    1057 </span>            : }
+<span class="lineNum">    1058 </span>            : 
+<span class="lineNum">    1059 </span>            : #endif
 </pre>
       </td>
     </tr>
