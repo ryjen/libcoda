@@ -62,12 +62,14 @@ AC_CONFIG_FILES([Makefile arg3.pc
                  src/math/Makefile
                  src/string/Makefile
                  src/terminal/Makefile
-                 tests/Makefile])
+                 src/variant/Makefile
+ 		 tests/Makefile])
 
-AC_CONFIG_SUBDIRS([src/db
-                   src/dice
-                   src/format
-                   src/json
-                   src/net])
+AC_CONFIG_SUBDIRS([src/db 
+                   src/dice 
+                   src/format 
+                   src/json 
+                   src/net 
+		   src/variant])
 
 AC_OUTPUT

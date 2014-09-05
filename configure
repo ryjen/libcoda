@@ -800,7 +800,8 @@ ac_subdirs_all='src/db
                    src/dice
                    src/format
                    src/json
-                   src/net'
+                   src/net
+		   src/variant'
 
 # Initialize some variables set by options.
 ac_init_help=
@@ -16141,7 +16142,7 @@ fi
 if test x"$GIT_CHECK" != x"yes" ; then
     as_fn_error $? "Required program 'git' not found." "$LINENO" 5
 else
-    GIT_CHECK=`git submodule update --init --recursive`
+    git submodule update --init --recursive
 fi
 
 #coverage
@@ -16960,12 +16961,12 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile arg3.pc src/Makefile src/collections/Makefile src/log/Makefile src/math/Makefile src/string/Makefile src/terminal/Makefile tests/Makefile"
+ac_config_files="$ac_config_files Makefile arg3.pc src/Makefile src/collections/Makefile src/log/Makefile src/math/Makefile src/string/Makefile src/terminal/Makefile src/variant/Makefile tests/Makefile"
 
 
 
 
-subdirs="$subdirs src/db src/dice src/format src/json src/net"
+subdirs="$subdirs src/db src/dice src/format src/json src/net src/variant"
 
 
 cat >confcache <<\_ACEOF
@@ -18091,6 +18092,7 @@ do
     "src/math/Makefile") CONFIG_FILES="$CONFIG_FILES src/math/Makefile" ;;
     "src/string/Makefile") CONFIG_FILES="$CONFIG_FILES src/string/Makefile" ;;
     "src/terminal/Makefile") CONFIG_FILES="$CONFIG_FILES src/terminal/Makefile" ;;
+    "src/variant/Makefile") CONFIG_FILES="$CONFIG_FILES src/variant/Makefile" ;;
     "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
