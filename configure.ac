@@ -62,7 +62,6 @@ AC_CONFIG_FILES([Makefile arg3.pc
                  src/math/Makefile
                  src/string/Makefile
                  src/terminal/Makefile
-                 src/variant/Makefile
  		 tests/Makefile])
 
 AC_CONFIG_SUBDIRS([src/db 
