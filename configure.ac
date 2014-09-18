@@ -68,6 +68,7 @@ AC_CONFIG_SUBDIRS([src/db
                    src/dice
                    src/format
                    src/json
-                   src/net])
+                   src/net
+                   src/variant])
 
 AC_OUTPUT
