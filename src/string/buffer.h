@@ -59,8 +59,6 @@ namespace arg3
 
         buffer &remove(size_t start, size_t end = std::string::npos);
 
-        void clear();
-
         size_t length() const;
     };
 

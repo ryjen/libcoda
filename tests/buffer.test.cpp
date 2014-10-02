@@ -240,14 +240,14 @@ go_bandit([]()
             buf.remove(buf.length() - 2);
 
             Assert::That(buf.to_string(), Equals("testing 1 2"));
-	
-	    buf.clear();
 
-            buf << "testing 1 2 3";
+            buffer buf2;
 
-            buf.remove(buf.length() - 4, buf.length() - 2);
+            buf2 << "testing 1 2 3";
 
-            Assert::That(buf.to_string(), Equals("testing 1 3"));
+            buf2.remove(buf2.length() - 4, buf2.length() - 2);
+
+            Assert::That(buf2.to_string(), Equals("testing 1 3"));
         });
     });
 

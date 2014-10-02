@@ -18,10 +18,6 @@ namespace arg3
         buf_ << other.buf_.str();
         return *this;
     }
-	
-    void buffer::clear() {
-	buf_.clear();
-    }
 
     buffer &buffer::writeln()
     {
@@ -61,9 +57,7 @@ namespace arg3
             temp = temp.append(endStr);
         }
 
-        buf_.clear();
-
-        buf_ << temp;
+        buf_.str(temp);
 
         return *this;
     }
