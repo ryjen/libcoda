@@ -235,7 +235,7 @@ namespace arg3
                 reserve(x.size);
             }
             size = x.size;
-            for (int i = 0; i < size; ++ i)
+            for (size_t i = 0; i < size; ++ i)
             {
                 array[i] = ~(array[i] | ~x.array[i]);
             }
@@ -279,7 +279,7 @@ namespace arg3
             size = x.size;
         }
 
-        for (int i = 0; i < x.size; ++ i)
+        for (size_t i = 0; i < x.size; ++ i)
         {
             array[i] ^= x.array[i];
         }
@@ -298,10 +298,10 @@ namespace arg3
         if (x > 0 && size > 0)
         {
             int a = x % 32;
-            int b = x / 32;
+            size_t b = x / 32;
             if (b > 0)
             {
-                for (int i = b; i < size; ++ i)
+                for (size_t i = b; i < size; ++ i)
                 {
                     array[i - b] = array[i];
                 }
@@ -320,7 +320,7 @@ namespace arg3
             {
                 // uint32_t mask = (1 << a) - 1;
 
-                for (int i = 0; i < size - 1; ++ i)
+                for (size_t i = 0; i < size - 1; ++ i)
                 {
                     array[i] = (array[i] >> a) | (array[i + 1] << (32 - a));
                 }

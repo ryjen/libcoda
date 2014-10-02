@@ -38,20 +38,6 @@ go_bandit([]()
             Assert::That(other.to_string(), Equals("lorum ipsum"));
         });
 
-        it("has a move constructor", []()
-        {
-            buffer buf;
-
-            buf.writeln("test");
-
-            buffer other = std::move(buf);
-
-            Assert::That(other.to_string(), Equals("test\n"));
-
-            Assert::That(buf.empty(), Equals(true));
-
-        });
-
         it("can be copy assigned", []()
         {
             buffer buf;
@@ -242,20 +228,22 @@ go_bandit([]()
 
         it("can be constructed from a string", []()
         {
-            buffer buf = "testing 1 2 3";
+            buffer buf("testing 1 2 3");
 
             Assert::That(buf.to_string(), Equals("testing 1 2 3"));
         });
 
         it("can remove output", []()
         {
-            buffer buf = "testing 1 2 3";
+            buffer buf("testing 1 2 3");
 
             buf.remove(buf.length() - 2);
 
             Assert::That(buf.to_string(), Equals("testing 1 2"));
+	
+	    buf.clear();
 
-            buf = "testing 1 2 3";
+            buf << "testing 1 2 3";
 
             buf.remove(buf.length() - 4, buf.length() - 2);
 

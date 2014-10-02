@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "buffer.h"
 
 using namespace std;
@@ -11,20 +12,15 @@ namespace arg3
         buf_ << other.buf_.str();
     }
 
-    buffer::buffer(buffer &&other) : buf_(std::move(other.buf_))
-    {
-
-    }
     buffer &buffer::operator=(const buffer &other)
     {
         buf_.clear();
         buf_ << other.buf_.str();
         return *this;
     }
-    buffer &buffer::operator=(buffer && other)
-    {
-        buf_ = std::move(other.buf_);
-        return *this;
+	
+    void buffer::clear() {
+	buf_.clear();
     }
 
     buffer &buffer::writeln()
@@ -65,7 +61,7 @@ namespace arg3
             temp = temp.append(endStr);
         }
 
-        buf_ = ostringstream();
+        buf_.clear();
 
         buf_ << temp;
 

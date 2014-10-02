@@ -1,8 +1,9 @@
 #include <iterator>
 #include <sstream>
 #include <algorithm>
+#include <cstring>
+#include <cstdarg>
 #include "util.h"
-#include "../format/src/format.h"
 
 namespace arg3
 {
@@ -107,20 +108,27 @@ namespace arg3
 
     string ordinal_string(int n)
     {
+	char buf[BUFSIZ+1] = {0};
+
         if (n == 1 || n == 0)
             return "first";
         else if (n == 2)
             return "second";
         else if (n == 3)
             return "third";
-        else if (n % 10 == 1)
-            return format("{0}st") << n;
-        else if (n % 10 == 2)
-            return format("{0}nd") << n;
-        else if (n % 10 == 3)
-            return format("{0}rd") << n;
-        else
-            return format("{0}th") << n;
+        else if (n % 10 == 1) {
+	    snprintf(buf, BUFSIZ, "%dst", n);
+            return buf;
+        } else if (n % 10 == 2) {
+	    snprintf(buf, BUFSIZ, "%dnd", n);
+            return buf;
+        } else if (n % 10 == 3) {
+	    snprintf(buf, BUFSIZ, "%drd", n);
+            return buf;
+        } else {
+	    snprintf(buf, BUFSIZ, "%dth", n);
+            return buf;
+	}
     }
 
     string join(const string &value, string::size_type count, const string &delimiter)
@@ -377,7 +385,7 @@ namespace arg3
     int sprintf(std::string &ret, const char *fmt, ...)
     {
         char *buf;
-        size_t bufsize;
+        int bufsize;
         char *newbuf;
         size_t nextsize;
         int outsize;

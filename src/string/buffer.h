@@ -24,9 +24,9 @@ namespace arg3
             buf_ << value;
         }
         buffer(const buffer &other);
-        buffer(buffer &&other);
+        buffer(buffer &&other) = delete;
         buffer &operator=(const buffer &other);
-        buffer &operator=(buffer && other);
+        buffer &operator=(buffer && other) = delete;
 
         buffer &writeln();
 
