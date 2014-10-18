@@ -1,2 +1,0 @@
-./configure --prefix=/usr/local/Cellar/arg3/0.5 $@
-

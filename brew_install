@@ -1,0 +1,5 @@
+make dist-gzip
+
+cp homebrew/* /usr/local/Library/Formula/
+
+brew install arg3 --local
