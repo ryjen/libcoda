@@ -13,6 +13,10 @@ class Arg3 < Formula
     url 'file:///Users/Ryan/Devel/libarg3/arg3-0.5.tar.gz'
   end
 
+  depends_on 'json-c'
+  depends_on 'mysql'
+  depends_on 'sqlite3'
+
   def install
     ENV.universal_binary
     
