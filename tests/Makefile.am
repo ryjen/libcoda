@@ -1,5 +1,5 @@
 
-noinst_PROGRAMS = arg3_test
+check_PROGRAMS = arg3_test
 
 arg3_test_SOURCES = arg3.test.cpp argument.test.cpp collections.test.cpp log.test.cpp string.test.cpp buffer.test.cpp
 
