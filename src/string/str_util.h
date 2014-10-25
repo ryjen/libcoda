@@ -54,6 +54,14 @@ namespace arg3
 
 
     int sprintf(std::string &, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+
+    std::string &ltrim(std::string &s);
+
+    // trim from end
+    std::string &rtrim(std::string &s);
+
+    // trim from both ends
+    std::string &trim(std::string &s);
 }
 
 

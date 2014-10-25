@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ctime>
 #include "log.h"
-#include "../string/util.h"
+#include "../string/str_util.h"
 
 using namespace std;
 
@@ -18,9 +18,9 @@ namespace arg3
     ostream &log::header()
     {
         time_t current_time = time(NULL);
-	struct tm *timeinfo = std::localtime(&current_time);
-	char buffer[BUFSIZ+1] = {0};
-	strftime(buffer, BUFSIZ, "%F %T", timeinfo);
+        struct tm *timeinfo = std::localtime(&current_time);
+        char buffer[BUFSIZ + 1] = {0};
+        strftime(buffer, BUFSIZ, "%F %T", timeinfo);
         out_ << "[" << logNames[level_] << "] " << buffer << ": ";
         return out_;
     }

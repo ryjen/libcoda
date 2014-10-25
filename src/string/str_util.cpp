@@ -3,7 +3,10 @@
 #include <algorithm>
 #include <cstring>
 #include <cstdarg>
-#include "util.h"
+#include <vector>
+#include "str_util.h"
+
+using namespace std;
 
 namespace arg3
 {
@@ -108,7 +111,7 @@ namespace arg3
 
     string ordinal_string(int n)
     {
-	char buf[BUFSIZ+1] = {0};
+        char buf[BUFSIZ + 1] = {0};
 
         if (n == 1 || n == 0)
             return "first";
@@ -116,19 +119,26 @@ namespace arg3
             return "second";
         else if (n == 3)
             return "third";
-        else if (n % 10 == 1) {
-	    snprintf(buf, BUFSIZ, "%dst", n);
+        else if (n % 10 == 1)
+        {
+            snprintf(buf, BUFSIZ, "%dst", n);
             return buf;
-        } else if (n % 10 == 2) {
-	    snprintf(buf, BUFSIZ, "%dnd", n);
+        }
+        else if (n % 10 == 2)
+        {
+            snprintf(buf, BUFSIZ, "%dnd", n);
             return buf;
-        } else if (n % 10 == 3) {
-	    snprintf(buf, BUFSIZ, "%drd", n);
+        }
+        else if (n % 10 == 3)
+        {
+            snprintf(buf, BUFSIZ, "%drd", n);
             return buf;
-        } else {
-	    snprintf(buf, BUFSIZ, "%dth", n);
+        }
+        else
+        {
+            snprintf(buf, BUFSIZ, "%dth", n);
             return buf;
-	}
+        }
     }
 
     string join(const string &value, string::size_type count, const string &delimiter)
@@ -468,5 +478,24 @@ namespace arg3
         ret = buf;
         free(buf);
         return outsize;
+    }
+
+    std::string &ltrim(std::string &s)
+    {
+        s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+        return s;
+    }
+
+    // trim from end
+    std::string &rtrim(std::string &s)
+    {
+        s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+        return s;
+    }
+
+    // trim from both ends
+    std::string &trim(std::string &s)
+    {
+        return ltrim(rtrim(s));
     }
 }
