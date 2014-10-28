@@ -1,7 +1,7 @@
 
 #include <bandit/bandit.h>
 #include "../src/string/argument.h"
-#include "../src/math/util.h"
+#include "../src/math/math_util.h"
 
 using namespace bandit;
 using namespace arg3;

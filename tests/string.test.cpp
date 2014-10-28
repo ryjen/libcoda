@@ -1,5 +1,5 @@
 #include <bandit/bandit.h>
-#include "../src/string/util.h"
+#include "../src/string/str_util.h"
 #include <algorithm>
 
 using namespace bandit;
