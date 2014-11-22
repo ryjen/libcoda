@@ -40,6 +40,8 @@ AC_SUBST(COVERAGE_LDFLAGS)
 
 # Checks for header files.
 
+AC_CHECK_HEADERS([uuid/uuid.h])
+
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
 AC_TYPE_INT32_T
@@ -47,6 +49,8 @@ AC_TYPE_INT64_T
 AC_TYPE_SIZE_T
 AC_TYPE_UINT32_T
 AC_TYPE_UINT8_T
+
+AC_CHECK_LIB(uuid, uuid_generate_random)
 
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE

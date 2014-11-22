@@ -11,7 +11,9 @@ extern "C"
 #ifdef WIN32
 #include <Rpc.h>
 #else
+#ifdef HAVE_UUID_UUID_H
 #include <uuid/uuid.h>
+#endif
 #endif
 }
 
@@ -517,15 +519,22 @@ namespace arg3
         unsigned char *str;
         UuidToStringA ( &uuid, &str );
 
-        std::string s( ( char * ) str );
+        std::string s( ( char *) str );
 
         RpcStringFreeA ( &str );
+
+        return s;
 #else
+#ifdef HAVE_LIBUUID
+        char s[37] = {0};
         uuid_t uuid;
         uuid_generate_random ( uuid );
-        char s[37];
         uuid_unparse ( uuid, s );
-#endif
+
         return s;
+#else
+        throw std::runtime_error("uuid library not available.");
+#endif
+#endif
     }
 }
