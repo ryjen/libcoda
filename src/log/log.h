@@ -6,18 +6,18 @@
 
 namespace arg3
 {
+    typedef enum { LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_NONE } log_level;
+
     class log
     {
     public:
-        typedef enum { TRACE, DEBUG, INFO, WARN, ERROR, NONE } level;
-
         static void trace(const std::string &value, std::ostream &out = std::cout);
         static void debug(const std::string &value, std::ostream &out = std::cout);
         static void info(const std::string &value, std::ostream &out = std::cout);
         static void error(const std::string &value, std::ostream &out = std::cerr);
         static void warn(const std::string &value, std::ostream &out = std::cout);
 
-        log(level level = TRACE, std::ostream &out = std::cout);
+        log(log_level level = LOG_TRACE, std::ostream &out = std::cout);
         log(const log &other) = delete;
         log(log &&other) = delete;
         virtual ~log() = default;
@@ -34,9 +34,9 @@ namespace arg3
             return *this;
         }
 
-        static void set_min_log_level(level lev);
+        static void set_min_log_level(log_level lev);
 
-        static level lookup_log_level(const std::string &value);
+        static log_level lookup_log_level(const std::string &value);
 
         template<typename T>
         log &operator<<(const T &val)
@@ -50,9 +50,9 @@ namespace arg3
     protected:
         std::ostream &header();
     private:
-        static level minLevel_;
+        static log_level minLevel_;
 
-        level level_;
+        log_level level_;
         std::ostream &out_;
     };
 }

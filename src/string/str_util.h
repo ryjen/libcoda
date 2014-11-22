@@ -62,6 +62,8 @@ namespace arg3
 
     // trim from both ends
     std::string &trim(std::string &s);
+
+    std::string generate_uuid();
 }
 
 
