@@ -12,7 +12,7 @@ go_bandit([]()
     {
         it("can lookup a log level", []()
         {
-            Assert::That(log::lookup_log_level("debug"), Equals(log::DEBUG));
+            Assert::That(log::lookup_log_level("debug"), Equals(LOG_DEBUG));
         });
     });
 
