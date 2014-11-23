@@ -5,6 +5,7 @@
 #include <cstdarg>
 #include <vector>
 #include "str_util.h"
+#include "config.h"
 
 extern "C"
 {
