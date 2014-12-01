@@ -1,6 +1,7 @@
 #include <iomanip>
 #include <iostream>
 #include <ctime>
+#include <cstdarg>
 #include "log.h"
 #include "../string/str_util.h"
 
@@ -25,6 +26,27 @@ namespace arg3
         return out_;
     }
 
+    log &log::append(const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        append(format, args);
+        va_end(args);
+        return *this;
+    }
+
+    log &log::append(const char *const format, va_list args)
+    {
+        char buf[BUFSIZ + 1] = {0};
+
+        size_t len = vsnprintf(buf, BUFSIZ, format, args);
+
+        if (level_ >= minLevel_ && len > 0)
+            header() << buf << std::endl;
+
+        return *this;
+    }
+
     void log::set_min_log_level(log_level lev)
     {
         minLevel_ = lev;
@@ -42,24 +64,97 @@ namespace arg3
 
     void log::debug(const string &value, ostream &out)
     {
-        log(LOG_DEBUG, out).write(value);
+        log(LOG_DEBUG, out).append(value);
     }
 
     void log::trace(const string &value, std::ostream &out)
     {
-        log(LOG_TRACE, out).write(value);
+        log(LOG_TRACE, out).append(value);
     }
     void log::info(const string &value, ostream &out)
     {
-        log(LOG_INFO, out).write(value);
+        log(LOG_INFO, out).append(value);
     }
     void log::error(const string &value, ostream &out)
     {
-        log(LOG_ERROR, out).write(value);
+        log(LOG_ERROR, out).append(value);
     }
     void log::warn(const string &value, ostream &out)
     {
-        log(LOG_WARN, out).write(value);
+        log(LOG_WARN, out).append(value);
     }
 
+    void log::debug(const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_DEBUG, std::cout).append(format, args);
+        va_end(args);
+    }
+
+    void log::trace(const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_TRACE, std::cout).append(format, args);
+        va_end(args);
+    }
+    void log::info(const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_INFO, std::cout).append(format, args);
+        va_end(args);
+    }
+    void log::error(const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_ERROR, std::cerr).append(format, args);
+        va_end(args);
+    }
+    void log::warn(const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_WARN, std::cout).append(format, args);
+        va_end(args);
+    }
+
+    void log::debug(std::ostream &out, const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_DEBUG, out).append(format, args);
+        va_end(args);
+    }
+
+    void log::trace(std::ostream &out, const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_TRACE, out).append(format, args);
+        va_end(args);
+    }
+    void log::info(std::ostream &out, const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_INFO, out).append(format, args);
+        va_end(args);
+    }
+    void log::error(std::ostream &out, const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_ERROR, out).append(format, args);
+        va_end(args);
+    }
+    void log::warn(std::ostream &out, const char *const format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        log(LOG_WARN, out).append(format, args);
+        va_end(args);
+    }
 }
