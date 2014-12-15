@@ -6,6 +6,7 @@
 #include <vector>
 #include "str_util.h"
 #include "config.h"
+#include <sys/stat.h>
 
 extern "C"
 {
@@ -537,5 +538,27 @@ namespace arg3
         throw std::runtime_error("uuid library not available.");
 #endif
 #endif
+    }
+
+    bool dir_exists(const std::string &s)
+    {
+        struct stat info;
+
+        if (stat( s.c_str(), &info ) != 0)
+            return false;
+        else if (info.st_mode & S_IFDIR)
+            return true;
+        else
+            return false;
+    }
+
+    bool file_exists(const std::string &s)
+    {
+        struct stat info;
+
+        if (stat( s.c_str(), &info ) != 0)
+            return false;
+        else
+            return true;
     }
 }

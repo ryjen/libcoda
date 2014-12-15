@@ -45,7 +45,7 @@ namespace arg3
     namespace base64
     {
         // reference: http://www.cplusplus.com/forum/beginner/51572/
-        std::string encode(unsigned char const * , size_t len);
+        std::string encode(unsigned char const *, size_t len);
         std::string encode(const binary &);
         binary decode(const string &s);
     }
@@ -64,6 +64,9 @@ namespace arg3
     std::string &trim(std::string &s);
 
     std::string generate_uuid();
+
+    bool dir_exists(const std::string &s);
+    bool file_exists(const std::string &s);
 }
 
 
