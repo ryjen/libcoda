@@ -16,6 +16,8 @@ class Arg3 < Formula
   depends_on 'json-c'
   depends_on 'mysql'
   depends_on 'sqlite3'
+  depends_on 'curl'
+  depends_on 'uriparser'
 
   def install
     ENV.universal_binary
