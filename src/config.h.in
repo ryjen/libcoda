@@ -53,8 +53,7 @@
 /* Define to 1 if you have the <uuid/uuid.h> header file. */
 #undef HAVE_UUID_UUID_H
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
 
 /* Name of package */
