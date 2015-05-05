@@ -1,4 +1,4 @@
- prefix=@prefix@
+prefix=@prefix@
 exec_prefix=@exec_prefix@
 includedir=@includedir@
 libdir=@libdir@
@@ -7,6 +7,6 @@ Name: arg3
 Description: c++ utility code
 URL: http://github.com/c0der78/libarg3
 Version: @PACKAGE_VERSION@
-Cflags: -I${includedir}
+Cflags: -I${includedir} -larg3
 Libs: 
 Libs.private: 

@@ -1,16 +1,16 @@
 require 'formula'
 
-class Arg3 < Formula
+class Libarg3 < Formula
   homepage 'http://github.com/c0der78/libarg3'
   url 'https://github.com/c0der78/libarg3.git'
   sha1 '6177abcc886d9d16190d2ce449d1c18897c56d04'
 
   head 'http://github.com/c0der78/libarg3.git'
 	
-  version '0.5'
+  version '0.1'
 	
   devel do
-    url 'file:///Users/Ryan/Devel/libarg3/arg3-0.5.tar.gz'
+    url 'file:///Users/Ryan/Devel/libarg3/arg3-0.1.tar.gz'
   end
 
   depends_on 'json-c'
@@ -21,8 +21,8 @@ class Arg3 < Formula
 
   def install
     ENV.universal_binary
-    
-    system "./configure", "--prefix=#{prefix}"
+   
+    system "./bootstrap.sh", "--prefix=#{prefix}" 
     ENV.deparallelize
     system "make install"
   end
