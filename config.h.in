@@ -59,9 +59,6 @@
 /* Define to 1 if you have the <uuid/uuid.h> header file. */
 #undef HAVE_UUID_UUID_H
 
-/* Define to 1 if the system has the type `_Bool'. */
-#undef HAVE__BOOL
-
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
 

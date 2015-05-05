@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.58])
-AC_INIT([arg3], [0.1], [c0der78@gmail.com])
+AC_INIT([arg3], [0.5.1], [c0der78@gmail.com])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])
 
@@ -56,7 +56,6 @@ AC_CHECK_HEADERS([string.h])
 AC_CHECK_HEADERS([uuid/uuid.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_CHECK_HEADER_STDBOOL
 AC_C_INLINE
 AC_TYPE_INT32_T
 AC_TYPE_INT64_T
