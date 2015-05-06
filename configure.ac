@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.58])
-AC_INIT([arg3], [0.5.1], [c0der78@gmail.com])
+AC_INIT([arg3], [0.5.1], [c0der78@gmail.com], [libarg3], [http://github.com/c0der78/libarg3/archive/0.5.1.tar.gz])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])
 
@@ -18,7 +18,6 @@ AC_CONFIG_MACRO_DIR([m4])
 # Checks for programs.
 AC_PROG_CXX([clang++ g++])
 AC_PROG_CC
-AC_CHECK_PROG(GIT_CHECK,git,yes)
 AC_PROG_AWK
 AC_PROG_CPP
 AC_PROG_INSTALL
@@ -36,15 +35,22 @@ fi
 # Checks for libraries.
 AC_CHECK_LIB(uuid, uuid_generate_random)
 
-# check requirements
-if test x"$GIT_CHECK" != x"yes" ; then
-    AC_MSG_ERROR([Required program 'git' not found.])
-else
-    git submodule update --init --recursive
+# if a git enabled folder...
+if test -d .git ; then
+  
+  # get the git program
+  AC_CHECK_PROG(GIT_CHECK,git,yes)
+
+  # require git
+  if test x"$GIT_CHECK" != x"yes" ; then
+      AC_MSG_ERROR([Required program 'git' not found.])
+  else
+      # update the submodules
+      git submodule update --init --recursive
+  fi
 fi
 
-#coverage
-
+# coverage
 m4_include([m4/gcov.m4])
 AC_TDD_GCOV
 AC_SUBST(COVERAGE_CFLAGS)
