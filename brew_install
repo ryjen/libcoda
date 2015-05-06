@@ -1,5 +1,22 @@
-make dist-gzip
+#!/bin/sh
 
-cp homebrew/* /usr/local/Library/Formula/
+FORMULA_DIR=/usr/local/Library/Formula/
+FORMULA_NAME=libarg3
+FORMULA_FILE=homebrew/$FORMULA_NAME.rb
 
-brew install libarg3 --local
+if [ ! -d $FORMULA_DIR ]; then
+	echo "Homebrew installation not found!";
+  exit 1;
+fi
+
+if [ ! -f $FORMULA_FILE ]; then
+	echo "$FORMULA homebrew script not found";
+	exit 1;
+fi
+
+cp -f $FORMULA_FILE $FORMULA_DIR
+
+echo "$FORMULA_FILE installed to $FORMULA_DIR";
+
+exit 0;
+

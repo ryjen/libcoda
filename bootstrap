@@ -1,0 +1,6 @@
+#!/bin/sh
+autoreconf -ifv
+if [ -f configure ]; then
+	./configure $@
+fi
+

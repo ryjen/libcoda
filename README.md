@@ -1,6 +1,8 @@
 libarg3
 =======
 
+[![Build Status](https://travis-ci.org/c0der78/libarg3.svg?branch=master)](https://travis-ci.org/c0der78/libarg3)
+
 a c++11 utility library.  Its my toolkit for anything c++11.
 
 [View Testing Code Coverage](http://htmlpreview.github.com/?https://github.com/c0der78/libarg3/blob/master/coverage/index.html)
@@ -38,7 +40,7 @@ Requirements
 ============
 
 *compiler*
-You need a c++11 compiler.  I use [http://clang.llvm.org](clang++) on OSX. You need to pass '-std=c++11' and '-stdlib=libc++' options.
+You need a c++11 compiler.  
 
 *libraries*
 - [https://github.com/json-c/json-c](libjson-c)
@@ -46,4 +48,3 @@ You need a c++11 compiler.  I use [http://clang.llvm.org](clang++) on OSX. You n
 - [http://www.sqlite.org](sqlite3)
 - [http://www.mysql.com](mysql)
 
-all of the above libraries are available on OSX with [http://mxcl.github.io/homebrew/](Homebrew)
