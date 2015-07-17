@@ -231,6 +231,14 @@ go_bandit([]()
 
             Assert::That(arg.prefix("ipsum"), Equals(false));
         });
+
+        it("can have literal", []() {
+            auto a = "lorum ipsum"_a;
+
+            AssertThat(arg.next(), Equals("lorum"));
+
+        });
+
     });
 
 

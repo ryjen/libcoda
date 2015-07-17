@@ -16,7 +16,6 @@ namespace arg3
         size_t next(std::string &) const;
     public:
         argument(const std::string &);
-        argument(const char *);
         argument();
         argument(const argument &other);
         argument(argument &&other);
@@ -46,6 +45,8 @@ namespace arg3
         bool operator==(const argument &arg) const;
         bool operator!=(const argument &arg) const;
     };
+
+    argument operator "" _a( const char *cstr, size_t len );
 
     bool operator==(const std::string &a1, const argument &a2);
     bool operator!=(const std::string &a1, const argument &a2);
