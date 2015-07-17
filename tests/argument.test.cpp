@@ -34,7 +34,7 @@ go_bandit([]()
 
         it("can be assigned", []()
         {
-            argument arg = "lorum ipsum";
+            argument arg = "lorum ipsum"_a;
 
             argument other;
 
@@ -123,7 +123,7 @@ go_bandit([]()
 
             Assert::That(arg.next_bool(), Equals(true));
 
-            arg = "0";
+            arg = "0"_a;
 
             Assert::That(arg.next_bool(), Equals(false));
         });
@@ -233,7 +233,7 @@ go_bandit([]()
         });
 
         it("can have literal", []() {
-            auto a = "lorum ipsum"_a;
+            auto arg = "lorum ipsum"_a;
 
             AssertThat(arg.next(), Equals("lorum"));
 
