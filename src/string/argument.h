@@ -6,7 +6,7 @@
 namespace arg3
 {
     /*
-     * basically a string tokenizer
+     * basically a string tokenizer thats aware of quotes/parenthesis
      */
     class argument
     {
@@ -23,8 +23,22 @@ namespace arg3
         argument &operator=(const argument &other);
         argument &operator=(argument && other);
         virtual ~argument();
+
+        //! peek at the next argument
+        /*!
+         * @returns string the next available argument
+         *
+         * Notes: will not remove the argument from the original
+         */
         std::string peek() const;
+        //! gets the next argument
+        /*!
+         * @returns string the next argument
+         *
+         * Notes: will remove the argument from the original
+         */
         std::string next();
+
         int next_int();
         double next_double();
         int64_t next_int64();

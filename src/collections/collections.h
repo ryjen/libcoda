@@ -17,7 +17,7 @@ namespace arg3
 {
 
     template<typename K, typename V>
-    string join(map<K, V> collection, const string &divider = ",", bool displayValues = false)
+    string join(map<K, V> collection, bool displayValues = false, const string &divider = ",")
     {
         ostringstream buf;
 
@@ -26,10 +26,12 @@ namespace arg3
 
         for (auto & e : collection)
         {
-            if (displayValues)
+            if (displayValues) {
                 buf << e.second;
-            else
+            }
+            else {
                 buf << e.first;
+            }
             if (count++ < size - 1)
             {
                 buf << ",";
@@ -39,7 +41,7 @@ namespace arg3
         return buf.str();
     }
     template<typename K, typename V>
-    string join(unordered_map<K, V> collection, const string &divider = ",", bool displayValues = false)
+    string join(unordered_map<K, V> collection, bool displayValues = false, const string &divider = ",")
     {
         ostringstream buf;
 
@@ -48,10 +50,12 @@ namespace arg3
 
         for (auto & e : collection)
         {
-            if (displayValues)
+            if (displayValues) {
                 buf << e.second;
-            else
+            }
+            else {
                 buf << e.first;
+            }
             if (count++ < size - 1)
             {
                 buf << ",";

@@ -1,5 +1,5 @@
-#ifndef ARG3_DLM_BIG_INT_H
-#define ARG3_DLM_BIG_INT_H
+#ifndef ARG3_BIG_INT_H
+#define ARG3_BIG_INT_H
 
 #include <cstdint>
 #include <cassert>
