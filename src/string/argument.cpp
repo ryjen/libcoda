@@ -6,12 +6,14 @@ using namespace std;
 namespace arg3
 {
 
+    argument operator "" _a( const char *cstr, size_t len )
+    {
+       return argument(string(cstr, len));
+    }
+
     argument::argument() {}
 
     argument::argument(const string &str) : str_(str)
-    {}
-
-    argument::argument(const char *str) : str_(str)
     {}
 
     argument::~argument()

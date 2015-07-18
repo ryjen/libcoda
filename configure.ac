@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.58])
-AC_INIT([arg3], [0.5.1], [c0der78@gmail.com], [libarg3], [http://github.com/c0der78/libarg3/archive/0.5.1.tar.gz])
+AC_INIT([arg3 library], [0.5.1], [c0der78@gmail.com], [arg3], [http://github.com/c0der78/libarg3/archive/0.5.1.tar.gz])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])
 

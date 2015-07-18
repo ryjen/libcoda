@@ -94,7 +94,7 @@ namespace arg3
     }
 
     /*
-     * Return true if an argument is completely numeric.
+     * Return true if an argument is numeric.
      */
     int is_number ( const string &arg )
     {

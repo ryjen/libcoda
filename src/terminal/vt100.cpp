@@ -4,7 +4,7 @@ namespace arg3
 {
     namespace terminal
     {
-        base_terminal::data_buffer vt100::parse(const data_buffer &input)
+        data_buffer vt100::parse(const data_buffer &input)
         {
             data_buffer buf;
 
@@ -19,47 +19,98 @@ namespace arg3
                 if (++pos == input.end())
                     break;
 
-                if (*pos == '[')
-                {
-                    parse_parameter_tag(buf, pos + 1, input.end());
-                }
-                else
-                {
-                    parse_tag(buf, pos, input.end());
+                auto code = parse_csi_code(buf, pos, input.end());
+
+                if (code != nullptr) {
+                    codes_[buf.size()] = code;
                 }
             }
 
             return buf;
         }
 
-        void vt100::parse_parameter_tag( data_buffer &output, const data_buffer::const_iterator &start, const data_buffer::const_iterator &end) const
-        {
-
+        const map<size_t, shared_ptr<csi_code>> vt100::codes() const {
+            return codes_;
         }
 
-        void vt100::parse_tag(data_buffer &output, const data_buffer::const_iterator &start, const data_buffer::const_iterator &end) const
+        shared_ptr<csi_code> vt100::parse_csi_code( data_buffer &output, data_buffer::const_iterator &start, data_buffer::const_iterator end) const
+        {
+            shared_ptr<csi_code> code = make_shared<csi_code>();
+
+            if (*start > 32 && *start <= 47) {
+                code->set_prefix(*start++);
+            }
+
+            auto &s = ++start;
+
+            for(auto &last = s; s != end; ++s) {
+
+                if ( *s >= 64 && *s <= 126) {
+                    if (last != s) {
+                        code->add_value(stoi(string(last, s)));
+                    }
+                    code->set_command(*s);
+                    start = s;
+                    return code;
+                }
+
+                if (*s == ';') {
+                    if (last != s) {
+                        code->add_value(stoi(string(last, s)));
+                        last = s;
+                    }
+                    continue;
+                }
+
+
+                if (*s < '0' || *s > '9') {
+                    return nullptr;
+                }
+
+            }
+
+            if (start != s) {
+                start = s;
+            }
+
+            return nullptr;
+        }
+
+        csi_code::csi_code() : prefix_(0), command_(0)
         {}
 
+        void csi_code::add_value(int value) {
+            values_.push_back(value);
+        }
 
-        attribute::attribute(initializer_list<int> values) : values_(values)
-        {}
+        void csi_code::set_prefix(char prefix) {
+            prefix_ = prefix;
+        }
 
-        string attribute::to_string() const
+        void csi_code::set_command(char command) {
+            command_ = command;
+        }
+
+        string csi_code::to_string() const
         {
             ostringstream buf;
 
             buf << ESCAPE;
-            buf << "[";
+
+            if (prefix_ != 0) {
+                buf << prefix_;
+            }
 
             for (int i = 0, size = values_.size(); i < size; i++)
             {
                 buf << values_[i];
 
-                if (i + 1 == size)
-                    buf << "m";
-                else
-                    buf << ";";
+                if (i + 1 < size) {
+                    buf << ';';
+                }
             }
+
+            buf << command_;
 
             return buf.str();
         }
