@@ -4,6 +4,7 @@
 #include "base_terminal.h"
 #include <string>
 #include <sstream>
+#include <memory>
 #include <map>
 
 using namespace std;
