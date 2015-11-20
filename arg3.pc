@@ -1,4 +1,4 @@
-prefix=/usr/local
+prefix=/usr/local/Cellar/libarg3/0.5.0
 exec_prefix=${prefix}
 includedir=${prefix}/include
 libdir=${exec_prefix}/lib
