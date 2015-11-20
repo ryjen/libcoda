@@ -1,21 +1,21 @@
 [submodule "src/json"]
 	path = src/json
-	url = http://github.com/c0der78/arg3json
+	url = http://github.com/deadcoda/arg3json
 [submodule "src/net"]
 	path = src/net
-	url = http://github.com/c0der78/arg3net
+	url = http://github.com/deadcoda/arg3net
 [submodule "src/format"]
 	path = src/format
-	url = http://github.com/c0der78/arg3format
+	url = http://github.com/deadcoda/arg3format
 [submodule "src/dice"]
 	path = src/dice
-	url = http://github.com/c0der78/arg3dice
+	url = http://github.com/deadcoda/arg3dice
 [submodule "src/db"]
 	path = src/db
-	url = http://github.com/c0der78/arg3db
+	url = http://github.com/deadcoda/arg3db
 [submodule "tests/vendor/bandit"]
 	path = tests/vendor/bandit
-	url = http://github.com/c0der78/bandit.git
+	url = http://github.com/deadcoda/bandit.git
 [submodule "src/variant"]
 	path = src/variant
-	url = http://github.com/c0der78/arg3variant
+	url = http://github.com/deadcoda/arg3variant
