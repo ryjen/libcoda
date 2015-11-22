@@ -19,3 +19,6 @@
 [submodule "src/variant"]
 	path = src/variant
 	url = http://github.com/deadcoda/arg3variant
+[submodule "cmake"]
+	path = cmake
+	url = http://github.com/deadcoda/cmake.git

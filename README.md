@@ -24,17 +24,18 @@ I use [autotools](http://en.wikipedia.org/wiki/GNU_build_system).
 
 ```bash
 ./configure --prefix=/usr/local
-
 make
 ```
 
-Coding Style
-============
+for homebrew you build like this:
 
-- class/struct/method names are all lower case with underscores separating words
-- non public members are camel case with and underscore at end of the name
-- macros, enums and constants are all upper case with underscores seperating words
-- braces on a new line
+```bash
+./configure $(brew diy --version=0.5.0 libarg3)
+make install
+brew link libarg3
+```
+
+instead.
 
 Requirements
 ============

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if [ -z "$(which brew)" ]; then
+	echo "Homebrew must be installed."
+	exit 1
+fi
+
+if [ ! -f configure ]; then
+	echo "No configure script found."
+	exit 1
+fi
+
+FORMULA_NAME=libarg3
+FORMULA_VERSION=0.5.0
+FORMULA_PREFIX=$(brew diy --version=$FORMULA_VERSION --name=$FORMULA_NAME)
+
+if [ $? != 0 ]; then
+	echo "Unable to determine homebrew directory ($!)"
+	exit $?
+fi
+
+./configure $FORMULA_PREFIX
+
+exit $?;
+
