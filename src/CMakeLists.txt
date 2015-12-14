@@ -12,7 +12,7 @@ add_subdirectory(variant)
 
 add_library(${PROJECT_NAME} arg3.cpp)
 
-target_link_libraries(${PROJECT_NAME} arg3db arg3dice arg3format arg3json arg3net arg3variant arg3log arg3math arg3str arg3term)
+target_link_libraries(${PROJECT_NAME} arg3db arg3dice arg3format arg3json arg3net libarg3_arg3variant arg3log arg3math arg3str arg3term)
 
 INSTALL(FILES thread/later.h collections/collections.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/arg3)
 

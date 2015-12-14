@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - Code Coverage - log/log.h</title>
+  <title>LCOV - coverage.info.cleaned - log/log.h</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">Code Coverage</td>
+            <td class="headerValue">coverage.info.cleaned</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
@@ -37,20 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2014-09-25 12:02:04</td>
+            <td class="headerValue">2015-11-29 13:09:00</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
             <td class="headerCovTableEntry">4</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
-          </tr>
-          <tr>
-            <td class="headerItem">Legend:</td>
-            <td class="headerValueLeg">            Lines:
-            <span class="coverLegendCov">hit</span>
-            <span class="coverLegendNoCov">not hit</span>
-</td>
-            <td></td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -74,60 +66,77 @@
 <span class="lineNum">       4 </span>            : #include &lt;iostream&gt;
 <span class="lineNum">       5 </span>            : #include &lt;string&gt;
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span>            : namespace arg3
-<span class="lineNum">       8 </span>            : {
-<span class="lineNum">       9 </span>            :     class log
-<span class="lineNum">      10 </span>            :     {
-<span class="lineNum">      11 </span>            :     public:
-<span class="lineNum">      12 </span>            :         typedef enum { TRACE, DEBUG, INFO, WARN, ERROR, NONE } level;
-<span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span>            :         static void trace(const std::string &amp;value, std::ostream &amp;out = std::cout);
-<span class="lineNum">      15 </span>            :         static void debug(const std::string &amp;value, std::ostream &amp;out = std::cout);
-<span class="lineNum">      16 </span>            :         static void info(const std::string &amp;value, std::ostream &amp;out = std::cout);
-<span class="lineNum">      17 </span>            :         static void error(const std::string &amp;value, std::ostream &amp;out = std::cerr);
-<span class="lineNum">      18 </span>            :         static void warn(const std::string &amp;value, std::ostream &amp;out = std::cout);
-<span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span>            :         log(level level = TRACE, std::ostream &amp;out = std::cout);
-<a name="21"><span class="lineNum">      21 </span>            :         log(const log &amp;other) = delete;</a>
-<span class="lineNum">      22 </span>            :         log(log &amp;&amp;other) = delete;
-<span class="lineNum">      23 </span><span class="lineNoCov">          0 :         virtual ~log() = default;</span>
-<span class="lineNum">      24 </span>            :         log &amp;operator=(const log &amp;other) = delete;
-<span class="lineNum">      25 </span>            :         log &amp;operator=(log &amp;&amp; other) = delete;
-<a name="26"><span class="lineNum">      26 </span>            : </a>
-<span class="lineNum">      27 </span>            :         template&lt;typename T&gt;
-<span class="lineNum">      28 </span>            :         log &amp;write(const T &amp;value)
-<span class="lineNum">      29 </span>            :         {
-<span class="lineNum">      30 </span><span class="lineNoCov">          0 :             if (level_ &gt;= minLevel_)</span>
-<span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineNoCov">          0 :                 header() &lt;&lt; value &lt;&lt; std::endl;</span>
-<span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineNoCov">          0 :             return *this;</span>
-<span class="lineNum">      35 </span>            :         }
-<span class="lineNum">      36 </span>            : 
-<span class="lineNum">      37 </span>            :         static void set_min_log_level(level lev);
-<span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span>            :         static level lookup_log_level(const std::string &amp;value);
-<span class="lineNum">      40 </span>            : 
-<span class="lineNum">      41 </span>            :         template&lt;typename T&gt;
-<span class="lineNum">      42 </span>            :         log &amp;operator&lt;&lt;(const T &amp;val)
-<span class="lineNum">      43 </span>            :         {
-<span class="lineNum">      44 </span>            :             if (level_ &gt;= minLevel_)
-<span class="lineNum">      45 </span>            :                 header() &lt;&lt; val &lt;&lt; std::endl;
-<span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span>            :             return *this;
-<span class="lineNum">      48 </span>            :         }
-<span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span>            :     protected:
-<span class="lineNum">      51 </span>            :         std::ostream &amp;header();
-<span class="lineNum">      52 </span>            :     private:
-<span class="lineNum">      53 </span>            :         static level minLevel_;
-<span class="lineNum">      54 </span>            : 
-<span class="lineNum">      55 </span>            :         level level_;
-<span class="lineNum">      56 </span>            :         std::ostream &amp;out_;
-<span class="lineNum">      57 </span>            :     };
-<span class="lineNum">      58 </span>            : }
-<span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span>            : #endif
+<span class="lineNum">       7 </span>            : #ifndef __attribute__
+<span class="lineNum">       8 </span>            : #define __attribute__(x)
+<span class="lineNum">       9 </span>            : #endif
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : namespace arg3
+<span class="lineNum">      12 </span>            : {
+<span class="lineNum">      13 </span>            :     typedef enum { LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_NONE } log_level;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            :     class log
+<span class="lineNum">      16 </span>            :     {
+<span class="lineNum">      17 </span>            :     public:
+<span class="lineNum">      18 </span>            :         static void trace(const std::string &amp;value, std::ostream &amp;out = std::cout);
+<span class="lineNum">      19 </span>            :         static void debug(const std::string &amp;value, std::ostream &amp;out = std::cout);
+<span class="lineNum">      20 </span>            :         static void info(const std::string &amp;value, std::ostream &amp;out = std::cout);
+<span class="lineNum">      21 </span>            :         static void error(const std::string &amp;value, std::ostream &amp;out = std::cerr);
+<span class="lineNum">      22 </span>            :         static void warn(const std::string &amp;value, std::ostream &amp;out = std::cout);
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span>            :         static void trace(const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      25 </span>            :         static void debug(const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      26 </span>            :         static void info(const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      27 </span>            :         static void error(const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      28 </span>            :         static void warn(const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :         static void trace(std::ostream &amp;out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      31 </span>            :         static void debug(std::ostream &amp;out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      32 </span>            :         static void info(std::ostream &amp;out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      33 </span>            :         static void error(std::ostream &amp;out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      34 </span>            :         static void warn(std::ostream &amp;out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span>            :         log(log_level level = LOG_TRACE, std::ostream &amp;out = std::cout);
+<a name="37"><span class="lineNum">      37 </span>            :         log(const log &amp;other) = delete;</a>
+<span class="lineNum">      38 </span>            :         log(log &amp;&amp;other) = delete;
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :         virtual ~log() = default;</span>
+<span class="lineNum">      40 </span>            :         log &amp;operator=(const log &amp;other) = delete;
+<span class="lineNum">      41 </span>            :         log &amp;operator=(log &amp;&amp; other) = delete;
+<a name="42"><span class="lineNum">      42 </span>            : </a>
+<span class="lineNum">      43 </span>            :         template&lt;typename T&gt;
+<span class="lineNum">      44 </span>            :         log &amp;append(const T &amp;value)
+<span class="lineNum">      45 </span>            :         {
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :             if (level_ &gt;= minLevel_)</span>
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :                 header() &lt;&lt; value &lt;&lt; std::endl;</span>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :             return *this;</span>
+<span class="lineNum">      50 </span>            :         }
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            :         log &amp;append(const char *value, ...) __attribute__((format(printf, 1, 2)));
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            :         static void set_min_log_level(log_level lev);
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            :         static log_level lookup_log_level(const std::string &amp;value);
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span>            :         template&lt;typename T&gt;
+<span class="lineNum">      59 </span>            :         log &amp;operator&lt;&lt;(const T &amp;val)
+<span class="lineNum">      60 </span>            :         {
+<span class="lineNum">      61 </span>            :             if (level_ &gt;= minLevel_)
+<span class="lineNum">      62 </span>            :                 header() &lt;&lt; val &lt;&lt; std::endl;
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            :             return *this;
+<span class="lineNum">      65 </span>            :         }
+<span class="lineNum">      66 </span>            : 
+<span class="lineNum">      67 </span>            :     protected:
+<span class="lineNum">      68 </span>            :         std::ostream &amp;header();
+<span class="lineNum">      69 </span>            :     private:
+<span class="lineNum">      70 </span>            :         static log_level minLevel_;
+<span class="lineNum">      71 </span>            :         log &amp;append(const char *const format, va_list args);
+<span class="lineNum">      72 </span>            :         log_level level_;
+<span class="lineNum">      73 </span>            :         std::ostream &amp;out_;
+<span class="lineNum">      74 </span>            :     };
+<span class="lineNum">      75 </span>            : }
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span>            : #endif
 </pre>
       </td>
     </tr>
@@ -136,7 +145,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 

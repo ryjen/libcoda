@@ -1,27 +1,46 @@
 sudo: false
 language: cpp
-before_install: 
-  - mysql -e "create database IF NOT EXISTS test;" -uroot    
-before_script: 
+compiler: 
+  - clang
+  - gcc
+before_install:
+  - mysql -e "create database IF NOT EXISTS test;" -uroot
+before_script:
   - git submodule update --init --recursive
-  - autoreconf --recursive -if
+  - mkdir build
+  - gem install coveralls-lcov
+install:
+  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.7"; fi
+  - if [ "$CXX" == "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9" GCOV="gcov-4.9"; fi
+  - wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.12.orig.tar.gz
+  - tar xf lcov_1.12.orig.tar.gz
+  - export PATH=$TRAVIS_BUILD_DIR/lcov-1.12/bin:$PATH  
 addons:
   apt:
     sources:
+      - george-edison55-precise-backports
+      - llvm-toolchain-precise-3.7
       - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+      - g++-4.9
+      - clang-3.7
       - valgrind
       - liburiparser-dev
-      - mysql-client 
-      - libmysqlclient-dev 
-      - sqlite3 
-      - libsqlite3-dev 
-      - libjson0 
-      - libjson0-dev 
+      - mysql-client
+      - libmysqlclient-dev
+      - sqlite3
+      - libsqlite3-dev
+      - libjson0
+      - libjson0-dev
       - uuid-dev
+      - cmake
+      - cmake-data
 script:
-  - CXX=g++-4.8 ./configure
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DMEMORY_CHECK=ON ..
+  - make
+  - make libarg3-coverage-clean
   - make test
-  - valgrind --leak-check=full --error-exitcode=5 ./tests/arg3_test
- 
+  - make libarg3-coverage-info
+after_success:
+  - coveralls-lcov $TRAVIS_BUILD_DIR/coverage.info

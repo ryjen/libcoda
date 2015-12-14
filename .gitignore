@@ -16,3 +16,4 @@ config.h
 config.status
 libtool
 build
+debug

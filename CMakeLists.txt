@@ -20,6 +20,13 @@ find_package(SQLite3)
 find_package(JSONC)
 find_package(CURL)
 
+# add target for code coverage
+if(CODE_COVERAGE)
+	include(CodeCoverage)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_COVERAGE}")
+	setup_target_for_coverage(${PROJECT_NAME}-coverage ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test ${PROJECT_SOURCE_DIR}/coverage)
+endif()
+
 # create config header
 include(CreateConfigHeader)
 create_config_header()
@@ -37,11 +44,3 @@ if (MEMORY_CHECK)
 else ()
 	add_test(${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test)
 endif()
-
-# add target for code coverage
-if(CODE_COVERAGE)
-	include(CodeCoverage)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_COVERAGE}")
-	setup_target_for_coverage(${PROJECT_NAME}-coverage ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test ${PROJECT_SOURCE_DIR}/coverage)
-endif()
-

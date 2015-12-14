@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - Code Coverage - string/str_util.cpp</title>
+  <title>LCOV - coverage.info.cleaned - string/str_util.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,29 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">Code Coverage</td>
+            <td class="headerValue">coverage.info.cleaned</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">209</td>
-            <td class="headerCovTableEntry">261</td>
-            <td class="headerCovTableEntryMed">80.1 %</td>
+            <td class="headerCovTableEntry">259</td>
+            <td class="headerCovTableEntryMed">80.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-05-04 23:16:38</td>
+            <td class="headerValue">2015-11-29 13:09:00</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">18</td>
             <td class="headerCovTableEntry">25</td>
             <td class="headerCovTableEntryLo">72.0 %</td>
-          </tr>
-          <tr>
-            <td class="headerItem">Legend:</td>
-            <td class="headerValueLeg">            Lines:
-            <span class="coverLegendCov">hit</span>
-            <span class="coverLegendNoCov">not hit</span>
-</td>
-            <td></td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -157,14 +149,14 @@
 <span class="lineNum">      87 </span><span class="lineCov">          4 :             }</span>
 <span class="lineNum">      88 </span><span class="lineCov">         80 :             if (*c &lt;= ' ' || *c &gt;= 127) return 0;</span>
 <span class="lineNum">      89 </span><span class="lineCov">         39 :             if (strchr(rfc822_specials, *c)) return 0;</span>
-<span class="lineNum">      90 </span><span class="lineCov">         39 :         }</span>
+<span class="lineNum">      90 </span><span class="lineCov">         78 :         }</span>
 <span class="lineNum">      91 </span><span class="lineCov">         39 :         while (++c != address.cend());</span>
 <span class="lineNum">      92 </span>            : 
 <span class="lineNum">      93 </span><span class="lineCov">          5 :         return (count &gt;= 1);</span>
 <span class="lineNum">      94 </span><span class="lineCov">          8 :     }</span>
 <span class="lineNum">      95 </span>            : 
 <span class="lineNum">      96 </span>            :     /*
-<a name="97"><span class="lineNum">      97 </span>            :      * Return true if an argument is completely numeric.</a>
+<a name="97"><span class="lineNum">      97 </span>            :      * Return true if an argument is numeric.</a>
 <span class="lineNum">      98 </span>            :      */
 <span class="lineNum">      99 </span>            :     int is_number ( const string &amp;arg )
 <span class="lineNum">     100 </span>            :     {
@@ -286,8 +278,8 @@
 <span class="lineNum">     216 </span>            : 
 <span class="lineNum">     217 </span>            :     bool equals(const string &amp;astr, const string &amp;bstr, bool caseSensitive)
 <span class="lineNum">     218 </span>            :     {
-<span class="lineNum">     219 </span><span class="lineCov">          9 :         for (auto a = astr.cbegin(), b = bstr.cbegin();</span>
-<span class="lineNum">     220 </span><span class="lineCov">        140 :                 a != astr.cend() || b != bstr.cend(); a++, b++ )</span>
+<span class="lineNum">     219 </span><span class="lineCov">         96 :         for (auto a = astr.cbegin(), b = bstr.cbegin();</span>
+<span class="lineNum">     220 </span><span class="lineCov">         92 :                 a != astr.cend() || b != bstr.cend(); a++, b++ )</span>
 <span class="lineNum">     221 </span>            :         {
 <span class="lineNum">     222 </span><span class="lineCov">         86 :             if ( caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b)) )</span>
 <span class="lineNum">     223 </span><span class="lineCov">          4 :                 return false;</span>
@@ -304,7 +296,7 @@
 <span class="lineNum">     234 </span><span class="lineCov">          1 :             return false;</span>
 <span class="lineNum">     235 </span>            :         }
 <span class="lineNum">     236 </span>            : 
-<span class="lineNum">     237 </span><span class="lineCov">          6 :         for ( auto a = astr.cbegin(), b = bstr.cbegin();</span>
+<span class="lineNum">     237 </span><span class="lineCov">         38 :         for ( auto a = astr.cbegin(), b = bstr.cbegin();</span>
 <span class="lineNum">     238 </span><span class="lineCov">         32 :                 a != astr.cend(); a++, b++ )</span>
 <span class="lineNum">     239 </span>            :         {
 <span class="lineNum">     240 </span><span class="lineCov">         32 :             if ( caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b) ) )</span>
@@ -356,7 +348,7 @@
 <a name="286"><span class="lineNum">     286 </span>            :     namespace base64</a>
 <span class="lineNum">     287 </span>            :     {
 <span class="lineNum">     288 </span><span class="lineCov">          1 :         static const string base64_chars =</span>
-<span class="lineNum">     289 </span>            :             &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+<span class="lineNum">     289 </span><span class="lineCov">          2 :             &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>
 <span class="lineNum">     290 </span>            :             &quot;abcdefghijklmnopqrstuvwxyz&quot;
 <span class="lineNum">     291 </span>            :             &quot;0123456789+/&quot;;
 <a name="292"><span class="lineNum">     292 </span>            : </a>
@@ -486,7 +478,7 @@
 <span class="lineNum">     416 </span>            : 
 <span class="lineNum">     417 </span><span class="lineCov">          1 :         bufsize = 0;</span>
 <span class="lineNum">     418 </span><span class="lineCov">          1 :         outsize = 0;</span>
-<span class="lineNum">     419 </span><span class="lineCov">          1 :         for (;;)</span>
+<span class="lineNum">     419 </span><span class="lineCov">          2 :         for (;;)</span>
 <span class="lineNum">     420 </span>            :         {
 <span class="lineNum">     421 </span><span class="lineCov">          2 :             if (bufsize == 0)</span>
 <span class="lineNum">     422 </span>            :             {
@@ -557,7 +549,7 @@
 <span class="lineNum">     487 </span>            :                 /* Output was not truncated */
 <span class="lineNum">     488 </span><span class="lineCov">          1 :                 break;</span>
 <span class="lineNum">     489 </span>            :             }
-<span class="lineNum">     490 </span><span class="lineCov">          1 :         }</span>
+<span class="lineNum">     490 </span>            :         }
 <span class="lineNum">     491 </span><span class="lineCov">          1 :         ret = buf;</span>
 <span class="lineNum">     492 </span><span class="lineCov">          1 :         free(buf);</span>
 <span class="lineNum">     493 </span><span class="lineCov">          1 :         return outsize;</span>
@@ -598,17 +590,17 @@
 <span class="lineNum">     528 </span>            :         return s;
 <span class="lineNum">     529 </span>            : #else
 <span class="lineNum">     530 </span>            : #ifdef HAVE_LIBUUID
-<span class="lineNum">     531 </span><span class="lineNoCov">          0 :         char s[37] = {0};</span>
+<span class="lineNum">     531 </span>            :         char s[37] = {0};
 <span class="lineNum">     532 </span>            :         uuid_t uuid;
-<span class="lineNum">     533 </span><span class="lineNoCov">          0 :         uuid_generate_random ( uuid );</span>
-<span class="lineNum">     534 </span><span class="lineNoCov">          0 :         uuid_unparse ( uuid, s );</span>
+<span class="lineNum">     533 </span>            :         uuid_generate_random ( uuid );
+<span class="lineNum">     534 </span>            :         uuid_unparse ( uuid, s );
 <span class="lineNum">     535 </span>            : 
-<span class="lineNum">     536 </span><span class="lineNoCov">          0 :         return s;</span>
+<span class="lineNum">     536 </span>            :         return s;
 <span class="lineNum">     537 </span>            : #else
-<span class="lineNum">     538 </span>            :         throw std::runtime_error(&quot;uuid library not available.&quot;);
+<span class="lineNum">     538 </span><span class="lineNoCov">          0 :         throw std::runtime_error(&quot;uuid library not available.&quot;);</span>
 <span class="lineNum">     539 </span>            : #endif
 <span class="lineNum">     540 </span>            : #endif
-<a name="541"><span class="lineNum">     541 </span>            :     }</a>
+<a name="541"><span class="lineNum">     541 </span><span class="lineNoCov">          0 :     }</span></a>
 <span class="lineNum">     542 </span>            : 
 <span class="lineNum">     543 </span>            :     bool dir_exists(const std::string &amp;s)
 <span class="lineNum">     544 </span>            :     {
@@ -640,7 +632,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
   </table>
   <br>
 
