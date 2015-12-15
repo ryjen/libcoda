@@ -1,19 +1,16 @@
 #include <bandit/bandit.h>
-#include "../src/string/str_util.h"
+#include "../src/string/util.h"
 #include <algorithm>
 
 using namespace bandit;
 
 using namespace arg3;
 
-go_bandit([]()
-{
+go_bandit([]() {
 
-    describe("string utils", []()
-    {
+    describe("string utils", []() {
 
-        it("can test for numbers", []()
-        {
+        it("can test for numbers", []() {
             Assert::That(is_number("45"), Equals(1));
             Assert::That(is_number("4.5"), Equals(2));
             Assert::That(is_number("-4.5"), Equals(2));
@@ -24,8 +21,7 @@ go_bandit([]()
             Assert::That(is_number(""), Equals(0));
         });
 
-        it("can test for emails", []()
-        {
+        it("can test for emails", []() {
             Assert::That(is_valid_email("c0der78@gmail.com"), Equals(true));
             Assert::That(is_valid_email("ryan.jennings@arg3.net"), Equals(true));
             Assert::That(is_valid_email("ryan@blah"), Equals(false));
@@ -36,8 +32,7 @@ go_bandit([]()
             Assert::That(is_valid_email("\"ryan\".jennings@email.com"), Equals(true));
         });
 
-        it("can make a number ordinal", []()
-        {
+        it("can make a number ordinal", []() {
             Assert::That(ordinal_string(1), Equals("first"));
             Assert::That(ordinal_string(2), Equals("second"));
             Assert::That(ordinal_string(3), Equals("third"));
@@ -49,8 +44,7 @@ go_bandit([]()
         });
 
 
-        it("can capitalize", []()
-        {
+        it("can capitalize", []() {
 
             Assert::That(capitalize("fooBAR"), Equals("Foobar"));
 
@@ -58,22 +52,19 @@ go_bandit([]()
         });
 
 
-        it("can test for an empty string", []()
-        {
+        it("can test for an empty string", []() {
             Assert::That(nullstr(""), Equals(true));
             Assert::That(nullstr(0), Equals(true));
             Assert::That(nullstr("test"), Equals(false));
         });
 
-        it("can test for case insensitive equality", []()
-        {
+        it("can test for case insensitive equality", []() {
             Assert::That(equals("ABC", "abc"), Equals(true));
 
             Assert::That(equals("DEF", "ghi"), Equals(false));
         });
 
-        it("can encode and decode base64", []()
-        {
+        it("can encode and decode base64", []() {
             string testStr = "hello, world";
             binary binStr(testStr.begin(), testStr.end());
             string encStr = "aGVsbG8sIHdvcmxk";
@@ -85,8 +76,7 @@ go_bandit([]()
             Assert::That(std::equal(decStr.begin(), decStr.end(), binStr.begin()), Equals(true));
         });
 
-        it("can sprintf", []()
-        {
+        it("can sprintf", []() {
             string buf;
 
             int ret = sprintf(buf, "%s %d $%.2f", "Harry", 1234, 12.344546);
@@ -96,8 +86,7 @@ go_bandit([]()
             Assert::That(buf, Equals("Harry 1234 $12.34"));
         });
 
-        it("can join", []()
-        {
+        it("can join", []() {
             string test = arg3::join("abc", 3, ",");
 
             Assert::That(test, Equals("abc,abc,abc"));
@@ -107,8 +96,7 @@ go_bandit([]()
             Assert::That(test, Equals("Z-Z-Z"));
         });
 
-        it("can split", []()
-        {
+        it("can split", []() {
             auto parts = arg3::split("abc,123,xyz", ",", true);
 
             Assert::That(parts.size(), Equals(3));
@@ -134,8 +122,7 @@ go_bandit([]()
             Assert::That(parts[0], Equals("abc,123,xyz"));
         });
 
-        it("can test for a prefix", []()
-        {
+        it("can test for a prefix", []() {
             std::string test = "abc123";
 
             Assert::That(arg3::prefix("abc", test), Equals(true));
@@ -145,8 +132,7 @@ go_bandit([]()
             Assert::That(arg3::prefix("", test), Equals(false));
         });
 
-        it("can test for a suffix", []()
-        {
+        it("can test for a suffix", []() {
             std::string test = "abc123";
 
             Assert::That(arg3::suffix("abc", test), Equals(false));
@@ -154,8 +140,7 @@ go_bandit([]()
             Assert::That(arg3::suffix("", test), Equals(false));
         });
 
-        it("can test for string contents", []()
-        {
+        it("can test for string contents", []() {
             std::string test = "abc123";
 
             Assert::That(arg3::contains("bc12", test), Equals(true));
@@ -168,4 +153,3 @@ go_bandit([]()
 
 
 });
-

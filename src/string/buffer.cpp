@@ -5,7 +5,9 @@ using namespace std;
 
 namespace arg3
 {
-    buffer::buffer() {}
+    buffer::buffer()
+    {
+    }
 
     buffer::buffer(const buffer &other)
     {
@@ -51,8 +53,7 @@ namespace arg3
 
         string temp = str.substr(0, start);
 
-        if (end != string::npos)
-        {
+        if (end != string::npos) {
             string endStr = str.substr(end);
             temp = temp.append(endStr);
         }
@@ -69,8 +70,7 @@ namespace arg3
         /* find a new line character */
         auto pos = find_first_of(buffer_.begin(), buffer_.end(), NEWLINE.begin(), NEWLINE.end());
 
-        if (pos == buffer_.end())
-        {
+        if (pos == buffer_.end()) {
             string temp(buffer_.begin(), buffer_.end());
 
             buffer_.clear();
@@ -81,8 +81,7 @@ namespace arg3
         string temp(buffer_.begin(), pos);
 
         /* Skip all new line characters */
-        while (pos != buffer_.end() && find(NEWLINE.begin(), NEWLINE.end(), *pos) != NEWLINE.end())
-        {
+        while (pos != buffer_.end() && find(NEWLINE.begin(), NEWLINE.end(), *pos) != NEWLINE.end()) {
             pos++;
         }
 

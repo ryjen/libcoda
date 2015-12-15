@@ -1,26 +1,30 @@
 #include "argument.h"
-#include "str_util.h"
+#include "util.h"
 
 using namespace std;
 
 namespace arg3
 {
-
-    argument operator "" _a( const char *cstr, size_t len )
+    argument operator"" _a(const char *cstr, size_t len)
     {
-       return argument(string(cstr, len));
+        return argument(string(cstr, len));
     }
 
-    argument::argument() {}
+    argument::argument()
+    {
+    }
 
     argument::argument(const string &str) : str_(str)
-    {}
+    {
+    }
 
     argument::~argument()
-    {}
+    {
+    }
 
     argument::argument(const argument &other) : str_(other.str_)
-    {}
+    {
+    }
 
     argument::argument(argument &&other) : str_(std::move(other.str_))
     {
@@ -28,17 +32,15 @@ namespace arg3
 
     argument &argument::operator=(const argument &other)
     {
-        if (this != &other)
-        {
+        if (this != &other) {
             str_ = other.str_;
         }
         return *this;
     }
 
-    argument &argument::operator=(argument && other)
+    argument &argument::operator=(argument &&other)
     {
-        if (this != &other)
-        {
+        if (this != &other) {
             str_ = std::move(other.str_);
         }
         return *this;
@@ -55,24 +57,17 @@ namespace arg3
 
         cEnd = ' ';
 
-        if ( str_[pos] == '\'' || str_[pos] == '"'
-                || str_[pos] == '(' )
-        {
-            if ( str_[pos] == '(' )
-            {
+        if (str_[pos] == '\'' || str_[pos] == '"' || str_[pos] == '(') {
+            if (str_[pos] == '(') {
                 cEnd = ')';
                 pos++;
-            }
-            else
-            {
+            } else {
                 cEnd = str_[pos++];
             }
         }
 
-        while ( pos < str_.length() )
-        {
-            if ( str_[pos] == cEnd )
-            {
+        while (pos < str_.length()) {
+            if (str_[pos] == cEnd) {
                 pos++;
                 break;
             }
@@ -100,12 +95,9 @@ namespace arg3
 
         auto pos = next(arg);
 
-        if (pos == string::npos)
-        {
+        if (pos == string::npos) {
             str_.clear();
-        }
-        else
-        {
+        } else {
             str_ = str_.substr(pos);
         }
 
@@ -150,12 +142,12 @@ namespace arg3
         return str_;
     }
 
-    char argument::operator [] (int index) const
+    char argument::operator[](int index) const
     {
         return str_[index];
     }
 
-    bool argument::operator ! () const
+    bool argument::operator!() const
     {
         return empty();
     }

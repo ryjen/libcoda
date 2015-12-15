@@ -1,19 +1,20 @@
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <iterator>
 #include <sstream>
 #include <algorithm>
+#include <sys/stat.h>
 #include <cstring>
 #include <cstdarg>
 #include <vector>
-#include "str_util.h"
-#include "config.h"
-#include <sys/stat.h>
+#include "util.h"
 
-extern "C"
-{
+extern "C" {
 #ifdef WIN32
 #include <Rpc.h>
 #else
-#ifdef HAVE_UUID_UUID_H
+#if defined(HAVE_UUID_UUID_H) || defined(UUID_FOUND)
 #include <uuid/uuid.h>
 #endif
 #endif
@@ -31,15 +32,13 @@ namespace arg3
     /*
     * Returns an initial-capped string.
     */
-    string capitalize( const string &str )
+    string capitalize(const string &str)
     {
         string buf;
 
-        if (str.length() == 0)
-            return buf;
+        if (str.length() == 0) return buf;
 
-        for ( size_t i = 0; i < str.length(); i++ )
-            buf += tolower(str[i]);
+        for (size_t i = 0; i < str.length(); i++) buf += tolower(str[i]);
 
         buf[0] = toupper(buf[0]);
         return buf;
@@ -54,13 +53,9 @@ namespace arg3
         static char rfc822_specials[] = "()<>@,; : \\\"[]";
 
         /* first we validate the name portion (name@domain) */
-        for (c = address.cbegin();  c  != address.cend();  c++)
-        {
-            if (*c == '\"' && (c == address.begin() || *(c - 1) == '.' || *(c - 1) ==
-                               '\"'))
-            {
-                while (*++c)
-                {
+        for (c = address.cbegin(); c != address.cend(); c++) {
+            if (*c == '\"' && (c == address.begin() || *(c - 1) == '.' || *(c - 1) == '\"')) {
+                while (*++c) {
                     if (*c == '\"') break;
                     if (*c == '\\' && (*++c == ' ')) continue;
                     if (*c < ' ' || *c >= 127) return 0;
@@ -78,17 +73,14 @@ namespace arg3
 
         /* next we validate the domain portion (name@domain) */
         if ((domain = ++c) == address.cend()) return 0;
-        do
-        {
-            if (*c == '.')
-            {
+        do {
+            if (*c == '.') {
                 if (c == domain || *(c - 1) == '.') return 0;
                 count++;
             }
             if (*c <= ' ' || *c >= 127) return 0;
             if (strchr(rfc822_specials, *c)) return 0;
-        }
-        while (++c != address.cend());
+        } while (++c != address.cend());
 
         return (count >= 1);
     }
@@ -96,27 +88,22 @@ namespace arg3
     /*
      * Return true if an argument is numeric.
      */
-    int is_number ( const string &arg )
+    int is_number(const string &arg)
     {
         bool precision = false;
         auto c = arg.cbegin();
 
-        if ( c == arg.cend() )
-            return 0;
+        if (c == arg.cend()) return 0;
 
-        if ( *c == '+' || *c == '-' )
-            c++;
+        if (*c == '+' || *c == '-') c++;
 
-        for ( ; c != arg.cend(); c++ )
-        {
-            if ( *c == '.' )
-            {
+        for (; c != arg.cend(); c++) {
+            if (*c == '.') {
                 precision = true;
                 continue;
             }
 
-            if ( !isdigit( *c ) )
-                return 0;
+            if (!isdigit(*c)) return 0;
         }
 
         return precision ? 2 : 1;
@@ -132,23 +119,16 @@ namespace arg3
             return "second";
         else if (n == 3)
             return "third";
-        else if (n % 10 == 1)
-        {
+        else if (n % 10 == 1) {
             snprintf(buf, BUFSIZ, "%dst", n);
             return buf;
-        }
-        else if (n % 10 == 2)
-        {
+        } else if (n % 10 == 2) {
             snprintf(buf, BUFSIZ, "%dnd", n);
             return buf;
-        }
-        else if (n % 10 == 3)
-        {
+        } else if (n % 10 == 3) {
             snprintf(buf, BUFSIZ, "%drd", n);
             return buf;
-        }
-        else
-        {
+        } else {
             snprintf(buf, BUFSIZ, "%dth", n);
             return buf;
         }
@@ -158,10 +138,8 @@ namespace arg3
     {
         ostringstream buf;
 
-        if (value.length() > 0)
-        {
-            for (string::size_type i = 0; i < count - 1; i++)
-            {
+        if (value.length() > 0) {
+            for (string::size_type i = 0; i < count - 1; i++) {
                 buf << value;
                 buf << delimiter;
             }
@@ -175,10 +153,8 @@ namespace arg3
     {
         ostringstream buf;
 
-        if (count > 0)
-        {
-            for (string::size_type i = 0; i < count - 1; i++)
-            {
+        if (count > 0) {
+            for (string::size_type i = 0; i < count - 1; i++) {
                 buf.put(value);
                 buf << delimiter;
             }
@@ -191,22 +167,18 @@ namespace arg3
     vector<string> split(const string &s, const string &delim, const bool keep_empty)
     {
         vector<string> result;
-        if (delim.empty())
-        {
+        if (delim.empty()) {
             result.push_back(s);
             return result;
         }
         string::const_iterator substart = s.begin(), subend;
-        while (true)
-        {
+        while (true) {
             subend = search(substart, s.end(), delim.begin(), delim.end());
             string temp(substart, subend);
-            if (keep_empty || !temp.empty())
-            {
+            if (keep_empty || !temp.empty()) {
                 result.push_back(temp);
             }
-            if (subend == s.end())
-            {
+            if (subend == s.end()) {
                 break;
             }
             substart = subend + delim.size();
@@ -216,11 +188,8 @@ namespace arg3
 
     bool equals(const string &astr, const string &bstr, bool caseSensitive)
     {
-        for (auto a = astr.cbegin(), b = bstr.cbegin();
-                a != astr.cend() || b != bstr.cend(); a++, b++ )
-        {
-            if ( caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b)) )
-                return false;
+        for (auto a = astr.cbegin(), b = bstr.cbegin(); a != astr.cend() || b != bstr.cend(); a++, b++) {
+            if (caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b))) return false;
         }
 
         return true;
@@ -229,22 +198,18 @@ namespace arg3
 
     bool prefix(const string &astr, const string &bstr, bool caseSensitive)
     {
-        if (astr.length() == 0)
-        {
+        if (astr.length() == 0) {
             return false;
         }
 
-        for ( auto a = astr.cbegin(), b = bstr.cbegin();
-                a != astr.cend(); a++, b++ )
-        {
-            if ( caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b) ) )
-                return false;
+        for (auto a = astr.cbegin(), b = bstr.cbegin(); a != astr.cend(); a++, b++) {
+            if (caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b))) return false;
         }
 
         return true;
     }
 
-    bool suffix( const string &astr, const string &bstr, bool caseSensitive )
+    bool suffix(const string &astr, const string &bstr, bool caseSensitive)
     {
         string::size_type sstr1, sstr2;
 
@@ -254,30 +219,27 @@ namespace arg3
 
         sstr2 = bstr.length();
 
-        if ( sstr1 <= sstr2 && equals( astr, bstr.substr(sstr2 - sstr1), caseSensitive ) )
+        if (sstr1 <= sstr2 && equals(astr, bstr.substr(sstr2 - sstr1), caseSensitive))
             return true;
         else
             return false;
     }
 
-    bool contains( const string &astr, const string &bstr, bool caseSensitive )
+    bool contains(const string &astr, const string &bstr, bool caseSensitive)
     {
         int sstr1;
         int sstr2;
         int ichar;
         char c0;
 
-        if ( (sstr1 = astr.length()) == 0 )
-            return false;
+        if ((sstr1 = astr.length()) == 0) return false;
 
         c0 = tolower(astr[0]);
 
         sstr2 = bstr.length();
 
-        for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
-        {
-            if ( c0 == (caseSensitive ? bstr[ichar] : tolower(bstr[ichar]) ) && prefix( astr, bstr.substr(ichar), caseSensitive ) )
-                return true;
+        for (ichar = 0; ichar <= sstr2 - sstr1; ichar++) {
+            if (c0 == (caseSensitive ? bstr[ichar] : tolower(bstr[ichar])) && prefix(astr, bstr.substr(ichar), caseSensitive)) return true;
         }
 
         return false;
@@ -309,42 +271,33 @@ namespace arg3
             unsigned char char_array_3[3];
             unsigned char char_array_4[4];
 
-            while (in_len--)
-            {
+            while (in_len--) {
                 char_array_3[i++] = *(bytes_to_encode++);
-                if (i == 3)
-                {
+                if (i == 3) {
                     char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
                     char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
                     char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
                     char_array_4[3] = char_array_3[2] & 0x3f;
 
-                    for (i = 0; (i < 4) ; i++)
-                        ret += base64_chars[char_array_4[i]];
+                    for (i = 0; (i < 4); i++) ret += base64_chars[char_array_4[i]];
                     i = 0;
                 }
             }
 
-            if (i)
-            {
-                for (j = i; j < 3; j++)
-                    char_array_3[j] = '\0';
+            if (i) {
+                for (j = i; j < 3; j++) char_array_3[j] = '\0';
 
                 char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
                 char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
                 char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
                 char_array_4[3] = char_array_3[2] & 0x3f;
 
-                for (j = 0; (j < i + 1); j++)
-                    ret += base64_chars[char_array_4[j]];
+                for (j = 0; (j < i + 1); j++) ret += base64_chars[char_array_4[j]];
 
-                while ((i++ < 3))
-                    ret += '=';
-
+                while ((i++ < 3)) ret += '=';
             }
 
             return ret;
-
         }
 
         binary decode(const string &encoded_string)
@@ -356,32 +309,25 @@ namespace arg3
             unsigned char char_array_4[4], char_array_3[3];
             binary ret;
 
-            while (in_len-- && ( encoded_string[in_] != '=') && is_base64(encoded_string[in_]))
-            {
+            while (in_len-- && (encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
                 char_array_4[i++] = encoded_string[in_];
                 in_++;
-                if (i == 4)
-                {
-                    for (i = 0; i < 4; i++)
-                        char_array_4[i] = static_cast<unsigned char>(base64_chars.find(char_array_4[i]));
+                if (i == 4) {
+                    for (i = 0; i < 4; i++) char_array_4[i] = static_cast<unsigned char>(base64_chars.find(char_array_4[i]));
 
                     char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
                     char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
                     char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
-                    for (i = 0; (i < 3); i++)
-                        ret.push_back(char_array_3[i]);
+                    for (i = 0; (i < 3); i++) ret.push_back(char_array_3[i]);
                     i = 0;
                 }
             }
 
-            if (i)
-            {
-                for (j = i; j < 4; j++)
-                    char_array_4[j] = 0;
+            if (i) {
+                for (j = i; j < 4; j++) char_array_4[j] = 0;
 
-                for (j = 0; j < 4; j++)
-                    char_array_4[j] = static_cast<unsigned char>(base64_chars.find(char_array_4[j]));
+                for (j = 0; j < 4; j++) char_array_4[j] = static_cast<unsigned char>(base64_chars.find(char_array_4[j]));
 
                 char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
                 char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
@@ -398,8 +344,7 @@ namespace arg3
     {
         struct tm tp;
 
-        if (!strptime(s.c_str(), format.c_str(), &tp))
-            return 0;
+        if (!strptime(s.c_str(), format.c_str(), &tp)) return 0;
 
         return mktime(&tp);
     }
@@ -416,23 +361,16 @@ namespace arg3
 
         bufsize = 0;
         outsize = 0;
-        for (;;)
-        {
-            if (bufsize == 0)
-            {
+        for (;;) {
+            if (bufsize == 0) {
                 bufsize = strlen(fmt);
-                if ((buf = (char *)malloc(bufsize)) == NULL)
-                {
+                if ((buf = (char *)malloc(bufsize)) == NULL) {
                     return -1;
                 }
-            }
-            else if ((newbuf = (char *)realloc(buf, nextsize)) != NULL)
-            {
+            } else if ((newbuf = (char *)realloc(buf, nextsize)) != NULL) {
                 buf = newbuf;
                 bufsize = nextsize;
-            }
-            else
-            {
+            } else {
                 free(buf);
                 return outsize;
             }
@@ -443,17 +381,14 @@ namespace arg3
 
             va_end(args);
 
-            if (outsize == -1)
-            {
+            if (outsize == -1) {
                 /* Clear indication that output was truncated, but no
                  * clear indication of how big buffer needs to be, so
                  * simply double existing buffer size for next time.
                  */
                 nextsize = bufsize * 2;
 
-            }
-            else if (outsize == bufsize)
-            {
+            } else if (outsize == bufsize) {
                 /* Output was truncated (since at least the \0 could
                  * not fit), but no indication of how big the buffer
                  * needs to be, so just double existing buffer size
@@ -461,9 +396,7 @@ namespace arg3
                  */
                 nextsize = bufsize * 2;
 
-            }
-            else if (outsize > bufsize)
-            {
+            } else if (outsize > bufsize) {
                 /* Output was truncated, but we were told exactly how
                  * big the buffer needs to be next time. Add two chars
                  * to the returned size. One for the \0, and one to
@@ -471,9 +404,7 @@ namespace arg3
                  */
                 nextsize = outsize + 2;
 
-            }
-            else if (outsize == bufsize - 1)
-            {
+            } else if (outsize == bufsize - 1) {
                 /* This is ambiguous. May mean that the output string
                  * exactly fits, but on some systems the output string
                  * may have been trucated. We can't tell.
@@ -481,9 +412,7 @@ namespace arg3
                  */
                 nextsize = bufsize * 2;
 
-            }
-            else
-            {
+            } else {
                 /* Output was not truncated */
                 break;
             }
@@ -516,22 +445,22 @@ namespace arg3
     {
 #ifdef WIN32
         UUID uuid;
-        UuidCreate ( &uuid );
+        UuidCreate(&uuid);
 
         unsigned char *str;
-        UuidToStringA ( &uuid, &str );
+        UuidToStringA(&uuid, &str);
 
-        std::string s( ( char *) str );
+        std::string s((char *)str);
 
-        RpcStringFreeA ( &str );
+        RpcStringFreeA(&str);
 
         return s;
 #else
-#ifdef HAVE_LIBUUID
+#if defined(HAVE_LIBUUID) || defined(UUID_FOUND)
         char s[37] = {0};
         uuid_t uuid;
-        uuid_generate_random ( uuid );
-        uuid_unparse ( uuid, s );
+        uuid_generate_random(uuid);
+        uuid_unparse(uuid, s);
 
         return s;
 #else
@@ -544,7 +473,7 @@ namespace arg3
     {
         struct stat info;
 
-        if (stat( s.c_str(), &info ) != 0)
+        if (stat(s.c_str(), &info) != 0)
             return false;
         else if (info.st_mode & S_IFDIR)
             return true;
@@ -556,7 +485,7 @@ namespace arg3
     {
         struct stat info;
 
-        if (stat( s.c_str(), &info ) != 0)
+        if (stat(s.c_str(), &info) != 0)
             return false;
         else
             return true;

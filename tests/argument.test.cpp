@@ -1,19 +1,16 @@
 
 #include <bandit/bandit.h>
 #include "../src/string/argument.h"
-#include "../src/math/math_util.h"
+#include "../src/math/util.h"
 
 using namespace bandit;
 using namespace arg3;
 using namespace std;
 
-go_bandit([]()
-{
+go_bandit([]() {
 
-    describe("an argument", []()
-    {
-        it("can be constructed from a string", []()
-        {
+    describe("an argument", []() {
+        it("can be constructed from a string", []() {
             string test = "lorum ipsum";
 
             argument arg(test);
@@ -21,8 +18,7 @@ go_bandit([]()
             Assert::That(arg, Equals("lorum ipsum"));
         });
 
-        it("can be moved into another", []()
-        {
+        it("can be moved into another", []() {
             argument arg("lorum ipsum");
 
             argument other = std::move(arg);
@@ -32,8 +28,7 @@ go_bandit([]()
             AssertThat(!arg, Equals(true));
         });
 
-        it("can be assigned", []()
-        {
+        it("can be assigned", []() {
             argument arg = "lorum ipsum"_a;
 
             argument other;
@@ -43,8 +38,7 @@ go_bandit([]()
             Assert::That(other, Equals("lorum ipsum"));
         });
 
-        it("can be move assigned", []()
-        {
+        it("can be move assigned", []() {
             argument arg("lorum ipsum");
 
             argument other = std::move(arg);
@@ -54,8 +48,7 @@ go_bandit([]()
             Assert::That(!arg, Equals(true));
         });
 
-        it("can be copied", []()
-        {
+        it("can be copied", []() {
             argument arg("lorum ipsum");
 
             argument other(arg);
@@ -63,8 +56,7 @@ go_bandit([]()
             Assert::That(other, Equals("lorum ipsum"));
         });
 
-        it("can be broken into parts", []()
-        {
+        it("can be broken into parts", []() {
             argument argument("\"this\" 'is a' test (1 2 3)");
 
             string arg = argument.next();
@@ -86,8 +78,7 @@ go_bandit([]()
             Assert::That(argument.empty(), Equals(true));
         });
 
-        it("can find integers", []()
-        {
+        it("can find integers", []() {
             argument arg("1234");
 
             Assert::That(arg.next_int(), Equals(1234));
@@ -97,8 +88,7 @@ go_bandit([]()
             AssertThrows(std::invalid_argument, arg.next_int());
         });
 
-        it("can find doubles", []()
-        {
+        it("can find doubles", []() {
             argument arg("1.1234");
 
             double value = arg.next_double();
@@ -106,8 +96,7 @@ go_bandit([]()
             Assert::That(almost_equal(value, 1.1234, 1), Equals(true));
         });
 
-        it("can find int64 types", []()
-        {
+        it("can find int64 types", []() {
             argument arg("1234123412341234");
 
             int64_t value = arg.next_int64();
@@ -117,8 +106,7 @@ go_bandit([]()
             Assert::That(value, Equals(check));
         });
 
-        it("can find a boolean", []()
-        {
+        it("can find a boolean", []() {
             argument arg("true");
 
             Assert::That(arg.next_bool(), Equals(true));
@@ -128,8 +116,7 @@ go_bandit([]()
             Assert::That(arg.next_bool(), Equals(false));
         });
 
-        it("can cast to a string", []()
-        {
+        it("can cast to a string", []() {
             argument arg("lorum ipsum");
 
             string test = arg;
@@ -137,8 +124,7 @@ go_bandit([]()
             Assert::That(test, Equals("lorum ipsum"));
         });
 
-        it("can peek at the next part", []()
-        {
+        it("can peek at the next part", []() {
             argument argument("testing (1 2 3)");
 
             Assert::That(argument.peek(), Equals("testing"));
@@ -146,8 +132,7 @@ go_bandit([]()
             Assert::That(argument.to_string(), Equals("testing (1 2 3)"));
         });
 
-        it("can be empty", []()
-        {
+        it("can be empty", []() {
             argument argument("blah");
 
             argument.next();
@@ -156,8 +141,7 @@ go_bandit([]()
         });
 
 
-        it("has a length", []()
-        {
+        it("has a length", []() {
             argument arg("test 123");
 
             Assert::That(arg.length(), Equals(8));
@@ -167,8 +151,7 @@ go_bandit([]()
             Assert::That(arg.length(), Equals(3));
         });
 
-        it("has a not operator", []()
-        {
+        it("has a not operator", []() {
             argument arg("test");
 
             Assert::That(!arg, Equals(false));
@@ -178,20 +161,18 @@ go_bandit([]()
             Assert::That(!arg, Equals(true));
         });
 
-        it("can be indexed", []()
-        {
+        it("can be indexed", []() {
             argument arg("test");
 
             Assert::That(arg[1], Equals('e'));
         });
 
-        it("has equlity", []()
-        {
+        it("has equlity", []() {
             argument arg("test");
 
             Assert::That("test" == arg, Equals(true));
 
-            Assert::That(arg == "test" , Equals(true));
+            Assert::That(arg == "test", Equals(true));
 
             Assert::That("test" != arg, Equals(false));
 
@@ -212,8 +193,7 @@ go_bandit([]()
             Assert::That(arg != other, Equals(false));
         });
 
-        it("has case equality", []()
-        {
+        it("has case equality", []() {
             argument arg("lorum ipsum");
 
             Assert::That(arg.equals("lorum ipsum"), Equals(true));
@@ -223,8 +203,7 @@ go_bandit([]()
             Assert::That(arg.equals("lorum IPSUM", false), Equals(true));
         });
 
-        it("can test for prefixes", []()
-        {
+        it("can test for prefixes", []() {
             argument arg("lorum ipsum");
 
             Assert::That(arg.prefix("lorum"), Equals(true));
@@ -243,4 +222,3 @@ go_bandit([]()
 
 
 });
-

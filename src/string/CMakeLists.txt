@@ -1,5 +1,17 @@
+find_package(PkgConfig)
 
-add_library(arg3str argument.cpp buffer.cpp str_util.cpp)
+pkg_search_module(UUID uuid)
 
-install(FILES argument.h buffer.h str_util.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/arg3str)
+if (UUID_FOUND)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DUUID_FOUND")
+endif()
 
+add_library(arg3str argument.cpp buffer.cpp util.cpp)
+
+install(FILES argument.h buffer.h util.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/arg3str)
+
+install(TARGETS arg3str LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+
+# create the package config install
+include(CreatePackage)
+create_package_named(arg3str 0.1.0 "A string library")

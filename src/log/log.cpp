@@ -3,18 +3,18 @@
 #include <ctime>
 #include <cstdarg>
 #include "log.h"
-#include "../string/str_util.h"
 
 using namespace std;
 
 namespace arg3
 {
-    const char *logNames[] = { "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "NONE"  };
+    const char *logNames[] = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "NONE"};
 
     log_level log::minLevel_ = LOG_TRACE;
 
     log::log(log_level level, ostream &out) : level_(level), out_(out)
-    {}
+    {
+    }
 
     ostream &log::header()
     {
@@ -41,8 +41,7 @@ namespace arg3
 
         size_t len = vsnprintf(buf, BUFSIZ, format, args);
 
-        if (level_ >= minLevel_ && len > 0)
-            header() << buf << std::endl;
+        if (level_ >= minLevel_ && len > 0) header() << buf << std::endl;
 
         return *this;
     }
@@ -54,10 +53,8 @@ namespace arg3
 
     log_level log::lookup_log_level(const std::string &value)
     {
-        for (log_level l = LOG_TRACE; l <= LOG_ERROR; l = static_cast<log_level>(static_cast<int>(l) + 1))
-        {
-            if (equals(value, logNames[l]))
-                return l;
+        for (int l = LOG_TRACE; l <= LOG_ERROR; l++) {
+            if (value == logNames[l]) return static_cast<log_level>(l);
         }
         return minLevel_;
     }
