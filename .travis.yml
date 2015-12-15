@@ -40,7 +40,7 @@ script:
   - cmake -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DMEMORY_CHECK=ON ..
   - make
   - make libarg3-coverage-clean
-  - make test
+  - make test ARGS=-V
   - make libarg3-coverage-info
 after_success:
   - coveralls-lcov $TRAVIS_BUILD_DIR/coverage.info
