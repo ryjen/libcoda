@@ -8,6 +8,8 @@ endif()
 
 add_library(arg3str argument.cpp buffer.cpp util.cpp)
 
+target_link_libraries(arg3str ${UUID_LIBRARIES})
+
 install(FILES argument.h buffer.h util.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/arg3str)
 
 install(TARGETS arg3str LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
