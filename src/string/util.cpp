@@ -69,10 +69,13 @@ namespace arg3
             if (*c <= ' ' || *c >= 127) return 0;
             if (strchr(rfc822_specials, *c)) return 0;
         }
+        if (c == address.cend()) return 0;
+
         if (c == address.begin() || *(c - 1) == '.') return 0;
 
         /* next we validate the domain portion (name@domain) */
         if ((domain = ++c) == address.cend()) return 0;
+
         do {
             if (*c == '.') {
                 if (c == domain || *(c - 1) == '.') return 0;

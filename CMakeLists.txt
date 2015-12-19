@@ -48,6 +48,6 @@ add_opt_memcheck_test(MEMORY_CHECK arg3dice-test ${PROJECT_BINARY_DIR}/src/dice/
 add_opt_memcheck_test(MEMORY_CHECK arg3format-test ${PROJECT_BINARY_DIR}/src/format/tests/arg3format-test)
 add_opt_memcheck_test(MEMORY_CHECK arg3json-test ${PROJECT_BINARY_DIR}/src/json/tests/arg3json-test)
 add_opt_memcheck_test(MEMORY_CHECK arg3net-test ${PROJECT_BINARY_DIR}/src/net/tests/arg3net-test)
-add_opt_memcheck_test(MEMORY_CHECK arg3variant-test ${PROJECT_BINARY_DIR}/src/variant/tests/arg3variant-test)
+add_opt_memcheck_test(MEMORY_CHECK arg3variant-test ${PROJECT_BINARY_DIR}/src/variant/tests/arg3variant-test "--suppressions=${PROJECT_SOURCE_DIR}/src/variant/suppression.map")
 
 
