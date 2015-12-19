@@ -55,6 +55,10 @@ namespace arg3
 
         size_t pos = str_.find_first_not_of(' ');
 
+        if (pos == string::npos) {
+            return pos;
+        }
+
         cEnd = ' ';
 
         if (str_[pos] == '\'' || str_[pos] == '"' || str_[pos] == '(') {

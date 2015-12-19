@@ -7,18 +7,18 @@
 
 namespace arg3
 {
-
     typedef std::vector<unsigned char> buffered_data;
 
-    static const buffered_data NEWLINE = { '\r', '\n' };
+    static const buffered_data NEWLINE = {'\r', '\n'};
 
     class buffer
     {
-    private:
+       private:
         std::ostringstream buf_;
-    public:
+
+       public:
         buffer();
-        template<typename T>
+        template <typename T>
         buffer(const T &value)
         {
             buf_ << value;
@@ -26,25 +26,25 @@ namespace arg3
         buffer(const buffer &other);
         buffer(buffer &&other) = delete;
         buffer &operator=(const buffer &other);
-        buffer &operator=(buffer && other) = delete;
+        buffer &operator=(buffer &&other) = delete;
 
         buffer &writeln();
 
-        template<typename T>
+        template <typename T>
         buffer &writeln(const T &value)
         {
             buf_ << value << std::endl;
             return *this;
         }
 
-        template<typename T>
+        template <typename T>
         buffer &write(const T &value)
         {
             buf_ << value;
             return *this;
         }
 
-        template<typename T>
+        template <typename T>
         buffer &operator<<(const T &value)
         {
             buf_ << value;
@@ -64,7 +64,7 @@ namespace arg3
 
     class buffered_reader
     {
-    public:
+       public:
         /*!
          * Reads a line from the read buffer
          */
@@ -87,14 +87,14 @@ namespace arg3
          * @returns true if no errors occured
          */
         virtual bool read_to_buffer() = 0;
-    private:
+
+       private:
         buffered_data buffer_;
     };
 
     class buffered_writer
     {
-    public:
-
+       public:
         /*!
          * Appends some data to the write buffer with a new line.
          */
@@ -131,7 +131,8 @@ namespace arg3
          * @returns true if no errors occured
          */
         virtual bool write_from_buffer() = 0;
-    private:
+
+       private:
         buffered_data buffer_;
     };
 }
