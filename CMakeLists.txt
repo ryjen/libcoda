@@ -38,9 +38,16 @@ add_subdirectory(tests)
 # Setup testing
 enable_testing()
 
-if (MEMORY_CHECK)
-	include(MemCheckTest)
-	add_memcheck_test(${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test)
-else ()
-	add_test(${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test)
-endif()
+
+include(MemCheckTest)
+
+add_opt_memcheck_test(MEMORY_CHECK ${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}-test)
+add_opt_memcheck_test(MEMORY_CHECK arg3db-mysql-test ${PROJECT_BINARY_DIR}/src/db/tests/arg3db-mysql-test)
+add_opt_memcheck_test(MEMORY_CHECK arg3db-sqlite-test ${PROJECT_BINARY_DIR}/src/db/tests/arg3db-sqlite-test)
+add_opt_memcheck_test(MEMORY_CHECK arg3dice-test ${PROJECT_BINARY_DIR}/src/dice/tests/arg3dice-test)
+add_opt_memcheck_test(MEMORY_CHECK arg3format-test ${PROJECT_BINARY_DIR}/src/format/tests/arg3format-test)
+add_opt_memcheck_test(MEMORY_CHECK arg3json-test ${PROJECT_BINARY_DIR}/src/json/tests/arg3json-test)
+add_opt_memcheck_test(MEMORY_CHECK arg3net-test ${PROJECT_BINARY_DIR}/src/net/tests/arg3net-test)
+add_opt_memcheck_test(MEMORY_CHECK arg3variant-test ${PROJECT_BINARY_DIR}/src/variant/tests/arg3variant-test)
+
+
