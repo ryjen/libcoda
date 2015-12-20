@@ -7,4 +7,4 @@ useful functions for strings
 licensing
 =========
 
-under the Lesser GNU Public License
+under the MIT License
