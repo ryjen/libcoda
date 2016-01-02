@@ -1,9 +1,9 @@
 libarg3
 =======
 
-[![Build Status](http://img.shields.io/travis/deadcoda/libarg3.svg)](https://travis-ci.org/deadcoda/libarg3)
-[![Coverage Status](https://coveralls.io/repos/deadcoda/libarg3/badge.svg?branch=master&service=github)](https://coveralls.io/github/deadcoda/libarg3?branch=master)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://deadcoda.mit-license.org)
+[![Build Status](http://img.shields.io/travis/ryjen/libarg3.svg)](https://travis-ci.org/ryjen/libarg3)
+[![Coverage Status](https://coveralls.io/repos/ryjen/libarg3/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/libarg3?branch=master)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
 
 a c++11 utility library.  Its my toolkit for anything c++11.
 
