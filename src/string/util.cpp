@@ -8,6 +8,7 @@
 #include <cstring>
 #include <cstdarg>
 #include <vector>
+#include <stdexcept>
 #include "util.h"
 
 extern "C" {
