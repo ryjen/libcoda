@@ -29,7 +29,7 @@ go_bandit([]() {
         });
 
         it("can be assigned", []() {
-            argument arg = "lorum ipsum"_a;
+            argument arg = "lorum ipsum"_arg;
 
             argument other;
 
@@ -81,29 +81,19 @@ go_bandit([]() {
         it("can find integers", []() {
             argument arg("1234");
 
-            Assert::That(arg.next_int(), Equals(1234));
+            Assert::That(arg.next_number(), Equals(1234));
 
             argument arg2("abcdef");
 
-            AssertThrows(std::invalid_argument, arg.next_int());
+            AssertThrows(std::invalid_argument, arg.next_number());
         });
 
         it("can find doubles", []() {
             argument arg("1.1234");
 
-            double value = arg.next_double();
+            double value = arg.next_real();
 
             Assert::That(almost_equal(value, 1.1234, 1), Equals(true));
-        });
-
-        it("can find int64 types", []() {
-            argument arg("1234123412341234");
-
-            int64_t value = arg.next_int64();
-
-            int64_t check = 1234123412341234LL;
-
-            Assert::That(value, Equals(check));
         });
 
         it("can find a boolean", []() {
@@ -111,7 +101,7 @@ go_bandit([]() {
 
             Assert::That(arg.next_bool(), Equals(true));
 
-            arg = "0"_a;
+            arg = "0"_arg;
 
             Assert::That(arg.next_bool(), Equals(false));
         });
@@ -212,7 +202,7 @@ go_bandit([]() {
         });
 
         it("can have literal", []() {
-            auto arg = "lorum ipsum"_a;
+            auto arg = "lorum ipsum"_arg;
 
             AssertThat(arg.next(), Equals("lorum"));
 

@@ -19,6 +19,7 @@ find_package(MySQL)
 find_package(SQLite3)
 find_package(JSONC)
 find_package(CURL)
+find_package(PostgreSQL)
 
 # add target for code coverage
 if(CODE_COVERAGE)

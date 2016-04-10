@@ -14,7 +14,7 @@ namespace arg3
 
     class log
     {
-    public:
+       public:
         static void trace(const std::string &value, std::ostream &out = std::cout);
         static void debug(const std::string &value, std::ostream &out = std::cout);
         static void info(const std::string &value, std::ostream &out = std::cout);
@@ -34,41 +34,40 @@ namespace arg3
         static void warn(std::ostream &out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
 
         log(log_level level = LOG_TRACE, std::ostream &out = std::cout);
-        log(const log &other) = delete;
-        log(log &&other) = delete;
+        log(const arg3::log &other) = delete;
+        log(arg3::log &&other) = delete;
         virtual ~log() = default;
-        log &operator=(const log &other) = delete;
-        log &operator=(log && other) = delete;
+        arg3::log &operator=(const arg3::log &other) = delete;
+        arg3::log &operator=(arg3::log &&other) = delete;
 
-        template<typename T>
-        log &append(const T &value)
+        template <typename T>
+        arg3::log &append(const T &value)
         {
-            if (level_ >= minLevel_)
-                header() << value << std::endl;
+            if (level_ >= minLevel_) header() << value << std::endl;
 
             return *this;
         }
 
-        log &append(const char *value, ...) __attribute__((format(printf, 1, 2)));
+        arg3::log &append(const char *value, ...) __attribute__((format(printf, 1, 2)));
 
         static void set_min_log_level(log_level lev);
 
         static log_level lookup_log_level(const std::string &value);
 
-        template<typename T>
-        log &operator<<(const T &val)
+        template <typename T>
+        arg3::log &operator<<(const T &val)
         {
-            if (level_ >= minLevel_)
-                header() << val << std::endl;
+            if (level_ >= minLevel_) header() << val << std::endl;
 
             return *this;
         }
 
-    protected:
+       protected:
         std::ostream &header();
-    private:
+
+       private:
         static log_level minLevel_;
-        log &append(const char *const format, va_list args);
+        arg3::log &append(const char *const format, va_list args);
         log_level level_;
         std::ostream &out_;
     };

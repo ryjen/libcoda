@@ -13,17 +13,21 @@ namespace arg3
 {
     namespace terminal
     {
-
         class csi_code
         {
-        public:
+           public:
             csi_code();
+            csi_code(const csi_code &other) = default;
+            csi_code(csi_code &&other) = default;
+            virtual ~csi_code();
+            csi_code &operator=(const csi_code &other) = default;
+            csi_code &operator=(csi_code &&other) = default;
             string to_string() const;
             void add_value(int value);
             void set_prefix(char prefix);
             void set_command(char command);
 
-        private:
+           private:
             vector<int> values_;
             char prefix_;
             char command_;
@@ -31,11 +35,12 @@ namespace arg3
 
         class vt100 : public base_terminal
         {
-        public:
+           public:
             data_buffer parse(const data_buffer &input);
             const map<size_t, shared_ptr<csi_code>> codes() const;
-        private:
-            shared_ptr<csi_code> parse_csi_code( data_buffer &output, data_buffer::const_iterator &start, data_buffer::const_iterator end) const;
+
+           private:
+            shared_ptr<csi_code> parse_csi_code(data_buffer &output, data_buffer::const_iterator &start, data_buffer::const_iterator end) const;
             map<size_t, shared_ptr<csi_code>> codes_;
         };
 

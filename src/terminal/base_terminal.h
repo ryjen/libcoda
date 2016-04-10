@@ -10,14 +10,15 @@ namespace arg3
 {
     namespace terminal
     {
-            typedef char data_type;
-            typedef vector<data_type> data_buffer;
+        typedef char data_type;
+        typedef vector<data_type> data_buffer;
 
         class base_terminal
         {
-        public:
+           public:
             virtual data_buffer parse(const data_buffer &input) = 0;
-        private:
+
+           private:
         };
     }
 }

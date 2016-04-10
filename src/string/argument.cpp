@@ -5,7 +5,7 @@ using namespace std;
 
 namespace arg3
 {
-    argument operator"" _a(const char *cstr, size_t len)
+    argument operator"" _arg(const char *cstr, size_t len)
     {
         return argument(string(cstr, len));
     }
@@ -47,7 +47,13 @@ namespace arg3
     }
 
     /**
-     * gets the next argument
+     * gets the next argument.
+     * example arguments:
+     * "abc 1234"
+     * 'abc 1234'
+     * (abc 1234)
+     * abc
+     * 1234
      */
     size_t argument::next(string &arg) const
     {
@@ -107,23 +113,19 @@ namespace arg3
 
         return arg;
     }
-    int argument::next_int()
+    long argument::next_number()
     {
-        return stoi(next());
+        return stol(next());
     }
-    double argument::next_double()
+    double argument::next_real()
     {
         return stod(next());
-    }
-    int64_t argument::next_int64()
-    {
-        return stoll(next());
     }
     bool argument::next_bool()
     {
         string arg = next();
 
-        return arg == "true" || arg == "1";
+        return equals(arg, "true") || equals(arg, "yes") || equals(arg, "1");
     }
 
     argument::operator const string &()

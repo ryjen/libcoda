@@ -1,4 +1,5 @@
 #include "vt100.h"
+#include <iostream>
 
 namespace arg3
 {
@@ -8,16 +9,13 @@ namespace arg3
         {
             data_buffer buf;
 
-            for (auto pos = input.begin(); pos != input.end(); pos++)
-            {
-                if (*pos != ESCAPE)
-                {
+            for (auto pos = input.begin(); pos != input.end(); pos++) {
+                if (*pos != ESCAPE) {
                     buf.push_back(*pos);
                     continue;
                 }
 
-                if (++pos == input.end())
-                    break;
+                if (++pos == input.end()) break;
 
                 auto code = parse_csi_code(buf, pos, input.end());
 
@@ -29,11 +27,12 @@ namespace arg3
             return buf;
         }
 
-        const map<size_t, shared_ptr<csi_code>> vt100::codes() const {
+        const map<size_t, shared_ptr<csi_code>> vt100::codes() const
+        {
             return codes_;
         }
 
-        shared_ptr<csi_code> vt100::parse_csi_code( data_buffer &output, data_buffer::const_iterator &start, data_buffer::const_iterator end) const
+        shared_ptr<csi_code> vt100::parse_csi_code(data_buffer &output, data_buffer::const_iterator &start, data_buffer::const_iterator end) const
         {
             shared_ptr<csi_code> code = make_shared<csi_code>();
 
@@ -43,11 +42,15 @@ namespace arg3
 
             auto &s = ++start;
 
-            for(auto &last = s; s != end; ++s) {
-
-                if ( *s >= 64 && *s <= 126) {
+            for (auto &last = s; s != end; ++s) {
+                if (*s >= 64 && *s <= 126) {
                     if (last != s) {
-                        code->add_value(stoi(string(last, s)));
+                        string value(last, s);
+                        try {
+                            code->add_value(stoi(value));
+                        } catch (const std::exception &e) {
+                            std::cerr << "invalid csi code " << value << std::endl;
+                        }
                     }
                     code->set_command(*s);
                     start = s;
@@ -56,7 +59,12 @@ namespace arg3
 
                 if (*s == ';') {
                     if (last != s) {
-                        code->add_value(stoi(string(last, s)));
+                        string value(last, s);
+                        try {
+                            code->add_value(stoi(value));
+                        } catch (const std::exception &e) {
+                            std::cerr << "invalid csi code " << value << endl;
+                        }
                         last = s;
                     }
                     continue;
@@ -66,7 +74,6 @@ namespace arg3
                 if (*s < '0' || *s > '9') {
                     return nullptr;
                 }
-
             }
 
             if (start != s) {
@@ -77,17 +84,25 @@ namespace arg3
         }
 
         csi_code::csi_code() : prefix_(0), command_(0)
-        {}
+        {
+        }
 
-        void csi_code::add_value(int value) {
+        csi_code::~csi_code()
+        {
+        }
+
+        void csi_code::add_value(int value)
+        {
             values_.push_back(value);
         }
 
-        void csi_code::set_prefix(char prefix) {
+        void csi_code::set_prefix(char prefix)
+        {
             prefix_ = prefix;
         }
 
-        void csi_code::set_command(char command) {
+        void csi_code::set_command(char command)
+        {
             command_ = command;
         }
 
@@ -101,8 +116,7 @@ namespace arg3
                 buf << prefix_;
             }
 
-            for (int i = 0, size = values_.size(); i < size; i++)
-            {
+            for (int i = 0, size = values_.size(); i < size; i++) {
                 buf << values_[i];
 
                 if (i + 1 < size) {

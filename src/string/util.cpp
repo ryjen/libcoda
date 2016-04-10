@@ -43,6 +43,8 @@ namespace arg3
         buf[0] = toupper(buf[0]);
         return buf;
     }
+
+
     /*
     * Credit: http://www.secureprogramming.com/?action=view&feature=recipes&recipeid=3
     */
@@ -255,7 +257,6 @@ namespace arg3
             "abcdefghijklmnopqrstuvwxyz"
             "0123456789+/";
 
-
         static inline bool is_base64(unsigned char c)
         {
             return (isalnum(c) || (c == '+') || (c == '/'));
@@ -444,32 +445,35 @@ namespace arg3
         return ltrim(rtrim(s));
     }
 
-    std::string generate_uuid()
+    namespace uuid
     {
+        std::string generate()
+        {
 #ifdef WIN32
-        UUID uuid;
-        UuidCreate(&uuid);
+            UUID uuid;
+            UuidCreate(&uuid);
 
-        unsigned char *str;
-        UuidToStringA(&uuid, &str);
+            unsigned char *str;
+            UuidToStringA(&uuid, &str);
 
-        std::string s((char *)str);
+            std::string s((char *)str);
 
-        RpcStringFreeA(&str);
+            RpcStringFreeA(&str);
 
-        return s;
+            return s;
 #else
 #if defined(HAVE_LIBUUID) || defined(UUID_FOUND)
-        char s[37] = {0};
-        uuid_t uuid;
-        uuid_generate_random(uuid);
-        uuid_unparse(uuid, s);
+            char s[37] = {0};
+            uuid_t uuid;
+            uuid_generate_random(uuid);
+            uuid_unparse(uuid, s);
 
-        return s;
+            return s;
 #else
-        throw std::runtime_error("uuid library not available.");
+            throw std::runtime_error("uuid library not available.");
 #endif
 #endif
+        }
     }
 
     bool dir_exists(const std::string &s)

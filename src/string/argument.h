@@ -10,17 +10,19 @@ namespace arg3
      */
     class argument
     {
-    private:
+       private:
         std::string str_;
-    protected:
+
+       protected:
         size_t next(std::string &) const;
-    public:
+
+       public:
         argument(const std::string &);
         argument();
         argument(const argument &other);
         argument(argument &&other);
         argument &operator=(const argument &other);
-        argument &operator=(argument && other);
+        argument &operator=(argument &&other);
         virtual ~argument();
 
         //! peek at the next argument
@@ -38,14 +40,13 @@ namespace arg3
          */
         std::string next();
 
-        int next_int();
-        double next_double();
-        int64_t next_int64();
+        long next_number();
+        double next_real();
         bool next_bool();
         operator const std::string &();
         bool empty() const;
-        bool operator ! () const;
-        char operator[] (int) const;
+        bool operator!() const;
+        char operator[](int) const;
         size_t length() const;
         std::string to_string() const;
 
@@ -60,7 +61,7 @@ namespace arg3
         bool operator!=(const argument &arg) const;
     };
 
-    argument operator "" _a( const char *cstr, size_t len );
+    argument operator"" _arg(const char *cstr, size_t len);
 
     bool operator==(const std::string &a1, const argument &a2);
     bool operator!=(const std::string &a1, const argument &a2);
