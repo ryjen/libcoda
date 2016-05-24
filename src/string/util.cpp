@@ -194,7 +194,7 @@ namespace arg3
 
     bool equals(const string &astr, const string &bstr, bool caseSensitive)
     {
-        for (auto a = astr.cbegin(), b = bstr.cbegin(); a != astr.cend() || b != bstr.cend(); a++, b++) {
+        for (auto a = astr.cbegin(), b = bstr.cbegin(); a != astr.cend() && b != bstr.cend(); a++, b++) {
             if (caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b))) return false;
         }
 

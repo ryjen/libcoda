@@ -125,7 +125,7 @@ namespace arg3
     {
         string arg = next();
 
-        return equals(arg, "true") || equals(arg, "yes") || equals(arg, "1");
+        return arg3::equals(arg, "true") || arg3::equals(arg, "yes") || arg3::equals(arg, "1");
     }
 
     argument::operator const string &()
