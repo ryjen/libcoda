@@ -1,7 +1,7 @@
 #include "vt100.h"
 #include <iostream>
 
-namespace arg3
+namespace rj
 {
     namespace terminal
     {

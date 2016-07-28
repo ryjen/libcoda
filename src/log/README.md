@@ -1,5 +1,5 @@
-libarg3log
-==========
+rj_log
+======
 
 useful code for logging
 

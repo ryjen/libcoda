@@ -1,9 +1,9 @@
-#include <algorithm>
 #include "buffer.h"
+#include <algorithm>
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
     buffer::buffer()
     {

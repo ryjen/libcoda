@@ -1,9 +1,9 @@
-#ifndef ARG3_ARGUMENT_H_
-#define ARG3_ARGUMENT_H_
+#ifndef RJ_ARGUMENT_H_
+#define RJ_ARGUMENT_H_
 
 #include <string>
 
-namespace arg3
+namespace rj
 {
     /*
      * basically a string tokenizer thats aware of quotes/parenthesis

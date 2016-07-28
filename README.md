@@ -1,8 +1,8 @@
-libarg3
-=======
+librj
+=====
 
-[![Build Status](http://img.shields.io/travis/ryjen/libarg3.svg)](https://travis-ci.org/ryjen/libarg3)
-[![Coverage Status](https://coveralls.io/repos/ryjen/libarg3/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/libarg3?branch=master)
+[![Build Status](http://img.shields.io/travis/ryjen/librj.svg)](https://travis-ci.org/ryjen/librj)
+[![Coverage Status](https://coveralls.io/repos/ryjen/librj/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/librj?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
 
 a c++11 utility library.  Its my toolkit for anything c++11.
@@ -17,7 +17,6 @@ git submodule init
 git submodule update
 ```
 
-
 Building
 ========
 
@@ -28,16 +27,6 @@ mkdir debug; cd debug
 cmake -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DMEMORY_CHECK=ON ..
 make
 make test
-```
-
-for homebrew you can add the install prefix:
-
-```bash
-mkdir release; cd release
-cmake $(cd..;brew diy --version=0.5.0) -DCMAKE_BUILD_TYPE=Release ..
-make
-make install
-brew link libarg3
 ```
 
 options supported are:

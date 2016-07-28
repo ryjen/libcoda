@@ -1,5 +1,5 @@
-#ifndef ARG3_LOG_H
-#define ARG3_LOG_H
+#ifndef RJ_LOG_H
+#define RJ_LOG_H
 
 #include <iostream>
 #include <string>
@@ -8,7 +8,7 @@
 #define __attribute__(x)
 #endif
 
-namespace arg3
+namespace rj
 {
     typedef enum { LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_NONE } log_level;
 
@@ -34,28 +34,28 @@ namespace arg3
         static void warn(std::ostream &out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
 
         log(log_level level = LOG_TRACE, std::ostream &out = std::cout);
-        log(const arg3::log &other) = delete;
-        log(arg3::log &&other) = delete;
+        log(const rj::log &other) = delete;
+        log(rj::log &&other) = delete;
         virtual ~log() = default;
-        arg3::log &operator=(const arg3::log &other) = delete;
-        arg3::log &operator=(arg3::log &&other) = delete;
+        rj::log &operator=(const rj::log &other) = delete;
+        rj::log &operator=(rj::log &&other) = delete;
 
         template <typename T>
-        arg3::log &append(const T &value)
+        rj::log &append(const T &value)
         {
             if (level_ >= minLevel_) header() << value << std::endl;
 
             return *this;
         }
 
-        arg3::log &append(const char *value, ...) __attribute__((format(printf, 1, 2)));
+        rj::log &append(const char *value, ...) __attribute__((format(printf, 1, 2)));
 
         static void set_min_log_level(log_level lev);
 
         static log_level lookup_log_level(const std::string &value);
 
         template <typename T>
-        arg3::log &operator<<(const T &val)
+        rj::log &operator<<(const T &val)
         {
             if (level_ >= minLevel_) header() << val << std::endl;
 
@@ -67,7 +67,7 @@ namespace arg3
 
        private:
         static log_level minLevel_;
-        arg3::log &append(const char *const format, va_list args);
+        rj::log &append(const char *const format, va_list args);
         log_level level_;
         std::ostream &out_;
     };

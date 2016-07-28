@@ -3,17 +3,10 @@
 
 using namespace bandit;
 
-using namespace arg3;
+using namespace rj;
 
-go_bandit([]()
-{
+go_bandit([]() {
 
-    describe("a log", []()
-    {
-        it("can lookup a log level", []()
-        {
-            Assert::That(log::lookup_log_level("debug"), Equals(LOG_DEBUG));
-        });
-    });
+    describe("a log", []() { it("can lookup a log level", []() { Assert::That(log::lookup_log_level("debug"), Equals(LOG_DEBUG)); }); });
 
 });

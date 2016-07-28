@@ -1,15 +1,15 @@
-#ifndef ARG3_TERMINAL_VT100_H_
-#define ARG3_TERMINAL_VT100_H_
+#ifndef RJ_TERMINAL_VT100_H_
+#define RJ_TERMINAL_VT100_H_
 
-#include "base_terminal.h"
-#include <string>
-#include <sstream>
-#include <memory>
 #include <map>
+#include <memory>
+#include <sstream>
+#include <string>
+#include "base_terminal.h"
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
     namespace terminal
     {

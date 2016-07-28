@@ -1,12 +1,12 @@
+#include "log.h"
+#include <cstdarg>
+#include <ctime>
 #include <iomanip>
 #include <iostream>
-#include <ctime>
-#include <cstdarg>
-#include "log.h"
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
     const char *logNames[] = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "NONE"};
 

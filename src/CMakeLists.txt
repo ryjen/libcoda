@@ -10,9 +10,9 @@ add_subdirectory(string)
 add_subdirectory(terminal)
 add_subdirectory(variant)
 
-add_library(${PROJECT_NAME} arg3.cpp)
+add_library(${PROJECT_NAME} version.cpp)
 
-target_link_libraries(${PROJECT_NAME} arg3db arg3dice arg3format arg3json arg3net libarg3-arg3variant arg3log arg3math arg3str arg3term)
+target_link_libraries(${PROJECT_NAME} rj_db rj_dice rj_format rj_json rj_net librj_rj_variant rj_log rj_math rj_string rj_term)
 
-INSTALL(FILES thread/later.h collections/collections.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/arg3)
+INSTALL(FILES thread/later.h collections/collections.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/rj)
 

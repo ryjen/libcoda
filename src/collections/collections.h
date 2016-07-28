@@ -1,22 +1,21 @@
-#ifndef _ARG3_COLLECTIONS_H_
-#define _ARG3_COLLECTIONS_H_
+#ifndef RJ_COLLECTIONS_H
+#define RJ_COLLECTIONS_H
 
-#include <map>
-#include <unordered_map>
-#include <string>
-#include <sstream>
-#include <list>
-#include <iterator>
-#include <vector>
-#include <functional>
 #include <algorithm>
+#include <functional>
+#include <iterator>
+#include <list>
+#include <map>
+#include <sstream>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
-
-    template<typename K, typename V>
+    template <typename K, typename V>
     string join(map<K, V> collection, bool displayValues = false, const string &divider = ",")
     {
         ostringstream buf;
@@ -24,23 +23,20 @@ namespace arg3
         size_t size = collection.size();
         size_t count = 0;
 
-        for (auto & e : collection)
-        {
+        for (auto &e : collection) {
             if (displayValues) {
                 buf << e.second;
-            }
-            else {
+            } else {
                 buf << e.first;
             }
-            if (count++ < size - 1)
-            {
+            if (count++ < size - 1) {
                 buf << ",";
             }
         }
 
         return buf.str();
     }
-    template<typename K, typename V>
+    template <typename K, typename V>
     string join(unordered_map<K, V> collection, bool displayValues = false, const string &divider = ",")
     {
         ostringstream buf;
@@ -48,29 +44,25 @@ namespace arg3
         size_t size = collection.size();
         size_t count = 0;
 
-        for (auto & e : collection)
-        {
+        for (auto &e : collection) {
             if (displayValues) {
                 buf << e.second;
-            }
-            else {
+            } else {
                 buf << e.first;
             }
-            if (count++ < size - 1)
-            {
+            if (count++ < size - 1) {
                 buf << ",";
             }
         }
 
         return buf.str();
     }
-    template<typename T>
+    template <typename T>
     string join(initializer_list<T> list, const string &delimiter = ",")
     {
         ostringstream buf;
 
-        if (list.size() > 0)
-        {
+        if (list.size() > 0) {
             ostream_iterator<T> it(buf, delimiter);
 
             copy(list.begin(), list.end() - 1, it);
@@ -81,13 +73,12 @@ namespace arg3
         return buf.str();
     }
 
-    template<typename T>
+    template <typename T>
     string join(vector<T> list, const string &divider = ",")
     {
         ostringstream buf;
 
-        if (list.size() > 0)
-        {
+        if (list.size() > 0) {
             ostream_iterator<T> it(buf, divider.c_str());
 
             copy(list.begin(), list.end() - 1, it);

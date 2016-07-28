@@ -1,5 +1,5 @@
-libarg3strings
-==============
+rj_string
+=========
 
 useful functions for strings
 

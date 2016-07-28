@@ -1,24 +1,24 @@
 [submodule "src/json"]
 	path = src/json
-	url = http://github.com/ryjen/arg3json
+	url = http://github.com/ryjen/json
 [submodule "src/net"]
 	path = src/net
-	url = http://github.com/ryjen/arg3net
+	url = http://github.com/ryjen/net
 [submodule "src/format"]
 	path = src/format
-	url = http://github.com/ryjen/arg3format
+	url = http://github.com/ryjen/format
 [submodule "src/dice"]
 	path = src/dice
-	url = http://github.com/ryjen/arg3dice
+	url = http://github.com/ryjen/dice
 [submodule "src/db"]
 	path = src/db
-	url = http://github.com/ryjen/arg3db
+	url = http://github.com/ryjen/db
 [submodule "tests/vendor/bandit"]
 	path = tests/vendor/bandit
 	url = http://github.com/joakimkarlsson/bandit.git
 [submodule "src/variant"]
 	path = src/variant
-	url = http://github.com/ryjen/arg3variant
+	url = http://github.com/ryjen/variant
 [submodule "cmake"]
 	path = cmake
 	url = http://github.com/ryjen/cmake.git

@@ -1,10 +1,10 @@
 
 #include <bandit/bandit.h>
-#include "../src/string/argument.h"
 #include "../src/math/util.h"
+#include "../src/string/argument.h"
 
 using namespace bandit;
-using namespace arg3;
+using namespace rj;
 using namespace std;
 
 go_bandit([]() {

@@ -1,14 +1,14 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <sys/stat.h>
+#include <algorithm>
+#include <cstdarg>
+#include <cstring>
 #include <iterator>
 #include <sstream>
-#include <algorithm>
-#include <sys/stat.h>
-#include <cstring>
-#include <cstdarg>
-#include <vector>
 #include <stdexcept>
+#include <vector>
 #include "util.h"
 
 extern "C" {
@@ -23,7 +23,7 @@ extern "C" {
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
     bool nullstr(const char *str)
     {
@@ -194,10 +194,11 @@ namespace arg3
 
     bool equals(const string &astr, const string &bstr, bool caseSensitive)
     {
-        for (auto a = astr.cbegin(), b = bstr.cbegin(); a != astr.cend() || b != bstr.cend(); a++, b++) {
-            if (caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b))) return false;
+        for (auto a = astr.cbegin(), b = bstr.cbegin(); a != astr.cend() && b != bstr.cend(); a++, b++) {
+            if (caseSensitive ? (*a != *b) : (tolower(*a) != tolower(*b))) {
+                return false;
+            }
         }
-
         return true;
     }
 

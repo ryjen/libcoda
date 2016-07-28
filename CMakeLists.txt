@@ -6,7 +6,7 @@ option(CODE_COVERAGE "Enable code coverage testing." OFF)
 option(MEMORY_CHECK "Enable testing for memory leaks." OFF)
 
 # define project name
-project (libarg3 VERSION 0.5.0)
+project (librj VERSION 0.5.0)
 
 # set path to custom modules
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -25,7 +25,7 @@ find_package(PostgreSQL)
 if(CODE_COVERAGE)
 	include(CodeCoverage)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_COVERAGE}")
-	setup_target_for_coverage(${PROJECT_NAME}-coverage ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test ${PROJECT_SOURCE_DIR}/coverage)
+	setup_target_for_coverage(${PROJECT_NAME}_coverage ${PROJECT_SOURCE_DIR}/coverage)
 endif()
 
 # create config header
@@ -39,15 +39,14 @@ add_subdirectory(tests)
 # Setup testing
 enable_testing()
 
+include(ValgrindTest)
 
-include(MemCheckTest)
-
-add_opt_memcheck_test(MEMORY_CHECK ${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}-test)
-add_opt_memcheck_test(MEMORY_CHECK arg3db-test ${PROJECT_BINARY_DIR}/src/db/tests/arg3db-test)
-add_opt_memcheck_test(MEMORY_CHECK arg3dice-test ${PROJECT_BINARY_DIR}/src/dice/tests/arg3dice-test)
-add_opt_memcheck_test(MEMORY_CHECK arg3format-test ${PROJECT_BINARY_DIR}/src/format/tests/arg3format-test)
-add_opt_memcheck_test(MEMORY_CHECK arg3json-test ${PROJECT_BINARY_DIR}/src/json/tests/arg3json-test)
-add_opt_memcheck_test(MEMORY_CHECK arg3net-test ${PROJECT_BINARY_DIR}/src/net/tests/arg3net-test)
-add_opt_memcheck_test(MEMORY_CHECK arg3variant-test ${PROJECT_BINARY_DIR}/src/variant/tests/arg3variant-test "--suppressions=${PROJECT_SOURCE_DIR}/src/variant/suppression.map")
+add_opt_valgrind_test(MEMORY_CHECK ${PROJECT_NAME}_test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test)
+add_opt_valgrind_test(MEMORY_CHECK rj_db_test ${PROJECT_BINARY_DIR}/src/db/tests/rj_db_test)
+add_opt_valgrind_test(MEMORY_CHECK rj_dice_test ${PROJECT_BINARY_DIR}/src/dice/tests/rj_dice_test)
+add_opt_valgrind_test(MEMORY_CHECK rj_format_test ${PROJECT_BINARY_DIR}/src/format/tests/rj_format_test)
+add_opt_valgrind_test(MEMORY_CHECK rj_json_test ${PROJECT_BINARY_DIR}/src/json/tests/rj_json_test)
+add_opt_valgrind_test(MEMORY_CHECK rj_net_test ${PROJECT_BINARY_DIR}/src/net/tests/rj_net_test)
+add_opt_valgrind_test(MEMORY_CHECK rj_variant_test ${PROJECT_BINARY_DIR}/src/variant/tests/rj_variant_test)
 
 

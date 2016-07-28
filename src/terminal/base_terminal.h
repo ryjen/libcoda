@@ -1,12 +1,12 @@
-#ifndef ARG3_TERMINAL_BASE_TERMINAL_H_
-#define ARG3_TERMINAL_BASE_TERMINAL_H_
+#ifndef RJ_TERMINAL_BASE_TERMINAL_H_
+#define RJ_TERMINAL_BASE_TERMINAL_H_
 
-#include <vector>
 #include <functional>
+#include <vector>
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
     namespace terminal
     {

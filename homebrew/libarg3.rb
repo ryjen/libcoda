@@ -1,11 +1,11 @@
 require 'formula'
 
-class Libarg3 < Formula
-  homepage 'http://github.com/c0der78/libarg3'
-  url 'https://github.com/c0der78/libarg3/archive/0.5.1.tar.gz'
+class Librj < Formula
+  homepage 'http://github.com/ryjen/librj'
+  url 'https://github.com/ryjen/librj/archive/0.5.1.tar.gz'
   sha1 '168aa6a1d06119d2e64b5bdfec82799c411dcfb5'
 
-  head 'http://github.com/c0der78/libarg3.git'
+  head 'http://github.com/ryjen/librj.git'
 
   version '0.5.1'
 

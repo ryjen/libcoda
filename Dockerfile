@@ -1,27 +1,24 @@
-FROM ubuntu:15.10
+FROM ryjen/cpp-coveralls
 
-RUN apt-get update && apt-get install -y \
-	  git \
-	  build-essential \
-    make \
-    gcc \
+ARG CMAKE_DEFINES
+
+RUN apt-get install -y \	  
     libcurl4-openssl-dev \
-    libjson0-dev \
+    libjson-c-dev \
     libmysqlclient-dev \
     libpq-dev \
     libsqlite3-dev \
-    lcov \
-    valgrind \
-    openssl \
     uuid-dev \
-    liburiparser-dev \
-    cmake \
-    cmake-data
+    liburiparser-dev
 
-COPY . libarg3
+COPY . /usr/src
 
-WORKDIR libarg3
+RUN mkdir -p /usr/src/build
 
-RUN mkdir -p build && cd build && \
-    cmake .. && make && make test
-    
+WORKDIR /usr/src/build
+
+RUN cmake ${CMAKE_DEFINES} ..
+
+RUN make
+
+CMD "make", "test", "ARGS=-V"

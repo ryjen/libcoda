@@ -1,16 +1,12 @@
-#ifndef _ARG3_STRINGS_H_
-#define _ARG3_STRINGS_H_
+#ifndef RJ_STRINGS_H
+#define RJ_STRINGS_H
 
 #include <string>
 #include <vector>
 
 using namespace std;
 
-#ifdef _WIN32
-#define __attribute__(x)
-#endif
-
-namespace arg3
+namespace rj
 {
     typedef vector<uint8_t> binary;
 
@@ -49,7 +45,10 @@ namespace arg3
         std::string encode(const binary &);
         binary decode(const string &s);
     }
-
+    namespace uuid
+    {
+        std::string generate();
+    }
     time_t datetime(const std::string &s, const std::string &format = "%FT%T%z");
 
 
@@ -68,7 +67,6 @@ namespace arg3
     bool dir_exists(const std::string &s);
     bool file_exists(const std::string &s);
 }
-
 
 
 #endif

@@ -2,12 +2,12 @@
 #include "../src/string/buffer.h"
 
 using namespace bandit;
-using namespace arg3;
+using namespace rj;
 
 
 class test_buffer : public buffered_reader, public buffered_writer
 {
-public:
+   public:
     bool read_to_buffer()
     {
         input().insert(input().begin(), output().begin(), output().end());
@@ -22,13 +22,10 @@ public:
     }
 };
 
-go_bandit([]()
-{
+go_bandit([]() {
 
-    describe("a buffer", []()
-    {
-        it("has a copy constructor", []()
-        {
+    describe("a buffer", []() {
+        it("has a copy constructor", []() {
             buffer buf;
 
             buf.write("lorum ipsum");
@@ -38,8 +35,7 @@ go_bandit([]()
             Assert::That(other.to_string(), Equals("lorum ipsum"));
         });
 
-        it("can be copy assigned", []()
-        {
+        it("can be copy assigned", []() {
             buffer buf;
 
             buf.write("lorum ipsum");
@@ -51,8 +47,7 @@ go_bandit([]()
             Assert::That(other.to_string(), Equals("lorum ipsum"));
         });
 
-        it("can write a line", []()
-        {
+        it("can write a line", []() {
             test_buffer buf;
 
             buf.writeln("lorum ipsum");
@@ -61,7 +56,7 @@ go_bandit([]()
 
             buf.output().clear();
 
-            buffered_data data = {'h', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd' };
+            buffered_data data = {'h', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd'};
 
             buf.writeln(data);
 
@@ -82,8 +77,7 @@ go_bandit([]()
             Assert::That(buf2.to_string(), Equals("test\n\n"));
         });
 
-        it("can be empty", []()
-        {
+        it("can be empty", []() {
             buffer buf;
 
             Assert::That(buf.empty(), Equals(true));
@@ -93,8 +87,7 @@ go_bandit([]()
             Assert::That(buf.empty(), Equals(false));
         });
 
-        it("can write", []()
-        {
+        it("can write", []() {
             buffer buf;
 
             buf.write("test");
@@ -107,15 +100,14 @@ go_bandit([]()
 
             Assert::That(testBuf.output().size(), Equals(11));
 
-            buffered_data data = { 't', 'e', 's', 't', 'i', 'n', 'g' };
+            buffered_data data = {'t', 'e', 's', 't', 'i', 'n', 'g'};
 
             testBuf.write(data);
 
             Assert::That(testBuf.output().size(), Equals(18));
         });
 
-        it("can read a line", []()
-        {
+        it("can read a line", []() {
             test_buffer buf;
 
             buf.writeln("lorum ipsum");
@@ -143,8 +135,7 @@ go_bandit([]()
             Assert::That(buf.readln(), Equals("test"));
         });
 
-        it("can test for input", []()
-        {
+        it("can test for input", []() {
             test_buffer buf;
 
             buf.writeln("lorum ipsum");
@@ -158,8 +149,7 @@ go_bandit([]()
             Assert::That(buf.has_input(), Equals(false));
         });
 
-        it("can get input", []()
-        {
+        it("can get input", []() {
             test_buffer buf;
 
             Assert::That(buf.input().size(), Equals(0));
@@ -173,8 +163,7 @@ go_bandit([]()
             Assert::That(input.size(), Equals(13));
         });
 
-        it("can append", []()
-        {
+        it("can append", []() {
             buffer buf;
 
             buf.write("test").write("ing").write(" ").write("1 2 3");
@@ -182,8 +171,7 @@ go_bandit([]()
             Assert::That(buf.to_string(), Equals("testing 1 2 3"));
         });
 
-        it("can test for output", []()
-        {
+        it("can test for output", []() {
             test_buffer buf;
 
             Assert::That(buf.has_output(), Equals(false));
@@ -193,8 +181,7 @@ go_bandit([]()
             Assert::That(buf.has_output(), Equals(true));
         });
 
-        it("can get output", []()
-        {
+        it("can get output", []() {
             test_buffer buf;
 
             Assert::That(buf.output().size(), Equals(0));
@@ -204,19 +191,19 @@ go_bandit([]()
             Assert::That(buf.output().size(), Equals(13));
         });
 
-        it("can left shift output", []()
-        {
+        it("can left shift output", []() {
             buffer buf;
 
             buf << "testing";
 
-            buf << " " << "1 2 3" << "\n";
+            buf << " "
+                << "1 2 3"
+                << "\n";
 
             Assert::That(buf.to_string(), Equals("testing 1 2 3\n"));
         });
 
-        it("can be cast to a string", []()
-        {
+        it("can be cast to a string", []() {
             buffer buf;
 
             buf << "testing";
@@ -226,15 +213,13 @@ go_bandit([]()
             Assert::That(temp, Equals("testing"));
         });
 
-        it("can be constructed from a string", []()
-        {
+        it("can be constructed from a string", []() {
             buffer buf("testing 1 2 3");
 
             Assert::That(buf.to_string(), Equals("testing 1 2 3"));
         });
 
-        it("can remove output", []()
-        {
+        it("can remove output", []() {
             buffer buf("testing 1 2 3");
 
             buf.remove(buf.length() - 2);
@@ -253,4 +238,3 @@ go_bandit([]()
 
 
 });
-

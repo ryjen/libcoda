@@ -1,5 +1,5 @@
-libarg3math
-==========
+rj_3math
+========
 
 useful code for working with numbers
 

@@ -1,0 +1,20 @@
+version: '2'
+services:
+  test:
+    image: librj_test
+    build:
+      context: .
+      args:
+          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Release -DMEMORY_CHECK=ON
+    environment:
+      - TRAVIS_JOB_ID
+    privileged: true
+    working_dir: /usr/src/build
+    command: make test ARGS=-V
+  coverage:
+    extends: test
+    image: librj_coverage
+    build:
+      args:
+          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON
+    command: make librj_coverage_coveralls

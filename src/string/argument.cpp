@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
     argument operator"" _arg(const char *cstr, size_t len)
     {
@@ -125,7 +125,7 @@ namespace arg3
     {
         string arg = next();
 
-        return equals(arg, "true") || equals(arg, "yes") || equals(arg, "1");
+        return rj::equals(arg, "true") || rj::equals(arg, "yes") || rj::equals(arg, "1");
     }
 
     argument::operator const string &()
@@ -160,12 +160,12 @@ namespace arg3
 
     bool argument::equals(const string &arg, bool caseSensitive) const
     {
-        return arg3::equals(str_, arg, caseSensitive);
+        return rj::equals(str_, arg, caseSensitive);
     }
 
     bool argument::prefix(const string &arg, bool caseSensitive) const
     {
-        return arg3::prefix(arg, str_, caseSensitive);
+        return rj::prefix(arg, str_, caseSensitive);
     }
 
     bool argument::operator==(const std::string &arg) const

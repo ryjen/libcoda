@@ -8,7 +8,6 @@ stamp-h1
 *.o
 *.lo
 Makefile
-arg3_test
 *.gcno
 coverage.info
 *.cache

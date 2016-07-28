@@ -1,11 +1,11 @@
-#ifndef ARG3_STRING_BUFFERED_IO_H_
-#define ARG3_STRING_BUFFERED_IO_H_
+#ifndef RJ_STRING_BUFFERED_IO_H_
+#define RJ_STRING_BUFFERED_IO_H_
 
-#include <vector>
-#include <string>
 #include <sstream>
+#include <string>
+#include <vector>
 
-namespace arg3
+namespace rj
 {
     typedef std::vector<unsigned char> buffered_data;
 

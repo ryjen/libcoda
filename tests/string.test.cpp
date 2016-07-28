@@ -1,10 +1,10 @@
 #include <bandit/bandit.h>
-#include "../src/string/util.h"
 #include <algorithm>
+#include "../src/string/util.h"
 
 using namespace bandit;
 
-using namespace arg3;
+using namespace rj;
 
 go_bandit([]() {
 
@@ -22,8 +22,8 @@ go_bandit([]() {
         });
 
         it("can test for emails", []() {
-            Assert::That(is_valid_email("c0der78@gmail.com"), Equals(true));
-            Assert::That(is_valid_email("ryan.jennings@arg3.net"), Equals(true));
+            Assert::That(is_valid_email("info@ryan-jennings.net"), Equals(true));
+            Assert::That(is_valid_email("ryan.jennings@email.net"), Equals(true));
             Assert::That(is_valid_email("ryan@blah"), Equals(false));
             Assert::That(is_valid_email("@blah.com"), Equals(false));
             Assert::That(is_valid_email("ryan@"), Equals(false));
@@ -87,17 +87,17 @@ go_bandit([]() {
         });
 
         it("can join", []() {
-            string test = arg3::join("abc", 3, ",");
+            string test = rj::join("abc", 3, ",");
 
             Assert::That(test, Equals("abc,abc,abc"));
 
-            test = arg3::join('Z', 3, "-");
+            test = rj::join('Z', 3, "-");
 
             Assert::That(test, Equals("Z-Z-Z"));
         });
 
         it("can split", []() {
-            auto parts = arg3::split("abc,123,xyz", ",", true);
+            auto parts = rj::split("abc,123,xyz", ",", true);
 
             Assert::That(parts.size(), Equals(3));
 
@@ -105,7 +105,7 @@ go_bandit([]() {
             Assert::That(parts[1], Equals("123"));
             Assert::That(parts[2], Equals("xyz"));
 
-            parts = arg3::split("abc//123//xyz", "/", true);
+            parts = rj::split("abc//123//xyz", "/", true);
 
             Assert::That(parts.size(), Equals(5));
 
@@ -115,7 +115,7 @@ go_bandit([]() {
             Assert::That(parts[3], Equals(""));
             Assert::That(parts[4], Equals("xyz"));
 
-            parts = arg3::split("abc,123,xyz", "", true);
+            parts = rj::split("abc,123,xyz", "", true);
 
             Assert::That(parts.size(), Equals(1));
 
@@ -125,29 +125,29 @@ go_bandit([]() {
         it("can test for a prefix", []() {
             std::string test = "abc123";
 
-            Assert::That(arg3::prefix("abc", test), Equals(true));
+            Assert::That(rj::prefix("abc", test), Equals(true));
 
-            Assert::That(arg3::prefix("123", test), Equals(false));
+            Assert::That(rj::prefix("123", test), Equals(false));
 
-            Assert::That(arg3::prefix("", test), Equals(false));
+            Assert::That(rj::prefix("", test), Equals(false));
         });
 
         it("can test for a suffix", []() {
             std::string test = "abc123";
 
-            Assert::That(arg3::suffix("abc", test), Equals(false));
-            Assert::That(arg3::suffix("123", test), Equals(true));
-            Assert::That(arg3::suffix("", test), Equals(false));
+            Assert::That(rj::suffix("abc", test), Equals(false));
+            Assert::That(rj::suffix("123", test), Equals(true));
+            Assert::That(rj::suffix("", test), Equals(false));
         });
 
         it("can test for string contents", []() {
             std::string test = "abc123";
 
-            Assert::That(arg3::contains("bc12", test), Equals(true));
+            Assert::That(rj::contains("bc12", test), Equals(true));
 
-            Assert::That(arg3::contains("asd", test), Equals(false));
+            Assert::That(rj::contains("asd", test), Equals(false));
 
-            Assert::That(arg3::contains("", test), Equals(false));
+            Assert::That(rj::contains("", test), Equals(false));
         });
     });
 

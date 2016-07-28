@@ -1,5 +1,5 @@
-libarg3collections
-==================
+rj_collections
+==============
 
 useful code for working with collections of data
 
