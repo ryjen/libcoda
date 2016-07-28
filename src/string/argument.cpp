@@ -124,7 +124,6 @@ namespace rj
     bool argument::next_bool()
     {
         string arg = next();
-
         return rj::equals(arg, "true") || rj::equals(arg, "yes") || rj::equals(arg, "1");
     }
 

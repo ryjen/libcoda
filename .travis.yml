@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 sudo: required
 dist: trusty
 services:
@@ -10,6 +11,50 @@ before_install:
   - sudo mv -f docker-compose /usr/local/bin
   - sudo apt-get update
   - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine
+=======
+sudo: false
+language: cpp
+compiler:
+  - clang
+  - gcc
+before_install:
+  - mysql -e "create database IF NOT EXISTS test;" -uroot
+before_script:
+  - git submodule update --init --recursive
+  - mkdir build
+  - gem install coveralls-lcov
+  - psql -c 'create database test;' -U postgres
+install:
+  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.7"; fi
+  - if [ "$CXX" == "g++" ]; then export CXX="g++-5" CC="gcc-5" GCOV="gcov-5"; fi
+  - wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.12.orig.tar.gz
+  - tar xf lcov_1.12.orig.tar.gz
+  - export PATH=$TRAVIS_BUILD_DIR/lcov-1.12/bin:$PATH
+addons:
+  postgresql: "9.3"
+  apt:
+    sources:
+      - george-edison55-precise-backports
+      - llvm-toolchain-precise-3.7
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-5
+      - clang-3.7
+      - valgrind
+      - liburiparser-dev
+      - mysql-client
+      - libmysqlclient-dev
+      - sqlite3
+      - libsqlite3-dev
+      - libjson0
+      - libjson0-dev
+      - uuid-dev
+      - cmake
+      - cmake-data
+      - libpq-dev
+services:
+  - postgresql
+>>>>>>> 6b50b65b396ab9051dfdb67b60afde4641fbeb49
 script:
   - docker-compose build test
   - docker-compose run test
