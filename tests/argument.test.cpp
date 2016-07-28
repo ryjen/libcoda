@@ -99,11 +99,11 @@ go_bandit([]() {
         it("can find a boolean", []() {
             argument arg("true");
 
-            Assert::That(arg.next_bool(), Equals(true));
+            Assert::That(arg.next_bool(), IsTrue());
 
             arg = "0"_arg;
 
-            Assert::That(arg.next_bool(), Equals(false));
+            Assert::That(arg.next_bool(), IsFalse());
         });
 
         it("can cast to a string", []() {
