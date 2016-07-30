@@ -9,7 +9,9 @@ RUN apt-get install -y \
     libpq-dev \
     libsqlite3-dev \
     uuid-dev \
-    liburiparser-dev
+    liburiparser-dev \
+    postgresql-server-dev-all \
+    libssl-dev libcurl4-openssl-dev
 
 COPY . /usr/src
 

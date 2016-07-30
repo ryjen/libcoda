@@ -356,7 +356,7 @@ namespace rj
     }
 
 
-    int sprintf(std::string &ret, const char *fmt, ...)
+    int sprintf(std::string &ret, const std::string &fmt, ...)
     {
         char *buf;
         int bufsize;
@@ -369,7 +369,7 @@ namespace rj
         outsize = 0;
         for (;;) {
             if (bufsize == 0) {
-                bufsize = strlen(fmt);
+                bufsize = fmt.length();
                 if ((buf = (char *)malloc(bufsize)) == NULL) {
                     return -1;
                 }
@@ -383,7 +383,7 @@ namespace rj
 
             va_start(args, fmt);
 
-            outsize = vsnprintf(buf, bufsize, fmt, args);
+            outsize = vsnprintf(buf, bufsize, fmt.c_str(), args);
 
             va_end(args);
 
