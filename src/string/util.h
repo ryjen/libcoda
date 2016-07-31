@@ -51,9 +51,6 @@ namespace rj
     }
     time_t datetime(const std::string &s, const std::string &format = "%FT%T%z");
 
-
-    int sprintf(std::string &, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-
     std::string &ltrim(std::string &s);
 
     // trim from end
