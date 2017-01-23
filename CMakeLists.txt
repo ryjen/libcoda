@@ -28,10 +28,6 @@ if(CODE_COVERAGE)
 	setup_target_for_coverage(${PROJECT_NAME}_coverage ${PROJECT_SOURCE_DIR}/coverage)
 endif()
 
-# create config header
-include(CreateConfigHeader)
-create_config_header()
-
 # add directories
 add_subdirectory(src)
 add_subdirectory(tests)

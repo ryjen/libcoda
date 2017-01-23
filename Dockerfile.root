@@ -1,16 +1,19 @@
 FROM ubuntu:14.04
 
+RUN apt-get update
 RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:george-edison55/cmake-3.x
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN add-apt-repository ppa:george-edison55/cmake-3.x
 
 RUN apt-get update
 
-RUN apt-get -y install build-essential gcc-5 g++-5 clang gdb cmake valgrind lcov wget ruby git pkg-config
+RUN apt-get -y install make libc-dev gcc-6 g++-6 clang gdb cmake valgrind wget lcov ruby git pkg-config
 
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 1
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 1
 
-RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 1
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 1
+
+RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-6 1
 
 # dockerize for docker-compose
 # used to wait for services to be ready

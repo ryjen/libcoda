@@ -1,0 +1,10 @@
+{
+   wcscmp valgrind37
+   Memcheck:Addr8
+   fun:wcscmp
+}
+{
+   wcsdup valgrind37
+   Memcheck:Leak
+   fun:wcsdup
+}

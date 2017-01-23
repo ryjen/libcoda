@@ -1,6 +1,3 @@
-[submodule "src/json"]
-	path = src/json
-	url = http://github.com/ryjen/json
 [submodule "src/net"]
 	path = src/net
 	url = http://github.com/ryjen/net
@@ -16,9 +13,6 @@
 [submodule "tests/vendor/bandit"]
 	path = tests/vendor/bandit
 	url = http://github.com/joakimkarlsson/bandit.git
-[submodule "src/variant"]
-	path = src/variant
-	url = http://github.com/ryjen/variant
 [submodule "cmake"]
 	path = cmake
 	url = http://github.com/ryjen/cmake.git
