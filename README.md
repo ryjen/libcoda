@@ -24,15 +24,15 @@ You can use [cmake](https://cmake.org) to generate for the build system of your 
 
 ```bash
 mkdir debug; cd debug
-cmake -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DMEMORY_CHECK=ON ..
+cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON -DENABLE_MEMCHECK=ON ..
 make
 make test
 ```
 
 options supported are:
 
-		-DCODE_COVERAGE=ON   :   enable code coverage using lcov
-		-DMEMORY_CHECK=ON    :   enable valgrind memory checking on tests
+		-DENABLE_COVERAGE=ON   :   enable code coverage using lcov
+		-DENABLE_MEMCHECK=ON    :   enable valgrind memory checking on tests
 
 Requirements
 ============

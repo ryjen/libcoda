@@ -2,7 +2,7 @@ FROM ryjen/cpp-coveralls
 
 ARG CMAKE_DEFINES
 
-RUN apt-get install -y \	  
+RUN apt-get install -y \
     libcurl4-openssl-dev \
     libjson-c-dev \
     libmysqlclient-dev \
@@ -11,7 +11,8 @@ RUN apt-get install -y \
     uuid-dev \
     liburiparser-dev \
     postgresql-server-dev-all \
-    libssl-dev libcurl4-openssl-dev
+    libssl-dev libcurl4-openssl-dev \
+    libboost-dev
 
 COPY . /usr/src
 

@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Release -DMEMORY_CHECK=ON
+          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Release -DENABLE_MEMCHECK=ON
     environment:
       - TRAVIS_JOB_ID
     privileged: true
@@ -16,5 +16,5 @@ services:
     image: rj_variant_coverage
     build:
       args:
-          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON
+          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON
     command: make rj_variant_coverage_coveralls

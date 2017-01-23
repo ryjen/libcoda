@@ -5,16 +5,38 @@ services:
     build:
       context: .
       args:
-          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Release -DMEMORY_CHECK=ON
+          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Release -DENABLE_MEMCHECK=ON -DCMAKE_CXX_COMPILER=g++
     environment:
       - TRAVIS_JOB_ID
     privileged: true
     working_dir: /usr/src/build
     command: make test ARGS=-V
+    depends_on:
+      - mysql
+      - postgres
   coverage:
-    extends: test
     image: librj_coverage
+    environment:
+      - TRAVIS_JOB_ID
+    privileged: true
     build:
+      context: .
       args:
-          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON
+          CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON -DCMAKE_CXX_COMPILER=g++
     command: make librj_coverage_coveralls
+    depends_on:
+      - mysql
+      - postgres
+  mysql:
+    image: mysql
+    hostname: mysql
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+  postgres:
+    image: postgres
+    hostname: postgres
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
