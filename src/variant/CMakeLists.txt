@@ -31,9 +31,6 @@ create_package("a c++11 variant/discriminated union type")
 add_subdirectory(src)
 add_subdirectory(tests)
 
-# Setup testing
-enable_testing()
-
 include(ValgrindTest)
 
-add_valgrind_profile_test(MEMCHECK ${ENABLE_MEMCHECK} PROFILING ${ENABLE_PROFILING} TARGET ${TEST_PROJECT_NAME}_test "--suppressions=${PROJECT_SOURCE_DIR}/suppression.map")
+add_valgrind_profile_test(MEMCHECK ${ENABLE_MEMCHECK} PROFILING ${ENABLE_PROFILING} TARGET ${TEST_PROJECT_NAME} "--suppressions=${PROJECT_SOURCE_DIR}/suppression.map")

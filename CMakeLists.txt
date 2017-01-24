@@ -9,6 +9,8 @@ option(ENABLE_PROFILING "Enable profiling code usage." OFF)
 # define project name
 project (librj VERSION 0.5.0)
 
+set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
+
 # Setup testing
 enable_testing()
 
@@ -39,10 +41,11 @@ endif()
 
 # add directories
 add_subdirectory(src)
+
 add_subdirectory(tests)
 
 include(ValgrindTest)
 
-add_valgrind_profile_test(MEMCHECK ${ENABLE_MEMCHECK} PROFILING ${ENABLE_PROFILING} TARGET ${PROJECT_NAME}_test)
+add_valgrind_profile_test(MEMCHECK ${ENABLE_MEMCHECK} PROFILING ${ENABLE_PROFILING} TARGET ${TEST_PROJECT_NAME})
 
 

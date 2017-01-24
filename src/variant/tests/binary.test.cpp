@@ -10,19 +10,20 @@ using namespace rj;
 
 go_bandit([]() {
 
-    int* imem = nullptr;
+    describe("a binary value", []() {
 
-    before_each([&imem]() {
-        imem = (int*)malloc(sizeof(int));
-        *imem = 18;
-    });
+        int* imem = nullptr;
 
-    after_each([&imem]() {
-        free(imem);
-        imem = nullptr;
-    });
+        before_each([&imem]() {
+            imem = (int*)malloc(sizeof(int));
+            *imem = 18;
+        });
 
-    describe("a binary value", [&imem]() {
+        after_each([&imem]() {
+            free(imem);
+            imem = nullptr;
+        });
+
         it("can be constructed", [&imem]() {
             binary bin;
 
@@ -90,5 +91,4 @@ go_bandit([]() {
             Assert::That(other.to_string(), Equals(string(test)));
         });
     });
-
 });
