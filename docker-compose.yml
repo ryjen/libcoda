@@ -10,7 +10,7 @@ services:
       - TRAVIS_JOB_ID
     privileged: true
     working_dir: /usr/src/build
-    command: make test ARGS=-V
+    command: dockerize -wait tcp://mysql:3306 -wait tcp://postgres:5432 -timeout 30s make test ARGS=-V
     depends_on:
       - mysql
       - postgres
@@ -23,7 +23,7 @@ services:
       context: .
       args:
           CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON -DCMAKE_CXX_COMPILER=g++
-    command: make librj_coverage_coveralls
+    command: dockerize -wait tcp://mysql:3306 -wait tcp://postgres:5432 -timeout 30s make librj_coverage_coveralls
     depends_on:
       - mysql
       - postgres
