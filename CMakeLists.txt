@@ -19,7 +19,7 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # create the package config install
 include(CreatePackage)
-create_package("A c++14 toolkit")
+create_package(DESCRIPTION "A c++14 toolkit")
 
 if (PROJECT_VERSION)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLIBRARY_VERSION=\\\"${PROJECT_VERSION}\\\"")

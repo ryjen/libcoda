@@ -29,7 +29,7 @@ endif()
 
 # create package config
 include (CreatePackage)
-create_package("a c++ json wrapper")
+create_package(DESCRIPTION "a c++ json wrapper")
 
 # add directories
 add_subdirectory(src)

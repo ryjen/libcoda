@@ -14,6 +14,4 @@ install(FILES argument.h buffer.h util.h DESTINATION ${CMAKE_INSTALL_PREFIX}/inc
 
 install(TARGETS rj_string LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
-# create the package config install
-include(CreatePackage)
-create_package_named(rj_string 0.1.0 "A string library")
+create_package(TARGET rj_string VERSION 0.1.0 DESCRIPTION "A string library")

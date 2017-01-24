@@ -25,7 +25,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 
 # create the package config install
 include(CreatePackage)
-create_package("a c++11 variant/discriminated union type")
+create_package(DESCRIPTION "a c++11 variant/discriminated union type")
 
 # add directories
 add_subdirectory(src)
