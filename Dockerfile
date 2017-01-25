@@ -2,6 +2,8 @@ FROM ryjen/cpp-coveralls
 
 ARG CMAKE_DEFINES
 
+ENV POSTGRES_VERS 9.3
+
 RUN apt-get install -y \
     libcurl4-openssl-dev \
     libjson-c-dev \
@@ -20,7 +22,7 @@ RUN mkdir -p /usr/src/build
 
 WORKDIR /usr/src/build
 
-RUN cmake ${CMAKE_DEFINES} ..
+RUN cmake ${CMAKE_DEFINES} -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql/${POSTGRES_VERS}/server ..
 
 RUN make
 
