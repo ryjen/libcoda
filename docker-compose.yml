@@ -7,7 +7,8 @@ services:
       args:
           CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Release -DENABLE_MEMCHECK=ON -DCMAKE_CXX_COMPILER=g++
     environment:
-      - TRAVIS_JOB_ID
+      MYSQL_URI: mysql://mysql:3306/test
+      POSTGRES_URI: postgres://test:test@postgres:5432/test
     privileged: true
     working_dir: /usr/src/build
     command: dockerize -wait tcp://mysql:3306 -wait tcp://postgres:5432 -timeout 30s make test ARGS=-V
@@ -17,7 +18,8 @@ services:
   coverage:
     image: librj_coverage
     environment:
-      - TRAVIS_JOB_ID
+      MYSQL_URI: mysql://mysql:3306/test
+      POSTGRES_URI: postgres://test:test@postgres:5432/test
     privileged: true
     build:
       context: .
