@@ -1,6 +1,7 @@
 librj
 =====
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f39c12a30e1141eaa8ae9aca5f4fe8c9)](https://www.codacy.com/app/ryjen/libarg3?utm_source=github.com&utm_medium=referral&utm_content=ryjen/libryjen&utm_campaign=badger)
 [![Build Status](http://img.shields.io/travis/ryjen/librj.svg)](https://travis-ci.org/ryjen/librj)
 [![Coverage Status](https://coveralls.io/repos/ryjen/librj/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/librj?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
