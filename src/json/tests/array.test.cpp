@@ -1,7 +1,5 @@
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-#undef VERSION
+#include <string>
+
 #include <bandit/bandit.h>
 #include <json.h>
 #include "array.h"
@@ -9,6 +7,7 @@
 
 using namespace rj;
 using namespace bandit;
+using namespace snowhouse;
 
 go_bandit([]() {
 

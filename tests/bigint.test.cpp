@@ -1,8 +1,11 @@
+#include <string>
+
 #include <bandit/bandit.h>
 #include "bigint.h"
 
 using namespace bandit;
 using namespace rj;
+using namespace snowhouse;
 
 go_bandit([]() {
 
@@ -11,7 +14,8 @@ go_bandit([]() {
 
             bigint bi = 34098792871928374019287305239874052938465018273192387418273657623868726345_bi;
 
-            Assert::That(bi.to_string(), Equals("34098792871928374019287305239874052938465018273192387418273657623868726345"));
+            Assert::That(bi.to_string(),
+                         Equals("34098792871928374019287305239874052938465018273192387418273657623868726345"));
         });
     });
 

@@ -1,11 +1,10 @@
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+
 #include <json.h>
 #include <json_object.h>
 #include <algorithm>
 #include <cmath>
-#undef VERSION
+#include <string>
+
 #include <bandit/bandit.h>
 #include <unistd.h>
 #include <fstream>
@@ -18,6 +17,8 @@ using namespace rj;
 using namespace bandit;
 
 using namespace std;
+
+using namespace snowhouse;
 
 inline bool equalf(double x, double y, double absTol)
 {
@@ -262,7 +263,8 @@ go_bandit([]() {
 
         it("can parse JSON", []() {
             const char *TESTVALUE =
-                "{\"col1\":\"value1\",\"col2\":1234,\"col3\":123.321,\"col4\":true,\"col5\":[\"a1\",2,true],\"col6\":{\"col7\":true}}";
+                "{\"col1\":\"value1\",\"col2\":1234,\"col3\":123.321,\"col4\":true,\"col5\":[\"a1\",2,true],\"col6\":{"
+                "\"col7\":true}}";
 
             json::object obj;
 

@@ -1,3 +1,5 @@
+#include <string>
+
 #include <bandit/bandit.h>
 #include <functional>
 #include "variant.h"
@@ -7,6 +9,7 @@ using namespace bandit;
 using namespace std;
 
 using namespace rj;
+using namespace snowhouse;
 
 class complex_val : public variant::complex
 {

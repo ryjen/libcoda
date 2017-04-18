@@ -1,9 +1,13 @@
+#include <string>
+
 #include <bandit/bandit.h>
 #include "../src/terminal/vt100.h"
 
 using namespace bandit;
 
 using namespace rj;
+
+using namespace snowhouse;
 
 go_bandit([]() {
 

@@ -1,3 +1,5 @@
+#include <string>
+
 #include <bandit/bandit.h>
 #include <algorithm>
 #include "../src/string/util.h"
@@ -5,6 +7,8 @@
 using namespace bandit;
 
 using namespace rj;
+
+using namespace snowhouse;
 
 go_bandit([]() {
 

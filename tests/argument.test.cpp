@@ -1,3 +1,4 @@
+#include <string>
 
 #include <bandit/bandit.h>
 #include "../src/math/util.h"
@@ -6,6 +7,7 @@
 using namespace bandit;
 using namespace rj;
 using namespace std;
+using namespace snowhouse;
 
 go_bandit([]() {
 

@@ -1,8 +1,11 @@
+#include <string>
+
 #include <bandit/bandit.h>
 #include "../src/string/buffer.h"
 
 using namespace bandit;
 using namespace rj;
+using namespace snowhouse;
 
 
 class test_buffer : public buffered_reader, public buffered_writer
