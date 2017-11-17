@@ -248,11 +248,11 @@ go_bandit([]() {
             });
 
             it("is a short", []() {
-                short s = 32768;
+                short s = 3768;
 
                 variant v = s;
 
-                short test = 32768;
+                short test = 3768;
 
                 Assert::That(v, Equals(test));
             });
