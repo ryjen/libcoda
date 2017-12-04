@@ -17,3 +17,5 @@ libtool
 build
 debug
 release
+.idea
+cmake-build-debug
