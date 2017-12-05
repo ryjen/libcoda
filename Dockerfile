@@ -4,6 +4,8 @@ ARG CMAKE_DEFINES
 
 ENV POSTGRES_VERS 9.3
 
+RUN apt-get update
+
 RUN apt-get install -y \
     libcurl4-openssl-dev \
     libjson-c-dev \
