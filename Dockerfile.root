@@ -17,8 +17,8 @@ RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-6 1
 
 # dockerize for docker-compose
 # used to wait for services to be ready
-RUN wget https://github.com/jwilder/dockerize/releases/download/v0.2.0/dockerize-linux-amd64-v0.2.0.tar.gz
+RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.0/dockerize-linux-amd64-v0.6.0.tar.gz
 
-RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.2.0.tar.gz
+RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.0.tar.gz
 
 RUN gem install coveralls-lcov
