@@ -10,6 +10,8 @@ namespace rj {
     namespace log {
 
         namespace output {
+            std::ostream &stream = std::cout;
+
             std::ostream &print(std::ostream &os) { return os; }
 
             std::string timeinfo() {
