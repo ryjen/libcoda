@@ -7,7 +7,7 @@ using namespace bandit;
 
 int main(int argc, char *argv[])
 {
-    rj::log::set_min_log_level(rj::LOG_DEBUG);
+    rj::log::level::set(rj::log::level::Debug);
 
     return bandit::run(argc, argv);
 }

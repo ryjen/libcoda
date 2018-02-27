@@ -12,7 +12,10 @@ using namespace snowhouse;
 go_bandit([]() {
 
     describe("a log", []() {
-        it("can lookup a log level", []() { Assert::That(log::lookup_log_level("debug"), Equals(LOG_DEBUG)); });
+        it("can lookup a log level", []() { 
+                log::level::set("debug");
+                Assert::That(log::level::valid(log::level::Debug), IsTrue()); 
+        });
     });
 
 });

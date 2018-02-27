@@ -1,76 +1,130 @@
 #ifndef RJ_LOG_H
 #define RJ_LOG_H
 
-#include <iostream>
-#include <string>
+#include <ostream>
 
-#ifndef __attribute__
-#define __attribute__(x)
-#endif
+namespace rj {
 
-namespace rj
-{
-    typedef enum { LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_NONE } log_level;
+    namespace log {
 
-    class log
-    {
-       public:
-        static void trace(const std::string &value, std::ostream &out = std::cout);
-        static void debug(const std::string &value, std::ostream &out = std::cout);
-        static void info(const std::string &value, std::ostream &out = std::cout);
-        static void error(const std::string &value, std::ostream &out = std::cerr);
-        static void warn(const std::string &value, std::ostream &out = std::cout);
+        namespace level {
+            typedef enum {
+                /*! logging is disabled */
+                None = 0,
+                /*! only error messages will be logged */
+                Error = 1,
+                /*! warnings and errors will be logged */
+                Warn = 2,
+                /*! info, warning, and error messages will be logged */
+                Info = 3,
+                /*! debug, info, warning and error messages will be logged */
+                Debug = 4,
+                /*! trace, debug, info, warning and error messages will be logged */
+                Trace = 5
+            } Type;
 
-        static void trace(const char *const format, ...) __attribute__((format(printf, 1, 2)));
-        static void debug(const char *const format, ...) __attribute__((format(printf, 1, 2)));
-        static void info(const char *const format, ...) __attribute__((format(printf, 1, 2)));
-        static void error(const char *const format, ...) __attribute__((format(printf, 1, 2)));
-        static void warn(const char *const format, ...) __attribute__((format(printf, 1, 2)));
+            void set(const std::string &name);
 
-        static void trace(std::ostream &out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
-        static void debug(std::ostream &out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
-        static void info(std::ostream &out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
-        static void error(std::ostream &out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
-        static void warn(std::ostream &out, const char *const format, ...) __attribute__((format(printf, 1, 2)));
+            void set(Type type);
 
-        log(log_level level = LOG_TRACE, std::ostream &out = std::cout);
-        log(const rj::log &other) = delete;
-        log(rj::log &&other) = delete;
-        virtual ~log() = default;
-        rj::log &operator=(const rj::log &other) = delete;
-        rj::log &operator=(rj::log &&other) = delete;
+            bool valid(Type value);
 
-        template <typename T>
-        rj::log &append(const T &value)
-        {
-            if (level_ >= minLevel_) header() << value << std::endl;
-
-            return *this;
+            std::string format(level::Type value);
         }
 
-        rj::log &append(const char *value, ...) __attribute__((format(printf, 1, 2)));
+        namespace output {
 
-        static void set_min_log_level(log_level lev);
+            void enable_color(bool value);
 
-        static log_level lookup_log_level(const std::string &value);
+            namespace stdio {
 
-        template <typename T>
-        rj::log &operator<<(const T &val)
-        {
-            if (level_ >= minLevel_) header() << val << std::endl;
+                /**
+                 * utility method for variadic print
+                 * @param os the output stream
+                 * @return the output stream
+                 */
+                std::ostream &print(std::ostream &os);
 
-            return *this;
+                /**
+                 * variadic print
+                 * @tparam A0 the type of argument
+                 * @tparam Args the remaining arguments
+                 * @param os the output stream
+                 * @param a0 the argument
+                 * @param args the remaining arguments
+                 * @return
+                 */
+                template <class A0, class... Args>
+                std::ostream &print(std::ostream &os, const A0 &a0, const Args &... args) {
+                    // print the argument
+                    os << a0;
+                    // print the remaining arguments
+                    return print(os, args...);
+                }
+
+                /**
+                 * variadic print
+                 * @tparam Args the arguments
+                 * @param os the output stream
+                 * @param args the arguments
+                 * @return the output stream
+                 */
+                template <class... Args>
+                std::ostream &print(std::ostream &os, const Args &... args) {
+                    // pass the first argument to the printer
+                    return print(os, args...);
+                }
+            }
         }
 
-       protected:
-        std::ostream &header();
+        using namespace level;
+        using namespace output;
 
-       private:
-        static log_level minLevel_;
-        rj::log &append(const char *const format, va_list args);
-        log_level level_;
-        std::ostream &out_;
-    };
+        template <class... Args>
+        void info(const Args &... args) {
+            if (!valid(Info)) {
+                return;
+            }
+            stdio::print(format(Info), args..., "\n") << std::flush;
+        }
+
+        template <class... Args>
+        void debug(const Args &... args) {
+            if (!valid(Debug)) {
+                return;
+            }
+            stdio::print(format(Debug), args..., "\n") << std::flush;
+        }
+
+        template <class... Args>
+        void error(const Args &... args) {
+            if (!valid(Error)) {
+                return;
+            }
+            stdio::print(format(Error), args..., "\n") << std::flush;
+        }
+
+        template <class... Args>
+        void warn(const Args &... args) {
+            if (!valid(Warn)) {
+                return;
+            }
+            stdio::print(format(Warn), args..., "\n") << std::flush;
+        }
+
+        template <class... Args>
+        void trace(const Args &... args) {
+            if (!valid(Trace)) {
+                return;
+            }
+            stdio::print(format(Trace), args..., "\n") << std::flush;
+        }
+
+        template <class... Args>
+        void perror(const Args &... args) {
+            error(std::to_string(errno), ": ", strerror(errno), " - ", args...);
+        }
+    }
 }
 
 #endif

@@ -6,152 +6,77 @@
 
 using namespace std;
 
-namespace rj
-{
-    const char *logNames[] = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "NONE"};
+namespace rj {
+    namespace log {
 
-    log_level log::minLevel_ = LOG_TRACE;
+        namespace output {
+            std::ostream &print(std::ostream &os) { return os; }
 
-    log::log(log_level level, ostream &out) : level_(level), out_(out)
-    {
-    }
+            std::string timeinfo() {
+                time_t current_time = time(nullptr);
+                struct tm *timeinfo = std::localtime(&current_time);
+                char buffer[BUFSIZ + 1] = {0};
+                strftime(buffer, BUFSIZ, "%F %T", timeinfo);
+                return buffer;
+            }
 
-    ostream &log::header()
-    {
-        time_t current_time = time(NULL);
-        struct tm *timeinfo = std::localtime(&current_time);
-        char buffer[BUFSIZ + 1] = {0};
-        strftime(buffer, BUFSIZ, "%F %T", timeinfo);
-        out_ << "[" << logNames[level_] << "] " << buffer << ": ";
-        return out_;
-    }
+            bool __enable_color = false;
 
-    log &log::append(const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        append(format, args);
-        va_end(args);
-        return *this;
-    }
+            void enable_color(bool value) { __enable_color = value; }
 
-    log &log::append(const char *const format, va_list args)
-    {
-        char buf[BUFSIZ + 1] = {0};
-
-        size_t len = vsnprintf(buf, BUFSIZ, format, args);
-
-        if (level_ >= minLevel_ && len > 0) header() << buf << std::endl;
-
-        return *this;
-    }
-
-    void log::set_min_log_level(log_level lev)
-    {
-        minLevel_ = lev;
-    }
-
-    log_level log::lookup_log_level(const std::string &value)
-    {
-        for (int l = LOG_TRACE; l <= LOG_ERROR; l++) {
-            if (value == logNames[l]) return static_cast<log_level>(l);
         }
-        return minLevel_;
-    }
 
-    void log::debug(const string &value, ostream &out)
-    {
-        log(LOG_DEBUG, out).append(value);
-    }
+        namespace level {
 
-    void log::trace(const string &value, std::ostream &out)
-    {
-        log(LOG_TRACE, out).append(value);
-    }
-    void log::info(const string &value, ostream &out)
-    {
-        log(LOG_INFO, out).append(value);
-    }
-    void log::error(const string &value, ostream &out)
-    {
-        log(LOG_ERROR, out).append(value);
-    }
-    void log::warn(const string &value, ostream &out)
-    {
-        log(LOG_WARN, out).append(value);
-    }
+            const char *NAMES[] = {"UNKN",  "ERROR", "WARN", "INFO",
+                                   "DEBUG", "TRACE", nullptr
+                                  };
 
-    void log::debug(const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_DEBUG, std::cout).append(format, args);
-        va_end(args);
-    }
+            const char *COLORS[] = {"",           "\033[1;31m", "\033[1;33m", "\033[1;32m",
+                                    "\033[1;36m", "\033[1;37m", nullptr
+                                   };
 
-    void log::trace(const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_TRACE, std::cout).append(format, args);
-        va_end(args);
-    }
-    void log::info(const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_INFO, std::cout).append(format, args);
-        va_end(args);
-    }
-    void log::error(const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_ERROR, std::cerr).append(format, args);
-        va_end(args);
-    }
-    void log::warn(const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_WARN, std::cout).append(format, args);
-        va_end(args);
-    }
+            const char *CLEAR = "\033[0m";
 
-    void log::debug(std::ostream &out, const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_DEBUG, out).append(format, args);
-        va_end(args);
-    }
+            Type __current_log_level = Info;
 
-    void log::trace(std::ostream &out, const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_TRACE, out).append(format, args);
-        va_end(args);
-    }
-    void log::info(std::ostream &out, const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_INFO, out).append(format, args);
-        va_end(args);
-    }
-    void log::error(std::ostream &out, const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_ERROR, out).append(format, args);
-        va_end(args);
-    }
-    void log::warn(std::ostream &out, const char *const format, ...)
-    {
-        va_list args;
-        va_start(args, format);
-        log(LOG_WARN, out).append(format, args);
-        va_end(args);
-    }
-}
+            bool valid(Type value) { return (value <= __current_log_level); }
+
+            void set(const std::string &name) {
+                int i = 0;
+
+                if (name.empty()) {
+                    return;
+                }
+
+                for (; NAMES[i] != nullptr; i++) {
+                    if (!strcasecmp(name.c_str(), NAMES[i])) {
+                        __current_log_level = (Type)i;
+                    }
+                }
+            }
+
+            void set(Type type) {
+                __current_log_level = type;
+            }
+
+            std::string format(Type level) {
+                std::string buf("  ");
+
+                if (output::__enable_color) {
+                    buf += COLORS[level];
+                }
+
+                buf += NAMES[level];
+
+                if (output::__enable_color) {
+                    buf += CLEAR;
+                }
+
+                buf += timeinfo();
+                buf += ": ";
+                return buf;
+            }
+        } 
+    } 
+} 
