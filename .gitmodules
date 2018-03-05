@@ -1,18 +1,18 @@
 [submodule "src/net"]
 	path = src/net
-	url = http://github.com/ryjen/net
+	url = https://github.com/ryjen/net
 [submodule "src/format"]
 	path = src/format
-	url = http://github.com/ryjen/format
+	url = https://github.com/ryjen/format
 [submodule "src/dice"]
 	path = src/dice
-	url = http://github.com/ryjen/dice
+	url = https://github.com/ryjen/dice
 [submodule "src/db"]
 	path = src/db
-	url = http://github.com/ryjen/db
+	url = https://github.com/ryjen/db
 [submodule "tests/vendor/bandit"]
 	path = tests/vendor/bandit
-	url = http://github.com/joakimkarlsson/bandit.git
+	url = https://github.com/joakimkarlsson/bandit.git
 [submodule "cmake"]
 	path = cmake
-	url = http://github.com/ryjen/cmake.git
+	url = https://github.com/ryjen/cmake.git
