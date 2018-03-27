@@ -1,5 +1,5 @@
 
-add_library(rj_term vt100.cpp)
+add_library(rj_term vt100.cpp output.h cursor.h progress.h color.h color.cpp output.cpp cursor.cpp progress.cpp)
 
 install(FILES base_terminal.h vt100.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/rj/term)
 

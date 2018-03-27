@@ -46,27 +46,6 @@ namespace rj
 
         constexpr static const data_type ESCAPE = '\033';
 
-        // Attributes
-        constexpr static int RESET = 0;
-        constexpr static int BRIGHT = 1;
-        constexpr static int DIM = 2;
-        constexpr static int UNDERSCORE = 4;
-        constexpr static int BLINK = 5;
-        constexpr static int REVERSE = 7;
-        constexpr static int HIDDEN = 8;
-
-        // Foreground Colors
-        constexpr static int BLACK = 30;
-        constexpr static int RED = 31;
-        constexpr static int GREEN = 32;
-        constexpr static int YELLOW = 33;
-        constexpr static int BLUE = 34;
-        constexpr static int MAGENTA = 35;
-        constexpr static int CYAN = 36;
-        constexpr static int WHITE = 37;
-
-        // Background Colours
-        constexpr static int BACKGROUND_ADD = 10;
     }
 }
 
