@@ -1,7 +1,7 @@
 #include <string>
 
 #include <bandit/bandit.h>
-#include "../src/log/log.h"
+#include "log/log.h"
 
 using namespace bandit;
 

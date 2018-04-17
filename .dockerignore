@@ -1,0 +1,5 @@
+.prep
+cmake-build-*
+homebrew
+debug
+release

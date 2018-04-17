@@ -1,7 +1,7 @@
 #include <string>
 
 #include <bandit/bandit.h>
-#include "../src/string/buffer.h"
+#include "string/buffer.h"
 
 using namespace bandit;
 using namespace coda;

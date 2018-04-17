@@ -7,7 +7,7 @@ option(ENABLE_MEMCHECK "Enable testing for memory leaks." OFF)
 option(ENABLE_PROFILING "Enable profiling code usage." OFF)
 
 # define project name
-project (libcoda VERSION 0.5.0)
+project (coda VERSION 0.5.1)
 
 set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
 
@@ -39,10 +39,11 @@ if(ENABLE_COVERAGE)
 	setup_target_for_coverage(TARGET ${PROJECT_NAME}_coverage OUTPUT ${PROJECT_BINARY_DIR}/gen/coverage)
 endif()
 
-# add directories
-add_subdirectory(src)
-
+# add test first for environment variables in submodules
 add_subdirectory(tests)
+
+# add src directory contain submodules
+add_subdirectory(src)
 
 include(ValgrindTest)
 

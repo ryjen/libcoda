@@ -1,8 +1,8 @@
 #include <string>
 
 #include <bandit/bandit.h>
-#include "../src/math/util.h"
-#include "../src/string/argument.h"
+#include "math/util.h"
+#include "string/argument.h"
 
 using namespace bandit;
 using namespace coda;

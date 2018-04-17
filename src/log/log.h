@@ -2,6 +2,7 @@
 #define CODA_LOG_H
 
 #include <ostream>
+#include <cstring>
 
 namespace coda {
 

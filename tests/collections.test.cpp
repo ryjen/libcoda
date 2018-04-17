@@ -1,7 +1,7 @@
 #include <string>
 
 #include <bandit/bandit.h>
-#include "../src/collections/collections.h"
+#include "utility/collections.h"
 
 using namespace coda;
 

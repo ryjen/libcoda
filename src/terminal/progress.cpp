@@ -2,6 +2,7 @@
 // Created by Ryan Jennings on 2018-03-26.
 //
 
+#include <functional>
 #include "progress.h"
 #include "cursor.h"
 #include "color.h"

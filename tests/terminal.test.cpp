@@ -1,7 +1,7 @@
 #include <string>
 
 #include <bandit/bandit.h>
-#include "../src/terminal/vt100.h"
+#include "terminal/vt100.h"
 
 using namespace bandit;
 

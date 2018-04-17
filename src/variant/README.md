@@ -4,7 +4,7 @@ variant
 [![Coverage Status](https://img.shields.io/coveralls/ryjen/variant/master.svg)](https://coveralls.io/github/ryjen/variant?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
 
-A c++11 utility class for storing arbitrary variables with automatic type conversion.  Usefull for things like database or configuration values.
+A c++117 utility class for storing arbitrary variables with automatic type conversion.  Usefull for things like database or configuration values.
 
 ----
 

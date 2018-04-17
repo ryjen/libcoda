@@ -2,7 +2,7 @@ FROM ryjen/cpp-coveralls
 
 ARG CMAKE_DEFINES
 
-ENV POSTGRES_VERS 9.3
+ENV POSTGRES_VERS 9.5
 
 RUN apt-get install -y \
     libcurl4-openssl-dev \

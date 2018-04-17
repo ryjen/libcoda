@@ -13,6 +13,10 @@ if (NOT DEFINED BANDIT_DIR)
 
     set(BANDIT_DIR ${SOURCE_DIR})
     set(BANDIT_DIR ${BANDIT_DIR} PARENT_SCOPE)
+    set(BANDIT_TARGET ${PROJECT_NAME}-bandit)
+    set(BANDIT_TARGET ${BANDIT_TARGET} PARENT_SCOPE)
+
+    message(STATUS "Using ${BANDIT_DIR}")
 endif()
 
 
@@ -22,4 +26,6 @@ target_include_directories(${TEST_PROJECT_NAME} SYSTEM PUBLIC ${BANDIT_DIR} PUBL
 
 target_link_libraries (${TEST_PROJECT_NAME} ${PROJECT_NAME})
 
-
+if (DEFINED BANDIT_TARGET)
+    add_dependencies(${TEST_PROJECT_NAME} ${BANDIT_TARGET})
+endif()

@@ -19,3 +19,4 @@ debug
 release
 .idea
 cmake-build-*
+.prep

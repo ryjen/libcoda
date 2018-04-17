@@ -2,7 +2,7 @@
 
 #include <bandit/bandit.h>
 #include <algorithm>
-#include "../src/string/util.h"
+#include "string/util.h"
 
 using namespace bandit;
 
