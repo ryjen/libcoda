@@ -1,10 +1,10 @@
-#ifndef RJ_JSON_EXCEPTION_H_
-#define RJ_JSON_EXCEPTION_H_
+#ifndef CODA_JSON_EXCEPTION_H
+#define CODA_JSON_EXCEPTION_H
 
 #include <stdexcept>
 #include <string>
 
-namespace rj
+namespace coda
 {
     namespace json
     {

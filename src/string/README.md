@@ -1,4 +1,4 @@
-rj_string
+coda_string
 =========
 
 useful functions for strings

@@ -1,5 +1,5 @@
-#ifndef RJ_JSON_OBJECT_ITERATOR_H_
-#define RJ_JSON_OBJECT_ITERATOR_H_
+#ifndef CODA_JSON_OBJECT_ITERATOR_H
+#define CODA_JSON_OBJECT_ITERATOR_H
 
 #include <iterator>
 
@@ -7,7 +7,7 @@ using namespace std;
 
 struct lh_entry;
 
-namespace rj
+namespace coda
 {
     namespace json
     {

@@ -8,7 +8,7 @@ using namespace bandit;
 
 using namespace std;
 
-using namespace rj;
+using namespace coda;
 
 using namespace snowhouse;
 

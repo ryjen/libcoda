@@ -1,7 +1,7 @@
 #include "vt100.h"
 #include <iostream>
 
-namespace rj
+namespace coda
 {
     namespace terminal
     {

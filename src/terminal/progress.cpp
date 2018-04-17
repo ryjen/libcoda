@@ -6,7 +6,7 @@
 #include "cursor.h"
 #include "color.h"
 
-namespace rj
+namespace coda
 {
     namespace terminal
     {

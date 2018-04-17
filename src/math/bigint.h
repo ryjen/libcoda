@@ -1,5 +1,5 @@
-#ifndef RJ_BIG_INT_H
-#define RJ_BIG_INT_H
+#ifndef CODA_BIG_INT_H
+#define CODA_BIG_INT_H
 
 #include <algorithm>
 #include <cassert>
@@ -7,7 +7,7 @@
 #include <cstring>
 #include <ostream>
 
-namespace rj
+namespace coda
 {
     class bigint
     {

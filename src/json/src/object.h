@@ -1,5 +1,5 @@
-#ifndef RJ_JSON_OBJECT_H_
-#define RJ_JSON_OBJECT_H_
+#ifndef CODA_JSON_OBJECT_H
+#define CODA_JSON_OBJECT_H
 
 #include <complex>
 #include <functional>
@@ -8,7 +8,7 @@
 
 struct json_object;
 
-namespace rj
+namespace coda
 {
     template <class T>
     typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type almost_equal(T x, T y, int ulp)

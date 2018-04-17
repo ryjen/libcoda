@@ -12,7 +12,7 @@
 #include "exception.h"
 #include "object.h"
 
-using namespace rj;
+using namespace coda;
 
 using namespace bandit;
 
@@ -77,13 +77,13 @@ go_bandit([]() {
 
             json::object d(123.123);
 
-            Assert::That(rj::almost_equal(d.to_double(), 123.123, 1), Equals(true));
+            Assert::That(coda::almost_equal(d.to_double(), 123.123, 1), Equals(true));
 
             json::object c(d);
 
             Assert::That(c.is_double(), Equals(true));
 
-            Assert::That(rj::almost_equal(c.to_double(), d.to_double(), 1), Equals(true));
+            Assert::That(coda::almost_equal(c.to_double(), d.to_double(), 1), Equals(true));
 
         });
 

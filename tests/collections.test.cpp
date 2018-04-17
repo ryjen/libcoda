@@ -3,7 +3,7 @@
 #include <bandit/bandit.h>
 #include "../src/collections/collections.h"
 
-using namespace rj;
+using namespace coda;
 
 using namespace bandit;
 

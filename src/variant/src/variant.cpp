@@ -1,4 +1,3 @@
-#ifndef RJ_VARIANT_H_
 
 #include "variant.h"
 #include <wchar.h>
@@ -9,7 +8,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     const char *const variant::TYPE_NAMES[] = {"nulltype", "number", "unumber", "real", "binary", "string", "wstring", "char", "wchar", "bool"};
 
@@ -1297,7 +1296,7 @@ namespace rj
         return equals(other);
     }
 
-    std::string to_string(const rj::variant &value)
+    std::string to_string(const coda::variant &value)
     {
         return value.to_string();
     }
@@ -1307,4 +1306,4 @@ namespace rj
         return value.to_string();
     }
 }
-#endif
+

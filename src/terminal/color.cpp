@@ -5,7 +5,7 @@
 #include <sstream>
 #include <vector>
 
-namespace rj
+namespace coda
 {
     namespace terminal
     {

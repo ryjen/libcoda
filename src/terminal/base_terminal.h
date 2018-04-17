@@ -1,12 +1,12 @@
-#ifndef RJ_TERMINAL_BASE_TERMINAL_H_
-#define RJ_TERMINAL_BASE_TERMINAL_H_
+#ifndef CODA_TERMINAL_BASE_TERMINAL_H_
+#define CODA_TERMINAL_BASE_TERMINAL_H_
 
 #include <functional>
 #include <vector>
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     namespace terminal
     {

@@ -10,9 +10,6 @@
 [submodule "src/db"]
 	path = src/db
 	url = https://github.com/ryjen/db
-[submodule "tests/vendor/bandit"]
-	path = tests/vendor/bandit
-	url = https://github.com/joakimkarlsson/bandit.git
 [submodule "cmake"]
 	path = cmake
 	url = https://github.com/ryjen/cmake.git

@@ -1,5 +1,5 @@
-#ifndef RJ_COLLECTIONS_H
-#define RJ_COLLECTIONS_H
+#ifndef CODA_COLLECTIONS_H
+#define CODA_COLLECTIONS_H
 
 #include <algorithm>
 #include <functional>
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     template <typename K, typename V>
     string join(map<K, V> collection, bool displayValues = false, const string &divider = ",")

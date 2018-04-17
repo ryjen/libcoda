@@ -1,12 +1,12 @@
-#ifndef RJ_STRINGS_H
-#define RJ_STRINGS_H
+#ifndef CODA_STRINGS_H
+#define CODA_STRINGS_H
 
 #include <string>
 #include <vector>
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     typedef vector<uint8_t> binary;
 

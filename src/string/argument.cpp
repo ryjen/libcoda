@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     argument operator"" _arg(const char *cstr, size_t len)
     {
@@ -124,7 +124,7 @@ namespace rj
     bool argument::next_bool()
     {
         string arg = next();
-        return rj::equals(arg, "true") || rj::equals(arg, "yes") || rj::equals(arg, "1");
+        return coda::equals(arg, "true") || coda::equals(arg, "yes") || coda::equals(arg, "1");
     }
 
     argument::operator const string &()
@@ -159,12 +159,12 @@ namespace rj
 
     bool argument::equals(const string &arg, bool caseSensitive) const
     {
-        return rj::equals(str_, arg, caseSensitive);
+        return coda::equals(str_, arg, caseSensitive);
     }
 
     bool argument::prefix(const string &arg, bool caseSensitive) const
     {
-        return rj::prefix(arg, str_, caseSensitive);
+        return coda::prefix(arg, str_, caseSensitive);
     }
 
     bool argument::operator==(const std::string &arg) const

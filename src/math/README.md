@@ -1,4 +1,4 @@
-rj_3math
+coda_math
 ========
 
 useful code for working with numbers

@@ -2,14 +2,14 @@
 // Created by Ryan Jennings on 2018-03-26.
 //
 
-#ifndef LIBRJ_PROGRESS_H
-#define LIBRJ_PROGRESS_H
+#ifndef CODA_PROGRESS_H
+#define CODA_PROGRESS_H
 
 #include <cstdlib>
 #include <thread>
 #include "output.h"
 
-namespace rj
+namespace coda
 {
     namespace terminal
     {
@@ -61,4 +61,4 @@ namespace rj
         };
     }
 }
-#endif //LIBRJ_PROGRESS_H
+#endif

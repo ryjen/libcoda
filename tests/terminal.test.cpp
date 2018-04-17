@@ -5,7 +5,7 @@
 
 using namespace bandit;
 
-using namespace rj;
+using namespace coda;
 
 using namespace snowhouse;
 
@@ -13,11 +13,11 @@ go_bandit([]() {
 
     describe("a vt100 terminal", []() {
         it("can parse csi codes", []() {
-            rj::terminal::vt100 term;
+            coda::terminal::vt100 term;
 
             std::string s = "\033[1;33mHello\033[0m, \033[1;32mWorld\033[0m!";
 
-            vector<rj::terminal::data_type> bytes(s.begin(), s.end());
+            vector<coda::terminal::data_type> bytes(s.begin(), s.end());
 
             auto t = term.parse(bytes);
 

@@ -4,7 +4,7 @@
 
 #include "output.h"
 
-namespace rj
+namespace coda
 {
     namespace terminal {
 

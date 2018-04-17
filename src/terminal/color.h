@@ -2,13 +2,13 @@
 // Created by Ryan Jennings on 2018-03-26.
 //
 
-#ifndef LIBRJ_COLOR_H
-#define LIBRJ_COLOR_H
+#ifndef CODA_COLOR_H
+#define CODA_COLOR_H
 
 #include <string>
 #include <vector>
 
-namespace rj
+namespace coda
 {
     namespace terminal {
 
@@ -111,4 +111,4 @@ namespace rj
         }
     }
 }
-#endif //LIBRJ_COLOR_H
+#endif

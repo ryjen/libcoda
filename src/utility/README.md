@@ -1,4 +1,4 @@
-rj_collections
+coda_collections
 ==============
 
 useful code for working with collections of data

@@ -4,7 +4,7 @@
 #include <functional>
 #include <future>
 
-namespace rj
+namespace coda
 {
     class later
     {

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     bigint operator"" _bi(char c)
     {

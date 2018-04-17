@@ -1,9 +1,9 @@
-#ifndef RJ_ARGUMENT_H_
-#define RJ_ARGUMENT_H_
+#ifndef CODA_ARGUMENT_H_
+#define CODA_ARGUMENT_H_
 
 #include <string>
 
-namespace rj
+namespace coda
 {
     /*
      * basically a string tokenizer thats aware of quotes/parenthesis

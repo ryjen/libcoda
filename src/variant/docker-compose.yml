@@ -1,7 +1,7 @@
 version: '2'
 services:
   test:
-    image: rj_variant_test
+    image: coda_variant_test
     build:
       context: .
       args:
@@ -13,8 +13,8 @@ services:
     command: make test ARGS=-V
   coverage:
     extends: test
-    image: rj_variant_coverage
+    image: coda_variant_coverage
     build:
       args:
           CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON
-    command: make rj_variant_coverage_coveralls
+    command: make coda_variant_coverage_coveralls

@@ -1,6 +1,6 @@
 
-#ifndef RJ_VARIANT_H_
-#define RJ_VARIANT_H_
+#ifndef CODA_VARIANT_H
+#define CODA_VARIANT_H
 
 #include <cmath>
 #include <cstring>
@@ -11,7 +11,7 @@
 #include <string>
 #include "binary.h"
 
-namespace rj
+namespace coda
 {
     /*!
      * an exception thrown when the variant class cannot convert a value
@@ -125,7 +125,7 @@ namespace rj
             long double real_;
             std::string str_;
             std::wstring wstr_;
-            rj::binary ptr_;
+            coda::binary ptr_;
             std::shared_ptr<complex> compl_;
         };
 

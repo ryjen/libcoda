@@ -1,11 +1,11 @@
-#ifndef RJ_BINARY_H_
-#define RJ_BINARY_H_
+#ifndef CODA_BINARY_H
+#define CODA_BINARY_H
 
 #include <stdlib.h>
 #include <cstring>
 #include <ostream>
 
-namespace rj
+namespace coda
 {
     /*!
      * Represents a chunk of binary data.
@@ -99,15 +99,15 @@ namespace rj
     std::ostream &operator<<(std::ostream &out, const binary &value);
 
     /* equality operators */
-    bool operator==(const void *ptr, const rj::binary &other);
-    bool operator==(const std::nullptr_t &null, const rj::binary &other);
+    bool operator==(const void *ptr, const coda::binary &other);
+    bool operator==(const std::nullptr_t &null, const coda::binary &other);
 
     /*!
      * gets a string representation of a binary object
      * @param  p the binary object
      * @return   the hex string of the pointer
      */
-    std::string to_string(const rj::binary &p);
+    std::string to_string(const coda::binary &p);
 }
 
 #endif

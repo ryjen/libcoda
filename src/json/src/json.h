@@ -1,5 +1,5 @@
-#ifndef RJ_JSON_H
-#define RJ_JSON_H
+#ifndef CODA_JSON_H
+#define CODA_JSON_H
 
 #include "array.h"
 #include "object.h"

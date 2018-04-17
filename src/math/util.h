@@ -1,11 +1,11 @@
-#ifndef RJ_MATH_UTIL_H_
-#define RJ_MATH_UTIL_H_
+#ifndef CODA_MATH_UTIL_H_
+#define CODA_MATH_UTIL_H_
 
 #include <cmath>
 #include <limits>
 #include <type_traits>
 
-namespace rj
+namespace coda
 {
     template <class T>
     typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type almost_equal(T x, T y, int ulp)

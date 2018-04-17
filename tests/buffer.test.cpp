@@ -4,7 +4,7 @@
 #include "../src/string/buffer.h"
 
 using namespace bandit;
-using namespace rj;
+using namespace coda;
 using namespace snowhouse;
 
 

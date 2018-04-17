@@ -1,8 +1,11 @@
+set(MATH_LIBRARY coda_math)
 
-add_library(rj_math bigint.cpp)
+add_library(${MATH_LIBRARY} bigint.cpp util.h)
 
-install(FILES bigint.h util.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/rj/math)
+string(REPLACE "_" "/" INSTALL_DIRECTORY ${MATH_LIBRARY})
 
-install(TARGETS rj_math LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+install(FILES bigint.h util.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${INSTALL_DIRECTORY})
 
-create_package(TARGET rj_math VERSION 0.1.0 DESCRIPTION "Math utils")
+install(TARGETS ${MATH_LIBRARY} LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+
+create_package(TARGET ${MATH_LIBRARY} VERSION 0.1.0 DESCRIPTION "Math utils")

@@ -5,7 +5,7 @@
 #include "array.h"
 #include "object.h"
 
-using namespace rj;
+using namespace coda;
 using namespace bandit;
 using namespace snowhouse;
 
@@ -95,7 +95,7 @@ go_bandit([]() {
 
 
             it("can be copied", [&value]() {
-                rj::json::array::iterator k = value.begin();
+                coda::json::array::iterator k = value.begin();
                 auto i = ++value.begin();
 
                 auto j(i);

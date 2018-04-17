@@ -2,12 +2,12 @@
 // Created by Ryan Jennings on 2018-03-26.
 //
 
-#ifndef LIBRJ_CURSOR_H
-#define LIBRJ_CURSOR_H
+#ifndef CODA_CURSOR_H
+#define CODA_CURSOR_H
 
 #include <mutex>
 
-namespace rj
+namespace coda
 {
     namespace terminal
     {
@@ -94,4 +94,4 @@ namespace rj
 
     }
 }
-#endif //LIBRJ_CURSOR_H
+#endif

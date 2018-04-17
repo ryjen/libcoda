@@ -7,7 +7,7 @@ option(ENABLE_MEMCHECK "Enable testing for memory leaks." OFF)
 option(ENABLE_PROFILING "Enable profiling code usage." OFF)
 
 # define project name
-project (librj VERSION 0.5.0)
+project (libcoda VERSION 0.5.0)
 
 set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
 
@@ -19,7 +19,7 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # create the package config install
 include(CreatePackage)
-create_package(DESCRIPTION "A c++14 toolkit")
+create_package(DESCRIPTION "A c++17 toolkit")
 
 if (PROJECT_VERSION)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLIBRARY_VERSION=\\\"${PROJECT_VERSION}\\\"")
@@ -47,5 +47,3 @@ add_subdirectory(tests)
 include(ValgrindTest)
 
 add_valgrind_profile_test(MEMCHECK ${ENABLE_MEMCHECK} PROFILING ${ENABLE_PROFILING} TARGET ${TEST_PROJECT_NAME})
-
-

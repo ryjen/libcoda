@@ -1,7 +1,7 @@
 version: '2'
 services:
   test:
-    image: librj_test
+    image: libcoda_test
     build:
       context: .
       args:
@@ -16,7 +16,7 @@ services:
       - mysql
       - postgres
   coverage:
-    image: librj_coverage
+    image: libcoda_coverage
     environment:
       MYSQL_URI: mysql://mysql:3306/test
       POSTGRES_URI: postgres://test:test@postgres:5432/test
@@ -25,7 +25,7 @@ services:
       context: .
       args:
           CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON -DCMAKE_CXX_COMPILER=g++
-    command: dockerize -wait tcp://mysql:3306 -wait tcp://postgres:5432 -timeout 30s make librj_coverage_coveralls
+    command: dockerize -wait tcp://mysql:3306 -wait tcp://postgres:5432 -timeout 30s make libcoda_coverage_coveralls
     depends_on:
       - mysql
       - postgres

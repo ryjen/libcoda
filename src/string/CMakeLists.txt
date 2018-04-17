@@ -1,17 +1,23 @@
 find_package(PkgConfig)
 
+set(STRING_LIBRARY coda_string)
+
 pkg_search_module(UUID uuid)
 
 if (UUID_FOUND)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DUUID_FOUND")
 endif()
 
-add_library(rj_string argument.cpp buffer.cpp util.cpp)
+set(${STRING_LIBRARY}_HEADERS argument.h buffer.h util.h )
 
-target_link_libraries(rj_string ${UUID_LIBRARIES})
+add_library(${STRING_LIBRARY} ${${STRING_LIBRARY}_HEADERS} argument.cpp buffer.cpp util.cpp)
 
-install(FILES argument.h buffer.h util.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/rj/string)
+target_link_libraries(${STRING_LIBRARY} ${UUID_LIBRARIES})
 
-install(TARGETS rj_string LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+string(REPLACE "_" "/" INSTALL_DIRECTORY ${STRING_LIBRARY})
 
-create_package(TARGET rj_string VERSION 0.1.0 DESCRIPTION "A string library")
+install(FILES ${${STRING_LIBRARY}_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${INSTALL_DIRECTORY})
+
+install(TARGETS ${STRING_LIBRARY} LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+
+create_package(TARGET ${STRING_LIBRARY} VERSION 0.1.0 DESCRIPTION "A string library")

@@ -5,7 +5,7 @@
 #include "../src/string/argument.h"
 
 using namespace bandit;
-using namespace rj;
+using namespace coda;
 using namespace std;
 using namespace snowhouse;
 

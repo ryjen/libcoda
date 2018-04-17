@@ -1,4 +1,4 @@
-rj_log
+coda_log
 ======
 
 useful code for logging

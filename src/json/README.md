@@ -1,5 +1,5 @@
 
-rj_json
+coda_json
 =======
 [![Build Status](http://img.shields.io/travis/ryjen/json.svg)](https://travis-ci.org/ryjen/json)
 [![Coverage Status](https://coveralls.io/repos/ryjen/json/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/json?branch=master)
@@ -36,13 +36,13 @@ Examples
 ```c++
 ifstream file("object.test.json");
 
-rj::json::object obj(file);
+coda::json::object obj(file);
 
 obj.get_int("var1"); // get an integer for a key
 
 obj.set_string("var2", "testing"); // set a key/value pair
 
-for(auto &entry: obj) // entry will be of type std::pair<string, rj::json::object>
+for(auto &entry: obj) // entry will be of type std::pair<string, coda::json::object>
 {
 	cout << "Key: " << entry.first << " Value: " << entry.second.to_string() << endl;
 }
@@ -55,7 +55,7 @@ obj.get("var1").to_int() == 1234; // true
 *Arrays*
 
 ```c++
-rj::json::array value;
+coda::json::array value;
 
 value.add_double(123.321);
 
@@ -69,7 +69,7 @@ value[0].to_double() == 123.321; // true
 
 value[1].to_bool() == true; // true
 
-for(auto &entry: value) // entry will be of type rj::json::object
+for(auto &entry: value) // entry will be of type coda::json::object
 {
 	cout << entry.to_string() << endl;
 }

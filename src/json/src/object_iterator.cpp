@@ -6,7 +6,7 @@
 #include <linkhash.h>
 #include "object.h"
 
-namespace rj
+namespace coda
 {
     namespace json
     {

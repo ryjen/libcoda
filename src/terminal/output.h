@@ -2,13 +2,13 @@
 // Created by Ryan Jennings on 2018-03-26.
 //
 
-#ifndef LIBRJ_OUTPUT_H
-#define LIBRJ_OUTPUT_H
+#ifndef CODA_OUTPUT_H
+#define CODA_OUTPUT_H
 
 #include <mutex>
 #include <iostream>
 
-namespace rj
+namespace coda
 {
     namespace terminal
     {
@@ -80,4 +80,4 @@ namespace rj
 
     }
 }
-#endif //LIBRJ_OUTPUT_H
+#endif

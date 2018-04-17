@@ -11,7 +11,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     namespace json
     {
@@ -151,14 +151,14 @@ namespace rj
         int32_t array::get_int(size_t idx) const
         {
             if (idx >= size()) {
-                throw std::out_of_range("bad index for rj::json::array::get_int");
+                throw std::out_of_range("bad index for coda::json::array::get_int");
             }
             return json_object_get_int(json_object_array_get_idx(value_, idx));
         }
         int64_t array::get_int64(size_t idx) const
         {
             if (idx >= size()) {
-                throw std::out_of_range("bad index for rj::json::array::get_int64");
+                throw std::out_of_range("bad index for coda::json::array::get_int64");
             }
 #ifdef JSON_C_EXTENDED
             return json_object_get_int64(json_object_array_get_idx(value_, idx));
@@ -171,7 +171,7 @@ namespace rj
             const char *temp = NULL;
 
             if (idx >= size()) {
-                throw std::out_of_range("bad index for rj::json::array::get_string");
+                throw std::out_of_range("bad index for coda::json::array::get_string");
             }
             temp = json_object_get_string(json_object_array_get_idx(value_, idx));
 
@@ -185,7 +185,7 @@ namespace rj
         bool array::get_bool(size_t idx) const
         {
             if (idx >= size()) {
-                throw std::out_of_range("bad index for rj::json::array::get_bool");
+                throw std::out_of_range("bad index for coda::json::array::get_bool");
             }
 
             return json_object_get_boolean(json_object_array_get_idx(value_, idx));
@@ -193,7 +193,7 @@ namespace rj
         double array::get_double(size_t idx) const
         {
             if (idx >= size()) {
-                throw std::out_of_range("bad index for rj::json::array::get_double");
+                throw std::out_of_range("bad index for coda::json::array::get_double");
             }
             return json_object_get_double(json_object_array_get_idx(value_, idx));
         }
@@ -203,7 +203,7 @@ namespace rj
             json_object *obj = NULL;
 
             if (idx >= size()) {
-                throw std::out_of_range("bad index for rj::json::array::get_array");
+                throw std::out_of_range("bad index for coda::json::array::get_array");
             }
             obj = json_object_array_get_idx(value_, idx);
 
@@ -225,7 +225,7 @@ namespace rj
         object array::get(size_t idx) const
         {
             if (idx >= size()) {
-                throw std::out_of_range("bad index for rj::json::array");
+                throw std::out_of_range("bad index for coda::json::array");
             }
             return json_object_array_get_idx(value_, idx);
         }

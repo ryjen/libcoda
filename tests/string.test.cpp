@@ -6,7 +6,7 @@
 
 using namespace bandit;
 
-using namespace rj;
+using namespace coda;
 
 using namespace snowhouse;
 
@@ -81,17 +81,17 @@ go_bandit([]() {
         });
 
         it("can join", []() {
-            string test = rj::join("abc", 3, ",");
+            string test = coda::join("abc", 3, ",");
 
             Assert::That(test, Equals("abc,abc,abc"));
 
-            test = rj::join('Z', 3, "-");
+            test = coda::join('Z', 3, "-");
 
             Assert::That(test, Equals("Z-Z-Z"));
         });
 
         it("can split", []() {
-            auto parts = rj::split("abc,123,xyz", ",", true);
+            auto parts = coda::split("abc,123,xyz", ",", true);
 
             Assert::That(parts.size(), Equals(3));
 
@@ -99,7 +99,7 @@ go_bandit([]() {
             Assert::That(parts[1], Equals("123"));
             Assert::That(parts[2], Equals("xyz"));
 
-            parts = rj::split("abc//123//xyz", "/", true);
+            parts = coda::split("abc//123//xyz", "/", true);
 
             Assert::That(parts.size(), Equals(5));
 
@@ -109,7 +109,7 @@ go_bandit([]() {
             Assert::That(parts[3], Equals(""));
             Assert::That(parts[4], Equals("xyz"));
 
-            parts = rj::split("abc,123,xyz", "", true);
+            parts = coda::split("abc,123,xyz", "", true);
 
             Assert::That(parts.size(), Equals(1));
 
@@ -119,29 +119,29 @@ go_bandit([]() {
         it("can test for a prefix", []() {
             std::string test = "abc123";
 
-            Assert::That(rj::prefix("abc", test), Equals(true));
+            Assert::That(coda::prefix("abc", test), Equals(true));
 
-            Assert::That(rj::prefix("123", test), Equals(false));
+            Assert::That(coda::prefix("123", test), Equals(false));
 
-            Assert::That(rj::prefix("", test), Equals(false));
+            Assert::That(coda::prefix("", test), Equals(false));
         });
 
         it("can test for a suffix", []() {
             std::string test = "abc123";
 
-            Assert::That(rj::suffix("abc", test), Equals(false));
-            Assert::That(rj::suffix("123", test), Equals(true));
-            Assert::That(rj::suffix("", test), Equals(false));
+            Assert::That(coda::suffix("abc", test), Equals(false));
+            Assert::That(coda::suffix("123", test), Equals(true));
+            Assert::That(coda::suffix("", test), Equals(false));
         });
 
         it("can test for string contents", []() {
             std::string test = "abc123";
 
-            Assert::That(rj::contains("bc12", test), Equals(true));
+            Assert::That(coda::contains("bc12", test), Equals(true));
 
-            Assert::That(rj::contains("asd", test), Equals(false));
+            Assert::That(coda::contains("asd", test), Equals(false));
 
-            Assert::That(rj::contains("", test), Equals(false));
+            Assert::That(coda::contains("", test), Equals(false));
         });
     });
 

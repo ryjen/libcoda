@@ -4,7 +4,7 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace rj
+namespace coda
 {
     binary::binary() : val_(nullptr), sz_(0), alloc_(nullptr), copy_(nullptr), free_(nullptr), cmp_(nullptr)
     {
@@ -133,17 +133,17 @@ namespace rj
         return out;
     }
 
-    bool operator==(const void *ptr, const rj::binary &p)
+    bool operator==(const void *ptr, const coda::binary &p)
     {
         return p == ptr;
     }
 
-    bool operator==(const std::nullptr_t &null, const rj::binary &bin)
+    bool operator==(const std::nullptr_t &null, const coda::binary &bin)
     {
         return bin == null;
     }
 
-    std::string to_string(const rj::binary &p)
+    std::string to_string(const coda::binary &p)
     {
         return p.to_string();
     }

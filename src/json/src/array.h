@@ -1,12 +1,12 @@
-#ifndef RJ_JSON_ARRAY_H_
-#define RJ_JSON_ARRAY_H_
+#ifndef CODA_JSON_ARRAY_H
+#define CODA_JSON_ARRAY_H
 
 #include <string>
 #include "array_iterator.h"
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     namespace json
     {

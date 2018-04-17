@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.1)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 # add options for testing
 option(ENABLE_COVERAGE "Enable code coverage testing." OFF)
@@ -7,7 +7,7 @@ option(ENABLE_MEMCHECK "Enable testing for memory leaks." OFF)
 option(ENABLE_PROFILING "Enable profiling code usage." OFF)
 
 # define project name
-project (rj_variant VERSION 0.2.0)
+project (coda_variant VERSION 0.2.0)
 
 set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
 

@@ -6,7 +6,7 @@
 #include "array_iterator.h"
 #include "object.h"
 
-namespace rj
+namespace coda
 {
     namespace json
     {

@@ -1,11 +1,11 @@
-#ifndef RJ_STRING_BUFFERED_IO_H_
-#define RJ_STRING_BUFFERED_IO_H_
+#ifndef CODA_STRING_BUFFERED_IO_H_
+#define CODA_STRING_BUFFERED_IO_H_
 
 #include <sstream>
 #include <string>
 #include <vector>
 
-namespace rj
+namespace coda
 {
     typedef std::vector<unsigned char> buffered_data;
 

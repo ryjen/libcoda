@@ -1,9 +1,9 @@
-#ifndef RJ_LOG_H
-#define RJ_LOG_H
+#ifndef CODA_LOG_H
+#define CODA_LOG_H
 
 #include <ostream>
 
-namespace rj {
+namespace coda {
 
     namespace log {
 

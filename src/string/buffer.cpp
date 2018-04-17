@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     buffer::buffer()
     {

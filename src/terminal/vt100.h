@@ -1,5 +1,5 @@
-#ifndef RJ_TERMINAL_VT100_H_
-#define RJ_TERMINAL_VT100_H_
+#ifndef CODA_TERMINAL_VT100_H_
+#define CODA_TERMINAL_VT100_H_
 
 #include <map>
 #include <memory>
@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     namespace terminal
     {

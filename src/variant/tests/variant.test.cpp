@@ -8,7 +8,7 @@ using namespace bandit;
 
 using namespace std;
 
-using namespace rj;
+using namespace coda;
 using namespace snowhouse;
 
 class complex_val : public variant::complex
@@ -756,7 +756,7 @@ go_bandit([]() {
         describe("equality", []() {
             variant v, other;
 
-            it("has equality with bool", [&v, &other]() {
+            it("has equality with bool", [&v]() {
                 v = "true";
 
                 Assert::That(v == true, IsTrue());
@@ -771,7 +771,7 @@ go_bandit([]() {
                 Assert::That(v != true, IsTrue());
             });
 
-            it("has equality with float", [&v, &other]() {
+            it("has equality with float", [&v]() {
                 v = 123.1234f;
 
                 Assert::That(v == 123.1234f, IsTrue());
@@ -785,7 +785,7 @@ go_bandit([]() {
                 Assert::That(v.equals(123.1234f), IsTrue());
             });
 
-            it("has equality with double", [&v, &other]() {
+            it("has equality with double", [&v]() {
                 v = 321.321;
 
                 Assert::That(v == 321.321, IsTrue());
@@ -799,7 +799,7 @@ go_bandit([]() {
                 Assert::That(v.equals(321.321), IsTrue());
             });
 
-            it("has equality with long double", [&v, &other]() {
+            it("has equality with long double", [&v]() {
                 long double ld = 234.432L;
 
                 v = ld;
@@ -820,7 +820,7 @@ go_bandit([]() {
 
             });
 
-            it("has equality with wstring", [&v, &other]() {
+            it("has equality with wstring", [&v]() {
                 v = wstring(L"Hello, world");
 
                 Assert::That(v == wstring(L"Hello, world"), IsTrue());
@@ -832,7 +832,7 @@ go_bandit([]() {
                 Assert::That(v.equals(wstring(L"Hello, world")), IsTrue());
             });
 
-            it("has equality with numerical types", [&v, &other]() {
+            it("has equality with numerical types", [&v]() {
                 v = 1234321;
 
                 Assert::That(v == 1234321ULL, IsTrue());
