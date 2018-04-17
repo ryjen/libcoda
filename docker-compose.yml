@@ -25,7 +25,7 @@ services:
       context: .
       args:
           CMAKE_DEFINES: -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON -DCMAKE_CXX_COMPILER=g++
-    command: dockerize -wait tcp://mysql:3306 -wait tcp://postgres:5432 -timeout 30s make libcoda_coverage_coveralls
+    command: dockerize -wait tcp://mysql:3306 -wait tcp://postgres:5432 -timeout 30s make coda_coverage_coveralls
     depends_on:
       - mysql
       - postgres
