@@ -5,16 +5,14 @@ ARG CMAKE_DEFINES
 ENV POSTGRES_VERS 9.5
 
 RUN apt-get install -y \
-    libcurl4-openssl-dev \
     libjson-c-dev \
     libmysqlclient-dev \
     libpq-dev \
     libsqlite3-dev \
     uuid-dev \
-    liburiparser-dev \
     postgresql-server-dev-all \
-    libssl-dev libcurl4-openssl-dev \
-    libboost-dev
+    libboost-dev \
+    libssl-dev libcurl4-openssl-dev liburiparser-dev
 
 COPY . /usr/src
 
