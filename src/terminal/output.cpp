@@ -12,7 +12,7 @@ namespace coda
         namespace output
         {
             // utility for variadic print
-            std::ostream &print(std::ostream &os)
+            std::ostream &print(std::ostream &os) noexcept
             {
                 return os;
             }

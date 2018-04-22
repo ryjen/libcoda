@@ -12,7 +12,7 @@ namespace coda {
         namespace output {
             std::ostream &stream = std::cout;
 
-            std::ostream &print(std::ostream &os) { return os; }
+            std::ostream &print(std::ostream &os) noexcept { return os; }
 
             std::string timeinfo() {
                 time_t current_time = time(nullptr);
@@ -24,7 +24,7 @@ namespace coda {
 
             bool __enable_color = false;
 
-            void enable_color(bool value) { __enable_color = value; }
+            void enable_color(bool value) noexcept { __enable_color = value; }
 
         }
 
@@ -42,7 +42,7 @@ namespace coda {
 
             Type __current_log_level = Info;
 
-            bool valid(Type value) { return (value <= __current_log_level); }
+            bool valid(Type value) noexcept { return (value <= __current_log_level); }
 
             void set(const std::string &name) {
                 int i = 0;
@@ -58,7 +58,7 @@ namespace coda {
                 }
             }
 
-            void set(Type type) {
+            void set(Type type) noexcept {
                 __current_log_level = type;
             }
 

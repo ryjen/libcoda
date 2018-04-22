@@ -156,7 +156,7 @@ namespace coda
         return tmp.flip();
     }
 
-    bigint &bigint::flip()
+    bigint &bigint::flip() noexcept
     {
         flipped = !flipped;
         return *this;
@@ -369,7 +369,7 @@ namespace coda
         return;
     }
 
-    bigint &bigint::init()
+    bigint &bigint::init() noexcept
     {
         flipped = false;
         array = NULL;

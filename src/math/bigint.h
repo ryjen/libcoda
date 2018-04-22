@@ -37,7 +37,7 @@ namespace coda
 
         bigint(bigint &&x);
 
-        virtual ~bigint();
+        ~bigint();
 
         std::string to_string() const;
 
@@ -53,7 +53,7 @@ namespace coda
 
         bigint operator~() const;
 
-        bigint &flip();
+        bigint &flip() noexcept;
 
         bool operator!=(const bigint &x) const;
 
@@ -80,7 +80,7 @@ namespace coda
         void reserve(uint32_t n);
 
        private:  // private member functions
-        bigint &init();
+        bigint &init() noexcept;
 
         bigint &trim();
 

@@ -26,7 +26,7 @@ go_bandit([]() {
         });
 
         it("can test for emails", []() {
-            Assert::That(is_valid_email("info@ryan-jennings.net"), Equals(true));
+            Assert::That(is_valid_email("info@coda.life"), Equals(true));
             Assert::That(is_valid_email("ryan.jennings@email.net"), Equals(true));
             Assert::That(is_valid_email("ryan@blah"), Equals(false));
             Assert::That(is_valid_email("@blah.com"), Equals(false));

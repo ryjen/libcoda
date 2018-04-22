@@ -27,7 +27,7 @@ namespace coda
             return buf;
         }
 
-        const map<size_t, shared_ptr<csi_code>> vt100::codes() const
+        const map<size_t, shared_ptr<csi_code>> vt100::codes() const noexcept
         {
             return codes_;
         }
@@ -83,11 +83,11 @@ namespace coda
             return nullptr;
         }
 
-        csi_code::csi_code() : prefix_(0), command_(0)
+        csi_code::csi_code() noexcept : prefix_(0), command_(0)
         {
         }
 
-        csi_code::~csi_code()
+        csi_code::~csi_code() noexcept
         {
         }
 
@@ -96,12 +96,12 @@ namespace coda
             values_.push_back(value);
         }
 
-        void csi_code::set_prefix(char prefix)
+        void csi_code::set_prefix(char prefix) noexcept
         {
             prefix_ = prefix;
         }
 
-        void csi_code::set_command(char command)
+        void csi_code::set_command(char command) noexcept
         {
             command_ = command;
         }

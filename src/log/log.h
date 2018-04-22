@@ -26,16 +26,16 @@ namespace coda {
 
             void set(const std::string &name);
 
-            void set(Type type);
+            void set(Type type) noexcept;
 
-            bool valid(Type value);
+            bool valid(Type value) noexcept;
 
             std::string format(level::Type value);
         }
 
         namespace output {
 
-            void enable_color(bool value);
+            void enable_color(bool value) noexcept;
 
             extern std::ostream &stream;
 
@@ -44,7 +44,7 @@ namespace coda {
              * @param os the output stream
              * @return the output stream
              */
-            std::ostream &print(std::ostream &os);
+            std::ostream &print(std::ostream &os) noexcept;
 
             /**
              * variadic print

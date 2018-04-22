@@ -24,7 +24,7 @@ namespace coda
              * @param os the output stream
              * @return the output stream
              */
-            std::ostream &print(std::ostream &os);
+            std::ostream &print(std::ostream &os) noexcept;
 
             /**
              * variadic print

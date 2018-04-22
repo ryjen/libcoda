@@ -10,27 +10,27 @@ namespace coda
         return argument(string(cstr, len));
     }
 
-    argument::argument()
+    argument::argument() noexcept
     {
     }
 
-    argument::argument(const string &str) : str_(str)
+    argument::argument(const string &str) noexcept : str_(str)
     {
     }
 
-    argument::~argument()
+    argument::~argument() noexcept
     {
     }
 
-    argument::argument(const argument &other) : str_(other.str_)
+    argument::argument(const argument &other) noexcept : str_(other.str_)
     {
     }
 
-    argument::argument(argument &&other) : str_(std::move(other.str_))
+    argument::argument(argument &&other) noexcept : str_(std::move(other.str_))
     {
     }
 
-    argument &argument::operator=(const argument &other)
+    argument &argument::operator=(const argument &other) noexcept
     {
         if (this != &other) {
             str_ = other.str_;
@@ -38,7 +38,7 @@ namespace coda
         return *this;
     }
 
-    argument &argument::operator=(argument &&other)
+    argument &argument::operator=(argument &&other) noexcept
     {
         if (this != &other) {
             str_ = std::move(other.str_);
@@ -127,22 +127,22 @@ namespace coda
         return coda::equals(arg, "true") || coda::equals(arg, "yes") || coda::equals(arg, "1");
     }
 
-    argument::operator const string &()
+    argument::operator const string &() noexcept
     {
         return str_;
     }
 
-    bool argument::empty() const
+    bool argument::empty() const noexcept
     {
         return str_.length() == 0;
     }
 
-    size_t argument::length() const
+    size_t argument::length() const noexcept
     {
         return str_.length();
     }
 
-    string argument::to_string() const
+    string argument::to_string() const noexcept
     {
         return str_;
     }
@@ -152,7 +152,7 @@ namespace coda
         return str_[index];
     }
 
-    bool argument::operator!() const
+    bool argument::operator!() const noexcept
     {
         return empty();
     }
@@ -167,11 +167,11 @@ namespace coda
         return coda::prefix(arg, str_, caseSensitive);
     }
 
-    bool argument::operator==(const std::string &arg) const
+    bool argument::operator==(const std::string &arg) const noexcept
     {
         return str_ == arg;
     }
-    bool argument::operator!=(const std::string &arg) const
+    bool argument::operator!=(const std::string &arg) const noexcept
     {
         return str_ != arg;
     }
@@ -183,19 +183,19 @@ namespace coda
     {
         return str_ != arg;
     }
-    bool argument::operator==(const argument &arg) const
+    bool argument::operator==(const argument &arg) const noexcept
     {
         return str_ == arg.str_;
     }
-    bool argument::operator!=(const argument &arg) const
+    bool argument::operator!=(const argument &arg) const noexcept
     {
         return str_ != arg.str_;
     }
-    bool operator==(const std::string &a1, const argument &a2)
+    bool operator==(const std::string &a1, const argument &a2) noexcept
     {
         return a1 == a2.to_string();
     }
-    bool operator!=(const std::string &a1, const argument &a2)
+    bool operator!=(const std::string &a1, const argument &a2) noexcept
     {
         return a1 != a2.to_string();
     }

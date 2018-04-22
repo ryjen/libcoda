@@ -16,16 +16,16 @@ namespace coda
         class csi_code
         {
            public:
-            csi_code();
+            csi_code() noexcept;
             csi_code(const csi_code &other) = default;
             csi_code(csi_code &&other) = default;
-            virtual ~csi_code();
+            ~csi_code() noexcept;
             csi_code &operator=(const csi_code &other) = default;
             csi_code &operator=(csi_code &&other) = default;
             string to_string() const;
             void add_value(int value);
-            void set_prefix(char prefix);
-            void set_command(char command);
+            void set_prefix(char prefix) noexcept;
+            void set_command(char command) noexcept;
 
            private:
             vector<int> values_;
@@ -37,7 +37,7 @@ namespace coda
         {
            public:
             data_buffer parse(const data_buffer &input);
-            const map<size_t, shared_ptr<csi_code>> codes() const;
+            const map<size_t, shared_ptr<csi_code>> codes() const noexcept;
 
            private:
             shared_ptr<csi_code> parse_csi_code(data_buffer &output, data_buffer::const_iterator &start, data_buffer::const_iterator end) const;
