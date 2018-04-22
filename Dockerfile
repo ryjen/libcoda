@@ -2,7 +2,7 @@ FROM ryjen/cpp-coveralls
 
 ARG CMAKE_DEFINES
 
-ENV POSTGRES_VERS 9.5
+ENV POSTGRES_VERS 9.6
 
 RUN apt-get install -y \
     libjson-c-dev \
