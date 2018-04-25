@@ -4,6 +4,8 @@ ARG CMAKE_DEFINES
 
 ENV POSTGRES_VERS 9.6
 
+RUN apt-get update
+
 RUN apt-get install -y \
     libjson-c-dev \
     libmysqlclient-dev \
