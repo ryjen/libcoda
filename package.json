@@ -13,6 +13,9 @@
     {
       "name": "uriparser",
       "version": "0.8.4",
+      "apt": {
+        "name": "liburiparser-dev"
+      },
       "git": {
         "location": "git://git.code.sf.net/p/uriparser/git#uriparser-0.8.4"
       },

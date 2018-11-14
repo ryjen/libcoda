@@ -1,30 +1,25 @@
-FROM ubuntu:artful
+FROM alpine:edge
 
-RUN apt-get update
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apk update
 
-RUN apt-get update
-RUN apt-get -y install make libc-dev gcc g++ clang gdb valgrind wget lcov ruby git pkg-config doxygen cmake
+RUN apk add --no-cache make gcc g++ clang gdb valgrind wget ruby git pkgconfig doxygen cmake openssl bash perl
 
-#RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 1
-
-#RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 1
-
-#RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-7 1
-
-#ENV CMAKE_VERSION "3.11.0"
-
-#RUN wget https://cmake.org/files/v3.11/cmake-${CMAKE_VERSION}-Linux-x86_64.sh
-
-#RUN chmod u+x cmake-${CMAKE_VERSION}-Linux-x86_64.sh
-
-#RUN ./cmake-${CMAKE_VERSION}-Linux-x86_64.sh --skip-license --prefix=/usr
+RUN gem install --no-ri --no-rdoc coveralls-lcov
 
 ENV DOCKERIZE_VERSION "v0.6.1"
 
 RUN wget https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz
 
-RUN tar -C /usr/local/bin -xzvf dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz
+RUN tar -C /usr/local/bin -xzf dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz
 
-RUN gem install coveralls-lcov
+ENV LCOV_VERSION "1.13"
+
+RUN wget http://downloads.sourceforge.net/ltp/lcov-${LCOV_VERSION}.tar.gz
+
+RUN tar -xzf lcov-${LCOV_VERSION}.tar.gz
+
+WORKDIR lcov-${LCOV_VERSION}
+
+RUN make install
+
+

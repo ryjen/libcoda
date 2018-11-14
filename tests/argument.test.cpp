@@ -95,7 +95,7 @@ go_bandit([]() {
 
             double value = arg.next_real();
 
-            Assert::That(almost_equal(value, 1.1234, 1), Equals(true));
+            Assert::That(almost_equal(value, 1.1234), Equals(true));
         });
 
         it("can find a boolean", []() {

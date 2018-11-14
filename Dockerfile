@@ -2,19 +2,18 @@ FROM ryjen/cpp-coveralls
 
 ARG CMAKE_DEFINES
 
-ENV POSTGRES_VERS 9.6
+RUN apk update
 
-RUN apt-get update
-
-RUN apt-get install -y \
-    libjson-c-dev \
-    libmysqlclient-dev \
-    libpq-dev \
-    libsqlite3-dev \
-    uuid-dev \
-    postgresql-server-dev-all \
-    libboost-dev \
-    libssl-dev libcurl4-openssl-dev liburiparser-dev
+RUN apk add \
+    json-c0.12-dev \
+    mariadb-connector-c-dev \
+    mariadb-client \
+    libpq \
+    sqlite-dev \
+    libuuid \
+    postgresql-dev \
+    curl-dev \
+    uriparser-dev
 
 COPY . /usr/src
 
@@ -22,7 +21,7 @@ RUN mkdir -p /usr/src/build
 
 WORKDIR /usr/src/build
 
-RUN cmake ${CMAKE_DEFINES} -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql/${POSTGRES_VERS}/server ..
+RUN cmake ${CMAKE_DEFINES} -DPostgreSQL_TYPE_INCLUDE_DIR="$(pg_config --includedir-server)" ..
 
 RUN make
 

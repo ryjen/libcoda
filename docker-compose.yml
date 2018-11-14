@@ -30,13 +30,13 @@ services:
       - mysql
       - postgres
   mysql:
-    image: mysql:5.7
+    image: wangxian/alpine-mysql
     hostname: mysql
     environment:
       MYSQL_DATABASE: test
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
   postgres:
-    image: postgres
+    image: postgres:alpine
     hostname: postgres
     environment:
       POSTGRES_DB: test
