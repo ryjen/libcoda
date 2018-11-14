@@ -6,21 +6,18 @@
 
 using namespace std;
 
-namespace coda
-{
-    namespace terminal
-    {
-        typedef char data_type;
-        typedef vector<data_type> data_buffer;
+namespace coda {
+  namespace terminal {
+    typedef char data_type;
+    typedef vector<data_type> data_buffer;
 
-        class base_terminal
-        {
-           public:
-            virtual data_buffer parse(const data_buffer &input) = 0;
+    class base_terminal {
+      public:
+      virtual data_buffer parse(const data_buffer &input) = 0;
 
-           private:
-        };
-    }
-}
+      private:
+    };
+  } // namespace terminal
+} // namespace coda
 
 #endif

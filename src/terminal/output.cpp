@@ -4,25 +4,19 @@
 
 #include "output.h"
 
-namespace coda
-{
-    namespace terminal {
+namespace coda {
+  namespace terminal {
 
-        // output related functions
-        namespace output
-        {
-            // utility for variadic print
-            std::ostream &print(std::ostream &os) noexcept
-            {
-                return os;
-            }
+    // output related functions
+    namespace output {
+      // utility for variadic print
+      std::ostream &print(std::ostream &os) noexcept { return os; }
 
-            // output functions have their own mutex
-            Mutex &get_mutex()
-            {
-                static Mutex m;
-                return m;
-            }
-        }
-    }
-}
+      // output functions have their own mutex
+      Mutex &get_mutex() {
+        static Mutex m;
+        return m;
+      }
+    } // namespace output
+  }   // namespace terminal
+} // namespace coda
