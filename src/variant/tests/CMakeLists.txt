@@ -14,7 +14,6 @@ if (NOT DEFINED BANDIT_DIR)
 
     set(BANDIT_DIR ${SOURCE_DIR})
 
-    message(STATUS "Using ${BANDIT_DIR}")
 endif()
 
 add_executable(${TEST_PROJECT_NAME} main.test.cpp variant.test.cpp binary.test.cpp)
