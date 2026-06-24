@@ -14,9 +14,10 @@ coverage.info
 config.h
 config.status
 libtool
-build
-debug
-release
-.idea
-cmake-build-*
-.prep
+build/
+debug/
+release/
+.idea/
+cmake-build-*/
+build-*/
+.prep/

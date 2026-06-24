@@ -6,6 +6,7 @@ if (NOT DEFINED BANDIT_DIR)
     externalproject_add(${PROJECT_NAME}-bandit
             GIT_REPOSITORY https://github.com/banditcpp/bandit.git
             GIT_TAG v2.0.0
+            CMAKE_ARGS -DCMAKE_POLICY_VERSION_MINIMUM=3.5
             INSTALL_COMMAND ""
             BUILD_COMMAND ""
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/bandit)
@@ -21,4 +22,3 @@ add_executable(${TEST_PROJECT_NAME} main.test.cpp variant.test.cpp binary.test.c
 target_include_directories(${TEST_PROJECT_NAME} SYSTEM PUBLIC ${BANDIT_DIR} PUBLIC ${PROJECT_SOURCE_DIR}/src)
 
 target_link_libraries(${TEST_PROJECT_NAME} ${PROJECT_NAME})
-

@@ -1,6 +1,7 @@
 #ifndef CODA_STRINGS_H
 #define CODA_STRINGS_H
 
+#include <cstdint>
 #include <string>
 #include <vector>
 
