@@ -6,7 +6,6 @@ project(coda VERSION 0.5.1 LANGUAGES CXX)
 # component target owns its compile features as part of issue #2.
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(CODA_BUILD_TESTS "Build libcoda tests." ON)
 option(CODA_ENABLE_COVERAGE "Enable code coverage testing." OFF)
@@ -69,4 +68,4 @@ target_compile_definitions(${PROJECT_NAME}
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 message(STATUS "libcoda version: ${PROJECT_VERSION}")
-message(STATUS "libcoda tests: ${CODA_BUILD_TESTS}")
+message(STATUS "libcoda aggregate tests: ${CODA_BUILD_TESTS}")
