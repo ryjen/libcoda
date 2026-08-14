@@ -7,6 +7,19 @@ libcoda
 
 a c++17 utility library.  Its my toolkit for anything c++17.
 
+Architecture
+============
+
+Modernization follows explicit layered-dependency, error-handling, and dependency-management rules:
+
+- [System context](docs/architecture/0001-system-context.md)
+- [Layered architecture and SOLID guidance](docs/architecture/0002-layered-architecture.md)
+- [Error handling policy](docs/architecture/0003-error-handling.md)
+- [Dependency policy](docs/architecture/0004-dependency-policy.md)
+- [ADR 0001: retain component repositories and submodules during modernization](docs/adr/0001-submodules-vs-monorepo.md)
+
+The architecture documents describe target constraints for modernization; they do not imply every legacy component already conforms.
+
 Submodules
 ==========
 
