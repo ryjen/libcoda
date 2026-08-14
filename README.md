@@ -27,7 +27,7 @@ cmake --build --preset dev
 ctest --preset dev
 ```
 
-For a release build without test-only dependency setup:
+For a release aggregate build with the root test target disabled:
 
 ```bash
 cmake --preset release
