@@ -42,6 +42,7 @@ jobs:
             libsqlite3-dev \
             libssl-dev \
             liburiparser-dev \
+            postgresql-server-dev-all \
             ninja-build \
             pkg-config
 
@@ -52,6 +53,7 @@ jobs:
           cmake --preset release \
             -G Ninja \
             -DENABLE_TEST_DB_FIXTURES=OFF \
+            -DPostgreSQL_TYPE_INCLUDE_DIR="$(pg_config --includedir-server)" \
             -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
             2>&1 | tee configure.log
           status=${PIPESTATUS[0]}
