@@ -17,7 +17,7 @@ git submodule update --init --recursive
 
 The checked-in presets keep common development and release configurations reproducible without embedding machine-specific paths.
 
-Development build with tests:
+Development aggregate build with the root test target enabled:
 
 ```bash
 cmake --preset dev
@@ -25,7 +25,7 @@ cmake --build --preset dev
 ctest --preset dev
 ```
 
-Release build without test-only dependency setup:
+Release aggregate build with the root test target disabled:
 
 ```bash
 cmake --preset release
@@ -38,7 +38,7 @@ Current project-level options are:
 
 | Option | Default | Purpose |
 | --- | --- | --- |
-| `CODA_BUILD_TESTS` | `ON` | Configure and build the test tree. |
+| `CODA_BUILD_TESTS` | `ON` | Configure the aggregate repository's root `tests/` target. |
 | `CODA_ENABLE_COVERAGE` | `OFF` | Enable the existing coverage integration. |
 | `CODA_ENABLE_MEMCHECK` | `OFF` | Enable the existing Valgrind memcheck integration. |
 | `CODA_ENABLE_PROFILING` | `OFF` | Enable the existing Valgrind profiling integration. |
@@ -51,4 +51,4 @@ The root build is being modernized incrementally. This first slice deliberately 
 
 The root `LIBRARY_VERSION` definition is now target-local to `coda` rather than injected through `CMAKE_CXX_FLAGS`.
 
-Tests still initialize Bandit through the legacy test CMake and may fetch it when `CODA_BUILD_TESTS=ON`. The testing modernization issue tracks removing that configure/build ordering and network dependency behavior.
+`CODA_BUILD_TESTS` currently governs only the aggregate repository's root `tests/` directory. Legacy component submodules still own their own test setup and may continue to configure tests independently. Issue #5 tracks converging those component test paths on a consistent project-level switch and removing build-time test dependency fetching.
