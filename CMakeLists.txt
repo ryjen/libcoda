@@ -2,11 +2,6 @@ cmake_minimum_required(VERSION 3.21)
 
 project(coda VERSION 0.5.1 LANGUAGES CXX)
 
-# Transitional project-wide language defaults. These remain global until each
-# component target owns its compile features as part of issue #2.
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 option(CODA_BUILD_TESTS "Build libcoda tests." ON)
 option(CODA_ENABLE_COVERAGE "Enable code coverage testing." OFF)
 option(CODA_ENABLE_MEMCHECK "Enable Valgrind memory checking." OFF)
