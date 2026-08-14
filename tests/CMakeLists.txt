@@ -31,13 +31,6 @@ if (DEFINED BANDIT_TARGET)
     add_dependencies(${TEST_PROJECT_NAME} ${BANDIT_TARGET})
 endif()
 
-# add target for code coverage
-if(ENABLE_COVERAGE)
-	include(CodeCoverage)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_COVERAGE}")
-	setup_target_for_coverage(TARGET ${PROJECT_NAME}_coverage OUTPUT ${PROJECT_BINARY_DIR}/gen/coverage)
-endif()
-
 include(ValgrindTest)
 
 add_valgrind_profile_test(MEMCHECK ${ENABLE_MEMCHECK} PROFILING ${ENABLE_PROFILING} TARGET ${TEST_PROJECT_NAME})
