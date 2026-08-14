@@ -2,6 +2,7 @@
 set(LOG_LIBRARY coda_log)
 
 add_library(${LOG_LIBRARY} log.cpp)
+target_compile_features(${LOG_LIBRARY} PUBLIC cxx_std_17)
 
 string(REPLACE "_" "/" INSTALL_DIRECTORY ${LOG_LIBRARY})
 
