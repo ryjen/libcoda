@@ -17,6 +17,10 @@ jobs:
   aggregate-build:
     name: Aggregate release build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      NEEDRESTART_MODE: a
 
     steps:
       - name: Checkout
@@ -27,8 +31,8 @@ jobs:
 
       - name: Install build dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install --yes \
+          sudo -E apt-get -o Acquire::Retries=3 update
+          sudo -E apt-get -o Acquire::Retries=3 install --yes --no-install-recommends \
             libboost-dev \
             libcurl4-openssl-dev \
             libjson-c-dev \
