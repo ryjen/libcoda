@@ -10,7 +10,7 @@ a c++17 utility library.  Its my toolkit for anything c++17.
 Submodules
 ==========
 
-After cloning run two commands to initialize submodules:
+After cloning, initialize the Git submodules:
 
 ```bash
 git submodule update --recursive --init
@@ -19,7 +19,22 @@ git submodule update --recursive --init
 Building
 ========
 
-This project now builds with [prep](https://github.com/ryjen/prep).
+The preferred CMake workflow uses the checked-in presets:
+
+```bash
+cmake --preset dev
+cmake --build --preset dev
+ctest --preset dev
+```
+
+For a release build without test-only dependency setup:
+
+```bash
+cmake --preset release
+cmake --build --preset release
+```
+
+The legacy `prep` workflow remains available where configured:
 
 ```bash
 prep            # install dependencies only
@@ -27,26 +42,14 @@ prep build      # build project
 prep install    # install project to kitchen
 ```
 
-You can use [cmake](https://cmake.org) to generate for the build system of your choice.
-
-```bash
-mkdir debug; cd debug
-cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON -DENABLE_MEMCHECK=ON ..
-make
-make test
-```
-
-options supported are:
-
-		-DENABLE_COVERAGE=ON   :   enable code coverage using lcov
-		-DENABLE_MEMCHECK=ON   :   enable valgrind memory checking on tests
+See [`docs/build.md`](docs/build.md) for build options, compatibility aliases, and the current CMake modernization boundary.
 
 Requirements
 ============
 
 *compiler*
 
-You need a c++17 compiler.  
+You need a c++17 compiler.
 
 *libraries*
 - [libjson-c](https://github.com/json-c/json-c)
