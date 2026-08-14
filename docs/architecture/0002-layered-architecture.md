@@ -23,9 +23,9 @@ flowchart TB
     Adapters --> Ports
     Adapters --> Domain
     Adapters --> External
-
-    classDef forbidden stroke-dasharray: 5 5;
 ```
+
+The arrows describe source/compile-time dependency direction, not runtime control flow. Adapter selection and wiring happens at the composition/factory edge appropriate to the component or consuming application.
 
 The important rule is not the number of boxes. It is that domain/parser/query logic does not acquire a dependency on concrete infrastructure merely because that infrastructure is convenient to call.
 
