@@ -42,7 +42,7 @@ jobs:
             libsqlite3-dev \
             libssl-dev \
             liburiparser-dev \
-            postgresql-server-dev-all \
+            postgresql-server-dev-16 \
             ninja-build \
             pkg-config
 
