@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - development
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  aggregate-build:
+    name: Aggregate release build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            libboost-dev \
+            libcurl4-openssl-dev \
+            libjson-c-dev \
+            libmariadb-dev \
+            libpq-dev \
+            libsqlite3-dev \
+            libssl-dev \
+            liburiparser-dev \
+            ninja-build \
+            pkg-config
+
+      - name: Configure
+        run: |
+          cmake --preset release \
+            -G Ninja \
+            -DENABLE_TEST_DB_FIXTURES=OFF \
+            -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+
+      - name: Build
+        run: cmake --build --preset release --parallel 2
