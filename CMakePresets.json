@@ -9,7 +9,7 @@
     {
       "name": "dev",
       "displayName": "Development",
-      "description": "Debug aggregate build with root tests enabled.",
+      "description": "Debug aggregate build with shared tests enabled.",
       "binaryDir": "${sourceDir}/build/dev",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
@@ -20,7 +20,7 @@
     {
       "name": "release",
       "displayName": "Release",
-      "description": "Release aggregate build with the root test target disabled.",
+      "description": "Release aggregate build with shared tests disabled where components support CODA_BUILD_TESTS.",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
