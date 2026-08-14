@@ -1,15 +1,15 @@
 [submodule "src/net"]
 	path = src/net
-	url = https://github.com/ryjen/net
+	url = https://github.com/ryjen/libcoda-net.git
 [submodule "src/format"]
 	path = src/format
-	url = https://github.com/ryjen/format
+	url = https://github.com/ryjen/libcoda-format.git
 [submodule "src/dice"]
 	path = src/dice
-	url = https://github.com/ryjen/dice
+	url = https://github.com/ryjen/libcoda-dice.git
 [submodule "src/db"]
 	path = src/db
-	url = https://github.com/ryjen/db
+	url = https://github.com/ryjen/libcoda-db.git
 [submodule "cmake"]
 	path = cmake
 	url = https://github.com/ryjen/cmake.git
