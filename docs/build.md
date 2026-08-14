@@ -47,10 +47,12 @@ Current project-level options are:
 
 ## Modernization boundary
 
-The root build is being modernized incrementally. This first slice deliberately keeps the project-wide C++17 setting because several component libraries are Git submodules and still inherit language configuration from the aggregate build. As those component targets migrate, they should declare their own `target_compile_features(... cxx_std_17)` and target-local compile definitions/options.
+The aggregate no longer sets a project-wide C++ standard. Each compiled library target in the current aggregate graph declares its own `target_compile_features(... cxx_std_17)` requirement, including the migrated format, dice, DB, and network submodules. This keeps language requirements attached to the targets that need them and prevents ambient compiler state from masking incomplete component configuration.
 
-The root `LIBRARY_VERSION` definition is now target-local to `coda` rather than injected through `CMAKE_CXX_FLAGS`.
+The root `LIBRARY_VERSION` definition is target-local to `coda` rather than injected through `CMAKE_CXX_FLAGS`.
 
-`CODA_BUILD_TESTS` now governs the aggregate root tests and the migrated `format`, `db`, and `net` component test trees through the shared cache option. Other legacy components may still own independent test setup until they are migrated. Issue #5 tracks completing that convergence and removing remaining build-time test dependency fetching.
+`CODA_BUILD_TESTS` now governs the aggregate root tests and the migrated `format`, `dice`, `db`, and `net` component test trees through the shared cache option. Issue #5 tracks completing the remaining test-system convergence, including legacy Bandit setup and build-time test dependency behavior.
+
+Some analysis paths still use legacy shared CMake helpers that mutate global compiler flags, particularly coverage instrumentation. Those are intentionally separate from the language-requirement migration and remain tracked under issues #2 and #5.
 
 The release CI gate recursively initializes submodules and proves the full aggregate compile graph with shared tests disabled. Test-layer CI, sanitizers, coverage, and service-backed integration tests remain separate follow-up work under issue #5.
