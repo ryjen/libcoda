@@ -1,7 +1,7 @@
 libcoda
 =====
 
-[![Build Status](http://img.shields.io/travis/ryjen/libcoda.svg)](https://travis-ci.org/ryjen/libcoda)
+[![CI](https://github.com/ryjen/libcoda/actions/workflows/ci.yml/badge.svg?branch=development)](https://github.com/ryjen/libcoda/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/ryjen/libcoda/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/libcoda?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
 
@@ -27,7 +27,7 @@ cmake --build --preset dev
 ctest --preset dev
 ```
 
-For a release aggregate build with the root test target disabled:
+For a release aggregate build with shared tests disabled where supported:
 
 ```bash
 cmake --preset release
