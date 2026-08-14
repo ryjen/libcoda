@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - development
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  aggregate-build:
+    name: Aggregate release build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      NEEDRESTART_MODE: a
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Install build dependencies
+        run: |
+          sudo -E apt-get -o Acquire::Retries=3 update
+          sudo -E apt-get -o Acquire::Retries=3 install --yes --no-install-recommends \
+            libcereal-dev \
+            libboost-dev \
+            libcurl4-openssl-dev \
+            libjson-c-dev \
+            libmariadb-dev \
+            libpq-dev \
+            libsqlite3-dev \
+            libssl-dev \
+            liburiparser-dev \
+            postgresql-server-dev-16 \
+            ninja-build \
+            pkg-config
+
+      - name: Configure
+        shell: bash
+        run: |
+          set +e
+          cmake --preset release \
+            -G Ninja \
+            -DENABLE_TEST_DB_FIXTURES=OFF \
+            -DPostgreSQL_TYPE_INCLUDE_DIR="$(pg_config --includedir-server)" \
+            -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+            2>&1 | tee configure.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            details=$(grep -E -B 4 -A 12 'CMake Error|NOTFOUND|required.*not found|Could NOT find' configure.log | tail -n 80)
+            if [ -z "$details" ]; then
+              details=$(tail -n 80 configure.log)
+            fi
+            message=$(printf '%s' "$details" | tr '\n' ' ' | sed 's/%/%25/g')
+            echo "::error title=CMake configure failed::$message"
+            exit "$status"
+          fi
+
+      - name: Build
+        shell: bash
+        run: |
+          set +e
+          cmake --build --preset release --parallel 2 2>&1 | tee build.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            details=$(grep -E -B 4 -A 12 'FAILED:|error:|undefined reference|ninja: build stopped' build.log | tail -n 80)
+            if [ -z "$details" ]; then
+              details=$(tail -n 80 build.log)
+            fi
+            message=$(printf '%s' "$details" | tr '\n' ' ' | sed 's/%/%25/g')
+            echo "::error title=Aggregate build failed::$message"
+            exit "$status"
+          fi
