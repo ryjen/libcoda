@@ -69,5 +69,15 @@ target_compile_definitions(${PROJECT_NAME}
 )
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
+if(CODA_BUILD_TESTS AND CODA_ENABLE_COVERAGE)
+    include(CodaCoverage)
+    coda_enable_target_coverage(TARGET ${PROJECT_NAME})
+    coda_enable_target_coverage(TARGET ${PROJECT_NAME}_test)
+    setup_target_for_coverage(
+        TARGET ${PROJECT_NAME}_coverage
+        OUTPUT ${PROJECT_BINARY_DIR}/gen/coverage
+    )
+endif()
+
 message(STATUS "libcoda version: ${PROJECT_VERSION}")
 message(STATUS "libcoda aggregate tests: ${CODA_BUILD_TESTS}")
