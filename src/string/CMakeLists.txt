@@ -4,13 +4,14 @@ set(STRING_LIBRARY coda_string)
 
 pkg_search_module(UUID uuid)
 
-if (UUID_FOUND)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DUUID_FOUND")
-endif()
-
 set(${STRING_LIBRARY}_HEADERS argument.h buffer.h util.h )
 
 add_library(${STRING_LIBRARY} ${${STRING_LIBRARY}_HEADERS} argument.cpp buffer.cpp util.cpp)
+target_compile_features(${STRING_LIBRARY} PUBLIC cxx_std_17)
+
+if (UUID_FOUND)
+  target_compile_definitions(${STRING_LIBRARY} PRIVATE UUID_FOUND)
+endif()
 
 target_link_libraries(${STRING_LIBRARY} ${UUID_LIBRARIES})
 
