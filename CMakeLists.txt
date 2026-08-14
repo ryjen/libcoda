@@ -1,28 +1,46 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required(VERSION 3.21)
+
+project(coda VERSION 0.5.1 LANGUAGES CXX)
+
+# Transitional project-wide language defaults. These remain global until each
+# component target owns its compile features as part of issue #2.
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# add options for testing
-option(ENABLE_COVERAGE "Enable code coverage testing." OFF)
-option(ENABLE_MEMCHECK "Enable testing for memory leaks." OFF)
-option(ENABLE_PROFILING "Enable profiling code usage." OFF)
+option(CODA_BUILD_TESTS "Build libcoda tests." ON)
+option(CODA_ENABLE_COVERAGE "Enable code coverage testing." OFF)
+option(CODA_ENABLE_MEMCHECK "Enable Valgrind memory checking." OFF)
+option(CODA_ENABLE_PROFILING "Enable Valgrind profiling." OFF)
 
-# define project name
-project (coda VERSION 0.5.1)
+# Backward-compatible aliases for existing build scripts. New integrations
+# should use the CODA_* options above.
+option(ENABLE_COVERAGE "Deprecated: use CODA_ENABLE_COVERAGE." OFF)
+option(ENABLE_MEMCHECK "Deprecated: use CODA_ENABLE_MEMCHECK." OFF)
+option(ENABLE_PROFILING "Deprecated: use CODA_ENABLE_PROFILING." OFF)
+mark_as_advanced(ENABLE_COVERAGE ENABLE_MEMCHECK ENABLE_PROFILING)
 
-# Setup testing
-enable_testing()
+if(ENABLE_COVERAGE)
+    set(CODA_ENABLE_COVERAGE ON)
+endif()
+if(ENABLE_MEMCHECK)
+    set(CODA_ENABLE_MEMCHECK ON)
+endif()
+if(ENABLE_PROFILING)
+    set(CODA_ENABLE_PROFILING ON)
+endif()
 
-# set path to custom modules
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+# Keep legacy variables available to submodule/test CMake while they migrate.
+set(ENABLE_COVERAGE "${CODA_ENABLE_COVERAGE}")
+set(ENABLE_MEMCHECK "${CODA_ENABLE_MEMCHECK}")
+set(ENABLE_PROFILING "${CODA_ENABLE_PROFILING}")
 
-# create distribution packages
+# Set path to custom modules.
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+
+# Create distribution packages.
 include(CreatePackages)
 create_packages(DESCRIPTION "A c++17 toolkit")
-
-if (PROJECT_VERSION)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLIBRARY_VERSION=\\\"${PROJECT_VERSION}\\\"")
-	message(STATUS "Setting library version to ${PROJECT_VERSION}")
-endif()
 
 find_package(MySQL)
 find_package(SQLite3)
@@ -30,9 +48,25 @@ find_package(JSONC)
 find_package(CURL)
 find_package(PostgreSQL)
 
-# add test first for environment variables in submodules
-add_subdirectory(tests)
+if(CODA_BUILD_TESTS)
+    enable_testing()
 
-# add src directory contain submodules
+    # Tests are currently added before src because Bandit variables are shared
+    # with legacy component test CMake. Remove this ordering dependency as the
+    # test infrastructure is modernized under issue #5.
+    add_subdirectory(tests)
+endif()
+
+# Add src directory containing in-tree components and submodules.
 add_subdirectory(src)
 
+# LIBRARY_VERSION is only consumed by the aggregate coda target's version.cpp.
+# Keep it target-local rather than mutating CMAKE_CXX_FLAGS globally.
+target_compile_definitions(${PROJECT_NAME}
+    PRIVATE
+        LIBRARY_VERSION="${PROJECT_VERSION}"
+)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+
+message(STATUS "libcoda version: ${PROJECT_VERSION}")
+message(STATUS "libcoda tests: ${CODA_BUILD_TESTS}")
