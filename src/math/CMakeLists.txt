@@ -1,6 +1,7 @@
 set(MATH_LIBRARY coda_math)
 
 add_library(${MATH_LIBRARY} bigint.cpp util.h)
+target_compile_features(${MATH_LIBRARY} PUBLIC cxx_std_17)
 
 string(REPLACE "_" "/" INSTALL_DIRECTORY ${MATH_LIBRARY})
 
