@@ -9,7 +9,7 @@
     {
       "name": "dev",
       "displayName": "Development",
-      "description": "Debug build with tests enabled.",
+      "description": "Debug aggregate build with root tests enabled.",
       "binaryDir": "${sourceDir}/build/dev",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
@@ -20,7 +20,7 @@
     {
       "name": "release",
       "displayName": "Release",
-      "description": "Release build without tests or test-only dependency setup.",
+      "description": "Release aggregate build with the root test target disabled.",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
