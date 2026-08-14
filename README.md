@@ -20,6 +20,18 @@ Modernization follows explicit layered-dependency, error-handling, and dependenc
 
 The architecture documents describe target constraints for modernization; they do not imply every legacy component already conforms.
 
+Security
+========
+
+Security modernization is driven by explicit trust boundaries and component threat models:
+
+- [Project threat model and release-hardening checklist](docs/security/threat-model.md)
+- [`libcoda-net` threat model](docs/security/libcoda-net.md)
+- [`libcoda-db` threat model](docs/security/libcoda-db.md)
+- [`libcoda-format` threat model](docs/security/libcoda-format.md)
+
+The threat models record current findings as remediation inputs; documenting a legacy behavior does not make it an accepted security default.
+
 Submodules
 ==========
 
