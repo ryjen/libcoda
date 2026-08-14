@@ -17,7 +17,7 @@ git submodule update --init --recursive
 
 The checked-in presets keep common development and release configurations reproducible without embedding machine-specific paths.
 
-Development aggregate build with the root test target enabled:
+Development aggregate build with shared tests enabled:
 
 ```bash
 cmake --preset dev
@@ -25,7 +25,7 @@ cmake --build --preset dev
 ctest --preset dev
 ```
 
-Release aggregate build with the root test target disabled:
+Release aggregate build with shared tests disabled where supported:
 
 ```bash
 cmake --preset release
@@ -38,7 +38,7 @@ Current project-level options are:
 
 | Option | Default | Purpose |
 | --- | --- | --- |
-| `CODA_BUILD_TESTS` | `ON` | Configure the aggregate repository's root `tests/` target. |
+| `CODA_BUILD_TESTS` | `ON` | Configure the root tests and migrated component test trees. |
 | `CODA_ENABLE_COVERAGE` | `OFF` | Enable the existing coverage integration. |
 | `CODA_ENABLE_MEMCHECK` | `OFF` | Enable the existing Valgrind memcheck integration. |
 | `CODA_ENABLE_PROFILING` | `OFF` | Enable the existing Valgrind profiling integration. |
@@ -51,4 +51,6 @@ The root build is being modernized incrementally. This first slice deliberately 
 
 The root `LIBRARY_VERSION` definition is now target-local to `coda` rather than injected through `CMAKE_CXX_FLAGS`.
 
-`CODA_BUILD_TESTS` currently governs only the aggregate repository's root `tests/` directory. Legacy component submodules still own their own test setup and may continue to configure tests independently. Issue #5 tracks converging those component test paths on a consistent project-level switch and removing build-time test dependency fetching.
+`CODA_BUILD_TESTS` now governs the aggregate root tests and the migrated `format`, `db`, and `net` component test trees through the shared cache option. Other legacy components may still own independent test setup until they are migrated. Issue #5 tracks completing that convergence and removing remaining build-time test dependency fetching.
+
+The release CI gate recursively initializes submodules and proves the full aggregate compile graph with shared tests disabled. Test-layer CI, sanitizers, coverage, and service-backed integration tests remain separate follow-up work under issue #5.
