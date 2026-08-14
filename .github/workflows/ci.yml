@@ -41,11 +41,29 @@ jobs:
             pkg-config
 
       - name: Configure
+        shell: bash
         run: |
+          set +e
           cmake --preset release \
             -G Ninja \
             -DENABLE_TEST_DB_FIXTURES=OFF \
-            -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+            -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+            2>&1 | tee configure.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -n 30 configure.log | tr '\n' ' ' | sed 's/%/%25/g')
+            echo "::error title=CMake configure failed::$message"
+            exit "$status"
+          fi
 
       - name: Build
-        run: cmake --build --preset release --parallel 2
+        shell: bash
+        run: |
+          set +e
+          cmake --build --preset release --parallel 2 2>&1 | tee build.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -n 30 build.log | tr '\n' ' ' | sed 's/%/%25/g')
+            echo "::error title=Aggregate build failed::$message"
+            exit "$status"
+          fi
