@@ -51,7 +51,11 @@ jobs:
             2>&1 | tee configure.log
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
-            message=$(tail -n 30 configure.log | tr '\n' ' ' | sed 's/%/%25/g')
+            details=$(grep -E -B 4 -A 12 'CMake Error|NOTFOUND|required.*not found|Could NOT find' configure.log | tail -n 80)
+            if [ -z "$details" ]; then
+              details=$(tail -n 80 configure.log)
+            fi
+            message=$(printf '%s' "$details" | tr '\n' ' ' | sed 's/%/%25/g')
             echo "::error title=CMake configure failed::$message"
             exit "$status"
           fi
@@ -63,7 +67,11 @@ jobs:
           cmake --build --preset release --parallel 2 2>&1 | tee build.log
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
-            message=$(tail -n 30 build.log | tr '\n' ' ' | sed 's/%/%25/g')
+            details=$(grep -E -B 4 -A 12 'FAILED:|error:|undefined reference|ninja: build stopped' build.log | tail -n 80)
+            if [ -z "$details" ]; then
+              details=$(tail -n 80 build.log)
+            fi
+            message=$(printf '%s' "$details" | tr '\n' ' ' | sed 's/%/%25/g')
             echo "::error title=Aggregate build failed::$message"
             exit "$status"
           fi
