@@ -1,14 +1,17 @@
 cmake_minimum_required(VERSION 3.21)
 
+# Keep the historical target/project name during the re-charter. Renaming the
+# public CMake surface is a separate compatibility decision tracked by the
+# Seamwork migration plan.
 project(coda VERSION 0.5.1 LANGUAGES CXX)
 
-option(CODA_BUILD_TESTS "Build libcoda tests." ON)
+option(CODA_BUILD_TESTS "Build legacy libcoda/Seamwork transition tests." ON)
 option(CODA_ENABLE_COVERAGE "Enable code coverage testing." OFF)
 option(CODA_ENABLE_MEMCHECK "Enable Valgrind memory checking." OFF)
 option(CODA_ENABLE_PROFILING "Enable Valgrind profiling." OFF)
 
-# Backward-compatible aliases for existing build scripts. New integrations
-# should use the CODA_* options above.
+# Backward-compatible aliases for existing build scripts. New Seamwork naming
+# will be introduced deliberately rather than as a broad mechanical rename.
 option(ENABLE_COVERAGE "Deprecated: use CODA_ENABLE_COVERAGE." OFF)
 option(ENABLE_MEMCHECK "Deprecated: use CODA_ENABLE_MEMCHECK." OFF)
 option(ENABLE_PROFILING "Deprecated: use CODA_ENABLE_PROFILING." OFF)
@@ -36,12 +39,13 @@ if(NOT CODA_BUILD_TESTS AND
     )
 endif()
 
-# Set path to custom modules.
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
-# Create distribution packages.
 include(CreatePackages)
-create_packages(DESCRIPTION "A c++17 toolkit")
+create_packages(
+    DESCRIPTION
+        "Seamwork: modern C++23 interface and architecture refinement"
+)
 
 find_package(MySQL)
 find_package(SQLite3)
@@ -58,16 +62,19 @@ if(CODA_BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
-# Add src directory containing in-tree components and submodules.
 add_subdirectory(src)
 
 # LIBRARY_VERSION is only consumed by the aggregate coda target's version.cpp.
-# Keep it target-local rather than mutating CMAKE_CXX_FLAGS globally.
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE
         LIBRARY_VERSION="${PROJECT_VERSION}"
 )
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
-message(STATUS "libcoda version: ${PROJECT_VERSION}")
-message(STATUS "libcoda aggregate tests: ${CODA_BUILD_TESTS}")
+# C++23 is the baseline for active Seamwork/new aggregate code. Legacy
+# submodules retain their own target-local language contracts until they are
+# reviewed and migrated; do not restore a project-wide CMAKE_CXX_STANDARD.
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_EXTENSIONS OFF)
+
+message(STATUS "Seamwork transition version: ${PROJECT_VERSION}")
+message(STATUS "Seamwork aggregate tests: ${CODA_BUILD_TESTS}")
