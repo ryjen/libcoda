@@ -13,8 +13,8 @@ target_link_libraries(seamwork_yahtzee_randomness_example
 target_compile_features(seamwork_yahtzee_randomness_example PRIVATE cxx_std_23)
 set_target_properties(seamwork_yahtzee_randomness_example PROPERTIES CXX_EXTENSIONS OFF)
 
-# Compile the deterministic study tests even in release integration builds.
-# Register them with CTest only when the aggregate test layer is enabled.
+# Compile deterministic study tests as executable evidence even when test
+# registration is disabled.
 add_executable(seamwork_yahtzee_randomness_test tests.cpp)
 target_link_libraries(seamwork_yahtzee_randomness_test
     PRIVATE
@@ -23,7 +23,7 @@ target_link_libraries(seamwork_yahtzee_randomness_test
 target_compile_features(seamwork_yahtzee_randomness_test PRIVATE cxx_std_23)
 set_target_properties(seamwork_yahtzee_randomness_test PROPERTIES CXX_EXTENSIONS OFF)
 
-if(CODA_BUILD_TESTS)
+if(SEAMWORK_BUILD_TESTS)
     add_test(
         NAME seamwork_yahtzee_randomness
         COMMAND seamwork_yahtzee_randomness_test
