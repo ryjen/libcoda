@@ -1,11 +1,21 @@
-# Building libcoda
+# Building Seamwork
+
+## Current transition boundary
+
+The repository is being re-chartered from `libcoda` into Seamwork.
+
+C++23 is the baseline for new and materially refined Seamwork code. The aggregate/root `coda` target is the first active C++23 boundary.
+
+Legacy submodule targets retain their own target-local language requirements while they are inventoried and migrated. This is intentional: Seamwork does not perform syntax-only C++23 conversions merely to raise a version number.
 
 ## Prerequisites
 
 - CMake 3.21 or newer
-- A C++17 compiler
-- Git submodules initialized recursively
-- Component dependencies required by the enabled libcoda modules
+- A C++23-capable compiler for the aggregate/new Seamwork boundary
+- Git submodules initialized recursively during the transition
+- Component dependencies required by the enabled legacy modules
+
+The checked-in Nix development shell currently provides GCC 14.
 
 Initialize submodules after cloning:
 
@@ -14,8 +24,6 @@ git submodule update --init --recursive
 ```
 
 ## Preset-based builds
-
-The checked-in presets keep common development and release configurations reproducible without embedding machine-specific paths.
 
 Development aggregate build with shared tests enabled:
 
@@ -34,25 +42,57 @@ cmake --build --preset release
 
 ## Build options
 
-Current project-level options are:
+Current migration-era project-level options are:
 
 | Option | Default | Purpose |
 | --- | --- | --- |
-| `CODA_BUILD_TESTS` | `ON` | Configure the root tests and migrated component test trees. |
+| `CODA_BUILD_TESTS` | `ON` | Configure root tests and migrated component test trees. |
 | `CODA_ENABLE_COVERAGE` | `OFF` | Enable the existing coverage integration. |
 | `CODA_ENABLE_MEMCHECK` | `OFF` | Enable the existing Valgrind memcheck integration. |
 | `CODA_ENABLE_PROFILING` | `OFF` | Enable the existing Valgrind profiling integration. |
 
-`ENABLE_COVERAGE`, `ENABLE_MEMCHECK`, and `ENABLE_PROFILING` remain accepted as compatibility aliases while downstream CMake is migrated. New scripts should use the `CODA_*` names.
+The `CODA_*` names are retained temporarily to avoid mixing the project re-charter with a broad compatibility break. Active new surfaces will introduce `SEAMWORK_*` naming deliberately; compatibility aliases can then be evaluated per surface.
+
+`ENABLE_COVERAGE`, `ENABLE_MEMCHECK`, and `ENABLE_PROFILING` remain legacy aliases.
+
+## Language-standard ownership
+
+The project deliberately avoids a directory-global `CMAKE_CXX_STANDARD`.
+
+Each compiled target owns its language requirement through `target_compile_features`.
+
+The aggregate/root target now owns:
+
+```cmake
+target_compile_features(coda PUBLIC cxx_std_23)
+```
+
+and disables compiler-specific language extensions for that target.
+
+Legacy component targets may still own `cxx_std_17`. When a component is promoted into an active Seamwork study or component, its language contract should be migrated to C++23 as part of the actual design work.
+
+This preserves the useful target-local CMake modernization already completed while making the new project baseline explicit.
 
 ## Modernization boundary
 
-The aggregate no longer sets a project-wide C++ standard. Each compiled library target in the current aggregate graph declares its own `target_compile_features(... cxx_std_17)` requirement, including the migrated format, dice, DB, and network submodules. This keeps language requirements attached to the targets that need them and prevents ambient compiler state from masking incomplete component configuration.
+The root `LIBRARY_VERSION` definition remains target-local rather than injected through global flags.
 
-The root `LIBRARY_VERSION` definition is target-local to `coda` rather than injected through `CMAKE_CXX_FLAGS`.
+`CODA_BUILD_TESTS` governs the current aggregate and migrated component test trees. Existing issue #5 tracks remaining test-system convergence, including legacy Bandit setup and build-time test dependency behavior.
 
-`CODA_BUILD_TESTS` now governs the aggregate root tests and the migrated `format`, `dice`, `db`, and `net` component test trees through the shared cache option. Issue #5 tracks completing the remaining test-system convergence, including legacy Bandit setup and build-time test dependency behavior.
+Some analysis paths still use legacy shared CMake helpers, particularly coverage instrumentation. Those remain migration debt; they should not be copied into new Seamwork targets.
 
-Some analysis paths still use legacy shared CMake helpers that mutate global compiler flags, particularly coverage instrumentation. Those are intentionally separate from the language-requirement migration and remain tracked under issues #2 and #5.
+The existing aggregate CI remains a compatibility/integration gate while component disposition is reviewed.
 
-The release CI gate recursively initializes submodules and proves the full aggregate compile graph with shared tests disabled. Test-layer CI, sanitizers, coverage, and service-backed integration tests remain separate follow-up work under issue #5.
+## Intended direction
+
+As legacy components are classified and absorbed, the build should converge toward:
+
+- one primary Seamwork repository;
+- C++23 target-local requirements;
+- small project-owned CMake helpers;
+- flake-driven CI/dev environments;
+- explicit study/example/component targets;
+- no ambient compiler or dependency state;
+- deterministic tests without external services by default.
+
+See [the migration plan](migration/seamwork-rebrand.md) for sequencing.
