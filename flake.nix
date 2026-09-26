@@ -64,9 +64,8 @@
       ]);
 
       compilerHook = ''
-        : "${CC:=gcc}"
-        : "${CXX:=g++}"
-        export CC CXX
+        if [ -z "$CC" ]; then export CC=gcc; fi
+        if [ -z "$CXX" ]; then export CXX=g++; fi
         echo "Seamwork C++23 environment"
         echo "Compiler: $($CXX --version | head -n 1)"
       '';
