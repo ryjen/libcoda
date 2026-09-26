@@ -1,6 +1,6 @@
 # Seamwork
 
-[![CI](https://github.com/ryjen/libcoda/actions/workflows/ci.yml/badge.svg?branch=development)](https://github.com/ryjen/libcoda/actions/workflows/ci.yml)
+[![CI](https://github.com/ryjen/seamwork/actions/workflows/ci.yml/badge.svg?branch=development)](https://github.com/ryjen/seamwork/actions/workflows/ci.yml)
 [![License](https://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
 
 **Modern C++23 through interface and architecture refinement.**
@@ -117,4 +117,4 @@ See [`docs/build.md`](docs/build.md) for build boundaries and options.
 
 Seamwork preserves the Git history and lessons of `libcoda`.
 
-The eventual repository rename will happen after the active code surface reflects the new purpose. This avoids turning a repository rename into an implicit claim that every legacy utility is already part of the new design.
+The repository was renamed from `libcoda` to `seamwork` after the active C++23 build and study surface reflected the new purpose. Git history remains the canonical record of the earlier project.
