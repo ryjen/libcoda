@@ -71,20 +71,22 @@
       '';
     in
     {
-      devShells.${system}.default = pkgs.mkShell {
-        packages = seamworkPackages;
+      devShells.${system} = {
+        default = pkgs.mkShell {
+          packages = seamworkPackages;
 
-        shellHook = compilerHook + ''
-          echo "Configure with: cmake --preset dev"
-        '';
-      };
+          shellHook = compilerHook + ''
+            echo "Configure with: cmake --preset dev"
+          '';
+        };
 
-      devShells.${system}.legacy = pkgs.mkShell {
-        packages = legacyPackages;
+        legacy = pkgs.mkShell {
+          packages = legacyPackages;
 
-        shellHook = compilerHook + ''
-          echo "Legacy compatibility configure: cmake --preset legacy-dev"
-        '';
+          shellHook = compilerHook + ''
+            echo "Legacy compatibility configure: cmake --preset legacy-dev"
+          '';
+        };
       };
     };
 }
