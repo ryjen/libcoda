@@ -5,6 +5,7 @@ on:
     branches:
       - development
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,13 +15,53 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  aggregate-build:
-    name: Aggregate release build
+  seamwork:
+    name: Seamwork C++23 (${{ matrix.compiler }})
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    env:
-      DEBIAN_FRONTEND: noninteractive
-      NEEDRESTART_MODE: a
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - compiler: GCC
+            cc: gcc
+            cxx: g++
+          - compiler: Clang
+            cc: clang
+            cxx: clang++
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
+
+      - name: Configure
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: nix develop --command cmake --preset release -G Ninja
+
+      - name: Build
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: nix develop --command cmake --build --preset release --parallel 2
+
+      - name: Test
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: nix develop --command ctest --preset release
+
+  legacy-compatibility:
+    name: Legacy libcoda compatibility
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -29,59 +70,13 @@ jobs:
           submodules: recursive
           persist-credentials: false
 
-      - name: Install build dependencies
-        run: |
-          sudo -E apt-get -o Acquire::Retries=3 update
-          sudo -E apt-get -o Acquire::Retries=3 install --yes --no-install-recommends \
-            libcereal-dev \
-            libboost-dev \
-            libcurl4-openssl-dev \
-            libjson-c-dev \
-            libmariadb-dev \
-            libpq-dev \
-            libsqlite3-dev \
-            libssl-dev \
-            liburiparser-dev \
-            postgresql-server-dev-16 \
-            ninja-build \
-            pkg-config
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
 
-      - name: Configure
-        shell: bash
+      - name: Configure and build archived compatibility graph
         run: |
-          set +e
-          cmake --preset release \
-            -G Ninja \
-            -DENABLE_TEST_DB_FIXTURES=OFF \
-            -DPostgreSQL_TYPE_INCLUDE_DIR="$(pg_config --includedir-server)" \
-            -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-            2>&1 | tee configure.log
-          status=${PIPESTATUS[0]}
-          if [ "$status" -ne 0 ]; then
-            details=$(grep -E -B 4 -A 12 'CMake Error|NOTFOUND|required.*not found|Could NOT find' configure.log | tail -n 80)
-            if [ -z "$details" ]; then
-              details=$(tail -n 80 configure.log)
-            fi
-            message=$(printf '%s' "$details" | tr '\n' ' ' | sed 's/%/%25/g')
-            echo "::error title=CMake configure failed::$message"
-            exit "$status"
-          fi
-
-      - name: Build
-        shell: bash
-        run: |
-          set +e
-          cmake --build --preset release --parallel 2 2>&1 | tee build.log
-          status=${PIPESTATUS[0]}
-          if [ "$status" -ne 0 ]; then
-            details=$(grep -E -B 4 -A 12 'FAILED:|error:|undefined reference|ninja: build stopped' build.log | tail -n 80)
-            if [ -z "$details" ]; then
-              details=$(tail -n 80 build.log)
-            fi
-            message=$(printf '%s' "$details" | tr '\n' ' ' | sed 's/%/%25/g')
-            echo "::error title=Aggregate build failed::$message"
-            exit "$status"
-          fi
-
-      - name: Run Seamwork study checks
-        run: cmake --build --preset release --target seamwork_study_checks
+          nix develop .#legacy --command bash -lc '
+            cmake --preset legacy-release               -G Ninja               -DENABLE_TEST_DB_FIXTURES=OFF               -DPostgreSQL_TYPE_INCLUDE_DIR="$(pg_config --includedir-server)"               -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+            cmake --build --preset legacy-release --parallel 2
+            cmake --build --preset legacy-release --target seamwork_study_checks
+          '
