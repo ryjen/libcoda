@@ -106,7 +106,9 @@ The first concrete study is tracked in #22: rebuild the smallest useful Yahtzee 
 
 ## C++23 migration
 
-The aggregate/root target is the first C++23 boundary. Component targets remain responsible for their own compile-feature declarations while they are reviewed.
+The default build is now intended to be Seamwork-native: C++23 studies/tests build without the archived libcoda graph. Historical libcoda components remain available only through an explicit `SEAMWORK_BUILD_LEGACY=ON` compatibility path while archival/provenance work finishes.
+
+Active Seamwork targets own their compile-feature declarations. Archived targets retain their historical contracts only inside the compatibility path.
 
 When a legacy component becomes an active Seamwork study/component:
 
@@ -125,11 +127,12 @@ Do not perform a syntax-only "C++23 conversion."
 2. Establish C++23 at the aggregate/new-code boundary.
 3. Inventory legacy components and decide KEEP/REWORK/ABSORB/ARCHIVE/REMOVE.
 4. Build the first reference study/consumer under the new structure.
-5. Introduce `seamwork::`, `Seamwork::`, and `SEAMWORK_*` names for active new surfaces.
-6. Provide temporary compatibility aliases where justified.
-7. Rename the GitHub repository from `libcoda` to `seamwork`.
-8. Update badges, package metadata, links, namespaces, include paths, and related repositories.
-9. Archive or redirect legacy component repositories according to their disposition.
+5. Make the Seamwork C++23 surface the default build/CI path and move archived libcoda behind explicit compatibility controls (#28).
+6. Introduce `seamwork::`, `Seamwork::`, and `SEAMWORK_*` names for active new surfaces.
+7. Provide temporary compatibility aliases where justified.
+8. Rename the GitHub repository from `libcoda` to `seamwork`.
+9. Update badges, package metadata, links, namespaces, include paths, and related repositories.
+10. Archive or redirect legacy component repositories according to their disposition.
 
 The repository rename is deliberately later than the charter so the name does not imply that all legacy code is already endorsed as Seamwork.
 
@@ -144,5 +147,6 @@ The repository rename is deliberately later than the charter so the name does no
 - [x] Reconcile the existing multi-repository ADR with the new target topology.
 - [x] Rebuild a focused Yahtzee slice as the first practical reference application (#22).
 - [x] Complete one end-to-end refinement study.
-- [ ] Introduce the first intentional `seamwork::` public surface.
+- [x] Introduce the first intentional `seamwork::` study surface (#23).
+- [ ] Make Seamwork the default build/CI path and legacy libcoda explicitly opt-in (#28).
 - [ ] Rename the GitHub repository after the active surface reflects the new identity.
