@@ -29,3 +29,9 @@ if(CODA_BUILD_TESTS)
         COMMAND seamwork_yahtzee_randomness_test
     )
 endif()
+
+add_custom_target(seamwork_yahtzee_randomness_check
+    COMMAND $<TARGET_FILE:seamwork_yahtzee_randomness_test>
+    DEPENDS seamwork_yahtzee_randomness_test
+    USES_TERMINAL
+)
