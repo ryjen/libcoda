@@ -82,3 +82,6 @@ jobs:
             echo "::error title=Aggregate build failed::$message"
             exit "$status"
           fi
+
+      - name: Run Seamwork study checks
+        run: cmake --build --preset release --target seamwork_study_checks
