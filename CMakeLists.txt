@@ -9,6 +9,7 @@ option(CODA_BUILD_TESTS "Build legacy libcoda/Seamwork transition tests." ON)
 option(CODA_ENABLE_COVERAGE "Enable code coverage testing." OFF)
 option(CODA_ENABLE_MEMCHECK "Enable Valgrind memory checking." OFF)
 option(CODA_ENABLE_PROFILING "Enable Valgrind profiling." OFF)
+option(SEAMWORK_BUILD_STUDIES "Build Seamwork C++23 design studies." ON)
 
 # Backward-compatible aliases for existing build scripts. New Seamwork naming
 # will be introduced deliberately rather than as a broad mechanical rename.
@@ -60,6 +61,10 @@ if(CODA_BUILD_TESTS)
     # with legacy component test CMake. Remove this ordering dependency as the
     # test infrastructure is modernized under issue #5.
     add_subdirectory(tests)
+endif()
+
+if(SEAMWORK_BUILD_STUDIES)
+    add_subdirectory(studies)
 endif()
 
 add_subdirectory(src)

@@ -72,6 +72,12 @@ problem
 
 Promotion is optional. Demonstrating why an abstraction should not exist is a valid result.
 
+## Current studies
+
+- [Yahtzee randomness seam](studies/yahtzee-randomness/README.md) — compares a semantic callable/concept, runtime interface, type erasure, and direct URBG dependency against a focused C++23 consumer.
+
+Studies are evidence and design work first. They are not automatically promoted into reusable Seamwork components.
+
 ## Security
 
 The existing security work remains part of the evidence base:
