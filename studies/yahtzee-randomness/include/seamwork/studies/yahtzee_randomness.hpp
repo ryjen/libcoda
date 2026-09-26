@@ -12,7 +12,6 @@
 namespace seamwork::studies::yahtzee {
 
 inline constexpr std::size_t dice_per_hand = 5;
-inline constexpr std::size_t rolls_per_turn = 3;
 inline constexpr unsigned sides_per_die = 6;
 
 enum class face : std::uint8_t {
@@ -118,11 +117,6 @@ public:
     {
         std::uniform_int_distribution<unsigned> distribution{1, sides_per_die};
         return static_cast<face>(distribution(engine_));
-    }
-
-    [[nodiscard]] auto engine() noexcept -> Engine&
-    {
-        return engine_;
     }
 
 private:
