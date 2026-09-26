@@ -2,7 +2,7 @@
 
 ## Status
 
-In progress.
+Core re-charter complete. Legacy archival/absorption work continues independently.
 
 This document tracks the transition from `libcoda` to Seamwork. The transition intentionally separates project purpose, code disposition, C++23 migration, and repository renaming so history is preserved and legacy code is not promoted accidentally.
 
@@ -130,11 +130,11 @@ Do not perform a syntax-only "C++23 conversion."
 5. Make the Seamwork C++23 surface the default build/CI path and move archived libcoda behind explicit compatibility controls (#28).
 6. Introduce `seamwork::`, `Seamwork::`, and `SEAMWORK_*` names for active new surfaces.
 7. Provide temporary compatibility aliases where justified.
-8. Rename the GitHub repository from `libcoda` to `seamwork`.
+8. Rename the GitHub repository from `libcoda` to `seamwork`. **Completed.**
 9. Update badges, package metadata, links, namespaces, include paths, and related repositories.
 10. Archive or redirect legacy component repositories according to their disposition.
 
-The repository rename is deliberately later than the charter so the name does not imply that all legacy code is already endorsed as Seamwork.
+The repository rename occurred only after the charter, C++23 study surface, legacy disposition, and default-build inversion were established, so the new name does not imply that all historical libcoda code is endorsed as Seamwork.
 
 ## First milestone: Seamwork 0.1
 
@@ -148,5 +148,5 @@ The repository rename is deliberately later than the charter so the name does no
 - [x] Rebuild a focused Yahtzee slice as the first practical reference application (#22).
 - [x] Complete one end-to-end refinement study.
 - [x] Introduce the first intentional `seamwork::` study surface (#23).
-- [ ] Make Seamwork the default build/CI path and legacy libcoda explicitly opt-in (#28).
-- [ ] Rename the GitHub repository after the active surface reflects the new identity.
+- [x] Make Seamwork the default build/CI path and legacy libcoda explicitly opt-in (#28/#29).
+- [x] Rename the GitHub repository to `ryjen/seamwork` after the active surface reflects the new identity.
