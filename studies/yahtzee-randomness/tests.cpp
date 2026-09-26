@@ -3,7 +3,9 @@
 #include <iostream>
 #include <random>
 #include <stdexcept>
+#include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include <seamwork/studies/yahtzee_randomness.hpp>
