@@ -127,5 +127,5 @@ The repository rename is deliberately later than the charter so the name does no
 - [x] Reconcile the existing multi-repository ADR with the new target topology.
 - [x] Rebuild a focused Yahtzee slice as the first practical reference application (#22).
 - [x] Complete one end-to-end refinement study.
-- [x] Introduce the first intentional `seamwork::` study surface.
+- [ ] Introduce the first intentional `seamwork::` public surface.
 - [ ] Rename the GitHub repository after the active surface reflects the new identity.
