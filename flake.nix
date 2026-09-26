@@ -1,5 +1,5 @@
 {
-  description = "Seamwork modern C++23 development shell";
+  description = "Seamwork modern C++23 development and CI environments";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -7,6 +7,14 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
+
+      seamworkPackages = with pkgs; [
+        clang
+        cmake
+        gcc14
+        ninja
+      ];
+
       postgresqlDev = pkgs.postgresql.dev;
       postgresqlLib = pkgs.postgresql.lib;
       pgConfig = pkgs.writeShellScriptBin "pg_config" ''
@@ -32,41 +40,53 @@
             ;;
         esac
       '';
+
+      legacyPackages = seamworkPackages ++ (with pkgs; [
+        boost
+        curl
+        doxygen
+        gdb
+        git
+        gnumake
+        json_c
+        lcov
+        mariadb
+        mariadb-connector-c
+        openssl
+        pgConfig
+        pkg-config
+        postgresql
+        postgresql.dev
+        postgresql.lib
+        sqlite
+        uriparser
+        valgrind
+      ]);
+
+      compilerHook = ''
+        if [ -z "$CC" ]; then export CC=gcc; fi
+        if [ -z "$CXX" ]; then export CXX=g++; fi
+        echo "Seamwork C++23 environment"
+        echo "Compiler: $($CXX --version | head -n 1)"
+      '';
     in
     {
-      devShells.${system}.default = pkgs.mkShell {
-        packages = with pkgs; [
-          boost
-          cmake
-          curl
-          doxygen
-          gcc14
-          gdb
-          git
-          gnumake
-          json_c
-          lcov
-          mariadb
-          mariadb-connector-c
-          ninja
-          openssl
-          pgConfig
-          pkg-config
-          postgresql
-          postgresql.dev
-          postgresql.lib
-          sqlite
-          uriparser
-          valgrind
-        ];
+      devShells.${system} = {
+        default = pkgs.mkShell {
+          packages = seamworkPackages;
 
-        shellHook = ''
-          export CC=gcc
-          export CXX=g++
-          echo "Seamwork C++23 dev shell"
-          echo "Compiler: $($CXX --version | head -n 1)"
-          echo "Configure with: cmake --preset dev"
-        '';
+          shellHook = compilerHook + ''
+            echo "Configure with: cmake --preset dev"
+          '';
+        };
+
+        legacy = pkgs.mkShell {
+          packages = legacyPackages;
+
+          shellHook = compilerHook + ''
+            echo "Legacy compatibility configure: cmake --preset legacy-dev"
+          '';
+        };
       };
     };
 }

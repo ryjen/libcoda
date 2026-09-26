@@ -41,23 +41,23 @@ The existing architecture work remains useful as migration guidance:
 - [Dependency policy](docs/architecture/0004-dependency-policy.md)
 - [ADR 0002: transition toward a single Seamwork repository](docs/adr/0002-seamwork-topology.md)
 
-Legacy `libcoda` components are migration inputs, not automatically endorsed Seamwork components. Each will be reviewed as KEEP, REWORK, ABSORB, ARCHIVE, or REMOVE before becoming part of the long-term structure.
+Legacy `libcoda` components are migration inputs and archival evidence, not automatically endorsed Seamwork components.
 
 ## C++23 baseline
 
-C++23 is the baseline for new and materially refined Seamwork code.
-
-The root aggregate target now requires C++23. Legacy submodule targets currently retain their own language requirements while they are classified and migrated; changing their standard without a design purpose would be a syntax-only modernization and is intentionally not the migration strategy.
+C++23 is the baseline for active Seamwork code.
 
 The rule is:
 
 > use the simplest mechanism that preserves the desired semantics, and use C++23 where it makes the interface or architecture meaningfully better.
 
+Legacy components retain their historical language requirements only inside the explicit compatibility build; changing them without a design purpose would be syntax-only modernization.
+
 ## Practical consumers
 
-The original C++ Yahtzee implementation survives on the archived `ryjen/yahtsee` repository's `original` branch. It is used as historical baseline evidence, not imported wholesale. The first reference consumer will rebuild a focused C++23 slice around domain rules and randomness, avoiding the old networking/UI stack. See issue #22.
+The original C++ Yahtzee implementation survives on the archived `ryjen/yahtsee` repository's `original` branch. It is used as historical baseline evidence, not imported wholesale.
 
-A typical Seamwork study should move through:
+A typical Seamwork study moves through:
 
 ```text
 problem
@@ -91,34 +91,27 @@ Security is treated as part of interface design: trust boundaries, input validat
 
 ## Building
 
-Initialize the existing migration-era submodules:
+The default build is intentionally small and does not require the archived libcoda submodules:
 
 ```bash
-git submodule update --recursive --init
-```
-
-Use the checked-in presets:
-
-```bash
+nix develop
 cmake --preset dev
 cmake --build --preset dev
 ctest --preset dev
 ```
 
-For a release aggregate build:
+Required CI runs this Seamwork-native path with GCC and Clang through the checked-in flake.
+
+The historical libcoda aggregate remains available explicitly:
 
 ```bash
-cmake --preset release
-cmake --build --preset release
+git submodule update --init --recursive
+nix develop .#legacy
+cmake --preset legacy-dev
+cmake --build --preset legacy-dev
 ```
 
-See [`docs/build.md`](docs/build.md) for the current build boundary and transition notes.
-
-## Toolchain
-
-The active Seamwork boundary requires a C++23-capable compiler. The checked-in Nix development shell currently uses GCC 14.
-
-Legacy components may still declare C++17 until they are actively migrated as studies/components. That is transitional state, not the target standard.
+See [`docs/build.md`](docs/build.md) for build boundaries and options.
 
 ## Lineage
 
