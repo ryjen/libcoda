@@ -8,7 +8,6 @@ add_subdirectory(net)
 add_subdirectory(string)
 add_subdirectory(terminal)
 add_subdirectory(thread)
-add_subdirectory(utility)
 
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_HEADERS} version.cpp)
 
