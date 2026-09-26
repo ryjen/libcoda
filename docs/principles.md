@@ -103,7 +103,7 @@ Examples should be maintained as real code:
 - expose awkward APIs and architecture debt;
 - provide feedback before a study is promoted into `components/`.
 
-The Yahtzee CLI is the initial reference consumer because it exercises domain rules, randomness, input/output, formatting, and test seams without requiring a large application.
+A focused C++23 Yahtzee slice is the initial reference consumer because it exercises domain rules, randomness, input/output, and test seams without carrying forward the historical application's unrelated networking/UI stack.
 
 ## 11. Security is an interface property
 
