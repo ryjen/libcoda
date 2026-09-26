@@ -55,7 +55,7 @@ The rule is:
 
 ## Practical consumers
 
-The original command-line Yahtzee application is intended to become the first reference consumer. It provides useful seams around domain rules, randomness, input/output, formatting, persistence, and testing without requiring a large application.
+The original C++ Yahtzee implementation survives on the archived `ryjen/yahtsee` repository's `original` branch. It is used as historical baseline evidence, not imported wholesale. The first reference consumer will rebuild a focused C++23 slice around domain rules and randomness, avoiding the old networking/UI stack. See issue #22.
 
 A typical Seamwork study should move through:
 
