@@ -62,17 +62,30 @@ Each legacy area receives one disposition:
 
 ## Initial inventory
 
-These are review targets, not final decisions.
+These are migration directions, not blanket endorsements of the old implementations.
 
-| Legacy area | Initial direction | Reason to review |
+| Legacy area | Initial direction | Reason |
 | --- | --- | --- |
-| Yahtzee CLI | KEEP / modernize | Real consumer with useful domain, randomness, I/O, formatting, and testing seams. |
-| `libcoda-dice` | ABSORB / REWORK | Natural input to the Yahtzee/randomness studies; may not need independent library status. |
-| `libcoda-format` | REWORK / ARCHIVE | Existing parser/fuzz work is useful evidence; C++23 `std::format` changes the justification for a standalone formatter. |
-| `libcoda-db` | REWORK / ARCHIVE | Valuable architecture/error/adapter studies, but Seamwork should not become another general DB library without a concrete purpose. |
-| `libcoda-net` | REWORK / ARCHIVE | Useful transport/protocol boundary studies, but broad networking ownership requires stronger justification. |
-| log/math/string/terminal/thread/utility | REVIEW | Generic utility categories are exactly the old project shape Seamwork is moving away from. |
-| shared `cmake` repo | REVIEW | Keep only the tooling that supports the new project; prefer a small project-owned build surface. |
+| Yahtzee | KEEP AS LINEAGE / REWORK | The current default branch is a later Go rewrite, but the `original` branch preserves the C++14 application that consumed the old library family. Use it as baseline evidence; rebuild only useful domain seams in C++23. |
+| `libcoda-dice` | ABSORB / REWORK | Contains generic dice plus Yahtzee-specific code/tests. It is a strong source for the first randomness/domain study but does not currently justify an independent library lifecycle. |
+| `libcoda-format` | REWORK / ARCHIVE | Existing parser/fuzz work is useful evidence; C++23 `std::format` substantially weakens the case for maintaining another standalone formatter. Preserve interesting parser/API studies rather than competing with the standard facility. |
+| `libcoda-db` | REWORK / ARCHIVE | Its easy-syntax wrapper and adapter boundaries are useful architecture/error-handling material, but Seamwork should not own a general DB abstraction without a concrete study/consumer need. |
+| `libcoda-net` | REWORK / ARCHIVE | Transport/TLS/protocol boundaries are useful study material, but a broad networking library has a large maintenance/security surface and needs stronger justification than historical reuse. |
+| log/math/string/terminal/thread/utility | REVIEW | Generic utility categories are exactly the old project shape Seamwork is moving away from. Review for study material or consumers rather than migrating them as categories. |
+| shared `cmake` repo | REVIEW / ABSORB selectively | Keep only project-owned helpers that support the new build/evidence model; avoid retaining a separate helper repository solely for historical reasons. |
+
+## Inventory evidence
+
+The first pass found several useful constraints:
+
+- `ryjen/yahtsee` is archived and its default branch is Go.
+- The recoverable `original` branch is C++14 and depends directly on old logging, string, dice, network, HTTP, async, terminal/libcaca, archive, and UPnP surfaces.
+- The original Yahtzee test tree is effectively empty, so existing behavior must be characterized rather than assumed.
+- `libcoda-dice` already mixes generic dice behavior with a `yaht` subtree, reinforcing that the historical library boundary was not especially strong.
+- `libcoda-format` has some of the strongest existing modernization evidence (deterministic tests, fuzzing, target-local coverage), which is worth preserving even if the formatter itself is not promoted.
+- DB and network components have useful adapter/security/test boundaries, but their scope is much broader than needed for an initial Seamwork example.
+
+The first concrete study is tracked in #22: rebuild the smallest useful Yahtzee dice/randomness seam in C++23 and compare dependency-inversion mechanisms against a real consumer.
 
 ## C++23 migration
 
@@ -94,7 +107,7 @@ Do not perform a syntax-only "C++23 conversion."
 1. Land charter, principles, workflow, and migration plan.
 2. Establish C++23 at the aggregate/new-code boundary.
 3. Inventory legacy components and decide KEEP/REWORK/ABSORB/ARCHIVE/REMOVE.
-4. Decide the first reference study and bring its consumer under the new structure.
+4. Build the first reference study/consumer under the new structure.
 5. Introduce `seamwork::`, `Seamwork::`, and `SEAMWORK_*` names for active new surfaces.
 6. Provide temporary compatibility aliases where justified.
 7. Rename the GitHub repository from `libcoda` to `seamwork`.
@@ -111,8 +124,8 @@ The repository rename is deliberately later than the charter so the name does no
 - [x] Record the migration/disposition model.
 - [ ] Establish and validate the root C++23 build baseline.
 - [ ] Complete legacy component disposition review.
-- [ ] Reconcile the existing multi-repository ADR with the new target topology.
-- [ ] Bring Yahtzee in as the first practical reference application.
+- [x] Reconcile the existing multi-repository ADR with the new target topology.
+- [ ] Rebuild a focused Yahtzee slice as the first practical reference application (#22).
 - [ ] Complete one end-to-end refinement study.
 - [ ] Introduce the first intentional `seamwork::` public surface.
 - [ ] Rename the GitHub repository after the active surface reflects the new identity.
