@@ -125,7 +125,7 @@ The repository rename is deliberately later than the charter so the name does no
 - [ ] Establish and validate the root C++23 build baseline.
 - [ ] Complete legacy component disposition review.
 - [x] Reconcile the existing multi-repository ADR with the new target topology.
-- [ ] Rebuild a focused Yahtzee slice as the first practical reference application (#22).
-- [ ] Complete one end-to-end refinement study.
-- [ ] Introduce the first intentional `seamwork::` public surface.
+- [x] Rebuild a focused Yahtzee slice as the first practical reference application (#22).
+- [x] Complete one end-to-end refinement study.
+- [x] Introduce the first intentional `seamwork::` study surface.
 - [ ] Rename the GitHub repository after the active surface reflects the new identity.
