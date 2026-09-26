@@ -60,19 +60,36 @@ Each legacy area receives one disposition:
 | ARCHIVE | Preserve as historical/reference material but do not present as recommended modern design. |
 | REMOVE | No meaningful current purpose beyond accidental utility accumulation. |
 
-## Initial inventory
+## Final legacy disposition
 
-These are migration directions, not blanket endorsements of the old implementations.
+The first disposition review is complete. These decisions determine what may receive further Seamwork modernization effort; they do **not** require immediate deletion of historical code.
 
-| Legacy area | Initial direction | Reason |
-| --- | --- | --- |
-| Yahtzee | KEEP AS LINEAGE / REWORK | The current default branch is a later Go rewrite, but the `original` branch preserves the C++14 application that consumed the old library family. Use it as baseline evidence; rebuild only useful domain seams in C++23. |
-| `libcoda-dice` | ABSORB / REWORK | Contains generic dice plus Yahtzee-specific code/tests. It is a strong source for the first randomness/domain study but does not currently justify an independent library lifecycle. |
-| `libcoda-format` | REWORK / ARCHIVE | Existing parser/fuzz work is useful evidence; C++23 `std::format` substantially weakens the case for maintaining another standalone formatter. Preserve interesting parser/API studies rather than competing with the standard facility. |
-| `libcoda-db` | REWORK / ARCHIVE | Its easy-syntax wrapper and adapter boundaries are useful architecture/error-handling material, but Seamwork should not own a general DB abstraction without a concrete study/consumer need. |
-| `libcoda-net` | REWORK / ARCHIVE | Transport/TLS/protocol boundaries are useful study material, but a broad networking library has a large maintenance/security surface and needs stronger justification than historical reuse. |
-| log/math/string/terminal/thread/utility | REVIEW | Generic utility categories are exactly the old project shape Seamwork is moving away from. Review for study material or consumers rather than migrating them as categories. |
-| shared `cmake` repo | REVIEW / ABSORB selectively | Keep only project-owned helpers that support the new build/evidence model; avoid retaining a separate helper repository solely for historical reasons. |
+| Legacy area | Final disposition | Rationale / preserved evidence | Follow-up |
+| --- | --- | --- | --- |
+| Yahtzee | **REWORK** (preserve lineage) | It is the strongest real historical consumer and a compact domain for interface studies. The old C++ application remains baseline evidence rather than a port target. | Continue focused C++23 studies; PR #23 established the randomness seam. |
+| `libcoda-dice` | **ABSORB** | Generic dice and Yahtzee-specific behavior were already mixed. The useful randomness/domain problem belongs with the Yahtzee study, not an independent library. | Preserve history; migrate only behavior required by studies; retire the independent library when references are removed. |
+| `libcoda-format` | **ARCHIVE** | C++23 `std::format` removes the main product justification. Its deterministic parser tests, fuzzing, sanitizer work, and bounded-input lessons remain valuable evidence. | Keep security/testing artifacts as reference; do not promote another formatter unless a study identifies a gap in standard/mature facilities. |
+| `libcoda-db` | **ARCHIVE** | Adapter, transaction, URI, error, and backend-contract work is useful architectural source material, but Seamwork has no current consumer justifying a general DB abstraction. | Mine focused studies only when a real consumer needs them; preserve threat model and deterministic backend-test lessons. |
+| `libcoda-net` | **ARCHIVE** | Transport/TLS/protocol boundaries are rich study material, but a broad networking library carries a large security and maintenance surface without a current Seamwork consumer. | Preserve threat model/test-boundary evidence; create future narrow studies from concrete consumers rather than maintain the library. |
+| log | **ARCHIVE** | Historical variadic logging predates modern formatting/printing practice and has no current consumer justification. | Retain lineage only; use established logging facilities in examples unless logging itself becomes the study. |
+| math / `bigint` | **ARCHIVE** | Arbitrary-precision arithmetic is a substantial specialist domain and not part of Seamwork's current interface-refinement thesis without a consumer. | Preserve implementation history; prefer a mature bigint implementation for future consumers. |
+| string / argument / buffer helpers | **ARCHIVE** | The area combines tokenization, parsing, buffers, and generic string utilities. Much is better served by standard/mature facilities and no current consumer requires the old API. | Extract a focused parsing/interface study only if a real CLI example needs it. |
+| terminal | **ARCHIVE** | VT100, cursor, color, output, and progress handling are infrastructure rather than a current design target. | Revisit as an adapter only for a practical CLI study; otherwise use a mature terminal library. |
+| thread / `later` | **ARCHIVE** | The detached-thread helper has weak lifetime/cancellation semantics and predates `std::jthread`/stop-token-era design. It is useful as a negative baseline, not as a component. | Potential future structured-concurrency/lifetime study only when a consumer requires delayed work. |
+| utility / collections | **REMOVE** | Generic collection helpers are precisely the utility-bucket model Seamwork is leaving behind and are largely superseded by ranges/standard algorithms. | Remove from the active tree during cleanup; Git history preserves provenance. |
+| json wrapper | **ARCHIVE** | C++23 has no standard JSON facility, but Seamwork has no reason to own a generic wrapper around json-c without a consumer. | Use a mature JSON library or narrow adapter in future examples; retain old code as history. |
+| custom variant | **REMOVE** | The home-grown discriminated union is directly superseded by `std::variant` and has no remaining design role. | Remove from the active tree during cleanup; retain only historical provenance. |
+| shared `cmake` repo | **ABSORB selectively** | Build helpers are migration infrastructure, not a product. Useful helpers should live with the project or an organization-wide build standard. | Copy only still-needed helpers into the appropriate maintained location, then retire the independent dependency when unused. |
+
+### Decision rule going forward
+
+**ARCHIVE** does not mean "modernize before archiving." It means stop investing in the component as a product while preserving enough source, documentation, tests, threat models, and Git history to support future studies.
+
+**REMOVE** means remove the code from the active Seamwork build/tree once references are eliminated; history remains available in Git.
+
+**ABSORB** means migrate only the useful behavior/evidence into a concrete study or maintained build surface before retiring the old boundary.
+
+No legacy component should receive a broad C++23 conversion simply because it exists.
 
 ## Inventory evidence
 
@@ -122,8 +139,8 @@ The repository rename is deliberately later than the charter so the name does no
 - [x] Define design principles.
 - [x] Define the refinement workflow.
 - [x] Record the migration/disposition model.
-- [ ] Establish and validate the root C++23 build baseline.
-- [ ] Complete legacy component disposition review.
+- [x] Establish and validate the root C++23 build baseline.
+- [x] Complete legacy component disposition review (#24).
 - [x] Reconcile the existing multi-repository ADR with the new target topology.
 - [x] Rebuild a focused Yahtzee slice as the first practical reference application (#22).
 - [x] Complete one end-to-end refinement study.
