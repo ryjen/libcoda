@@ -1,5 +1,5 @@
 {
-  description = "libcoda C++ development shell";
+  description = "Seamwork modern C++23 development shell";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -63,8 +63,9 @@
         shellHook = ''
           export CC=gcc
           export CXX=g++
-          echo "libcoda dev shell"
-          echo "Configure with: cmake -S . -B build-wsl-gcc14 -G Ninja -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DPostgreSQL_TYPE_INCLUDE_DIR=\"$(pg_config --includedir-server)\""
+          echo "Seamwork C++23 dev shell"
+          echo "Compiler: $($CXX --version | head -n 1)"
+          echo "Configure with: cmake --preset dev"
         '';
       };
     };
