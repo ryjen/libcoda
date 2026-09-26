@@ -2,76 +2,96 @@
 
 ## Status
 
-Accepted as modernization guidance.
+Accepted as Seamwork transition guidance.
 
 ## Purpose
 
-`libcoda` is an aggregate C++17 toolkit and integration repository. It assembles a set of utility libraries, including database, networking, formatting, logging, math, string, terminal, threading, and general utility components.
+Seamwork is a practical C++23 interface and architecture refinement laboratory.
 
-The aggregate repository has two responsibilities:
+It exists to study how C++ interfaces and system boundaries can become easier to use, harder to misuse, and easier to reason about while keeping ownership, lifetime, allocation, blocking, failure, concurrency, and other important consequences visible.
 
-1. provide a reproducible integration/build surface for the component libraries;
-2. define project-wide architecture, dependency, testing, and security policy that component repositories can adopt incrementally.
+The repository currently contains the historical `libcoda` aggregate and utility components. Those are migration inputs and practical source material, not the long-term product definition.
 
-It is not intended to become a framework that forces unrelated utility domains behind one abstraction hierarchy.
+## Responsibilities
 
-## Current topology
+The primary repository should converge on four responsibilities:
 
-The codebase is a hybrid multi-repository system:
+1. host practical C++23 design studies and preserve their reasoning;
+2. host realistic example applications that exercise the studied seams;
+3. promote only justified abstractions into reusable components;
+4. provide common build, testing, security, analysis, and benchmarking infrastructure.
 
-- `libcoda` owns the aggregate build, integration CI, in-tree utility components, and project-wide policy;
-- `libcoda-format`, `libcoda-db`, `libcoda-net`, and other independently versioned components are consumed through Git submodules;
-- the shared `cmake` repository provides legacy CMake helpers used by several components;
-- some component CMake and test conventions remain independent and are being converged incrementally.
+It is not intended to become a framework or a replacement for the standard library and mature C++ ecosystems.
 
-The submodule boundary is therefore both a source-control boundary and a release/integration boundary. A change to a component is not part of an aggregate release until the aggregate gitlink is advanced and the recursive integration build passes.
+## Current transition topology
+
+The current codebase is still a hybrid multi-repository system:
+
+- the historical `libcoda` root owns aggregate build/integration policy and in-tree utilities;
+- `libcoda-format`, `libcoda-db`, `libcoda-net`, dice, and other components are consumed through Git submodules;
+- the shared `cmake` repository provides migration-era helpers;
+- architecture, testing, fuzzing, and security modernization already exists across several components.
+
+ADR 0002 changes the target topology: Seamwork will move toward one primary repository while legacy components are classified and either absorbed, reworked, archived, or removed.
+
+Submodules therefore remain a temporary migration mechanism rather than a permanent architectural principle.
 
 ## Intended consumers
 
-The primary consumers are:
+The primary consumers are now:
 
-- C++ applications that use one or more libcoda component libraries;
-- the aggregate libcoda build used to validate compatibility across components;
-- maintainers extending or modernizing individual components;
-- CI/fuzz/security tooling that needs deterministic component boundaries.
+- maintainers/readers studying practical modern C++ design alternatives;
+- example applications validating interface ergonomics and architecture;
+- reusable components that survive the project's promotion criteria;
+- CI/fuzz/security/benchmark tooling producing evidence about design claims.
+
+A generic external consumer base is not assumed merely because legacy code was once packaged as a library.
 
 ## Architectural drivers
 
-Modernization prioritizes:
+Seamwork prioritizes:
 
-1. **correctness and explicit contracts** — parsing, state, ownership, error, and lifecycle behavior should be testable and documented;
-2. **dependency direction** — domain and parsing logic should not depend on concrete database, socket, TLS, or platform adapters;
-3. **deterministic builds** — normal builds should not require network dependency downloads or external services;
-4. **security** — untrusted format strings, URIs, network data, SQL inputs, and credentials cross explicit trust boundaries;
-5. **testability** — pure logic should be testable without sockets or database services, with SQLite/fakes used for deterministic integration where appropriate;
-6. **incremental compatibility** — modernization should avoid unnecessary public API or ABI breakage and should isolate deliberate compatibility changes.
+1. **interface clarity** — call sites should communicate intent and constrain misuse;
+2. **visible semantics** — ownership, lifetime, cost, I/O, concurrency, and failure should remain understandable;
+3. **C++23 as a design tool** — concepts, ranges, `std::expected`, views, formatting, constexpr facilities, and other modern features are used when they improve the contract;
+4. **dependency direction** — policy and pure behavior should not acquire concrete infrastructure dependencies without reason;
+5. **pragmatic architecture** — SOLID and Clean Architecture guide coupling but do not mandate layers or interfaces;
+6. **practical evidence** — real consumers, tests, fuzzing, analysis, and measurements support design decisions;
+7. **security** — trust boundaries and unsafe assumptions are part of interface design;
+8. **refinement over reinvention** — mature existing libraries are preferred when they already provide the right contract.
 
 ## Maturity
 
-The aggregate build and several components are in active modernization. The architecture in this document describes the intended dependency rules; it does not imply every existing component already conforms.
+The repository is in a re-charter/migration phase.
+
+Useful modernization has already established target-local CMake behavior, deterministic test layers, security models, fuzzing, and analysis patterns. That work is retained.
 
 Known transitional areas include:
 
-- legacy global compiler settings and CMake helper behavior;
-- component-specific test setup;
-- service-coupled DB/network tests;
-- concrete adapter details leaking into higher-level code;
-- public-header and package-layout inconsistencies;
-- legacy dependencies retained for compatibility.
+- legacy C++17 component contracts;
+- multi-repository/submodule topology;
+- `coda` namespace/target/option names;
+- generic utility components without a current Seamwork study;
+- service-coupled database/network surfaces;
+- legacy shared CMake helpers and testing infrastructure.
 
-These should be treated as migration debt, not precedent for new code.
+These are migration debt, not precedent for new Seamwork code.
 
 ## Non-goals
 
-The modernization effort does not require:
+Seamwork does not require:
 
-- converting every component into a single monolithic library;
-- introducing interfaces where there is only one stable implementation and no testability benefit;
-- hiding standard-library value types behind project-specific wrappers;
-- replacing working algorithms solely to use newer language syntax;
-- moving all repositories into a monorepo before component boundaries are understood;
-- preserving accidental behavior caused by undefined, unsafe, or undocumented implementation details.
+- preserving every historical utility as a library;
+- hiding standard-library value types behind project wrappers;
+- using a C++23 feature when a simpler mechanism is clearer;
+- introducing an interface merely to satisfy dependency inversion terminology;
+- creating a reusable component from every study;
+- preserving accidental legacy API/ABI behavior when it prevents useful refinement.
 
 ## Change rule
 
-When a modernization change crosses a public API, component boundary, dependency direction, ownership/lifetime contract, or security boundary, the change should be justified by tests and, when durable, captured in architecture documentation or an ADR.
+A meaningful refinement should identify the problem, compare relevant alternatives, and capture evidence appropriate to the claim.
+
+When a change crosses a public API, dependency direction, ownership/lifetime contract, security boundary, or significant performance characteristic, document the trade-off through a study, QART note, or ADR as appropriate.
+
+See the [charter](../charter.md), [principles](../principles.md), and [refinement workflow](../refinement-workflow.md).
