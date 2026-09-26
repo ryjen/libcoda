@@ -43,7 +43,7 @@ jobs:
         env:
           CC: ${{ matrix.cc }}
           CXX: ${{ matrix.cxx }}
-        run: nix develop --command cmake --preset release -G Ninja
+        run: nix develop --command env CC=${{ matrix.cc }} CXX=${{ matrix.cxx }} cmake --preset release -G Ninja
 
       - name: Build
         env:
@@ -76,7 +76,7 @@ jobs:
       - name: Configure and build archived compatibility graph
         run: |
           nix develop .#legacy --command bash -lc '
-            cmake --preset legacy-release               -G Ninja               -DENABLE_TEST_DB_FIXTURES=OFF               -DPostgreSQL_TYPE_INCLUDE_DIR="$(pg_config --includedir-server)"               -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+            cmake --preset legacy-release -G Ninja -DENABLE_TEST_DB_FIXTURES=OFF -DPostgreSQL_TYPE_INCLUDE_DIR="$(pg_config --includedir-server)" -DCMAKE_POLICY_VERSION_MINIMUM=3.5
             cmake --build --preset legacy-release --parallel 2
             cmake --build --preset legacy-release --target seamwork_study_checks
           '
